@@ -19,7 +19,7 @@ object FlowingAgonyReborn {
     init {
         runForDist({
             ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.actConfig)
-            MOD_BUS.register(ModEnchantments.Registry)
+            ModEnchantments.Registry.register(MOD_BUS)
         }) {}
     }
 }

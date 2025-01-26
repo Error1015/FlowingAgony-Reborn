@@ -9,10 +9,10 @@ import org.error1015.flowingagonyreborn.enchantment.ModBaseEnchantment
 object MiraculousEscapeEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    private val config: Boolean = Config.acquirableSettings.miraculousEscape.get()
+    override fun getConfig(): Boolean = Config.acquirableSettings.miraculousEscape.get()
     override fun getMaxLevel() = 1
-    override fun isTradeable() = config
-    override fun isDiscoverable() = config
-    override fun isAllowedOnBooks() = config
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (config) super.canApplyAtEnchantingTable(stack) else false
+    override fun isTradeable() = getConfig()
+    override fun isDiscoverable() = getConfig()
+    override fun isAllowedOnBooks() = getConfig()
+    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (getConfig()) super.canApplyAtEnchantingTable(stack) else false
 }

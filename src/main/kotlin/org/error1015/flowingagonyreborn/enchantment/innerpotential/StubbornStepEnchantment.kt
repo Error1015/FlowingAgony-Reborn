@@ -10,11 +10,11 @@ import org.error1015.flowingagonyreborn.enchantment.ModBaseEnchantment
 object StubbornStepEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    private val config: Boolean = Config.acquirableSettings.stubbornStep.get()
+    override fun getConfig(): Boolean = Config.acquirableSettings.stubbornStep.get()
     override fun getMaxLevel() = 3
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != FrivolousStepEnchantment
-    override fun isTradeable() = config
-    override fun isDiscoverable() = config
-    override fun isAllowedOnBooks() = config
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (config) super.canApplyAtEnchantingTable(stack) else false
+    override fun isTradeable() = getConfig()
+    override fun isDiscoverable() = getConfig()
+    override fun isAllowedOnBooks() = getConfig()
+    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (getConfig()) super.canApplyAtEnchantingTable(stack) else false
 }

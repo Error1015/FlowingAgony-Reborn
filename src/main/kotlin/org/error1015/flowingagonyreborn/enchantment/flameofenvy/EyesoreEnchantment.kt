@@ -10,12 +10,12 @@ import org.error1015.flowingagonyreborn.enchantment.ModBaseEnchantment
 object EyesoreEnchantment: ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    private val config: Boolean = Config.acquirableSettings.eyesore.get()
+    override fun getConfig(): Boolean = Config.acquirableSettings.eyesore.get()
     override fun getMaxLevel() = 3
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != ThornInFleshEnchantment
     override fun isTreasureOnly() = true
-    override fun isTradeable() = config
-    override fun isDiscoverable() = config
-    override fun isAllowedOnBooks() = config
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (config) super.canApplyAtEnchantingTable(stack) else false
+    override fun isTradeable() = getConfig()
+    override fun isDiscoverable() = getConfig()
+    override fun isAllowedOnBooks() = getConfig()
+    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (getConfig()) super.canApplyAtEnchantingTable(stack) else false
 }
