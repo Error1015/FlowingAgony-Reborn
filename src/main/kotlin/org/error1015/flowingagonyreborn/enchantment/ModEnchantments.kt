@@ -16,6 +16,11 @@ import org.error1015.flowingagonyreborn.enchantment.lensofmalice.*
 import org.error1015.flowingagonyreborn.enchantment.madeofmadness.*
 import org.error1015.flowingagonyreborn.enchantment.madeofsuffering.*
 import org.error1015.flowingagonyreborn.enchantment.rootedinhatred.*
+import org.error1015.flowingagonyreborn.enchantment.survivaltricks.NecessaryEvilEnchantment
+import org.error1015.flowingagonyreborn.enchantment.survivaltricks.SurvivalRuseEnchantment
+import org.error1015.flowingagonyreborn.enchantment.survivaltricks.SurvivalShortcutEnchantment
+import org.error1015.flowingagonyreborn.enchantment.themistakens.*
+import org.error1015.flowingagonyreborn.enchantment.themistakens.curse.BurialObjectCurse
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModEnchantments {
@@ -86,4 +91,19 @@ object ModEnchantments {
     val OutrageoutSpirit by Registry.registerObject("outrageous_spirit") { OutrageoutSpiritEnchantment }
     val ResentfulSou by Registry.registerObject("resentful_soul") { ResentfulSoulEnchantment }
     val TooResentfulToDie by Registry.registerObject("too_resentful_to_die") { TooResentfulToDieEnchantment }
+
+    // survivaltricks
+    val NecessaryEvil by Registry.registerObject("necessary_evil") { NecessaryEvilEnchantment }
+    val SurvivalShortcut by Registry.registerObject("survival_shortcut") { SurvivalShortcutEnchantment }
+    val SurvivalRuse by Registry.registerObject("survival_ruse") { SurvivalRuseEnchantment }
+
+    // themistakens
+    val BurialObject by Registry.registerObject("burial_object") { BurialObjectCurse }
+    val CorruptedKindred by Registry.registerObject("corrupted_kindred") { CorruptedKindredEnchantment }
+    val LightburnFungalParasitic by Registry.registerObject("lightburn_fungal_parasitic") { LightburnFungalParasiticEnchantment }
+    val OriginalSinErosion by Registry.registerObject("original_sin_erosion") { OriginalSinErosionEnchantment }
+    val PrototypeChaotic by Registry.registerObject("prototype_chaotic") { PrototypeChaoticEnchantment }
+    val PrototypeChaoticTypeBeta by Registry.registerObject("prototype_chaotic_type_beta") { PrototypeChaoticTypeBetaEnchantment }
+    val ScholarOfOriginalSin by Registry.registerObject("scholar_of_original_sin") { ScholarOfOriginalSinEnchantment }
+    val Shadowborn by Registry.registerObject("shadowborn") { ShadowbornEnchantment }
 }
