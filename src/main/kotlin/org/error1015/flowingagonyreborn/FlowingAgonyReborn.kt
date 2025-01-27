@@ -17,9 +17,9 @@ object FlowingAgonyReborn {
     private val LOGGER: Logger = LogManager.getLogger(MODID)
 
     init {
-        runForDist({
+        runForDist(clientTarget = {
             ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.actConfig)
             ModEnchantments.Registry.register(MOD_BUS)
-        }) {}
+        }, serverTarget = {})
     }
 }

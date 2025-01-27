@@ -1,6 +1,5 @@
 package org.error1015.flowingagonyreborn.enchantment.lastwish
 
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
@@ -15,8 +14,4 @@ object MorirsDeathwishEnchantment : ModBaseEnchantment(
     override fun getMaxLevel() = 1
     override fun isTreasureOnly() = true
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != GuidensRegretEnchantment && pOther != Enchantments.MENDING && pOther != MorirsLifeboundEnchantment
-    override fun isTradeable() = getConfig()
-    override fun isDiscoverable() = getConfig()
-    override fun isAllowedOnBooks() = getConfig()
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (getConfig()) super.canApplyAtEnchantingTable(stack) else false
 }

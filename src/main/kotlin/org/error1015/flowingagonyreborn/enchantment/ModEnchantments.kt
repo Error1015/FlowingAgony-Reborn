@@ -12,6 +12,10 @@ import org.error1015.flowingagonyreborn.enchantment.lastwish.GuidensRegretEnchan
 import org.error1015.flowingagonyreborn.enchantment.lastwish.LastSweetDreamEnchantment
 import org.error1015.flowingagonyreborn.enchantment.lastwish.MorirsDeathwishEnchantment
 import org.error1015.flowingagonyreborn.enchantment.lastwish.MorirsLifeboundEnchantment
+import org.error1015.flowingagonyreborn.enchantment.lensofmalice.*
+import org.error1015.flowingagonyreborn.enchantment.madeofmadness.*
+import org.error1015.flowingagonyreborn.enchantment.madeofsuffering.*
+import org.error1015.flowingagonyreborn.enchantment.rootedinhatred.*
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModEnchantments {
@@ -52,4 +56,34 @@ object ModEnchantments {
     val LastSweetDream by Registry.registerObject("last_sweet_dream") { LastSweetDreamEnchantment }
     val MorirsDeathwish by Registry.registerObject("morirs_deathwish") { MorirsDeathwishEnchantment }
     val MorirsLifebound by Registry.registerObject("morirs_lifebound") { MorirsLifeboundEnchantment }
+
+    // lensofmalice
+    val BackAndFill by Registry.registerObject("back_and_fill") { BackAndFillEnchantment }
+    val InfectiousMalice by Registry.registerObject("infectious_malice") { InfectiousMaliceEnchantment }
+    val ISeeYouNow by Registry.registerObject("i_see_you_now") { ISeeYouNowEnchantment }
+    val MaliceOutbreak by Registry.registerObject("malice_outbreak") { MaliceOutbreakEnchantment }
+    val PerceivedMalice by Registry.registerObject("perceived_malice") { PerceivedMaliceEnchantment }
+    val Vengeance by Registry.registerObject("vengeance") { VengeanceEnchantment }
+
+    // madeofmadness
+    val AgonyScreamer by Registry.registerObject("agony_screamer") { AgonyScreamerEnchantment }
+    val CuttingWatermelonDream by Registry.registerObject("cutting_watermelon_dream") { CuttingWatermelonDreamEnchantment }
+    val InsanePoet by Registry.registerObject("insane_poet") { InsanePoetEnchantment }
+    val PaperBrain by Registry.registerObject("paper_brain") { PaperBrainEnchantment }
+    val ShockTherapy by Registry.registerObject("shock_therapy") { ShockTherapyEnchantment }
+
+    // madeofsuffering
+    val BurningPhobia by Registry.registerObject("burning_phobia") { BurningPhobiaEnchantment }
+    val ConstrainedHeart by Registry.registerObject("constrained_heart") { ConstrainedHeartEnchantment }
+    val DestructionWorship by Registry.registerObject("destruction_worship") { DestructionWorshipEnchantment }
+    val DrowningPhobia by Registry.registerObject("drowning_phobia") { DrowningPhobiaEnchantment }
+    val PiercingFever by Registry.registerObject("piercing_fever") { PiercingFeverEnchantment }
+    val PrayerOfPain by Registry.registerObject("prayer_of_pain") { PrayerOfPainEnchantment }
+
+    // rootedinhatred
+    val FreshRevenge by Registry.registerObject("fresh_revenge") { FreshRevengeEnchantment }
+    val HatredBloodline by Registry.registerObject("hatred_bloodline") { HatredBloodlineEnchantment }
+    val OutrageoutSpirit by Registry.registerObject("outrageous_spirit") { OutrageoutSpiritEnchantment }
+    val ResentfulSou by Registry.registerObject("resentful_soul") { ResentfulSoulEnchantment }
+    val TooResentfulToDie by Registry.registerObject("too_resentful_to_die") { TooResentfulToDieEnchantment }
 }

@@ -1,0 +1,52 @@
+{
+  "miraculous_escape_heartbeat": {
+    "subtitle": "sound.flowingagony_reborn.miraculous_escape_heartbeat",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "flowingagony_reborn:miraculous_escape_heartbeat",
+        "stream": true
+      }
+    ]
+  },
+  "malice_outbreak_knockback_sound": {
+    "subtitle": "sound.flowingagony_reborn.malice_outbreak_knockback_sound",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "flowingagony_reborn:malice_outbreak_knockback_sound",
+        "stream": true
+      }
+    ]
+  },
+  "extreme_hatred_first_stage_sound": {
+    "subtitle": "sound.flowingagony_reborn.extreme_hatred_first_stage_sound",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "flowingagony_reborn:extreme_hatred_first_stage_sound",
+        "stream": true
+      }
+    ]
+  },
+  "extreme_hatred_medium_stage_sound": {
+    "subtitle": "sound.flowingagony_reborn.extreme_hatred_medium_stage_sound",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "flowingagony_reborn:extreme_hatred_medium_stage_sound",
+        "stream": true
+      }
+    ]
+  },
+  "extreme_hatred_final_stage_sound": {
+    "subtitle": "sound.flowingagony_reborn.extreme_hatred_final_stage_sound",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "flowingagony_reborn:extreme_hatred_final_stage_sound",
+        "stream": true
+      }
+    ]
+  }
+}

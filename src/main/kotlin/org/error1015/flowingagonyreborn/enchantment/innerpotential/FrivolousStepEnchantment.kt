@@ -1,6 +1,5 @@
 package org.error1015.flowingagonyreborn.enchantment.innerpotential
 
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import org.error1015.flowingagonyreborn.config.Config
@@ -13,8 +12,4 @@ object FrivolousStepEnchantment : ModBaseEnchantment(
     override fun getConfig(): Boolean = Config.acquirableSettings.frivolousStep.get()
     override fun getMaxLevel() = 2
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != StubbornStepEnchantment
-    override fun isTradeable() = getConfig()
-    override fun isDiscoverable() = getConfig()
-    override fun isAllowedOnBooks() = getConfig()
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = if (getConfig()) super.canApplyAtEnchantingTable(stack) else false
 }
