@@ -1,27 +1,191 @@
 package org.error1015.flowingagonyreborn.event.enchantment
 
+import net.minecraft.util.Mth
+import net.minecraft.world.damagesource.DamageTypes
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.enchantment.EnchantmentHelper
+import net.minecraftforge.event.entity.living.LivingDamageEvent
+import net.minecraftforge.event.entity.living.LivingHealEvent
 import net.minecraftforge.event.entity.player.AttackEntityEvent
-import net.minecraftforge.event.entity.player.PlayerEvent
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import org.error1015.flowingagonyreborn.enchantment.ModEnchantments
-import org.error1015.flowingagonyreborn.util.allArmorHasEnchantment
+import org.error1015.flowingagonyreborn.enchantment.diceoffraud.DeathPunkEnchantment
+import org.error1015.flowingagonyreborn.enchantment.diceoffraud.ExoticHealerEnchantment
+import org.error1015.flowingagonyreborn.enchantment.diceoffraud.SavorTheTastedEnchantment
+import org.error1015.flowingagonyreborn.enchantment.diceoffraud.TricksterEnchantment
+import org.error1015.flowingagonyreborn.util.getArmorHasEnchantmentTotalLevel
+import org.error1015.flowingagonyreborn.util.getEnchantmentLevel
+import org.error1015.flowingagonyreborn.util.isItemEnchanted
 
 @Mod.EventBusSubscriber
-object DiceOfFraudEnchantmentHandler {/* @SubscribeEvent
+object DiceOfFraudEnchantmentHandler {
+    /**
+     * 欺诈师附魔效果
+     */
+    @SubscribeEvent
     fun doTricksterEnchantmentEvent(event: AttackEntityEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.target is LivingEntity) {
-
+        if (event.isCanceled) return
+        val target = event.target
+        val player = event.entity
+        if (target is LivingEntity) {
+            val enchantmentLevel = player.getEnchantmentLevel(TricksterEnchantment)
+            val diceNum = target.random.nextInt(5) + 1
+            // 使用变量接受另外一个随机点数
+            var anotherDiceNum = target.random.nextInt(5) + 1
+            when (enchantmentLevel) {
+                1 -> appendixEffectForTrickster(target, diceNum)
+                2 -> {
+                    // 当两个随机数相等的时候，重新生成一个随机数, 直到不想等为止
+                    while (diceNum == anotherDiceNum) anotherDiceNum = target.random.nextInt(5) + 1
+                    appendixEffectForTrickster(target, diceNum)
+                    appendixEffectForTrickster(target, anotherDiceNum)
+                }
+            }
         }
-    } */
+    }
 
-    /* @SubscribeEvent
-    fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
+    /**
+     * 给对应随机点数添加上对应的效果
+     */
+    private fun appendixEffectForTrickster(entity: LivingEntity, diceNum: Int) {
+        when (diceNum) {
+            1 -> entity.addEffect(MobEffectInstance(MobEffects.POISON, 100))
+            2 -> entity.addEffect(MobEffectInstance(MobEffects.WITHER, 100))
+            3 -> entity.addEffect(MobEffectInstance(MobEffects.WEAKNESS, 100))
+            4 -> entity.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100))
+            5 -> entity.setSecondsOnFire(5)
+        }
+    }
+
+    /*  @SubscribeEvent
+     fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
+         if (event.entity.level().isClientSide) return
+         if (event.isCanceled) return
+         val player = event.entity
+         val enchantmentLevel = EnchantmentHelper.getEnchantmentLevel(AnEnchantedGoldenAppleADayEnchantment, player)
+         TODO("需要完成倒计时逻辑")
+     } */
+
+    /**
+     * 死亡朋克附魔效果
+     */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    fun doDeathpunkEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.entity.allArmorHasEnchantment(ModEnchantments.anEnchantedGoldenAppleADay)) {
-            // event.entity.getCapability() TODO: Capability
+        if (event.isCanceled) return
+        if (event.entity is Player) {
+            val player = event.entity as Player
+            // 如果伤害来源是虚空伤害，则不触发死亡朋克附魔
+            if (event.amount < player.health && event.source == DamageTypes.FELL_OUT_OF_WORLD) return
+            // 检查玩家是否装备了死亡朋克的胸甲
+            if (player.isItemEnchanted(DeathPunkEnchantment, EquipmentSlot.CHEST)) {
+                val solution = player.random.nextInt(4)
+                val health = Mth.floor(player.health)
+                val maxHealth = Mth.floor(player.maxHealth)
+                var damageEnchantment = false
+                // 随机情况
+                when (solution) {
+                    0 -> {
+                        val saturationLevel = Mth.floor(player.foodData.saturationLevel)
+                        var foodLevel = player.foodData.foodLevel + saturationLevel
+                        if (foodLevel <= health) damageEnchantment = true
+                        else {
+                            if (foodLevel > maxHealth) foodLevel = maxHealth
+                            player.health = foodLevel.toFloat()
+                            player.foodData.foodLevel = health
+                            player.foodData.addExhaustion(player.foodData.saturationLevel * 4)
+                        }
+                    }
+
+                    1 -> {
+                        var oxygenLevel = Mth.floor((player.airSupply / player.maxAirSupply / maxHealth).toFloat())
+                        if (oxygenLevel <= health) damageEnchantment = true
+                        else {
+                            if (oxygenLevel > maxHealth) oxygenLevel = maxHealth
+                            player.health = oxygenLevel.toFloat()
+                            player.airSupply = health * (player.maxAirSupply / maxHealth)
+                        }
+                    }
+
+                    2 -> {
+                        val expPoint = player.totalExperience
+                        val exchangeCost = Mth.floor(player.maxHealth - health) * 30
+                        if (expPoint <= exchangeCost) damageEnchantment = true
+                        else {
+                            player.health = player.maxHealth
+                            player.giveExperiencePoints(-exchangeCost)
+                        }
+                    }
+
+                    3 -> damageEnchantment = true
+                }
+                // 如果damageEnchantment为true, 玩家生命值回满, 从胸甲中移除死亡朋克附魔
+                if (damageEnchantment) {
+                    player.health = player.maxHealth
+                    val enchantments = EnchantmentHelper.getEnchantments(player.getItemBySlot(EquipmentSlot.CHEST))
+                    enchantments -= DeathPunkEnchantment
+                    EnchantmentHelper.setEnchantments(enchantments, player.getItemBySlot(EquipmentSlot.CHEST))
+                }
+                event.isCanceled = true // 取消事件
+            }
         }
-    } */
+    }
+
+    /**
+     * 食髓知味附魔效果
+     */
+    @SubscribeEvent
+    fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.isCanceled) return
+        if (event.source.entity is Player) {
+            val player = event.source.entity as Player
+            val enchantmentLevel = EnchantmentHelper.getEnchantments(player.getItemBySlot(EquipmentSlot.MAINHAND))[SavorTheTastedEnchantment] ?: 0
+            if (enchantmentLevel == 0) return
+            val weaponNbt = player.mainHandItem.tag
+            val encodeId = event.entity.encodeId ?: return
+            if (weaponNbt?.contains("savor_the_tasted_target") != true) weaponNbt?.putString("savor_the_tasted_target", encodeId)
+            else {
+                val recordedTarget = weaponNbt.getString("savor_the_tasted_target")
+                if (recordedTarget == encodeId) event.amount = event.amount + player.random.nextInt(5) + enchantmentLevel * 4 - 1
+                else weaponNbt.putString("savor_the_tasted_target", encodeId)
+            }
+            player.mainHandItem.tag = weaponNbt
+        }
+    }
+
+    /**
+     * 异常治疗附魔效果
+     */
+    @SubscribeEvent
+    fun doExoticHealerEnchantmentEvent(event: LivingHealEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.isCanceled) return
+        if (event.entity is Player) {
+            val player = event.entity as Player
+            val enchantmentLevel = player.getArmorHasEnchantmentTotalLevel(ExoticHealerEnchantment)
+            if (enchantmentLevel == 0) return
+            val dice = player.random.nextInt(100)
+            val modifier = 1 + (enchantmentLevel - 1) * 0.1f
+            val duration = (600 * modifier).toInt()
+            when {
+                dice < 33 -> event.isCanceled = true
+                dice < 66 -> event.amount *= 2 * modifier
+                dice < 91 -> player.addEffect(MobEffectInstance(MobEffects.DAMAGE_BOOST, duration))
+                dice < 92 -> player.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SPEED, duration))
+                dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
+                dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
+                dice < 95 -> {
+                    // player.hurt(TODO("伤害来源需要为自定义的"),event.amount * modifier)
+                    event.isCanceled = true
+                }
+            }
+        }
+    }
 }

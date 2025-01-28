@@ -6,31 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
-
-/**
- * 拓展属性
- */
-var LivingEntity.helmet: ItemStack
-    get() = this.getItemBySlot(EquipmentSlot.HEAD)
-    set(value) = this.setItemSlot(EquipmentSlot.HEAD, value)
-
-var LivingEntity.chestplate: ItemStack
-    get() = this.getItemBySlot(EquipmentSlot.CHEST)
-    set(value) {
-        this.setItemSlot(EquipmentSlot.CHEST, value)
-    }
-
-var LivingEntity.leggings: ItemStack
-    get() = this.getItemBySlot(EquipmentSlot.LEGS)
-    set(value) {
-        this.setItemSlot(EquipmentSlot.LEGS, value)
-    }
-
-var LivingEntity.boots: ItemStack
-    get() = this.getItemBySlot(EquipmentSlot.FEET)
-    set(value) {
-        this.setItemSlot(EquipmentSlot.FEET, value)
-    }
+import net.minecraft.world.item.enchantment.EnchantmentHelper
 
 /**
  * 物品是否有某个附魔
@@ -38,14 +14,14 @@ var LivingEntity.boots: ItemStack
 fun ItemStack.hasEnchantment(enchantment: Enchantment) = this.allEnchantments.containsKey(enchantment)
 
 /**
- * 获取实体所有护甲
- */
-fun LivingEntity.getAllArmors(): List<ItemStack> = listOf(helmet, chestplate, leggings, boots)
-
-/**
  * 获取实体所有护甲是否都拥有一个附魔
  */
 fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.getAllArmors().all { it.hasEnchantment(enchantment) }
+
+/**
+ * 获取实体某个附魔的附魔等级
+ */
+fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment) = EnchantmentHelper.getEnchantmentLevel(enchantment, this)
 
 /**
  * 实体有一个护甲拥有某附魔
@@ -76,8 +52,16 @@ fun LivingEntity.getArmorHasEnchantmentLevel(enchantment: Enchantment): Int {
 /**
  * 实体所有护甲某附魔的最大等级
  */
-fun LivingEntity.getArmorHasEnchantmentMaxLevel(enchantment: Enchantment): Int {
+fun LivingEntity.getArmorHasEnchantmentTotalLevel(enchantment: Enchantment): Int {
     var maxLevel = 0
     getAllArmors().forEach { maxLevel = maxOf(maxLevel, it.allEnchantments[enchantment] ?: 0) }
     return maxLevel
+}
+
+/**
+ * 实体某个槽位是否存在某附魔
+ */
+fun LivingEntity.isItemEnchanted(enchantment: Enchantment, slot: EquipmentSlot): Boolean {
+    val enchantments = EnchantmentHelper.getEnchantments(this.getItemBySlot(slot))
+    return enchantments.containsKey(enchantment)
 }

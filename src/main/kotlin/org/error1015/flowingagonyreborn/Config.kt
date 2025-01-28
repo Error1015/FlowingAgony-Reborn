@@ -1,4 +1,4 @@
-package org.error1015.flowingagonyreborn.config
+package org.error1015.flowingagonyreborn
 
 import net.minecraftforge.common.ForgeConfigSpec
 
