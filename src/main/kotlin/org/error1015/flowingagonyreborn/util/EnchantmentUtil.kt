@@ -3,6 +3,7 @@
 package org.error1015.flowingagonyreborn.util
 
 import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.EquipmentSlot.*
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
@@ -22,6 +23,18 @@ fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.getAllA
  * 获取实体某个附魔的附魔等级
  */
 fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment) = EnchantmentHelper.getEnchantmentLevel(enchantment, this)
+
+fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment, slot: EquipmentSlot): Int {
+    return when (slot) {
+        HEAD -> this.helmet.allEnchantments[enchantment] ?: 0
+        CHEST -> this.chestplate.allEnchantments[enchantment] ?: 0
+        LEGS -> this.leggings.allEnchantments[enchantment] ?: 0
+        FEET -> this.boots.allEnchantments[enchantment] ?: 0
+        MAINHAND -> this.mainHandItem.allEnchantments[enchantment] ?: 0
+        OFFHAND -> offhandItem.allEnchantments[enchantment] ?: 0
+    }
+}
+
 
 /**
  * 实体有一个护甲拥有某附魔

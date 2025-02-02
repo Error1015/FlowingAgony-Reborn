@@ -13,7 +13,7 @@ const val MODID = "flowingagony_reborn"
 
 @Mod(MODID)
 object FlowingAgonyReborn {
-    private val LOGGER: Logger = LogManager.getLogger(MODID)
+    // private val LOGGER: Logger = LogManager.getLogger(MODID)
 
     init {
         runForDist(clientTarget = {

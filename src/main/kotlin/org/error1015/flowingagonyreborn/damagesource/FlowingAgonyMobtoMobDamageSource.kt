@@ -1,0 +1,3 @@
+package org.error1015.flowingagonyreborn.damagesource
+
+object FlowingAgonyMobtoMobDamageSource
