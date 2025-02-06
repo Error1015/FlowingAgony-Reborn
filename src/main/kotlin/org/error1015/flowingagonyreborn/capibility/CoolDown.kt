@@ -1,9 +1,10 @@
 package org.error1015.flowingagonyreborn.capibility
 
 import java.util.*
+import kotlin.math.max
 
 class CoolDown(
-    private var coolDownMap: Map<CoolDownType, Int>
+    private var coolDownMap: Map<CoolDownType, Int> = mutableMapOf()
 ) {
     init {
         coolDownMap = EnumMap(CoolDownType::class.java)
@@ -17,7 +18,7 @@ class CoolDown(
     fun isReady(cooldownType: CoolDownType) = (coolDownMap[cooldownType] ?: 0) < 1
 
     fun set(cooldownType: CoolDownType, cooldownTick: Int) {
-        coolDownMap + (cooldownType to Math.max(0, cooldownTick))
+        coolDownMap + (cooldownType to max(0, cooldownTick))
     }
 
     fun decrease(cooldownType: CoolDownType) {

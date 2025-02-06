@@ -75,9 +75,9 @@ object FlameOfEnvyEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ThornInFleshEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel != 0) {
                 if (event.entity is Player) {
-                    TODO()
+                    TODO("添加自定义效果")
                 } else {
-                    TODO()
+                    TODO("添加自定义效果")
                 }
             }
         }

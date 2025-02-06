@@ -5,7 +5,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import org.error1015.flowingagonyreborn.MODID
 
-@Mod.EventBusSubscriber(modid = MODID,bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object CapabilityRegistry {
     @SubscribeEvent
     fun registerCaps(event: RegisterCapabilitiesEvent) {

@@ -11,13 +11,18 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.event.entity.living.LivingHealEvent
 import net.minecraftforge.event.entity.player.AttackEntityEvent
+import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
+import org.error1015.flowingagonyreborn.capibility.CoolDown
+import org.error1015.flowingagonyreborn.capibility.ModCapManager
+import org.error1015.flowingagonyreborn.enchantment.diceoffraud.AnEnchantedGoldenAppleADayEnchantment
 import org.error1015.flowingagonyreborn.enchantment.diceoffraud.DeathPunkEnchantment
 import org.error1015.flowingagonyreborn.enchantment.diceoffraud.ExoticHealerEnchantment
 import org.error1015.flowingagonyreborn.enchantment.diceoffraud.SavorTheTastedEnchantment
 import org.error1015.flowingagonyreborn.enchantment.diceoffraud.TricksterEnchantment
+import org.error1015.flowingagonyreborn.util.getArmorHasEnchantmentLevel
 import org.error1015.flowingagonyreborn.util.getArmorHasEnchantmentTotalLevel
 import org.error1015.flowingagonyreborn.util.getEnchantmentLevel
 import org.error1015.flowingagonyreborn.util.isItemEnchanted
@@ -63,14 +68,60 @@ object DiceOfFraudEnchantmentHandler {
         }
     }
 
-    /*  @SubscribeEvent
-     fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
-         if (event.entity.level().isClientSide) return
-         if (event.isCanceled) return
-         val player = event.entity
-         val enchantmentLevel = EnchantmentHelper.getEnchantmentLevel(AnEnchantedGoldenAppleADayEnchantment, player)
-         TODO("需要完成倒计时逻辑")
-     } */
+    /**
+     * 来个苹果
+     */
+    @SubscribeEvent
+    fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.isCanceled) return
+        val player = event.entity
+        val enchantmentLevel = player.getArmorHasEnchantmentLevel(AnEnchantedGoldenAppleADayEnchantment)
+        if (enchantmentLevel == 0) return
+        val coolDownCap = event.entity.getCapability(ModCapManager.CoolDown_Capability)
+        coolDownCap.ifPresent { cap ->
+            {
+                if (cap.isReady(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)) {
+                    when {
+                        enchantmentLevel == 1 -> {
+                            val tempNum = player.random.nextInt(4)
+                            caseToAddEffect(tempNum, player)
+                        }
+
+                        enchantmentLevel < 4 -> {
+                            val set = HashSet<Int>()
+                            var tempCount = enchantmentLevel
+                            while (tempCount > 0) {
+                                val tempNum = player.random.nextInt(4)
+                                if (tempNum !in set) {
+                                    caseToAddEffect(tempNum, player)
+                                    set + tempNum
+                                    tempCount--
+                                }
+                            }
+                        }
+
+                        enchantmentLevel == 4 -> {
+                            player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
+                            player.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))
+                            player.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000))
+                            player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
+                        }
+                    }
+                    cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, 18000)
+                }
+            }
+        }
+    }
+
+    private fun caseToAddEffect(tempNum: Int, player: Player) {
+        when (tempNum) {
+            0 -> player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
+            1 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))
+            2 -> player.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000))
+            3 -> player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
+        }
+    }
 
     /**
      * 死亡朋克附魔效果
@@ -182,7 +233,7 @@ object DiceOfFraudEnchantmentHandler {
                 dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
                 dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
                 dice < 95 -> {
-                    // player.hurt(TODO("伤害来源需要为自定义的"),event.amount * modifier)
+                    // player.hurt(TODO(), event.amount * modifier)
                     event.isCanceled = true
                 }
             }

@@ -104,7 +104,11 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
     implementation "thedarkcolour:kotlinforforge:$kff_version"
+
+    runtimeOnly fg.deobf("curse.maven:bookshelf-228525:5423987")
+    runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:5855251")
     runtimeOnly fg.deobf("curse.maven:jade-324717:6106101")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
 }
 
 def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']

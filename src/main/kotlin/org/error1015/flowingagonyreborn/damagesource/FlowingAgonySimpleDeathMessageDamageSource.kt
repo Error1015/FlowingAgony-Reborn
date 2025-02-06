@@ -1,5 +1,0 @@
-package org.error1015.flowingagonyreborn.damagesource
-
-import net.minecraft.world.damagesource.DamageSource
-
-object FlowingAgonySimpleDeathMessageDamageSource

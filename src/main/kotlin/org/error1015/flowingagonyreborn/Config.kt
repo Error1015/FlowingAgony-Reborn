@@ -4,11 +4,10 @@ import net.minecraftforge.common.ForgeConfigSpec
 
 class Config {
     companion object {
-        var actConfig: ForgeConfigSpec? = null
-        val builder = ForgeConfigSpec.Builder()
+        var actConfig: ForgeConfigSpec
+        private val builder = ForgeConfigSpec.Builder()
         val generalSettings: GeneralSettings = GeneralSettings(builder)
         val acquirableSettings: AcquirableSettings = AcquirableSettings(builder)
-
 
         init {
             builder.comment("General Settings").push("general")
@@ -101,20 +100,5 @@ class Config {
         val scholarOfOriginalSin: ForgeConfigSpec.BooleanValue = builder.define("scholarOfOriginalSin", true)
         val originalSinErosion: ForgeConfigSpec.BooleanValue = builder.define("originalSinErosion", true)
         val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", true)
-    }
-
-    init {
-        val builder = ForgeConfigSpec.Builder()
-        builder.comment("General Settings").push("general")
-        val generalSettings = GeneralSettings(builder)
-        builder.pop()
-
-        builder.comment(
-                "Enchantment Acquirable Setting", "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
-                "Enchantment which is acquirable is still functional."
-        ).push("acquirable")
-        val acquirableSettings = AcquirableSettings(builder)
-        builder.pop()
-        actConfig = builder.build()
     }
 }
