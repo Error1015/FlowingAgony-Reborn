@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn
 
-import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments
-import net.minecraftforge.api.distmarker.Dist
+import love.marblegate.flowingagonyreborn.effect.ModEffects.ModEffects
+import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments.Enchantments
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import thedarkcolour.kotlinforforge.forge.*
@@ -11,11 +11,8 @@ const val MODID = "flowingagony_reborn"
 @Mod(MODID)
 object FlowingAgonyReborn {
     init {
-        // 注册附魔
-        runWhenOn(Dist.CLIENT) {
-            ModEnchantments.Registry.register(MOD_BUS)
-        }
-        // 注册Config
+        Enchantments.register(MOD_BUS)
+        ModEffects.register(MOD_BUS)
         registerConfig(ModConfig.Type.SERVER, Config.spec)
     }
 }
