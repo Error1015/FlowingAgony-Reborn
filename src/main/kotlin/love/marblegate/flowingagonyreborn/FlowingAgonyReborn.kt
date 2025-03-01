@@ -18,7 +18,7 @@ object FlowingAgonyReborn {
         ModEffects.register(MOD_BUS)
         ParticleTypes.register(MOD_BUS)
         Sounds.register(MOD_BUS)
-        Networking.registerMessage()
+        Networking.registerMessage() // 初始化Instance 
         registerConfig(ModConfig.Type.SERVER, Config.spec)
     }
 }
