@@ -2,6 +2,9 @@ package love.marblegate.flowingagonyreborn
 
 import love.marblegate.flowingagonyreborn.effect.ModEffects.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments.Enchantments
+import love.marblegate.flowingagonyreborn.fx.ModParticle.ParticleTypes
+import love.marblegate.flowingagonyreborn.fx.ModSounds.Sounds
+import love.marblegate.flowingagonyreborn.network.Networking
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import thedarkcolour.kotlinforforge.forge.*
@@ -13,6 +16,9 @@ object FlowingAgonyReborn {
     init {
         Enchantments.register(MOD_BUS)
         ModEffects.register(MOD_BUS)
+        ParticleTypes.register(MOD_BUS)
+        Sounds.register(MOD_BUS)
+        Networking.registerMessage()
         registerConfig(ModConfig.Type.SERVER, Config.spec)
     }
 }

@@ -39,5 +39,12 @@ fun LivingEntity.getAllArmors(): List<ItemStack> = listOf(helmet, chestplate, le
 /**
  * 实体是否拥有某项护甲
  */
-fun LivingEntity.hasArmor(equipmentSlot: EquipmentSlot) =
-    !this.getItemBySlot(equipmentSlot).isEmpty
+fun LivingEntity.hasArmor(equipmentSlot: EquipmentSlot) = !this.getItemBySlot(equipmentSlot).isEmpty
+
+fun LivingEntity.hasHelmet() = hasArmor(EquipmentSlot.HEAD)
+
+fun LivingEntity.hasChest() = hasArmor(EquipmentSlot.CHEST)
+
+fun LivingEntity.hasLegs() = hasArmor(EquipmentSlot.LEGS)
+
+fun LivingEntity.hasBoots() = hasArmor(EquipmentSlot.FEET)

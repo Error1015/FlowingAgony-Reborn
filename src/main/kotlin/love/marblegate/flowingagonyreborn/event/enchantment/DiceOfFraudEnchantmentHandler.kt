@@ -2,13 +2,12 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
-import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.AnEnchantedGoldenAppleADayEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.DeathPunkEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.ExoticHealerEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.SavorTheTastedEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.TricksterEnchantment
-import love.marblegate.flowingagonyreborn.util.getArmorHasEnchantmentLevel
-import love.marblegate.flowingagonyreborn.util.getArmorHasEnchantmentTotalLevel
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.ResourceKeys
+import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments
+import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
+import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
+import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentMaxLevel
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.isItemEnchanted
 import net.minecraft.util.Mth
@@ -39,7 +38,7 @@ object DiceOfFraudEnchantmentHandler {
         val target = event.target
         val player = event.entity
         if (target is LivingEntity) {
-            val enchantmentLevel = player.getEnchantmentLevel(TricksterEnchantment)
+            val enchantmentLevel = player.getEnchantmentLevel(TricksterEnchantment, EquipmentSlot.MAINHAND)
             val diceNum = target.random.nextInt(5) + 1
             // 使用变量接受另外一个随机点数
             var anotherDiceNum = target.random.nextInt(5) + 1
@@ -76,7 +75,7 @@ object DiceOfFraudEnchantmentHandler {
         if (event.entity.level().isClientSide) return
         if (event.isCanceled) return
         val player = event.entity
-        val enchantmentLevel = player.getArmorHasEnchantmentLevel(AnEnchantedGoldenAppleADayEnchantment)
+        val enchantmentLevel = player.getArmorEnchantmentTotalLevel(AnEnchantedGoldenAppleADayEnchantment)
         if (enchantmentLevel == 0) return
         val coolDownCap = event.entity.getCapability(ModCapManager.CoolDown_Capability)
         coolDownCap.ifPresent { cap ->
@@ -197,7 +196,7 @@ object DiceOfFraudEnchantmentHandler {
         if (event.isCanceled) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
-            val enchantmentLevel = EnchantmentHelper.getEnchantments(player.getItemBySlot(EquipmentSlot.MAINHAND))[SavorTheTastedEnchantment] ?: 0
+            val enchantmentLevel = player.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             val weaponNbt = player.mainHandItem.tag
             val encodeId = event.entity.encodeId ?: return
@@ -220,7 +219,7 @@ object DiceOfFraudEnchantmentHandler {
         if (event.isCanceled) return
         if (event.entity is Player) {
             val player = event.entity as Player
-            val enchantmentLevel = player.getArmorHasEnchantmentTotalLevel(ExoticHealerEnchantment)
+            val enchantmentLevel = player.getArmorEnchantmentMaxLevel(ExoticHealerEnchantment)
             if (enchantmentLevel == 0) return
             val dice = player.random.nextInt(100)
             val modifier = 1 + (enchantmentLevel - 1) * 0.1f
@@ -233,7 +232,8 @@ object DiceOfFraudEnchantmentHandler {
                 dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
                 dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
                 dice < 95 -> {
-                    // player.hurt(TODO(), event.amount * modifier)
+                    val exoticHealer = DamageSourceBuilder.createDamageSource(ResourceKeys.exotic_healer, player.level())
+                    player.hurt(exoticHealer, event.amount * modifier)
                     event.isCanceled = true
                 }
             }

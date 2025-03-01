@@ -1,10 +1,12 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.CovertKnifeEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EnviousKindEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EyesoreEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.SourceOfEnvyEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.ThornInFleshEnchantment
+import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
 import love.marblegate.flowingagonyreborn.util.getTargetsOfSameType
@@ -46,7 +48,7 @@ object FlameOfEnvyEnchantmentEventHandler {
                 val diff = event.entity.health - player.health
                 if (diff >= 0) {
                     val amplifier = floor(diff / 10.0)
-                    TODO("添加mod添加的效果") // player.addEffect(/* 效果 */,200,amplifier)
+                    player.addEffect(MobEffectInstance(ModEffects.ENVIOUS_BEING, 200, amplifier.toInt()))
                 }
             }
         }
@@ -63,7 +65,7 @@ object FlameOfEnvyEnchantmentEventHandler {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(EyesoreEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel != 0) {
-                // event.entity.addEffect()
+                event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.EYESORE_ENCHANTMENT_ACTIVE, 61, enchantmentLevel - 1))
             }
         }
     }
@@ -79,9 +81,9 @@ object FlameOfEnvyEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ThornInFleshEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel != 0) {
                 if (event.entity is Player) {
-                    TODO("添加自定义效果")
+                    event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.THORN_IN_FLESH_ACTIVE_FOR_PLAYER, 60 + 40 * enchantmentLevel, enchantmentLevel - 1))
                 } else {
-                    TODO("添加自定义效果")
+                    event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.THORN_IN_FLESH_ACTIVE, 60 + 40 * enchantmentLevel, enchantmentLevel - 1))
                 }
             }
         }
@@ -109,7 +111,7 @@ object FlameOfEnvyEnchantmentEventHandler {
                         else -> 0.0
                     }
                     if (Random.nextDouble() >= successProbability) return
-                    // entity.hurt(DamageSource.playerAttack((Player) event.getProjectile().getOwner()), 9f) TODO(写法变了)
+                    entity.hurt(owner.damageSources().playerAttack(owner), 9f)
                     if (owner.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND) == 1) entity.setSecondsOnFire(5)
 
                     when (event.projectile) {
