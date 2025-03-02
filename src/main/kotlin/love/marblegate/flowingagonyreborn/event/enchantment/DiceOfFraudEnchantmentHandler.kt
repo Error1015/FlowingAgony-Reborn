@@ -78,36 +78,34 @@ object DiceOfFraudEnchantmentHandler {
         if (enchantmentLevel == 0) return
         val coolDownCap = event.entity.getCapability(ModCapManager.CoolDown_Capability)
         coolDownCap.ifPresent { cap ->
-            {
-                if (cap.isReady(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)) {
-                    when {
-                        enchantmentLevel == 1 -> {
-                            val tempNum = player.random.nextInt(4)
-                            caseToAddEffect(tempNum, player)
-                        }
+            if (cap.isReady(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)) {
+                when {
+                    enchantmentLevel == 1 -> {
+                        val tempNum = player.random.nextInt(4)
+                        caseToAddEffect(tempNum, player)
+                    }
 
-                        enchantmentLevel < 4 -> {
-                            val set = HashSet<Int>()
-                            var tempCount = enchantmentLevel
-                            while (tempCount > 0) {
-                                val tempNum = player.random.nextInt(4)
-                                if (tempNum !in set) {
-                                    caseToAddEffect(tempNum, player)
-                                    set + tempNum
-                                    tempCount--
-                                }
+                    enchantmentLevel < 4 -> {
+                        val set = mutableSetOf<Int>()
+                        var tempCount = enchantmentLevel
+                        while (tempCount > 0) {
+                            val tempNum = player.random.nextInt(4)
+                            if (tempNum !in set) {
+                                caseToAddEffect(tempNum, player)
+                                set += tempNum
+                                tempCount--
                             }
                         }
-
-                        enchantmentLevel == 4 -> {
-                            player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
-                            player.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))
-                            player.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000))
-                            player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
-                        }
                     }
-                    cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, 18000)
+
+                    enchantmentLevel == 4 -> {
+                        player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
+                        player.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))
+                        player.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000))
+                        player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
+                    }
                 }
+                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, 18000)
             }
         }
     }
@@ -202,7 +200,7 @@ object DiceOfFraudEnchantmentHandler {
             if (weaponNbt?.contains("savor_the_tasted_target") != true) weaponNbt?.putString("savor_the_tasted_target", encodeId)
             else {
                 val recordedTarget = weaponNbt.getString("savor_the_tasted_target")
-                if (recordedTarget == encodeId) event.amount = event.amount + player.random.nextInt(5) + enchantmentLevel * 4 - 1
+                if (recordedTarget == encodeId) event.amount += player.random.nextInt(5) + enchantmentLevel * 4 - 1
                 else weaponNbt.putString("savor_the_tasted_target", encodeId)
             }
             player.mainHandItem.tag = weaponNbt

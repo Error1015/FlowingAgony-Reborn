@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraftforge.event.entity.item.ItemTossEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.event.entity.living.LivingDeathEvent
+import net.minecraftforge.event.entity.living.LivingHealEvent
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -59,7 +60,7 @@ object LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    fun doMorirsLifeboundEnchantmentEventMendOnHeal(event: LivingDamageEvent) {
+    fun doMorirsLifeboundEnchantmentEventMendOnHeal(event: LivingHealEvent) {
         if (event.entity.level().isClientSide || event.isCanceled) return
         if (event.entity is Player) {
             val player = event.entity as Player
@@ -89,7 +90,7 @@ object LastWishEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doGuidensRegretEnchantmentEvent(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val stacks = player.getStackWithEnchantment(GuidensRegretEnchantment)

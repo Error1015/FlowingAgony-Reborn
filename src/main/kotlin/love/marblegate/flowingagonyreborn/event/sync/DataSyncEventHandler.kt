@@ -30,10 +30,11 @@ object DataSyncEventHandler {
     fun syncAbnormalJoyCapability(player: Player) {
         if (player.level().isClientSide || !Networking.isInitialized()) return
 
-        player.getCapability(ModCapManager.AbnormalJoy_Capability).resolve().let { cap ->
-            (player as? ServerPlayer)?.let { serverPlayer ->
+        val capability = player.getCapability(ModCapManager.AbnormalJoy_Capability)
+        capability.ifPresent { cap ->
+            if (Networking.isInitialized()) {
                 Networking.INSTANCE.send(
-                    PacketDistributor.PLAYER.with { serverPlayer }, AbnormalJoySyncPacket(cap.get().getPoint())
+                    PacketDistributor.PLAYER.with { player as ServerPlayer }, AbnormalJoySyncPacket(cap.getPoint())
                 )
             }
         }

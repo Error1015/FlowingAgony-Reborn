@@ -79,9 +79,9 @@ fun LivingEntity.isItemEnchanted(enchantment: Enchantment, slot: EquipmentSlot):
 }
 
 fun LivingEntity.getStackWithEnchantment(enchantment: Enchantment): List<ItemStack> {
-    val list = listOf<ItemStack>()
+    val list = mutableListOf<ItemStack>()
     EquipmentSlot.entries.forEach {
-        if (this.isItemEnchanted(enchantment, it)) list + getItemBySlot(it)
+        if (this.isItemEnchanted(enchantment, it)) list += getItemBySlot(it)
     }
     return list
 }
