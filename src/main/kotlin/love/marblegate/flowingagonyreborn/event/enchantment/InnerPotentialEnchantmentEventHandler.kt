@@ -125,7 +125,7 @@ object InnerPotentialEnchantmentEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
-            if (event.source.type() == DamageTypes.FALL || event.source.type() == DamageTypes.CRAMMING || event.source.type() == DamageTypes.IN_WALL) {
+            if (event.source.`is`(DamageTypes.FALL) || event.source.`is`(DamageTypes.CRAMMING) || event.source.`is`(DamageTypes.IN_WALL)) {
                 if (player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE)) event.isCanceled = true
             }
         }

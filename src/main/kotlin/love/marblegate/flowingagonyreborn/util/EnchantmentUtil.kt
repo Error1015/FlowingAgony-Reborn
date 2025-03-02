@@ -17,7 +17,7 @@ fun ItemStack.isItemEnchanted(enchantment: Enchantment) = this.allEnchantments.c
 /**
  * 获取实体所有护甲是否都拥有一个附魔
  */
-fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.getAllArmors().all { it.isItemEnchanted(enchantment) }
+fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.armorSlots.all { it.isItemEnchanted(enchantment) }
 
 /**
  * 获取实体某个附魔的附魔等级
@@ -39,7 +39,7 @@ fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment, slot: EquipmentSl
  * 实体有一个护甲拥有某附魔
  */
 fun LivingEntity.armorHasEnchantment(enchantment: Enchantment): Boolean {
-    getAllArmors().forEach { if (it.isItemEnchanted(enchantment)) return true }
+    armorSlots.forEach { if (it.isItemEnchanted(enchantment)) return true }
     return false
 }
 
@@ -48,7 +48,7 @@ fun LivingEntity.armorHasEnchantment(enchantment: Enchantment): Boolean {
  */
 fun LivingEntity.getArmorEnchantmentCount(enchantment: Enchantment): Int {
     var count = 0
-    getAllArmors().forEach { if (it.isItemEnchanted(enchantment)) count++ }
+    armorSlots.forEach { if (it.isItemEnchanted(enchantment)) count++ }
     return count
 }
 
@@ -57,7 +57,7 @@ fun LivingEntity.getArmorEnchantmentCount(enchantment: Enchantment): Int {
  */
 fun LivingEntity.getArmorEnchantmentTotalLevel(enchantment: Enchantment): Int {
     var level = 0
-    getAllArmors().forEach { level += it.allEnchantments[enchantment] ?: 0 }
+    armorSlots.forEach { level += it.allEnchantments[enchantment] ?: 0 }
     return level
 }
 
@@ -66,7 +66,7 @@ fun LivingEntity.getArmorEnchantmentTotalLevel(enchantment: Enchantment): Int {
  */
 fun LivingEntity.getArmorEnchantmentMaxLevel(enchantment: Enchantment): Int {
     var maxLevel = 0
-    getAllArmors().forEach { maxLevel = maxOf(maxLevel, it.allEnchantments[enchantment] ?: 0) }
+    armorSlots.forEach { maxLevel = maxOf(maxLevel, it.allEnchantments[enchantment] ?: 0) }
     return maxLevel
 }
 

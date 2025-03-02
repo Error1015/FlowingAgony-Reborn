@@ -3,8 +3,7 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ResourceKeys
-import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments
+import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentMaxLevel
@@ -232,7 +231,7 @@ object DiceOfFraudEnchantmentHandler {
                 dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
                 dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
                 dice < 95 -> {
-                    val exoticHealer = DamageSourceBuilder.createDamageSource(ResourceKeys.exotic_healer, player.level())
+                    val exoticHealer = DamageSourceBuilder.createDamageSource(ModDamageTypes.exotic_healer, player.level())
                     player.hurt(exoticHealer, event.amount * modifier)
                     event.isCanceled = true
                 }

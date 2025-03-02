@@ -1,35 +1,22 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.effect.ModEffects
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.BackAndFillEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.ISeeYouNowEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.InfectiousMaliceEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.MaliceOutbreakEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.PerceivedMaliceEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.VengeanceEnchantment
+import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.*
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundWithLocationPacket
-import love.marblegate.flowingagonyreborn.util.EffectUtil
-import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
-import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
-import love.marblegate.flowingagonyreborn.util.getTargetsOfSameType
-import love.marblegate.flowingagonyreborn.util.isHostile
-import love.marblegate.flowingagonyreborn.util.isItemEnchanted
-import love.marblegate.flowingagonyreborn.util.isNeutral
+import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraftforge.event.entity.living.LivingAttackEvent
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.network.PacketDistributor
 import java.util.stream.Collectors
-import kotlin.contracts.Effect
 
 @Mod.EventBusSubscriber
 object LensOfMaliceEnchantmentEventHandler {

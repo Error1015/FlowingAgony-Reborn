@@ -1,5 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.effect
 
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
@@ -28,10 +30,11 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doCursedHatredEffectEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.entity.hasEffect(ModEffects.CURSED_HATRED)/* TODO: event.getSource() != CustomDamageSource.CURSED_HATRED) */) {
+        val curseHatred = DamageSourceBuilder.createDamageSource(ModDamageTypes.curse_hatred, event.entity.level())
+        if (event.entity.hasEffect(ModEffects.CURSED_HATRED) && event.source != curseHatred) {
             val potionLevel = event.entity.getEffect(ModEffects.CURSED_HATRED)?.let { it.amplifier + 1 } ?: return
             event.entity.removeEffect(ModEffects.CURSED_HATRED)
-            // event.entity.hurt()
+            event.entity.hurt(curseHatred, potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat())
         }
     }
 
@@ -91,11 +94,11 @@ object ExplicitEffectEventHandler {
 
                 val serverPlayer = event.entity as? ServerPlayer ?: return
                 if (Networking.isInitialized()) {
-                Networking.INSTANCE.send(
-                    PacketDistributor.PLAYER.with {
-                        serverPlayer
-                    }, RemoveEffectSyncToClientPacket(ModEffects.CURSE_OF_UNDEAD)
-                )
+                    Networking.INSTANCE.send(
+                        PacketDistributor.PLAYER.with {
+                            serverPlayer
+                        }, RemoveEffectSyncToClientPacket(ModEffects.CURSE_OF_UNDEAD)
+                    )
                 }
             }
         }
@@ -131,12 +134,13 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doBeenResonatedEffectEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.entity.hasEffect(ModEffects.BEEN_RESONATED)/*  && event.source !=  CustomDamageSource.AGONY_RESONANCE */) {
+        val agonyResonance = DamageSourceBuilder.createDamageSource(ModDamageTypes.agony_resonance, event.entity.level())
+        if (event.entity.hasEffect(ModEffects.BEEN_RESONATED) && event.source != agonyResonance) {
             val entities = event.entity.getTargetsExceptOneself(8f, 2f) { entity ->
                 entity.hasEffect(ModEffects.AGONY_RESONANCE)
             }
             val damageIndex = event.entity.getEffect(ModEffects.BEEN_RESONATED)?.let { it.amplifier + 1 } ?: 0
-            entities.forEach { entity -> entity.hurt(/* TODO(需要修改) */entity.damageSources().generic(), event.amount * (0.35F + damageIndex * 0.15F)) }
+            entities.forEach { entity -> entity.hurt(agonyResonance, event.amount * (0.35F + damageIndex * 0.15F)) }
         }
     }
 
@@ -160,7 +164,8 @@ object ExplicitEffectEventHandler {
                 val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                 if (event.source.entity is LivingEntity) {
                     val entity = event.source.entity as LivingEntity
-                    if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) entity.hurt(/*TODO(替换自定义DamageSource)*/entity.damageSources().generic(), effectLevel * event.amount)
+                    val letMeSavorIt = DamageSourceBuilder.createDamageSource(ModDamageTypes.let_me_savor_it, event.entity)
+                    if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) entity.hurt(letMeSavorIt, effectLevel * event.amount)
                 }
             }
         }

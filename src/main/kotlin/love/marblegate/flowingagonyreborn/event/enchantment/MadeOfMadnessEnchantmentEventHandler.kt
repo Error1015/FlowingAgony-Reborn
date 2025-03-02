@@ -2,7 +2,7 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ResourceKeys
+import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.madeofmadness.*
 import love.marblegate.flowingagonyreborn.util.*
@@ -90,7 +90,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     @SubscribeEvent
     fun onCuttingWatermelonDreamEnchantmentEventDealDamage(event: BlockEvent.BreakEvent) {
         if (event.player.level().isClientSide) return
-        val cuttingWaterMelonDreamDamageSource = DamageSourceBuilder.createDamageSource(ResourceKeys.cutting_watermelon_dream, event.player)
+        val cuttingWaterMelonDreamDamageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.cutting_watermelon_dream, event.player)
         if (event.state.block == Blocks.MELON) {
             if (event.player.isItemEnchanted(CuttingWatermelonDreamEnchantment, EquipmentSlot.MAINHAND)) {
                 val targets = event.player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }
@@ -118,7 +118,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     @SubscribeEvent
     fun onCuttingWatermelonDreamEnchantmentEventDropHeadAndExtraLoot(event: LivingDeathEvent) {
         if (event.entity.level().isClientSide && event.isCanceled) return
-        if (event.source.msgId == ResourceKeys.cutting_watermelon_dream.location().path && event.source.entity is Player && event.entity.supportHeadDrop()) {
+        if (event.source.`is`(ModDamageTypes.cutting_watermelon_dream) && event.source.entity is Player && event.entity.supportHeadDrop()) {
             val player = event.source.entity as Player
             val entity = event.entity
             if (player.isItemEnchanted(CuttingWatermelonDreamEnchantment, EquipmentSlot.MAINHAND)) {

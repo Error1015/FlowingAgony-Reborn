@@ -32,11 +32,6 @@ var LivingEntity.boots: ItemStack
     }
 
 /**
- * 获取实体所有护甲
- */
-fun LivingEntity.getAllArmors(): List<ItemStack> = listOf(helmet, chestplate, leggings, boots)
-
-/**
  * 实体是否拥有某项护甲
  */
 fun LivingEntity.hasArmor(equipmentSlot: EquipmentSlot) = !this.getItemBySlot(equipmentSlot).isEmpty
