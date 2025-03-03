@@ -5,7 +5,6 @@ import love.marblegate.flowingagonyreborn.network.packet.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraftforge.network.NetworkDirection
 import net.minecraftforge.network.NetworkRegistry
-import net.minecraftforge.network.PacketDistributor
 import net.minecraftforge.network.simple.SimpleChannel
 import java.util.Optional
 import kotlin.jvm.java
@@ -37,11 +36,5 @@ object Networking {
             nextID(), RemoveEffectSyncToClientPacket::class.java, RemoveEffectSyncToClientPacket::toBytes, ::RemoveEffectSyncToClientPacket, RemoveEffectSyncToClientPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         )
-    }
-
-    fun safeSend(packet: Any, distributor: PacketDistributor.PacketTarget) {
-        if (::INSTANCE.isInitialized) {
-            INSTANCE.send(distributor, packet)
-        }
     }
 }

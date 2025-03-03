@@ -1,5 +1,7 @@
 package love.marblegate.flowingagonyreborn.effect.explicit
 
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
@@ -7,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity
 object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
     override fun applyEffectTick(entity: LivingEntity, pAmplifier: Int) {
         val duration: Int = entity.getEffect(this)?.duration ?: 0
+        val damageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.rhythm_of_universe, entity)
         when {
             duration % 40 > 25 -> {
                 entity.setDeltaMovement(0.0, 0.41, 0.0)
@@ -29,7 +32,7 @@ object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
                 var damage: Float = entity.maxHealth * 0.2f + entity.health * 0.5f
                 damage = minOf(getMinDamage(pAmplifier), damage)
                 damage = maxOf(getMaxDamage(pAmplifier), damage)
-                // entity.hurt()
+                entity.hurt(damageSource, damage)
             }
         }
     }
