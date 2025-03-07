@@ -76,7 +76,7 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantLevel = player.getEnchantmentLevel(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)
             if (enchantLevel == 0) return
-            if (isExplicit(event.effectInstance)) {
+            if (event.effectInstance.isExplicit()) {
                 if (player.hasEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)) {
                     val newEffectAmplifier = min(player.getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)?.let { it.amplifier + enchantLevel } ?: return, 29).toInt()
                     player.addEffect(EffectUtil.genImplicitEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, newEffectAmplifier))
@@ -92,12 +92,12 @@ object TheMistakensEnchantmentEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
-            if (player.isItemEnchanted(PrototypeChaoticTypeBetaEnchantment, EquipmentSlot.CHEST) && isExplicit(event.effectInstance)) {
+            if (player.isItemEnchanted(PrototypeChaoticTypeBetaEnchantment, EquipmentSlot.CHEST) && event.effectInstance.isExplicit()) {
                 if (event.effectInstance.effect.category == MobEffectCategory.BENEFICIAL && !event.effectInstance.effect.isInstantenous) {
                     if (player.isItemEnchanted(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)) {
                         event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, event.effectInstance.duration * 3))
                         val negativeEffects = player.activeEffects.stream()
-                                .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && isExplicit(it) }.collect(Collectors.toList())
+                                .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit() }.collect(Collectors.toList())
                         if (negativeEffects.isNotEmpty()) {
                             negativeEffects.forEach { effect ->
                                 player.removeEffect(effect.effect)
@@ -208,7 +208,7 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ScholarOfOriginalSinEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            if (event.effectInstance.effect.category == MobEffectCategory.HARMFUL && isExplicit(event.effectInstance)) {
+            if (event.effectInstance.effect.category == MobEffectCategory.HARMFUL && event.effectInstance.isExplicit()) {
                 event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, (event.effectInstance.duration * (2.1 - 0.1 * enchantmentLevel)).toInt()))
             }
         }
@@ -259,7 +259,7 @@ object TheMistakensEnchantmentEventHandler {
                 (originalDeathPos.x - 16).toDouble(), (originalDeathPos.y - 1).toDouble(), (originalDeathPos.z - 16).toDouble(), (originalDeathPos.x + 16).toDouble(),
                 (originalDeathPos.y + 1).toDouble(), (originalDeathPos.z + 16.toDouble())
             )
-            val burialObjectCurseDamageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.burial_object_curse, player)
+            val burialObjectCurseDamageSource = DamageSourceBuilder.causeBurialObjectDamage(player)
             val players = player.level().getEntitiesOfClass(Player::class.java, scanningArea)
             players.forEach { player -> if (player.allArmorHasEnchantment(BurialObjectCurse)) player.hurt(burialObjectCurseDamageSource, 120f) }
         }

@@ -90,7 +90,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     @SubscribeEvent
     fun onCuttingWatermelonDreamEnchantmentEventDealDamage(event: BlockEvent.BreakEvent) {
         if (event.player.level().isClientSide) return
-        val cuttingWaterMelonDreamDamageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.cutting_watermelon_dream, event.player)
+        val cuttingWaterMelonDreamDamageSource = DamageSourceBuilder.causeCuttingWaterMelonDream(event.player)
         if (event.state.block == Blocks.MELON) {
             if (event.player.isItemEnchanted(CuttingWatermelonDreamEnchantment, EquipmentSlot.MAINHAND)) {
                 val targets = event.player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }

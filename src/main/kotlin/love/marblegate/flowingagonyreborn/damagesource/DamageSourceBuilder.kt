@@ -1,35 +1,45 @@
 package love.marblegate.flowingagonyreborn.damagesource
 
+import net.minecraft.client.Minecraft
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.level.Level
-import net.minecraft.world.phys.Vec3
 
 object DamageSourceBuilder {
-    fun createDamageSource(key: ResourceKey<DamageType>, directEntity: Entity, causingEntity: Entity): DamageSource {
-        val registryAccess = directEntity.level().registryAccess()
-        val holderOrThrow = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)
-        return DamageSource(holderOrThrow, causingEntity, directEntity)
+    internal val registryAccess = Minecraft.getInstance().level?.registryAccess() ?: throw IllegalStateException("Minecraft client is not initialized")
+    val CURSED_HATRED = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_hatred)
+    val CURSED_ANTIPATHY = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_antipathy_effect)
+    val LIGHTBURN_FUNGAL_INFECTION = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.lightburn_fungal_infection)
+    val AGONY_RESONANCE = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.agony_resonance)
+    val RYTHM_OF_UNIVERSE = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.rhythm_of_universe)
+    val EXOTIC_HEALER = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.exotic_healer)
+
+    fun causeCuttingWaterMelonDream(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.cutting_watermelon_dream, entity)
+
+    fun causeLetMeSavorItDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.let_me_savor_it, entity)
+
+    fun causeBurialObjectDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.burial_object_curse, entity)
+
+    fun causePhobiaDamage(entity: Entity): DamageSource {
+        // 暂时没有发现存在问题
+        // see https://github.com/MarbleGateKeeper/FlowingAgony/issues/9
+        // if (entity is Guardian) {
+        //     return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
+        // }
+        return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
     }
 
-    fun createDamageSource(key: ResourceKey<DamageType>, level: Level): DamageSource {
-        val registryAccess = level.registryAccess()
-        val holderOrThrow = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)
-        return DamageSource(holderOrThrow)
+    internal fun createFlowingAgonySimpleDeathMessageDamageSource(key: ResourceKey<DamageType>): DamageSource {
+        return FlowingAgonySimpleDeathMessageDamageSource(registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key))
     }
 
-    fun createDamageSource(key: ResourceKey<DamageType>, entity: Entity): DamageSource {
-        val registryAccess = entity.level().registryAccess()
-        val holderOrThrow = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)
-        return DamageSource(holderOrThrow, entity)
+    internal fun createFlowingAgonyMobtoMobDamageSource(key: ResourceKey<DamageType>, entity: Entity): DamageSource {
+        return FlowingAgonyMobtoMobDamageSource(registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key), entity)
     }
 
-    fun createDamageSource(key: ResourceKey<DamageType>, directEntity: Entity, causingEntity: Entity, vec3: Vec3): DamageSource {
-        val registryAccess = directEntity.level().registryAccess()
-        val holderOrThrow = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)
-        return DamageSource(holderOrThrow, causingEntity, directEntity, vec3)
+    internal fun createBasicDamageSource(key: ResourceKey<DamageType>): DamageSource {
+        return DamageSource(registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key))
     }
 }

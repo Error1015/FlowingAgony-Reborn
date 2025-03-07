@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.Mod
 object SurvivalTricksEnchantmentEventHandler {
     @SubscribeEvent(priority = EventPriority.LOW)
     fun doSurvivalShortcutEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (!event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD) && !event.source.`is`(ModDamageTypes.burial_object_curse)) {
             if (event.entity is Player) {
                 val player = event.entity as Player
@@ -45,7 +45,7 @@ object SurvivalTricksEnchantmentEventHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     fun doSurvivalSRuseEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (!event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD) && !event.source.`is`(ModDamageTypes.burial_object_curse)) {
             if (event.entity is Player) {
                 val player = event.entity as Player
@@ -62,7 +62,7 @@ object SurvivalTricksEnchantmentEventHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     fun doNecessaryEvilEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (!event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD) && !event.source.`is`(ModDamageTypes.burial_object_curse)) {
             if (event.entity is Player) {
                 val player = event.entity as Player
@@ -105,5 +105,4 @@ object SurvivalTricksEnchantmentEventHandler {
      * 在一个LivingEntity的集合中随机抽取一个幸运儿
      */
     private fun getLuckyOne(entities: List<LivingEntity>, source: RandomSource) = entities[source.nextInt(entities.size)]
-
 }

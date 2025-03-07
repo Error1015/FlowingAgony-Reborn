@@ -14,8 +14,7 @@ object CursedAntipathyEffect : MobEffect(
     MobEffectCategory.HARMFUL, 18432
 ) {
     override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
-        val cursedAntipathyDamageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.cursed_antipathy_effect, pLivingEntity)
-        pLivingEntity.hurt(cursedAntipathyDamageSource, 1.0f)
+        pLivingEntity.hurt(DamageSourceBuilder.CURSED_ANTIPATHY, 1.0f)
         if (pLivingEntity.level().isClientSide) return
         Networking.safeSend(
             PacketDistributor.NEAR.with {

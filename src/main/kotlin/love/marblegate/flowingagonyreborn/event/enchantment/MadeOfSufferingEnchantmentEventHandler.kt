@@ -4,21 +4,14 @@ import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.BurningPhobiaEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.ConstrainedHeartEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.DestructionWorshipEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.DrowningPhobiaEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.PiercingFeverEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.PrayerOfPainEnchantment
+import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.*
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.AbnormalJoySyncPacket
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
-import love.marblegate.flowingagonyreborn.util.helmet
 import love.marblegate.flowingagonyreborn.util.isHostile
 import love.marblegate.flowingagonyreborn.util.shouldReflectDamage
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.damagesource.DamageSources
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
@@ -30,7 +23,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.network.PacketDistributor
-import org.apache.logging.log4j.core.jmx.Server
 
 
 @Mod.EventBusSubscriber
@@ -55,7 +47,6 @@ object MadeOfSufferingEnchantmentEventHandler {
                 dealPhobiaEffectDamage(event, MobEffects.MOVEMENT_SLOWDOWN, enchantmentLevel)
             }
         }
-
     }
 
     private fun dealPhobiaEffectDamage(event: LivingDamageEvent, effect: MobEffect, level: Int) {
@@ -63,7 +54,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         event.entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 500 - level * 100))
         val player = event.entity as? Player ?: return
         val targets = player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }
-        val damageSource = DamageSourceBuilder.createDamageSource(ModDamageTypes.burial_object_curse, player)
+        val damageSource = DamageSourceBuilder.causePhobiaDamage(player)
         targets.forEach { target -> target.hurt(damageSource, event.amount * 1.5f + 0.5f * level) }
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity

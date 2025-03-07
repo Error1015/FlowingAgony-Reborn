@@ -9,6 +9,7 @@ import love.marblegate.flowingagonyreborn.network.packet.RemoveEffectSyncToClien
 import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
 import love.marblegate.flowingagonyreborn.util.hasHelmet
 import love.marblegate.flowingagonyreborn.util.helmet
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import love.marblegate.flowingagonyreborn.util.shouldReflectDamage
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
@@ -30,11 +31,10 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doCursedHatredEffectEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        val curseHatred = DamageSourceBuilder.createDamageSource(ModDamageTypes.curse_hatred, event.entity.level())
-        if (event.entity.hasEffect(ModEffects.CURSED_HATRED) && event.source != curseHatred) {
+        if (event.entity.hasEffect(ModEffects.CURSED_HATRED) && event.source != DamageSourceBuilder.CURSED_HATRED) {
             val potionLevel = event.entity.getEffect(ModEffects.CURSED_HATRED)?.let { it.amplifier + 1 } ?: return
             event.entity.removeEffect(ModEffects.CURSED_HATRED)
-            event.entity.hurt(curseHatred, potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat())
+            event.entity.hurt(DamageSourceBuilder.CURSED_HATRED, potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat())
         }
     }
 
@@ -48,19 +48,17 @@ object ExplicitEffectEventHandler {
                 player.removeEffect(ModEffects.EXTREME_HATRED)
 
                 val serverPlayer = event.source.entity as? ServerPlayer ?: return
-                if (Networking.isInitialized()) {
-                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
-                        serverPlayer
-                    }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, false))
+                Networking.safeSend(PacketDistributor.PLAYER.with {
+                    serverPlayer
+                }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, false))
 
-                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
-                        serverPlayer
-                    }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, false))
+                Networking.safeSend(PacketDistributor.PLAYER.with {
+                    serverPlayer
+                }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, false))
 
-                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
-                        serverPlayer
-                    }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, false))
-                }
+                Networking.safeSend(PacketDistributor.PLAYER.with {
+                    serverPlayer
+                }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, false))
                 event.amount *= (1 + potionLevel)
             }
         }
@@ -91,15 +89,12 @@ object ExplicitEffectEventHandler {
                 }
             } else if (event.item == Items.ENCHANTED_GOLDEN_APPLE.defaultInstance && player.hasEffect(ModEffects.CURSE_OF_UNDEAD)) {
                 player.removeEffect(ModEffects.CURSE_OF_UNDEAD)
-
                 val serverPlayer = event.entity as? ServerPlayer ?: return
-                if (Networking.isInitialized()) {
-                    Networking.INSTANCE.send(
-                        PacketDistributor.PLAYER.with {
-                            serverPlayer
-                        }, RemoveEffectSyncToClientPacket(ModEffects.CURSE_OF_UNDEAD)
-                    )
-                }
+                Networking.safeSend(
+                    PacketDistributor.PLAYER.with {
+                        serverPlayer
+                    }, RemoveEffectSyncToClientPacket(ModEffects.CURSE_OF_UNDEAD)
+                )
             }
         }
     }
@@ -134,13 +129,12 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doBeenResonatedEffectEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        val agonyResonance = DamageSourceBuilder.createDamageSource(ModDamageTypes.agony_resonance, event.entity.level())
-        if (event.entity.hasEffect(ModEffects.BEEN_RESONATED) && event.source != agonyResonance) {
+        if (event.entity.hasEffect(ModEffects.BEEN_RESONATED) && event.source != DamageSourceBuilder.AGONY_RESONANCE) {
             val entities = event.entity.getTargetsExceptOneself(8f, 2f) { entity ->
                 entity.hasEffect(ModEffects.AGONY_RESONANCE)
             }
             val damageIndex = event.entity.getEffect(ModEffects.BEEN_RESONATED)?.let { it.amplifier + 1 } ?: 0
-            entities.forEach { entity -> entity.hurt(agonyResonance, event.amount * (0.35F + damageIndex * 0.15F)) }
+            entities.forEach { entity -> entity.hurt(DamageSourceBuilder.AGONY_RESONANCE, event.amount * (0.35F + damageIndex * 0.15F)) }
         }
     }
 
@@ -164,7 +158,7 @@ object ExplicitEffectEventHandler {
                 val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                 if (event.source.entity is LivingEntity) {
                     val entity = event.source.entity as LivingEntity
-                    val letMeSavorIt = DamageSourceBuilder.createDamageSource(ModDamageTypes.let_me_savor_it, event.entity)
+                    val letMeSavorIt = DamageSourceBuilder.causeLetMeSavorItDamage(event.entity)
                     if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) entity.hurt(letMeSavorIt, effectLevel * event.amount)
                 }
             }
@@ -179,12 +173,9 @@ object ExplicitEffectEventHandler {
             if (event.player.health > 12) {
                 event.player.removeEffectNoUpdate(ModEffects.LET_ME_SAVOR_IT)
                 val serverPlayer = event.player as? ServerPlayer ?: return
-
-                if (Networking.isInitialized()) {
-                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
-                        serverPlayer
-                    }, RemoveEffectSyncToClientPacket(ModEffects.LET_ME_SAVOR_IT))
-                }
+                Networking.safeSend(PacketDistributor.PLAYER.with {
+                    serverPlayer
+                }, RemoveEffectSyncToClientPacket(ModEffects.LET_ME_SAVOR_IT))
             }
         }
     }

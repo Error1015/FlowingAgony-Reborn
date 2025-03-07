@@ -9,7 +9,7 @@ object EffectUtil {
 
     fun genImplicitEffect(effect: MobEffect, duration: Int, amplifier: Int) = MobEffectInstance(effect, duration, amplifier, false, false)
 
-    fun isImplicit(mobEffectInstance: MobEffectInstance) = mobEffectInstance.effect is ImplicitBaseEffect || !mobEffectInstance.isVisible || !mobEffectInstance.showIcon()
+    fun MobEffectInstance.isImplicit() = this.effect is ImplicitBaseEffect || !this.isVisible || !this.showIcon()
 
-    fun isExplicit(mobEffectInstance: MobEffectInstance) = !isImplicit(mobEffectInstance)
+    fun MobEffectInstance.isExplicit() = !isImplicit()
 }

@@ -129,7 +129,7 @@ object DiceOfFraudEnchantmentHandler {
         if (event.entity is Player) {
             val player = event.entity as Player
             // 如果伤害来源是虚空伤害，则不触发死亡朋克附魔
-            if (event.amount < player.health && event.source == DamageTypes.FELL_OUT_OF_WORLD) return
+            if (event.amount < player.health && event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD)) return
             // 检查玩家是否装备了死亡朋克的胸甲
             if (player.isItemEnchanted(DeathPunkEnchantment, EquipmentSlot.CHEST)) {
                 val solution = player.random.nextInt(4)
@@ -213,7 +213,6 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doExoticHealerEnchantmentEvent(event: LivingHealEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getArmorEnchantmentMaxLevel(ExoticHealerEnchantment)
@@ -229,8 +228,7 @@ object DiceOfFraudEnchantmentHandler {
                 dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
                 dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
                 dice < 95 -> {
-                    val exoticHealer = DamageSourceBuilder.createDamageSource(ModDamageTypes.exotic_healer, player.level())
-                    player.hurt(exoticHealer, event.amount * modifier)
+                    player.hurt(DamageSourceBuilder.EXOTIC_HEALER, event.amount * modifier)
                     event.isCanceled = true
                 }
             }
