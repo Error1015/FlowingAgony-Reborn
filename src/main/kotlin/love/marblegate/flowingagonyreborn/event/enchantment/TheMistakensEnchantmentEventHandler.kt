@@ -2,14 +2,13 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.*
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.curse.BurialObjectCurse
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.RemoveEffectSyncToClientPacket
 import love.marblegate.flowingagonyreborn.util.*
-import love.marblegate.flowingagonyreborn.util.EffectUtil.isExplicit
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
@@ -48,7 +47,7 @@ object TheMistakensEnchantmentEventHandler {
                         ShadowbornEnchantment, EquipmentSlot.HEAD
                     )) {
                 event.player.removeEffectNoUpdate(MobEffects.BLINDNESS)
-                if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with { event.player as ServerPlayer }, RemoveEffectSyncToClientPacket(MobEffects.BLINDNESS))
+               Networking.safeSend(PacketDistributor.PLAYER.with { event.player as ServerPlayer }, RemoveEffectSyncToClientPacket(MobEffects.BLINDNESS))
             }
             if (event.player.level().getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
                 if (event.player.hasEffect(MobEffects.NIGHT_VISION)) event.player.addEffect(MobEffectInstance(MobEffects.NIGHT_VISION, 1200))
@@ -101,7 +100,7 @@ object TheMistakensEnchantmentEventHandler {
                         if (negativeEffects.isNotEmpty()) {
                             negativeEffects.forEach { effect ->
                                 player.removeEffect(effect.effect)
-                                if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+                               Networking.safeSend(PacketDistributor.PLAYER.with {
                                     event.entity as ServerPlayer
                                 }, RemoveEffectSyncToClientPacket(effect.effect))
                             }
@@ -162,14 +161,14 @@ object TheMistakensEnchantmentEventHandler {
         if (event.player.isItemEnchanted(LightburnFungalParasiticEnchantment, EquipmentSlot.CHEST)) {
             if (event.player.hasEffect(MobEffects.POISON)) {
                 event.player.removeEffectNoUpdate(MobEffects.POISON)
-                if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+               Networking.safeSend(PacketDistributor.PLAYER.with {
                     event.player as ServerPlayer
                 }, RemoveEffectSyncToClientPacket(MobEffects.POISON))
             }
 
             if (event.player.hasEffect(ModEffects.LIGHTBURN_FUNGAL_INFECTION)) {
                 event.player.removeEffectNoUpdate(ModEffects.LIGHTBURN_FUNGAL_INFECTION)
-                if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+               Networking.safeSend(PacketDistributor.PLAYER.with {
                     event.player as ServerPlayer
                 }, RemoveEffectSyncToClientPacket(ModEffects.LIGHTBURN_FUNGAL_INFECTION))
             }

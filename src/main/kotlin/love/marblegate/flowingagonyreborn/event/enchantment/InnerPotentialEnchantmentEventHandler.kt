@@ -11,6 +11,7 @@ import love.marblegate.flowingagonyreborn.network.packet.RemoveEffectSyncToClien
 import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.isItemEnchanted
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffects
@@ -46,7 +47,7 @@ object InnerPotentialEnchantmentEventHandler {
             if (player.isItemEnchanted(StubbornStepEnchantment, EquipmentSlot.LEGS)) {
                 if (player.hasEffect(MobEffects.LEVITATION)) {
                     player.removeEffectNoUpdate(MobEffects.LEVITATION)
-                    if (Networking.isInitialized()) Networking.INSTANCE.send(
+                    Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                         player as ServerPlayer
                     }, RemoveEffectSyncToClientPacket(MobEffects.LEVITATION))
@@ -68,7 +69,7 @@ object InnerPotentialEnchantmentEventHandler {
             }
             if (player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
                 player.removeEffectNoUpdate(MobEffects.MOVEMENT_SLOWDOWN)
-                if (Networking.isInitialized()) Networking.INSTANCE.send(
+                Networking.safeSend(
                     PacketDistributor.PLAYER.with {
                     player as ServerPlayer
                 }, RemoveEffectSyncToClientPacket(MobEffects.MOVEMENT_SLOWDOWN))
@@ -93,7 +94,7 @@ object InnerPotentialEnchantmentEventHandler {
                 if (event.player.hasEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)) {
                     event.player.removeEffectNoUpdate(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)
 
-                    if (Networking.isInitialized()) Networking.INSTANCE.send(
+                    Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                         event.player as ServerPlayer
                     }, RemoveEffectSyncToClientPacket(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE))
@@ -108,7 +109,7 @@ object InnerPotentialEnchantmentEventHandler {
             val player = event.entity as Player
             if (player.health < 4f && player.isItemEnchanted(MiraculousEscapeEnchantment, EquipmentSlot.FEET)) {
                 if (!player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE)) {
-                    if ((!event.entity.level().isClientSide) && Networking.isInitialized()) Networking.INSTANCE.send(
+                    if ((!event.entity.level().isClientSide)) Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                             player as ServerPlayer
                         }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true)

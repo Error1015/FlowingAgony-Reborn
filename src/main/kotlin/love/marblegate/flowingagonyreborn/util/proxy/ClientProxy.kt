@@ -1,7 +1,13 @@
 package love.marblegate.flowingagonyreborn.util.proxy
 
+import love.marblegate.flowingagonyreborn.fx.ModSounds
+import love.marblegate.flowingagonyreborn.fx.sound.ExtremeHatredFinalStageSound
+import love.marblegate.flowingagonyreborn.fx.sound.ExtremeHatredFirstStageSound
+import love.marblegate.flowingagonyreborn.fx.sound.ExtremeHatredMediumStageSound
+import love.marblegate.flowingagonyreborn.fx.sound.MiraculousEscapeHeartbeatSound
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
 import net.minecraft.client.Minecraft
+import net.minecraft.client.player.LocalPlayer
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundSource
@@ -21,19 +27,38 @@ class ClientProxy : IProxy {
     override fun handleISound(type: PlaySoundPacket.ModSoundType, onOrOff: Boolean) {
         when (type) {
             PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT -> {
-                TODO()
+                if (onOrOff) {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.MIRACULOUS_ESCAPE_HEARTBEAT.location, SoundSource.PLAYERS)
+                    Minecraft.getInstance().soundManager.play(MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player as LocalPlayer))
+                } else {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.MIRACULOUS_ESCAPE_HEARTBEAT.location, SoundSource.PLAYERS)
+                }
             }
 
             PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE -> {
-                TODO()
+                if (onOrOff) {
+                    Minecraft.getInstance().soundManager.play(ExtremeHatredFirstStageSound(Minecraft.getInstance().player as LocalPlayer))
+                } else {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.EXTREME_HATRED_FIRST_STAGE_SOUND.location, SoundSource.PLAYERS)
+                }
             }
 
             PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE -> {
-                TODO()
+                if (onOrOff) {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.EXTREME_HATRED_FIRST_STAGE_SOUND.location, SoundSource.PLAYERS)
+                    Minecraft.getInstance().soundManager.play(ExtremeHatredMediumStageSound(Minecraft.getInstance().player as LocalPlayer))
+                } else {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.EXTREME_HATRED_MEDIUM_STAGE_SOUND.location, SoundSource.PLAYERS)
+                }
             }
 
             PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE -> {
-                TODO()
+                if (onOrOff) {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.EXTREME_HATRED_MEDIUM_STAGE_SOUND.location, SoundSource.PLAYERS)
+                    Minecraft.getInstance().soundManager.play(ExtremeHatredFinalStageSound(Minecraft.getInstance().player as LocalPlayer))
+                } else {
+                    Minecraft.getInstance().soundManager.stop(ModSounds.EXTREME_HATRED_FINAL_STAGE_SOUND.location, SoundSource.PLAYERS)
+                }
             }
         }
     }

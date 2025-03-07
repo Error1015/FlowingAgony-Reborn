@@ -9,6 +9,7 @@ import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
 import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffectCategory
@@ -53,7 +54,7 @@ object RootedInHatredEnchantmentEventHandler {
                     event.isCanceled = true
 
                     val serverPlayer = player as? ServerPlayer ?: return
-                    if (Networking.isInitialized()) Networking.INSTANCE.send(
+                   Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                             serverPlayer
                         }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true)
@@ -66,7 +67,7 @@ object RootedInHatredEnchantmentEventHandler {
                             player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200, 1))
                             event.isCanceled = true
                             val serverPlayer = player as? ServerPlayer ?: return
-                            if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+                            Networking.safeSend(PacketDistributor.PLAYER.with {
                                 serverPlayer
                             }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true))
                         }
@@ -76,7 +77,7 @@ object RootedInHatredEnchantmentEventHandler {
                             player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200, 2))
                             event.isCanceled = true
                             val serverPlayer = player as? ServerPlayer ?: return
-                            if (Networking.isInitialized()) Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+                           Networking.safeSend(PacketDistributor.PLAYER.with {
                                 serverPlayer
                             }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true))
                         }

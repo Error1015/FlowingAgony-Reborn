@@ -3,6 +3,7 @@ package love.marblegate.flowingagonyreborn.event.effect
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Player
 import net.minecraftforge.event.entity.living.LivingHurtEvent
@@ -31,7 +32,7 @@ object ImplicitEffectEventHandler {
         if (event.effectInstance?.effect == ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) {
             val serverPlayer = event.entity as? ServerPlayer ?: return
             if (Networking.isInitialized()) {
-                Networking.INSTANCE.send(PacketDistributor.PLAYER.with {
+                Networking.safeSend(PacketDistributor.PLAYER.with {
                     serverPlayer
                 }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, false))
             }

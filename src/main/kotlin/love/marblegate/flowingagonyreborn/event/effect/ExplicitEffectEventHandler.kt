@@ -106,7 +106,7 @@ object ExplicitEffectEventHandler {
             val player = event.entity as Player
             if (player.hasEffect(ModEffects.CURSE_OF_UNDEAD) && event.source.`is`(DamageTypes.ON_FIRE)) {
                 event.amount *= 2
-                if (player.hasHelmet()) player.helmet.hurtAndBreak(1, player) {}
+                if (player.hasHelmet()) player.helmet.hurtAndBreak(1, player) { }
             }
         }
     }

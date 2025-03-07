@@ -3,6 +3,7 @@ package love.marblegate.flowingagonyreborn.event.sync
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Player
 import net.minecraftforge.event.entity.player.PlayerEvent
@@ -28,24 +29,24 @@ object FXSyncHandler {
         val serverPlayer = player as? ServerPlayer ?: return
         when {
             player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) -> {
-                Networking.INSTANCE.send(
+                Networking.safeSend(
                     PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true))
             }
 
             player.hasEffect(ModEffects.EXTREME_HATRED) -> {
                 val temp = player.getEffect(ModEffects.EXTREME_HATRED)?.amplifier ?: 0
                 when (temp) {
-                    0 -> Networking.INSTANCE.send(
+                    0 -> Networking.safeSend(
                         PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true)
                     )
 
 
-                    1 -> Networking.INSTANCE.send(
+                    1 -> Networking.safeSend(
                         PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true)
                     )
 
 
-                    2 -> Networking.INSTANCE.send(
+                    2 -> Networking.safeSend(
                         PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true)
                     )
                 }

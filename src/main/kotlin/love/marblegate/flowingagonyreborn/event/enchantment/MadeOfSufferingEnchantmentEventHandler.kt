@@ -2,7 +2,6 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.*
 import love.marblegate.flowingagonyreborn.network.Networking
@@ -10,6 +9,7 @@ import love.marblegate.flowingagonyreborn.network.packet.AbnormalJoySyncPacket
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
 import love.marblegate.flowingagonyreborn.util.isHostile
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import love.marblegate.flowingagonyreborn.util.shouldReflectDamage
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
@@ -131,7 +131,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         pointCap.ifPresent { cap ->
             cap.addPoint(event.amount * 0.25f * (level + 1))
             val serverPlayer = event.entity as? ServerPlayer ?: return@ifPresent
-            if (Networking.isInitialized()) Networking.INSTANCE.send(
+            Networking.safeSend(
                 PacketDistributor.PLAYER.with { serverPlayer }, AbnormalJoySyncPacket(cap.getPoint())
             )
         }

@@ -210,11 +210,11 @@ object GloomyEraEnchantmentEventHandler {
             val player = event.source.directEntity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ModEnchantments.NimbleFinger, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
-            val itemStacks = listOf<ItemStack>()
+            val itemStacks = mutableListOf<ItemStack>()
 
             event.entity.armorSlots.forEach { stack ->
                 if (stack.isEmpty) return
-                itemStacks + stack
+                itemStacks += stack
             }
 
             itemStacks.forEach { stack ->
@@ -242,23 +242,23 @@ object GloomyEraEnchantmentEventHandler {
         var extraLuck = Mth.floor(fallingHeight)
         extraLuck = minOf(extraLuck, 15)
         extraLuck -= 5
-        val list = listOf<ItemStack>()
+        val list = mutableListOf<ItemStack>()
         var success = false
         if (random.nextInt(100) < 30 + 5 * extraLuck) {
             val temp = random.nextInt(offers.size)
-            list + offers[temp].result.copy()
+            list += offers[temp].result.copy()
             success = true
         }
 
         if (random.nextInt(100) < 15 + 2.5f * extraLuck && offers.size > 3) {
             val temp = random.nextInt(offers.size)
-            list + offers[temp].result.copy()
+            list += offers[temp].result.copy()
             success = true
         }
 
         if (random.nextInt(100) < 5 + 1.5f * extraLuck && offers.size > 5) {
             val temp = random.nextInt(offers.size)
-            list + offers[temp].result.copy()
+            list += offers[temp].result.copy()
             success = true
         }
 

@@ -5,6 +5,7 @@ import love.marblegate.flowingagonyreborn.enchantment.lensofmalice.*
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundWithLocationPacket
 import love.marblegate.flowingagonyreborn.util.*
+import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -56,17 +57,15 @@ object LensOfMaliceEnchantmentEventHandler {
             living.knockback(0.4 * enchantmentLevel, -player.lookAngle.x.toDouble(), player.lookAngle.z.toDouble())
 
             if (living.level().isClientSide) return
-            if (Networking.isInitialized()) {
-                Networking.INSTANCE.send(
-                    PacketDistributor.NEAR.with {
-                        PacketDistributor.TargetPoint(
-                            living.x, living.y, living.z, 192.0, living.level().dimension()
-                        )
-                    }, PlaySoundWithLocationPacket(
-                        PlaySoundWithLocationPacket.ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND, true, living.x, living.y + living.eyeHeight, living.z
+            Networking.safeSend(
+                PacketDistributor.NEAR.with {
+                    PacketDistributor.TargetPoint(
+                        living.x, living.y, living.z, 192.0, living.level().dimension()
                     )
+                }, PlaySoundWithLocationPacket(
+                    PlaySoundWithLocationPacket.ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND, true, living.x, living.y + living.eyeHeight, living.z
                 )
-            }
+            )
         }
     }
 
