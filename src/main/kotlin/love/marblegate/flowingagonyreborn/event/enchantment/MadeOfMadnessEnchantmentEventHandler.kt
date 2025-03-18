@@ -117,7 +117,7 @@ object MadeOfMadnessEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onCuttingWatermelonDreamEnchantmentEventDropHeadAndExtraLoot(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide && event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.source.`is`(ModDamageTypes.cutting_watermelon_dream) && event.source.entity is Player && event.entity.supportHeadDrop()) {
             val player = event.source.entity as Player
             val entity = event.entity

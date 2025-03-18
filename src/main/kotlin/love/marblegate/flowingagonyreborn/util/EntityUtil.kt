@@ -26,11 +26,6 @@ fun LivingEntity.getTargetsExceptOneself(radius: Float, height: Float, predicate
     return entities
 }
 
-fun Player.getTargetsExceptOneself(radius: Float, height: Float, predicate: Predicate<LivingEntity>): List<LivingEntity> {
-    return (this as LivingEntity).getTargetsExceptOneself(radius, height, predicate)
-}
-
-
 fun LivingEntity.getTargetsOfSameType(radius: Float, height: Float, sourceEntity: LivingEntity, excludeOneself: Boolean): List<LivingEntity> {
     val aabb = AABB(
         (this.blockPosition().x - radius).toDouble(), (this.blockPosition().y - height).toDouble(), (this.blockPosition().z - radius).toDouble(), (this.blockPosition().x + radius).toDouble(),

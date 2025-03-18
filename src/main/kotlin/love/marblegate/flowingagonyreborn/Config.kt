@@ -100,5 +100,10 @@ class Config {
         val scholarOfOriginalSin: ForgeConfigSpec.BooleanValue = builder.define("scholarOfOriginalSin", true)
         val originalSinErosion: ForgeConfigSpec.BooleanValue = builder.define("originalSinErosion", true)
         val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", true)
+
+        val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder
+                .comment("This entry is for a bug, The EnviousKind Enchantment will Add more than 10 level Envious Being Effect",
+                    "If you are modpack author, You Should Set to True")
+                .define("isFixEnviousKind", true)
     }
 }

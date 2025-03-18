@@ -13,5 +13,4 @@ object ResentfulSoulEnchantment : ModBaseEnchantment(
     override fun getMaxLevel() = 3
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != TooResentfulToDieEnchantment
     override fun isTreasureOnly() = true
-
 }

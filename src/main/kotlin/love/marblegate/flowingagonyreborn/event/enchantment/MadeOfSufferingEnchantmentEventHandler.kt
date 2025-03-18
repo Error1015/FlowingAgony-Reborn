@@ -12,6 +12,7 @@ import love.marblegate.flowingagonyreborn.util.isHostile
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import love.marblegate.flowingagonyreborn.util.shouldReflectDamage
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
@@ -54,7 +55,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         event.entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 500 - level * 100))
         val player = event.entity as? Player ?: return
         val targets = player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }
-        val damageSource = DamageSourceBuilder.causePhobiaDamage(player)
+        val damageSource = DamageSourceBuilder.causePhobiaDamage(event.entity)
         targets.forEach { target -> target.hurt(damageSource, event.amount * 1.5f + 0.5f * level) }
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity

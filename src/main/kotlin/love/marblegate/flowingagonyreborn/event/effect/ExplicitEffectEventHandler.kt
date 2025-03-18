@@ -153,12 +153,12 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun onLetMeSavorItEffectEventReflectDamage(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
+        val letMeSavorIt = DamageSourceBuilder.causeLetMeSavorItDamage(event.entity)
         if (event.entity is Player && event.shouldReflectDamage()) {
             if (event.entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                 val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                 if (event.source.entity is LivingEntity) {
                     val entity = event.source.entity as LivingEntity
-                    val letMeSavorIt = DamageSourceBuilder.causeLetMeSavorItDamage(event.entity)
                     if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) entity.hurt(letMeSavorIt, effectLevel * event.amount)
                 }
             }

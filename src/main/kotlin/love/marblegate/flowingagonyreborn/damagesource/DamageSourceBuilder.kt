@@ -26,7 +26,7 @@ object DamageSourceBuilder {
         // 暂时没有发现存在问题
         // see https://github.com/MarbleGateKeeper/FlowingAgony/issues/9
         // if (entity is Guardian) {
-        //     return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
+        //     return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity).magic() 暂无实现方法?
         // }
         return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
     }
@@ -36,7 +36,7 @@ object DamageSourceBuilder {
     }
 
     internal fun createFlowingAgonyMobtoMobDamageSource(key: ResourceKey<DamageType>, entity: Entity): DamageSource {
-        return FlowingAgonyMobtoMobDamageSource(registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key), entity)
+        return FlowingAgonyMobtoMobDamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key), entity)
     }
 
     internal fun createBasicDamageSource(key: ResourceKey<DamageType>): DamageSource {

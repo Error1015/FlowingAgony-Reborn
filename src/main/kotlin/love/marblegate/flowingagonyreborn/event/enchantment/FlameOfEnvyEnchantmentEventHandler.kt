@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.CovertKnifeEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EnviousKindEnchantment
@@ -44,13 +45,15 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(EnviousKindEnchantment, EquipmentSlot.CHEST)
-            if (enchantmentLevel != 0) {
-                val diff = event.entity.health - player.health
-                if (diff >= 0) {
-                    val amplifier = floor(diff / 10.0)
-                    player.addEffect(MobEffectInstance(ModEffects.ENVIOUS_BEING, 200, amplifier.toInt()))
-                }
-            }
+            if (enchantmentLevel == 0) return
+            val diff = event.entity.health - player.health
+            if (diff <= 0) return
+            val temp = floor(diff / 10.0).toInt()
+            // 根据配置文件决定是否修复善妒之人给予超过10级的ENVIOUS_BEING效果的Bug
+            val amplifier = if (Config.acquirableSettings.isFixEnviousKind.get()) {
+                if (temp > 10) 10 else temp
+            } else temp
+            player.addEffect(MobEffectInstance(ModEffects.ENVIOUS_BEING, 200, amplifier))
         }
     }
 

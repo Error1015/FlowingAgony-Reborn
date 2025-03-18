@@ -3,7 +3,6 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentMaxLevel

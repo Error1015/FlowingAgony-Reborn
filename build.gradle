@@ -45,6 +45,8 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 "$mod_id" {
                     source sourceSets.main
@@ -117,6 +119,7 @@ def replaceProperties = [
         mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
         mod_authors: mod_authors, mod_description: mod_description
 ]
+
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project

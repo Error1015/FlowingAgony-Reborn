@@ -90,7 +90,7 @@ object LensOfMaliceEnchantmentEventHandler {
                         }
                     }
                 } else {
-                    val selectedEffect = listOf<MobEffectInstance>()
+                    val selectedEffect = mutableListOf<MobEffectInstance>()
                     while (totalLevel > 0) {
                         val effect = effects[player.random.nextInt(effects.size)]
                         if (effect !in selectedEffect) {

@@ -20,10 +20,8 @@ fun ItemStack.isItemEnchanted(enchantment: Enchantment) = this.allEnchantments.c
 fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.armorSlots.all { it.isItemEnchanted(enchantment) }
 
 /**
- * 获取实体某个附魔的附魔等级
+ * 获取实体EquipmentSlot中的附魔
  */
-fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment) = EnchantmentHelper.getEnchantmentLevel(enchantment, this)
-
 fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment, slot: EquipmentSlot): Int {
     return when (slot) {
         HEAD -> this.helmet.allEnchantments[enchantment] ?: 0

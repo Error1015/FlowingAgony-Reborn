@@ -250,7 +250,8 @@ object TheMistakensEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doBurialObjectCurseEvent(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
+        val burialObjectCurseDamageSource = DamageSourceBuilder.causeBurialObjectDamage(event.entity)
         if (event.entity is Player) {
             val player = event.entity as Player
             val originalDeathPos = player.blockPosition()
@@ -258,7 +259,6 @@ object TheMistakensEnchantmentEventHandler {
                 (originalDeathPos.x - 16).toDouble(), (originalDeathPos.y - 1).toDouble(), (originalDeathPos.z - 16).toDouble(), (originalDeathPos.x + 16).toDouble(),
                 (originalDeathPos.y + 1).toDouble(), (originalDeathPos.z + 16.toDouble())
             )
-            val burialObjectCurseDamageSource = DamageSourceBuilder.causeBurialObjectDamage(player)
             val players = player.level().getEntitiesOfClass(Player::class.java, scanningArea)
             players.forEach { player -> if (player.allArmorHasEnchantment(BurialObjectCurse)) player.hurt(burialObjectCurseDamageSource, 120f) }
         }
