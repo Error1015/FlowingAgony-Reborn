@@ -40,7 +40,7 @@ import kotlin.math.roundToInt
 @Mod.EventBusSubscriber
 object MadeOfMadnessEnchantmentEventHandler {
     @SubscribeEvent
-    fun onAgonyScreamerEnchantmentEven(event: LivingDamageEvent) {
+    fun onAgonyScreamerEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
@@ -51,7 +51,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    fun onInsanePoetEnchantmentEven(event: LivingDamageEvent) {
+    fun onInsanePoetEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
@@ -64,7 +64,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    fun onPaperBrainEnchantmentEven(event: LivingDamageEvent) {
+    fun onPaperBrainEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
@@ -76,7 +76,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    fun onShockTherapyEnchantmentEven(event: LivingDamageEvent) {
+    fun onShockTherapyEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
