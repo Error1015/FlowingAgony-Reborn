@@ -1,14 +1,16 @@
 package love.marblegate.flowingagonyreborn.damagesource
 
-import net.minecraft.client.Minecraft
+import net.minecraft.core.RegistryAccess
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.entity.Entity
+import net.minecraftforge.server.ServerLifecycleHooks
 
 object DamageSourceBuilder {
-    internal val registryAccess = Minecraft.getInstance().level?.registryAccess() ?: throw IllegalStateException("Minecraft client is not initialized")
+    // internal val registryAccess = Minecraft.getInstance().level?.registryAccess() ?: throw IllegalStateException("Minecraft client is not initialized")
+    internal val registryAccess: RegistryAccess = ServerLifecycleHooks.getCurrentServer().registryAccess()
     val CURSED_HATRED = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_hatred)
     val CURSED_ANTIPATHY = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_antipathy_effect)
     val LIGHTBURN_FUNGAL_INFECTION = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.lightburn_fungal_infection)
@@ -23,11 +25,8 @@ object DamageSourceBuilder {
     fun causeBurialObjectDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.burial_object_curse, entity)
 
     fun causePhobiaDamage(entity: Entity): DamageSource {
-        // 暂时没有发现存在问题
         // see https://github.com/MarbleGateKeeper/FlowingAgony/issues/9
-        // if (entity is Guardian) {
-        //     return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity).magic() 暂无实现方法?
-        // }
+        // if (entity is Guardian) return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity).magic() 暂无实现方法?
         return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
     }
 

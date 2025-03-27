@@ -13,8 +13,4 @@ object CustomEnchantmentCategory {
     val everyThing: EnchantmentCategory = EnchantmentCategory.create("$MODID:everything") {
         it is Vanishable || Block.byItem(it) is Vanishable || EnchantmentCategory.BREAKABLE.canEnchant(it) || EnchantmentCategory.WEARABLE.canEnchant(it)
     }
-
-    fun addToItemGroup() {
-
-    }
 }

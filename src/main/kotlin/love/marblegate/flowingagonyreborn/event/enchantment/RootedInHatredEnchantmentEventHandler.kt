@@ -48,7 +48,7 @@ object RootedInHatredEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(TooResentfulToDieEnchantment, EquipmentSlot.HEAD)
             if (enchantmentLevel == 0) return
             if (event.amount >= player.health) {
-                if (player.hasEffect(ModEffects.EXTREME_HATRED)) {
+                if (!player.hasEffect(ModEffects.EXTREME_HATRED)) {
                     player.heal(1f + enchantmentLevel * 3)
                     player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200))
                     event.isCanceled = true
