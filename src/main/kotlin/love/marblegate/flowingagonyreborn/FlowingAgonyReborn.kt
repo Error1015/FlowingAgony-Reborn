@@ -1,9 +1,11 @@
 package love.marblegate.flowingagonyreborn
 
+import love.marblegate.flowingagonyreborn.ModItemGroup.GroupRegistries
 import love.marblegate.flowingagonyreborn.effect.ModEffects.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments.Enchantments
 import love.marblegate.flowingagonyreborn.fx.ModParticle.ParticleTypes
 import love.marblegate.flowingagonyreborn.fx.ModSounds.Sounds
+import love.marblegate.flowingagonyreborn.item.ModItems.ItemRegistries
 import love.marblegate.flowingagonyreborn.network.Networking
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
@@ -16,9 +18,11 @@ object FlowingAgonyReborn {
     init {
         Enchantments.register(MOD_BUS)
         ModEffects.register(MOD_BUS)
+        ItemRegistries.register(MOD_BUS)
         ParticleTypes.register(MOD_BUS)
         Sounds.register(MOD_BUS)
-        Networking.registerMessage() // 初始化Instance 
+        Networking.registerMessage() // 初始化Instance
         registerConfig(ModConfig.Type.SERVER, Config.spec)
+        GroupRegistries.register(MOD_BUS)
     }
 }
