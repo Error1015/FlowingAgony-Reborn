@@ -20,17 +20,21 @@ object ModItemGroup {
             .title(Component.translatable("itemGroup.flowingagony_reborn.group"))
             .icon { ModItems.Logo.defaultInstance }
             .displayItems { _, output ->
-                getEnchantedBookStacks().forEach { output.accept(it) }
+                enchantedBookItems.forEach { output.accept(it) }
             }
             .build()
     }
 
-    fun getEnchantedBookStacks(): List<ItemStack> {
+    private fun getEnchantedBookStacks(): List<ItemStack> {
         val stacks = mutableListOf<ItemStack>()
+        var enchantment: Enchantment
         ModEnchantments.Enchantments.entries.forEach {
-            val enchantedBook = EnchantedBookItem.createForEnchantment(EnchantmentInstance(it.get(), it.get().maxLevel))
+            enchantment = it?.get() ?: return
+            val enchantedBook = EnchantedBookItem.createForEnchantment(EnchantmentInstance(enchantment, enchantment.maxLevel)) ?: return
             stacks += enchantedBook
         }
         return stacks
     }
+
+    private val enchantedBookItems: List<ItemStack> get() = getEnchantedBookStacks()
 }

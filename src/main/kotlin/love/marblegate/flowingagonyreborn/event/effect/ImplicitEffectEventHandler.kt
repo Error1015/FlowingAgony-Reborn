@@ -31,7 +31,7 @@ object ImplicitEffectEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.effectInstance?.effect == ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) {
             val serverPlayer = event.entity as? ServerPlayer ?: return
-            if (Networking.isInitialized()) {
+            if (Networking.isInstanceInitialized()) {
                 Networking.safeSend(PacketDistributor.PLAYER.with {
                     serverPlayer
                 }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, false))

@@ -25,7 +25,7 @@ import kotlin.math.floor
 object LastWishEnchantmentEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     fun doMorirsDeathwishEnchantmentEventMendOnHurt(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player && event.source.type() != DamageTypes.FELL_OUT_OF_WORLD) {
             val player = event.entity as Player
             val stacks = player.getStackWithEnchantment(MorirsDeathwishEnchantment)
@@ -44,7 +44,7 @@ object LastWishEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doMorirsDeathwishEnchantmentEventMendOnDeath(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val stacks = player.getStackWithEnchantment(MorirsDeathwishEnchantment)
@@ -61,7 +61,7 @@ object LastWishEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doMorirsLifeboundEnchantmentEventMendOnHeal(event: LivingHealEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val stacks = player.getStackWithEnchantment(MorirsLifeboundEnchantment)
@@ -80,7 +80,7 @@ object LastWishEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doMorirsLifeBoundEnchantmentEventDamageOnDeath(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val stacks = player.getStackWithEnchantment(MorirsLifeboundEnchantment)
@@ -104,7 +104,7 @@ object LastWishEnchantmentEventHandler {
     @SubscribeEvent
     fun doLastSweetDreamEnchantmentEventSaveItem(event: ItemTossEvent) {
         val player = event.player
-        if (player.level().isClientSide || event.isCanceled) return
+        if (player.level().isClientSide) return
         val item = event.entity.item
         if (item.isItemEnchanted(LastSweetDreamEnchantment) && item.isDamageableItem) {
             if (item.damageValue / item.maxDamage > 0.9) {
@@ -124,14 +124,17 @@ object LastWishEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doLastSweetDreamEnchantmentEventRetrieveItem(event: PlayerWakeUpEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         val capability = event.entity.getCapability(ModCapManager.LastSweetDream_Capability)
         capability.ifPresent { cap ->
-            if (cap.isEmpty()) return@ifPresent
-            val savedItem = cap.getItemStack()
-            savedItem.damageValue = 0
-            Containers.dropItemStack(event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), savedItem)
-            cap.clear()
+            if (cap.isNotEmpty()) {
+                val savedItem = cap.getItemStack()
+                savedItem.damageValue = 0
+                Containers.dropItemStack(
+                    event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), savedItem
+                )
+                cap.clear()
+            }
         }
     }
 }

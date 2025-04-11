@@ -6,8 +6,9 @@ class Config {
     companion object {
         var spec: ForgeConfigSpec
         private val builder = ForgeConfigSpec.Builder()
-        val generalSettings: GeneralSettings = GeneralSettings(builder)
-        val acquirableSettings: AcquirableSettings = AcquirableSettings(builder)
+        val generalSettings = GeneralSettings(builder)
+        val acquirableSettings = AcquirableSettings(builder)
+        val numericalSettings = NumericalSettings(builder)
 
         init {
             builder.comment("General Settings").push("general")
@@ -17,6 +18,7 @@ class Config {
                 "Enchantment which is acquirable is still functional."
             ).push("acquirable")
             builder.pop()
+            builder.comment("Numerical Value Settings").push("Numerical")
             spec = builder.build()
         }
     }
@@ -102,8 +104,12 @@ class Config {
         val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", true)
 
         val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder
-                .comment("This entry is for a bug, The EnviousKind Enchantment will Add more than 10 level Envious Being Effect",
+                .comment("This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect",
                     "If you are modpack author, You Should Set to True")
                 .define("isFixEnviousKind", true)
+    }
+
+    class NumericalSettings(builder: ForgeConfigSpec.Builder) {
+        val anAppleADayCoolDowns: ForgeConfigSpec.ConfigValue<Int> = builder.comment("default 18000, about 5 minutes").define("anAppleADayCoolDowns", 18000)
     }
 }

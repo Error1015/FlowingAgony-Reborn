@@ -31,12 +31,12 @@ class PlaySoundPacket {
         buffer.writeBoolean(onOrOff)
     }
 
-    fun handle(ctx: Supplier<NetworkEvent.Context?>) {
+    fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, Supplier {
             Runnable {
                 proxy = ClientProxy()
-                ctx.get()?.enqueueWork({ proxy.handleISound(type, onOrOff) })
-                ctx.get()?.packetHandled = true
+                ctx.get().enqueueWork({ proxy.handleISound(type, onOrOff) })
+                ctx.get().packetHandled = true
             }
         })
     }

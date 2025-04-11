@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
@@ -27,14 +28,14 @@ import net.minecraftforge.fml.common.Mod
 @Mod.EventBusSubscriber
 object DiceOfFraudEnchantmentHandler {
     /**
-     * 欺诈师附魔效果
+     * 欺诈师
      */
     @SubscribeEvent
     fun doTricksterEnchantmentEvent(event: AttackEntityEvent) {
         if (event.entity.level().isClientSide) return
         if (event.isCanceled) return
-        val target = event.target
-        val player = event.entity
+        val target = event.target ?: return
+        val player = event.entity ?: return
         if (target is LivingEntity) {
             val enchantmentLevel = player.getEnchantmentLevel(TricksterEnchantment, EquipmentSlot.MAINHAND)
             val diceNum = target.random.nextInt(5) + 1
@@ -72,7 +73,7 @@ object DiceOfFraudEnchantmentHandler {
     fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
         if (event.entity.level().isClientSide) return
         if (event.isCanceled) return
-        val player = event.entity
+        val player = event.entity ?: return
         val enchantmentLevel = player.getArmorEnchantmentTotalLevel(AnEnchantedGoldenAppleADayEnchantment)
         if (enchantmentLevel == 0) return
         val coolDownCap = event.entity.getCapability(ModCapManager.CoolDown_Capability)
@@ -104,7 +105,7 @@ object DiceOfFraudEnchantmentHandler {
                         player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
                     }
                 }
-                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, 18000)
+                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, Config.numericalSettings.anAppleADayCoolDowns.get())
             }
         }
     }
@@ -178,13 +179,13 @@ object DiceOfFraudEnchantmentHandler {
                     enchantments -= DeathPunkEnchantment
                     EnchantmentHelper.setEnchantments(enchantments, player.getItemBySlot(EquipmentSlot.CHEST))
                 }
-                event.isCanceled = true // 取消事件
+                event.isCanceled = true
             }
         }
     }
 
     /**
-     * 食髓知味附魔效果
+     * 食髓知味
      */
     @SubscribeEvent
     fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
@@ -196,9 +197,10 @@ object DiceOfFraudEnchantmentHandler {
             if (enchantmentLevel == 0) return
             val weaponNbt = player.mainHandItem.tag
             val encodeId = event.entity.encodeId ?: return
-            if (weaponNbt?.contains("savor_the_tasted_target") != true) weaponNbt?.putString("savor_the_tasted_target", encodeId)
-            else {
-                val recordedTarget = weaponNbt.getString("savor_the_tasted_target")
+            if (weaponNbt?.contains("savor_the_tasted_target") != true) {
+                weaponNbt?.putString("savor_the_tasted_target", encodeId)
+            } else {
+                val recordedTarget = weaponNbt.getString("savor_the_tasted_target") ?: return
                 if (recordedTarget == encodeId) event.amount += player.random.nextInt(5) + enchantmentLevel * 4 - 1
                 else weaponNbt.putString("savor_the_tasted_target", encodeId)
             }
@@ -207,7 +209,7 @@ object DiceOfFraudEnchantmentHandler {
     }
 
     /**
-     * 异常治疗附魔效果
+     * 异常治疗
      */
     @SubscribeEvent
     fun doExoticHealerEnchantmentEvent(event: LivingHealEvent) {

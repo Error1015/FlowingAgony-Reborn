@@ -126,8 +126,10 @@ object FlameOfEnvyEnchantmentEventHandler {
                             ) ?: return
                             if (potion != Potions.EMPTY) {
                                 potion.effects.forEach {
-                                    val duration = Mth.ceil(it.duration.toFloat() * 0.125f)
-                                    entity.addEffect(MobEffectInstance(it.effect, duration, it.amplifier))
+                                    if (it != null) {
+                                        val duration = Mth.ceil(it.duration.toFloat() * 0.125f)
+                                        entity.addEffect(MobEffectInstance(it.effect, duration, it.amplifier))
+                                    }
                                 }
                             }
                         }

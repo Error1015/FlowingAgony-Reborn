@@ -17,4 +17,6 @@ class LastSweetDreamCapability(
     }
 
     fun isEmpty() = stack == Items.AIR.defaultInstance
+
+    fun isNotEmpty() = !isEmpty()
 }

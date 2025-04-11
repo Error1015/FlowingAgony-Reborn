@@ -45,17 +45,17 @@ class PlaySoundWithLocationPacket {
         buffer.writeDouble(z)
     }
 
-    fun handle(ctx: Supplier<NetworkEvent.Context?>) {
+    fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             proxy = ClientProxy()
             Runnable {
-                ctx.get()?.let {
+                ctx.get().let {
                     it.enqueueWork {
                         if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
                             proxy.playSoundWithLocation(ModSounds.MALICE_OUTBREAK_KNOCKBACK_SOUND, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
                         }
                     }
-                    ctx.get()?.packetHandled = true
+                    ctx.get().packetHandled = true
                 }
             }
         }

@@ -31,15 +31,15 @@ class RemoveEffectSyncToClientPacket {
         buffer.writeRegistryId(ForgeRegistries.MOB_EFFECTS, effect)
     }
 
-    fun handle(ctx: Supplier<NetworkEvent.Context?>) {
+    fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx.get()?.let {
+                ctx.get().let {
                     it.enqueueWork {
                         proxy = ClientProxy()
                         proxy.removeEffect(effect)
                     }
-                    ctx.get()?.packetHandled = true
+                    ctx.get().packetHandled = true
                 }
             }
         }

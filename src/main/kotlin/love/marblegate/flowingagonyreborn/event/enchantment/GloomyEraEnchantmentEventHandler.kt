@@ -52,18 +52,20 @@ object GloomyEraEnchantmentEventHandler {
     fun doCleansingBeforeUsingEnchantmentEvent(event: LivingDeathEvent) {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player && event.entity is Villager) {
-            val player = event.source.entity as Player
             val villager = event.entity as Villager
-            villager.getItemInHand(InteractionHand.MAIN_HAND).setRepairCost(0)
-            if (villager.getItemInHand(InteractionHand.MAIN_HAND).isDamageableItem) villager.getItemInHand(InteractionHand.MAIN_HAND).damageValue -= 10
+            val mainHandItem = villager.getItemInHand(InteractionHand.MAIN_HAND) ?: return
+            mainHandItem.setRepairCost(0)
+            if (mainHandItem.isDamageableItem) mainHandItem.damageValue -= 10
         }
     }
 
     @SubscribeEvent
     fun doComeBackAtDuskEnchantmentEvent(event: TickEvent.PlayerTickEvent) {
-        if (event.player.level().isClientSide || event.isCanceled || event.phase != TickEvent.Phase.START) return
+        if (event.player.level().isClientSide || event.phase != TickEvent.Phase.START) return
         if (event.player.armorHasEnchantment(ModEnchantments.DirtyMoney)) {
-            if (event.player.level().dayTime % 24000 >= 10999 && event.player.level().dayTime % 24000 < 13501 && event.player.armorHasEnchantment(ModEnchantments.ComeBackAtDusk)) {
+            if (event.player.level().dayTime % 24000 >= 10999 && event.player.level().dayTime % 24000 < 13501 && event.player.armorHasEnchantment(
+                        ModEnchantments.ComeBackAtDusk
+                    )) {
                 if (!event.player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) {
                     var amplifier = 0
                     val temp = Math.random()
@@ -82,31 +84,37 @@ object GloomyEraEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doDirtyMoneyEnchantmentEventPreventHOTVEffect(event: MobEffectEvent.Applicable) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
-        if (event.entity is Player && event.effectInstance.effect == MobEffects.HERO_OF_THE_VILLAGE && event.entity.armorHasEnchantment(ModEnchantments.DirtyMoney)) {
+        if (event.entity.level().isClientSide) return
+        if (event.entity is Player && event.effectInstance.effect == MobEffects.HERO_OF_THE_VILLAGE && event.entity.armorHasEnchantment(
+                    ModEnchantments.DirtyMoney
+                )) {
             event.result = Event.Result.DENY
         }
     }
 
     @SubscribeEvent
     fun doDirtyMoneyEnchantmentEventDropGoods(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Villager && event.source.entity is Player) {
             val player = event.source.entity as Player
             val maxLevel = player.getArmorEnchantmentMaxLevel(ModEnchantments.DirtyMoney)
             if (maxLevel == 0) return
             if (Math.random() < 0.1 * maxLevel) {
-                Containers.dropItemStack(event.entity.level(), event.entity.x, event.entity.y + 2, event.entity.z, Items.EMERALD.defaultInstance)
+                Containers.dropItemStack(
+                    event.entity.level(), event.entity.x, event.entity.y + 2, event.entity.z, Items.EMERALD.defaultInstance
+                )
             }
             if (Math.random() < 0.02 * maxLevel) {
-                Containers.dropItemStack(event.entity.level(), event.entity.x, event.entity.y + 2, event.entity.z, Items.GOLD_INGOT.defaultInstance)
+                Containers.dropItemStack(
+                    event.entity.level(), event.entity.x, event.entity.y + 2, event.entity.z, Items.GOLD_INGOT.defaultInstance
+                )
             }
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun doPilferageCreedEnchantmentEvent(event: LivingFallEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
             if (player.isItemEnchanted(ModEnchantments.PilferageCreed, EquipmentSlot.FEET)) {
@@ -127,7 +135,7 @@ object GloomyEraEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doCarefullyIdentifiedEnchantmentEvent(event: BlockEvent.BreakEvent) {
-        if (event.player.level().isClientSide || event.isCanceled) return
+        if (event.player.level().isClientSide) return
         val isStone = event.state.block == Blocks.STONE
         if (isStone || event.state.block == Blocks.DEEPSLATE) {
             val enchantmentLevel = event.player.getEnchantmentLevel(ModEnchantments.CarefullyIdentified, EquipmentSlot.MAINHAND)
@@ -147,14 +155,18 @@ object GloomyEraEnchantmentEventHandler {
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) iron.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), iron)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), iron
+                    )
                 }
                 if (Math.random() < 0.005) {
                     val copper = if (silkTouchLevel != 0) Items.RAW_COPPER.defaultInstance else if (isStone) Items.COPPER_ORE.defaultInstance else Items.DEEPSLATE_COPPER_ORE.defaultInstance
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) copper.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), copper)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), copper
+                    )
                 }
             }
 
@@ -164,12 +176,16 @@ object GloomyEraEnchantmentEventHandler {
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) gold.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), gold)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), gold
+                    )
                 }
                 if (Math.random() < 0.002) {
                     val redStone = if (silkTouchLevel != 0) Items.REDSTONE.defaultInstance else if (isStone) Items.REDSTONE_ORE.defaultInstance else Items.DEEPSLATE_REDSTONE_ORE.defaultInstance
                     if (forTuneLevel >= 1) if (Math.random() < 0.5) redStone.grow(forTuneLevel)
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), redStone)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), redStone
+                    )
                 }
             }
 
@@ -179,7 +195,9 @@ object GloomyEraEnchantmentEventHandler {
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) lapis.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), lapis)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), lapis
+                    )
                 }
             }
 
@@ -189,7 +207,9 @@ object GloomyEraEnchantmentEventHandler {
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) emerald.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), emerald)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), emerald
+                    )
                 }
 
                 if (Math.random() < 0.001) {
@@ -197,7 +217,9 @@ object GloomyEraEnchantmentEventHandler {
                     if (forTuneLevel >= 1) {
                         if (Math.random() < 0.5) diamond.grow(forTuneLevel)
                     }
-                    Containers.dropItemStack(event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), diamond)
+                    Containers.dropItemStack(
+                        event.level as Level, event.pos.x.toDouble(), event.pos.y.toDouble(), event.pos.z.toDouble(), diamond
+                    )
                 }
             }
         }
@@ -205,7 +227,7 @@ object GloomyEraEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doNimbleFingerEnchantmentEvent(event: LivingDeathEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Mob && event.entity !is Player && event.source.directEntity is Player) {
             val player = event.source.directEntity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ModEnchantments.NimbleFinger, EquipmentSlot.MAINHAND)
@@ -219,26 +241,17 @@ object GloomyEraEnchantmentEventHandler {
 
             itemStacks.forEach { stack ->
                 if (event.entity.random.nextDouble() < 0.5 + 0.1 * enchantmentLevel) {
-                    Containers.dropItemStack(event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), stack)
+                    Containers.dropItemStack(
+                        event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), stack
+                    )
                 }
             }
         }
     }
 
-    fun isSameCategory(item1: Item, item2: Item): Boolean = when (item1) {
-        is SwordItem -> item2 is SwordItem
-        is AxeItem -> item2 is AxeItem
-        is HoeItem -> item2 is HoeItem
-        is PickaxeItem -> item2 is PickaxeItem
-        is ShovelItem -> item2 is ShovelItem
-        is ArmorItem -> if (item2 is ArmorItem) {
-            item1.equipmentSlot == item2.equipmentSlot
-        } else false
-
-        else -> false
-    }
-
-    fun rollDiceForPilferage(armorFeet: ItemStack, villager: Villager, offers: List<MerchantOffer>, random: RandomSource, fallingHeight: Double): List<ItemStack> {
+    fun rollDiceForPilferage(
+        armorFeet: ItemStack, villager: Villager, offers: List<MerchantOffer>, random: RandomSource, fallingHeight: Double
+    ): List<ItemStack> {
         var extraLuck = Mth.floor(fallingHeight)
         extraLuck = minOf(extraLuck, 15)
         extraLuck -= 5

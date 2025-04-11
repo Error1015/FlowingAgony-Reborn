@@ -53,10 +53,10 @@ class ParticleEffectPacket {
         }
     }
 
-    fun handle(ctx: Supplier<NetworkEvent.Context?>) {
+    fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx.get()?.let {
+                ctx.get().let {
                     it.enqueueWork {
                         proxy = ClientProxy()
                         if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
@@ -65,7 +65,7 @@ class ParticleEffectPacket {
                             }
                         }
                     }
-                    ctx.get()?.packetHandled = true
+                    ctx.get().packetHandled = true
                 }
             }
         }
