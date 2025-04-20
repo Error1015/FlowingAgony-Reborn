@@ -5,3 +5,5 @@ pluginManagement {
         maven { url = 'https://maven.parchmentmc.org' }
     }
 }
+
+rootProject.name = "FlowingAgony-forge-1.20.1"

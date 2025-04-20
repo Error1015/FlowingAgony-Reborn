@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.innerpotential.ArmorUpEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.innerpotential.MiraculousEscapeEnchantment
@@ -134,14 +135,14 @@ object InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doArmorUpEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ArmorUpEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             if (player.health < 5 + enchantmentLevel) {
                 if (player.absorptionAmount + 1 < enchantmentLevel + 5) {
-                    player.absorptionAmount += 1
+                    player.absorptionAmount += Config.numericalSettings.armorUpEnchantment.get()
                 }
             }
         }

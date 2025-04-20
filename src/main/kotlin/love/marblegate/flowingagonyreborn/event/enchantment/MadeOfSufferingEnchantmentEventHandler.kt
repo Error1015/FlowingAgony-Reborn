@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.effect.ModEffects
@@ -12,7 +13,6 @@ import love.marblegate.flowingagonyreborn.util.isHostile
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import love.marblegate.flowingagonyreborn.util.shouldReflectDamage
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
@@ -60,7 +60,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
             if (attacker !in targets && event.entity != attacker) {
-                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level)
+                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level * Config.numericalSettings.phobiaEffectDamage.get())
             }
         }
     }
@@ -83,7 +83,7 @@ object MadeOfSufferingEnchantmentEventHandler {
             val player = event.source.entity as Player
             if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                 val effectLevel = player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.amplifier ?: 0
-                event.amount *= 1f - 0.09f * (effectLevel + 1f)
+                event.amount *= 1f - 0.09f * (effectLevel + 1f) * Config.numericalSettings.prayerOfPainEnchantment.get()
             }
         }
     }

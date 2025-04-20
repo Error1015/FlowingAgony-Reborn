@@ -196,7 +196,7 @@ object TheMistakensEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ScholarOfOriginalSinEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             val extraDamage = min(event.amount * (1.1f - 0.1f * enchantmentLevel), 10f)
-            event.amount += extraDamage
+            event.amount += extraDamage * Config.numericalSettings.scholarOfOriginalSinAddWeakness.get()
         }
     }
 
@@ -232,7 +232,7 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(OriginalSinErosionEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            event.amount = max(event.amount - 5f + enchantmentLevel, 0f)
+            event.amount = max(event.amount - 5f + enchantmentLevel, 0f) * Config.numericalSettings.scholarOfOriginalSinDecreaseAttack.get()
         }
     }
 
@@ -245,7 +245,6 @@ object TheMistakensEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             player.giveExperiencePoints((event.orb.value * (0.05 + 0.05 * enchantmentLevel)).toInt())
         }
-
     }
 
     @SubscribeEvent

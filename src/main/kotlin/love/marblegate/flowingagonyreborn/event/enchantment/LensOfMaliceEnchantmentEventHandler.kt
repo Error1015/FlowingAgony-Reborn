@@ -33,14 +33,15 @@ object LensOfMaliceEnchantmentEventHandler {
         }
     }
 
+    // 恶意感知
     @SubscribeEvent
     fun doPerceivedMaliceEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
+        if (event.entity.level().isClientSide) return
         if (event.entity is Player && event.source.entity is LivingEntity) {
             val player = event.entity as Player
             val living = event.source.entity as LivingEntity
             val enchantmentLevel = player.getEnchantmentLevel(PerceivedMaliceEnchantment, EquipmentSlot.HEAD)
-            if (enchantmentLevel == 0) return
+            if (enchantmentLevel <= 0) return
             if (living is Player) {
                 living.addEffect(MobEffectInstance(ModEffects.CURSED_ANTIPATHY, 200, enchantmentLevel - 1))
             }
@@ -54,7 +55,7 @@ object LensOfMaliceEnchantmentEventHandler {
             val living = event.source.entity as LivingEntity
             val enchantmentLevel = player.getEnchantmentLevel(MaliceOutbreakEnchantment, EquipmentSlot.HEAD)
             if (enchantmentLevel == 0) return
-            living.knockback(0.4 * enchantmentLevel, -player.lookAngle.x.toDouble(), player.lookAngle.z.toDouble())
+            living.knockback(0.4 * enchantmentLevel, -player.lookAngle.x, player.lookAngle.z)
 
             if (living.level().isClientSide) return
             Networking.safeSend(

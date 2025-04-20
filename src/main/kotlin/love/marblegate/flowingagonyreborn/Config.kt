@@ -14,7 +14,8 @@ class Config {
             builder.comment("General Settings").push("general")
             builder.pop()
             builder.comment(
-                "Enchantment Acquirable Setting", "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
+                "Enchantment Acquirable Setting",
+                "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
                 "Enchantment which is acquirable is still functional."
             ).push("acquirable")
             builder.pop()
@@ -103,13 +104,36 @@ class Config {
         val originalSinErosion: ForgeConfigSpec.BooleanValue = builder.define("originalSinErosion", true)
         val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", true)
 
-        val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder
-                .comment("This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect",
-                    "If you are modpack author, You Should Set to True")
-                .define("isFixEnviousKind", true)
+        val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder.comment(
+            "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect",
+            "If you are modpack author, You Should Set to True"
+        ).define("isFixEnviousKind", true)
     }
 
     class NumericalSettings(builder: ForgeConfigSpec.Builder) {
-        val anAppleADayCoolDowns: ForgeConfigSpec.ConfigValue<Int> = builder.comment("default 18000, about 5 minutes").define("anAppleADayCoolDowns", 18000)
+        val hatredBloodlineEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("HatredBloodlineEffect", 1f)
+        val cursedHatredEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("HatredBloodlineEffect", 1f)
+        val curseOfUndeadEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("CurseOfUndeadEffect", 1f)
+        val beenResonatedEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("BeenResonatedEffect", 1f)
+        val extremeHatredEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("ExtremeHatredEffect", 1f)
+        val letMeSavorItEffectReduceDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("LetMeSavorItEffectReduceDamage", 1f)
+        val letMeSavorItEffectReflectDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("LetMeSavorItEffectReflectDamage", 1f)
+        val phobiaEffectDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("PhobiaEffectDamage", 1f)
+        val savorTheTastedEnchantment: ForgeConfigSpec.ConfigValue<Float> = builder.define("SavorTheTastedEnchantment", 1f)
+        val armorUpEnchantment: ForgeConfigSpec.ConfigValue<Int> = builder
+            .comment("the absorption amount to add")
+            .define("ArmorUpEnchantment", 1)
+        val anAppleADayCoolDowns: ForgeConfigSpec.ConfigValue<Int> = builder
+            .comment("default 18000, about 5 minutes")
+            .define("anAppleADayCoolDowns", 18000)
+        val morirsDeathwishEnchantmentOnHurt: ForgeConfigSpec.ConfigValue<Float> = builder.define("morirsDeathwishEnchantmentOnHurtFix", 1f)
+        val morirsDeathwishEnchantmentOnDeathValue: ForgeConfigSpec.ConfigValue<Int> = builder.define("morirsDeathwishEnchantmentOnDeathFix", 64)
+        val morirsLifeboundOnHeal: ForgeConfigSpec.ConfigValue<Float> = builder.define("morirsLifeboundOnHeal", 1f)
+        val guidensRegret: ForgeConfigSpec.ConfigValue<Float> = builder.define("GuidensRegret", 1f)
+        val cuttingWatermelonDream: ForgeConfigSpec.ConfigValue<Float> = builder.define("CuttingWatermelonDream", 1f)
+        val prayerOfPainEnchantment: ForgeConfigSpec.ConfigValue<Float> = builder.define("PrayerOfPainEnchantment", 1f)
+        val outrageousSpirit: ForgeConfigSpec.ConfigValue<Float> = builder.define("OutrageousSpiritEnchantment", 1f)
+        val scholarOfOriginalSinAddWeakness: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinAddWeakness", 1f)
+        val scholarOfOriginalSinDecreaseAttack: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinDecreaseAttack", 1f)
     }
 }

@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
@@ -25,6 +26,7 @@ import net.minecraftforge.network.PacketDistributor
 
 @Mod.EventBusSubscriber
 object RootedInHatredEnchantmentEventHandler {
+    // 怨恨之灵 TODO: 服务器中拥有此附魔的玩家杀不死
     @SubscribeEvent
     fun doResentfulSoulEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
@@ -32,7 +34,7 @@ object RootedInHatredEnchantmentEventHandler {
             val player = event.entity as Player
             if (event.amount >= player.health) {
                 val enchantmentLevel = player.getEnchantmentLevel(ResentfulSoulEnchantment, EquipmentSlot.HEAD)
-                if (enchantmentLevel == 0) return
+                if (enchantmentLevel <= 0) return
                 if (player.lastHurtMobTimestamp <= 25 + enchantmentLevel * 25) {
                     event.isCanceled = true
                 }
@@ -42,8 +44,10 @@ object RootedInHatredEnchantmentEventHandler {
 
     @SubscribeEvent
     fun doTooResentfulToDieEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity.level().isClientSide || event.isCanceled) return
-        if (event.entity is Player && event.entity != event.source.entity && !event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD) && !event.source.`is`(ModDamageTypes.burial_object_curse)) {
+        if (event.entity.level().isClientSide) return
+        if (event.entity is Player && event.entity != event.source.entity && !event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD) && !event.source.`is`(
+                    ModDamageTypes.burial_object_curse
+                )) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(TooResentfulToDieEnchantment, EquipmentSlot.HEAD)
             if (enchantmentLevel == 0) return
@@ -54,7 +58,7 @@ object RootedInHatredEnchantmentEventHandler {
                     event.isCanceled = true
 
                     val serverPlayer = player as? ServerPlayer ?: return
-                   Networking.safeSend(
+                    Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                             serverPlayer
                         }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true)
@@ -77,7 +81,7 @@ object RootedInHatredEnchantmentEventHandler {
                             player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200, 2))
                             event.isCanceled = true
                             val serverPlayer = player as? ServerPlayer ?: return
-                           Networking.safeSend(PacketDistributor.PLAYER.with {
+                            Networking.safeSend(PacketDistributor.PLAYER.with {
                                 serverPlayer
                             }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true))
                         }
@@ -97,7 +101,7 @@ object RootedInHatredEnchantmentEventHandler {
             var negativeEffectCount = 0
             if (player.isOnFire) negativeEffectCount++
             negativeEffectCount += player.activeEffects.stream().filter { it.effect.category == MobEffectCategory.HARMFUL }.count().toInt()
-            event.amount += negativeEffectCount * enchantmentLevel
+            event.amount += negativeEffectCount * enchantmentLevel * Config.numericalSettings.outrageousSpirit.get()
         }
     }
 
@@ -120,7 +124,13 @@ object RootedInHatredEnchantmentEventHandler {
         capability.ifPresent {
             val activeLevel = it.getActiveLevel()
             if (activeLevel != 0) {
-                event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE, 800 * activeLevel, activeLevel - 1))
+                event.entity.addEffect(
+                    EffectUtil.genImplicitEffect(
+                        ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE,
+                        800 * activeLevel,
+                        activeLevel - 1
+                    )
+                )
                 it.setActiveLevel(0)
             }
         }

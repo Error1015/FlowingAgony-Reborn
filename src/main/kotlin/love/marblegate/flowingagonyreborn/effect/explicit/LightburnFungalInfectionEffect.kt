@@ -13,6 +13,6 @@ object LightburnFungalInfectionEffect : MobEffect(MobEffectCategory.HARMFUL, 167
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
         var k = 40
         if (amplifier > 0) k /= (amplifier * amplifier)
-        return if (k > 0) duration % k == 0 else false
+        return duration % k == 0
     }
 }

@@ -9,8 +9,8 @@ import net.minecraft.world.entity.Entity
 import net.minecraftforge.server.ServerLifecycleHooks
 
 object DamageSourceBuilder {
-    // internal val registryAccess = Minecraft.getInstance().level?.registryAccess() ?: throw IllegalStateException("Minecraft client is not initialized")
     internal val registryAccess: RegistryAccess = ServerLifecycleHooks.getCurrentServer().registryAccess()
+
     val CURSED_HATRED = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_hatred)
     val CURSED_ANTIPATHY = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_antipathy_effect)
     val LIGHTBURN_FUNGAL_INFECTION = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.lightburn_fungal_infection)

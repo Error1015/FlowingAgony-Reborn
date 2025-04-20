@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.effect
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
-import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
@@ -34,7 +34,8 @@ object ExplicitEffectEventHandler {
         if (event.entity.hasEffect(ModEffects.CURSED_HATRED) && event.source != DamageSourceBuilder.CURSED_HATRED) {
             val potionLevel = event.entity.getEffect(ModEffects.CURSED_HATRED)?.let { it.amplifier + 1 } ?: return
             event.entity.removeEffect(ModEffects.CURSED_HATRED)
-            event.entity.hurt(DamageSourceBuilder.CURSED_HATRED, potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat())
+            val damage = potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat()
+            event.entity.hurt(DamageSourceBuilder.CURSED_HATRED, damage * Config.numericalSettings.cursedHatredEffect.get())
         }
     }
 
@@ -43,7 +44,9 @@ object ExplicitEffectEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
-            val potionLevel = if (player.hasEffect(ModEffects.EXTREME_HATRED)) player.getEffect(ModEffects.EXTREME_HATRED)?.let { it.amplifier + 1 } ?: return else 0
+            val potionLevel = if (player.hasEffect(ModEffects.EXTREME_HATRED)) player
+                .getEffect(ModEffects.EXTREME_HATRED)
+                ?.let { it.amplifier + 1 } ?: return else 0
             if (event.amount * (1 + potionLevel) >= event.entity.maxHealth) {
                 player.removeEffect(ModEffects.EXTREME_HATRED)
 
@@ -59,7 +62,7 @@ object ExplicitEffectEventHandler {
                 Networking.safeSend(PacketDistributor.PLAYER.with {
                     serverPlayer
                 }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, false))
-                event.amount *= (1 + potionLevel)
+                event.amount *= (1 + potionLevel) * Config.numericalSettings.extremeHatredEffect.get()
             }
         }
     }
@@ -68,10 +71,9 @@ object ExplicitEffectEventHandler {
     fun doCurseOfUndeadEffectEventApplyBurningSetPlayerOnFireIfNoHelmet(event: TickEvent.PlayerTickEvent) {
         if (event.player.level().isClientSide) return
         if (event.phase == TickEvent.Phase.START) {
-            if (event.player.hasEffect(
-                        ModEffects.CURSE_OF_UNDEAD
-                    ) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player.level()
-                            .canSeeSky(event.player.blockPosition()))) {
+            if (event.player.hasEffect(ModEffects.CURSE_OF_UNDEAD) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player
+                        .level()
+                        .canSeeSky(event.player.blockPosition()))) {
                 if (!event.player.hasHelmet()) event.player.setSecondsOnFire(5)
             }
         }
@@ -105,7 +107,7 @@ object ExplicitEffectEventHandler {
         if (event.entity is Player) {
             val player = event.entity as Player
             if (player.hasEffect(ModEffects.CURSE_OF_UNDEAD) && event.source.`is`(DamageTypes.ON_FIRE)) {
-                event.amount *= 2
+                event.amount *= 2 * Config.numericalSettings.curseOfUndeadEffect.get()
                 if (player.hasHelmet()) player.helmet.hurtAndBreak(1, player) { }
             }
         }
@@ -115,13 +117,19 @@ object ExplicitEffectEventHandler {
     fun doAgonyResonanceEffectEvent(event: MobEffectEvent.Added) {
         if (event.entity.level().isClientSide) {
             // 客户端删除效果(可能指的是UI视觉效果)
-            if (event.effectInstance.effect == ModEffects.AGONY_RESONANCE && event.entity.hasEffect(ModEffects.BEEN_RESONATED)) event.entity.removeEffect(ModEffects.BEEN_RESONATED)
+            if (event.effectInstance.effect == ModEffects.AGONY_RESONANCE && event.entity.hasEffect(ModEffects.BEEN_RESONATED)) {
+                event.entity.removeEffect(ModEffects.BEEN_RESONATED)
+            }
         }
         if (event.effectInstance.effect == ModEffects.AGONY_RESONANCE) {
             if (event.entity.hasEffect(ModEffects.BEEN_RESONATED)) event.entity.removeEffect(ModEffects.BEEN_RESONATED)
             val entities = event.entity.getTargetsExceptOneself(8f, 2f) { true }
             entities.forEach { entity ->
-                entity.addEffect(MobEffectInstance(ModEffects.BEEN_RESONATED, event.effectInstance.duration, event.effectInstance.amplifier))
+                entity.addEffect(
+                    MobEffectInstance(
+                        ModEffects.BEEN_RESONATED, event.effectInstance.duration, event.effectInstance.amplifier
+                    )
+                )
             }
         }
     }
@@ -134,7 +142,12 @@ object ExplicitEffectEventHandler {
                 entity.hasEffect(ModEffects.AGONY_RESONANCE)
             }
             val damageIndex = event.entity.getEffect(ModEffects.BEEN_RESONATED)?.let { it.amplifier + 1 } ?: 0
-            entities.forEach { entity -> entity.hurt(DamageSourceBuilder.AGONY_RESONANCE, event.amount * (0.35F + damageIndex * 0.15F)) }
+            entities.forEach { entity ->
+                entity.hurt(
+                    DamageSourceBuilder.AGONY_RESONANCE,
+                    event.amount * (0.35F + damageIndex * 0.15F) * Config.numericalSettings.beenResonatedEffect.get()
+                )
+            }
         }
     }
 
@@ -145,7 +158,7 @@ object ExplicitEffectEventHandler {
             val player = event.source.entity as Player
             if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                 val effectLevel = player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
-                event.amount = event.amount * (1 - 0.09F * effectLevel)
+                event.amount = event.amount * (1 - 0.09F * effectLevel) * Config.numericalSettings.letMeSavorItEffectReduceDamage.get()
             }
         }
     }
@@ -159,7 +172,9 @@ object ExplicitEffectEventHandler {
                 val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                 if (event.source.entity is LivingEntity) {
                     val entity = event.source.entity as LivingEntity
-                    if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) entity.hurt(letMeSavorIt, effectLevel * event.amount)
+                    if (!entity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
+                        entity.hurt(letMeSavorIt, effectLevel * event.amount * Config.numericalSettings.letMeSavorItEffectReflectDamage.get())
+                    }
                 }
             }
         }

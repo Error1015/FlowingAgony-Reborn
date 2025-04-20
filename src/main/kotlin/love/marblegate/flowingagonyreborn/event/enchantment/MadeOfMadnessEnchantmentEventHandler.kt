@@ -70,7 +70,11 @@ object MadeOfMadnessEnchantmentEventHandler {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(PaperBrainEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
-            event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.PAPER_BRAIN_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1))
+            event.entity.addEffect(
+                EffectUtil.genImplicitEffect(
+                    ModEffects.PAPER_BRAIN_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
+                )
+            )
             event.amount *= (1.0 - Config.generalSettings.paperBrainDamageReduction.get()).toFloat()
         }
     }
@@ -82,7 +86,11 @@ object MadeOfMadnessEnchantmentEventHandler {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ShockTherapyEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
-            event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.SHOCK_THERAPY_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1))
+            event.entity.addEffect(
+                EffectUtil.genImplicitEffect(
+                    ModEffects.SHOCK_THERAPY_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
+                )
+            )
             event.amount *= (1.0 - Config.generalSettings.shockTherapyDamageReduction.get()).toFloat()
         }
     }
@@ -101,15 +109,15 @@ object MadeOfMadnessEnchantmentEventHandler {
                 if (event.player.getItemBySlot(EquipmentSlot.MAINHAND).item is DiggerItem) {
                     damage += (event.player.getItemBySlot(EquipmentSlot.MAINHAND).item as DiggerItem).attackDamage
                 }
-
                 if (silkLevel == 1) damage *= 0.5f
-                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random.nextDouble().toFloat()
+                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random
+                    .nextDouble()
+                    .toFloat()
                 targets.forEach { target ->
-                    target.hurt(cuttingWaterMelonDreamDamageSource, damage)
+                    target.hurt(cuttingWaterMelonDreamDamageSource, damage * Config.numericalSettings.cuttingWatermelonDream.get())
                 }
-                var damageAppliedToItem = 5
                 if (unBreakingLevel == 0) return
-                damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4
+                val damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4
                 event.player.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(damageAppliedToItem, event.player) { }
             }
         }
@@ -120,7 +128,7 @@ object MadeOfMadnessEnchantmentEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.source.`is`(ModDamageTypes.cutting_watermelon_dream) && event.source.entity is Player && event.entity.supportHeadDrop()) {
             val player = event.source.entity as Player
-            val entity = event.entity
+            val entity = event.entity ?: return
             if (player.isItemEnchanted(CuttingWatermelonDreamEnchantment, EquipmentSlot.MAINHAND)) {
                 val silkLevel = player.getEnchantmentLevel(Enchantments.SILK_TOUCH, EquipmentSlot.MAINHAND)
                 val fortuneLevel = player.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE, EquipmentSlot.MAINHAND)
@@ -128,11 +136,25 @@ object MadeOfMadnessEnchantmentEventHandler {
                     val dropHeadRate = 0.025 + 0.01 * fortuneLevel
                     if (Math.random() < dropHeadRate) {
                         when (entity) {
-                            is Zombie -> Containers.dropItemStack(entity.level(), entity.x, entity.y, entity.z, Items.ZOMBIE_HEAD.defaultInstance)
-                            is Skeleton -> Containers.dropItemStack(entity.level(), entity.x, entity.y, entity.z, Items.SKELETON_SKULL.defaultInstance)
-                            is Creeper -> Containers.dropItemStack(entity.level(), entity.x, entity.y, entity.z, Items.CREEPER_HEAD.defaultInstance)
-                            is WitherSkeleton -> Containers.dropItemStack(entity.level(), entity.x, entity.y, entity.z, Items.WITHER_SKELETON_SKULL.defaultInstance)
-                            is EnderDragon -> Containers.dropItemStack(entity.level(), entity.x, entity.y, entity.z, Items.DRAGON_HEAD.defaultInstance)
+                            is Zombie -> Containers.dropItemStack(
+                                entity.level(), entity.x, entity.y, entity.z, Items.ZOMBIE_HEAD.defaultInstance
+                            )
+
+                            is Skeleton -> Containers.dropItemStack(
+                                entity.level(), entity.x, entity.y, entity.z, Items.SKELETON_SKULL.defaultInstance
+                            )
+
+                            is Creeper -> Containers.dropItemStack(
+                                entity.level(), entity.x, entity.y, entity.z, Items.CREEPER_HEAD.defaultInstance
+                            )
+
+                            is WitherSkeleton -> Containers.dropItemStack(
+                                entity.level(), entity.x, entity.y, entity.z, Items.WITHER_SKELETON_SKULL.defaultInstance
+                            )
+
+                            is EnderDragon -> Containers.dropItemStack(
+                                entity.level(), entity.x, entity.y, entity.z, Items.DRAGON_HEAD.defaultInstance
+                            )
                         }
                     }
                 }
@@ -152,15 +174,16 @@ object MadeOfMadnessEnchantmentEventHandler {
 
     private fun getLootContextBuilder(entity: LivingEntity, player: Player, source: DamageSource): LootContext.Builder {
         val serverLevel = entity.level() as ServerLevel
-        val paramsBuilder  = LootParams.Builder(serverLevel)
-                .withParameter(LootContextParams.THIS_ENTITY, entity)
-                .withParameter(LootContextParams.ORIGIN, entity.position())
-                .withParameter(LootContextParams.DAMAGE_SOURCE, source)
-                .withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
-                .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity)
-                .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
-                .withLuck(player.luck)
-                .create(LootContextParamSets.ENTITY)
+        val paramsBuilder = LootParams
+            .Builder(serverLevel)
+            .withParameter(LootContextParams.THIS_ENTITY, entity)
+            .withParameter(LootContextParams.ORIGIN, entity.position())
+            .withParameter(LootContextParams.DAMAGE_SOURCE, source)
+            .withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
+            .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity)
+            .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
+            .withLuck(player.luck)
+            .create(LootContextParamSets.ENTITY)
 
         return LootContext.Builder(paramsBuilder)
     }

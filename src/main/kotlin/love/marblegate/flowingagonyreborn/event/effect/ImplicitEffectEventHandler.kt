@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.effect
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
@@ -21,7 +22,7 @@ object ImplicitEffectEventHandler {
             val player = event.source.entity as Player
             if (player.hasEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)) {
                 val effectLevel = player.getEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)?.let { it.amplifier + 1 } ?: 0
-                event.amount = event.amount * (1f + effectLevel * 0.25f)
+                event.amount = event.amount * (1f + effectLevel * 0.25f) * Config.numericalSettings.hatredBloodlineEffect.get()
             }
         }
     }
@@ -31,11 +32,9 @@ object ImplicitEffectEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.effectInstance?.effect == ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) {
             val serverPlayer = event.entity as? ServerPlayer ?: return
-            if (Networking.isInstanceInitialized()) {
-                Networking.safeSend(PacketDistributor.PLAYER.with {
-                    serverPlayer
-                }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, false))
-            }
+            Networking.safeSend(PacketDistributor.PLAYER.with {
+                serverPlayer
+            }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, false))
         }
     }
 }

@@ -201,8 +201,9 @@ object DiceOfFraudEnchantmentHandler {
                 weaponNbt?.putString("savor_the_tasted_target", encodeId)
             } else {
                 val recordedTarget = weaponNbt.getString("savor_the_tasted_target") ?: return
-                if (recordedTarget == encodeId) event.amount += player.random.nextInt(5) + enchantmentLevel * 4 - 1
-                else weaponNbt.putString("savor_the_tasted_target", encodeId)
+                if (recordedTarget == encodeId) {
+                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * Config.numericalSettings.savorTheTastedEnchantment.get()
+                } else weaponNbt.putString("savor_the_tasted_target", encodeId)
             }
             player.mainHandItem.tag = weaponNbt
         }

@@ -9,11 +9,14 @@ import love.marblegate.flowingagonyreborn.item.ModItems.ItemRegistries
 import love.marblegate.flowingagonyreborn.network.Networking
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
-import thedarkcolour.kotlinforforge.forge.*
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.forge.registerConfig
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 
 const val MODID = "flowingagony_reborn"
 
 @Mod(MODID)
+@Mod.EventBusSubscriber
 object FlowingAgonyReborn {
     init {
         Enchantments.register(MOD_BUS)
@@ -21,8 +24,12 @@ object FlowingAgonyReborn {
         ItemRegistries.register(MOD_BUS)
         ParticleTypes.register(MOD_BUS)
         Sounds.register(MOD_BUS)
-        Networking.registerMessage() // 初始化Instance
-        registerConfig(ModConfig.Type.SERVER, Config.spec)
+        registerConfig(ModConfig.Type.COMMON, Config.spec)
         GroupRegistries.register(MOD_BUS)
+
+        // 游戏初始化的时候初始化Networking
+        MOD_BUS.addListener { _: FMLCommonSetupEvent ->
+            Networking.registerMessage()
+        }
     }
 }

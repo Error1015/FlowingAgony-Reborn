@@ -14,8 +14,8 @@ object CursedAntipathyEffect : MobEffect(
     MobEffectCategory.HARMFUL, 18432
 ) {
     override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
-        pLivingEntity.hurt(DamageSourceBuilder.CURSED_ANTIPATHY, 1.0f)
         if (pLivingEntity.level().isClientSide) return
+        pLivingEntity.hurt(DamageSourceBuilder.CURSED_ANTIPATHY, pAmplifier.toFloat() / 2)
         Networking.safeSend(
             PacketDistributor.NEAR.with {
                 PacketDistributor.TargetPoint(pLivingEntity.x, pLivingEntity.y, pLivingEntity.z, 192.0, pLivingEntity.level().dimension())

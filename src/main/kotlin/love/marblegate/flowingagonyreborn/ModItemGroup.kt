@@ -14,27 +14,22 @@ import net.minecraft.world.item.CreativeModeTab as ItemGroup
 object ModItemGroup {
     val GroupRegistries: DeferredRegister<ItemGroup> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
 
+    val EnchantedBookItems: Collection<ItemStack>
+        get() = ModEnchantments.Enchantments.entries.map { obj ->
+            EnchantedBookItem.createForEnchantment(
+                EnchantmentInstance(
+                    obj.get(),
+                    obj.get().maxLevel
+                )
+            )
+        }
+
     val EnchantmentsGroup: ItemGroup by GroupRegistries.registerObject("flowingagony_reborn.group") {
         ItemGroup
             .builder()
             .title(Component.translatable("itemGroup.flowingagony_reborn.group"))
             .icon { ModItems.Logo.defaultInstance }
-            .displayItems { _, output ->
-                enchantedBookItems.forEach { output.accept(it) }
-            }
+            .displayItems { _, output -> output.acceptAll(EnchantedBookItems) }
             .build()
     }
-
-    private fun getEnchantedBookStacks(): List<ItemStack> {
-        val stacks = mutableListOf<ItemStack>()
-        var enchantment: Enchantment
-        ModEnchantments.Enchantments.entries.forEach {
-            enchantment = it?.get() ?: return
-            val enchantedBook = EnchantedBookItem.createForEnchantment(EnchantmentInstance(enchantment, enchantment.maxLevel)) ?: return
-            stacks += enchantedBook
-        }
-        return stacks
-    }
-
-    private val enchantedBookItems: List<ItemStack> get() = getEnchantedBookStacks()
 }

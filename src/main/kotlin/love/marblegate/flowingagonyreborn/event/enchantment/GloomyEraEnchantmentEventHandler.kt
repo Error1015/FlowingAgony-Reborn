@@ -55,7 +55,9 @@ object GloomyEraEnchantmentEventHandler {
             val villager = event.entity as Villager
             val mainHandItem = villager.getItemInHand(InteractionHand.MAIN_HAND) ?: return
             mainHandItem.setRepairCost(0)
-            if (mainHandItem.isDamageableItem) mainHandItem.damageValue -= 10
+            if (mainHandItem.isDamageableItem) {
+                mainHandItem.damageValue -= 10
+            }
         }
     }
 
@@ -67,9 +69,8 @@ object GloomyEraEnchantmentEventHandler {
                         ModEnchantments.ComeBackAtDusk
                     )) {
                 if (!event.player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) {
-                    var amplifier = 0
                     val temp = Math.random()
-                    amplifier = when {
+                    val amplifier = when {
                         temp < 0.9 -> 0
                         temp < 0.95 -> 1
                         temp < 0.98 -> 2
@@ -242,7 +243,7 @@ object GloomyEraEnchantmentEventHandler {
             itemStacks.forEach { stack ->
                 if (event.entity.random.nextDouble() < 0.5 + 0.1 * enchantmentLevel) {
                     Containers.dropItemStack(
-                        event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), stack
+                        event.entity.level(), event.entity.x, event.entity.y, event.entity.z, stack
                     )
                 }
             }

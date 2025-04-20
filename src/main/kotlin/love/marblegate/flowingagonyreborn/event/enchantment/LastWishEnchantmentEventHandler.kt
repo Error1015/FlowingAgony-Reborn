@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
+import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.GuidensRegretEnchantment
@@ -32,12 +33,12 @@ object LastWishEnchantmentEventHandler {
             stacks.forEach { stack ->
                 var repairPoint = 0
                 if (event.amount < 1) {
-                    repairPoint += floor(event.amount * player.random.nextInt(3).toInt()).toInt()
+                    repairPoint += floor(event.amount * player.random.nextInt(3)).toInt()
                 } else {
                     val temp = maxOf(floor(event.amount), 100f).toInt()
-                    (0 until temp).forEach { repairPoint += 1 + player.random.nextInt(3) }
+                    (0 until temp).forEach { _ -> repairPoint += 1 + player.random.nextInt(3) }
                 }
-                stack.damageValue -= repairPoint
+                stack.damageValue -= (repairPoint * Config.numericalSettings.morirsDeathwishEnchantmentOnHurt.get()).toInt()
             }
         }
     }
@@ -52,7 +53,7 @@ object LastWishEnchantmentEventHandler {
             val coolDownCapability = player.getCapability(ModCapManager.CoolDown_Capability)
             coolDownCapability.ifPresent { cap ->
                 if (cap.isReady(CoolDown.CoolDownType.MORIRS_DEATHWISH_DEATHMENDING)) {
-                    stacks.forEach { it.damageValue -= 64 }
+                    stacks.forEach { it.damageValue -= Config.numericalSettings.morirsDeathwishEnchantmentOnDeathValue.get() }
                     cap.set(CoolDown.CoolDownType.MORIRS_DEATHWISH_DEATHMENDING, 12000)
                 }
             }
@@ -68,12 +69,12 @@ object LastWishEnchantmentEventHandler {
             stacks.forEach {
                 var repairPoint = 0
                 if (event.amount < 1) {
-                    repairPoint += floor(event.amount * player.random.nextInt(3).toInt()).toInt()
+                    repairPoint += floor(event.amount * player.random.nextInt(3)).toInt()
                 } else {
                     val temp = maxOf(floor(event.amount), 100f).toInt()
-                    (0 until temp).forEach { repairPoint += 1 + player.random.nextInt(3) }
+                    (0 until temp).forEach { _ -> repairPoint += 1 + player.random.nextInt(3) }
                 }
-                it.damageValue -= repairPoint
+                it.damageValue -= (repairPoint * Config.numericalSettings.morirsLifeboundOnHeal.get()).toInt()
             }
         }
     }
@@ -96,14 +97,14 @@ object LastWishEnchantmentEventHandler {
             val stacks = player.getStackWithEnchantment(GuidensRegretEnchantment)
             stacks.forEach {
                 val repairPoint = 1 + player.random.nextInt(3)
-                it.damageValue -= repairPoint
+                it.damageValue -= (repairPoint * Config.numericalSettings.guidensRegret.get()).toInt()
             }
         }
     }
 
     @SubscribeEvent
     fun doLastSweetDreamEnchantmentEventSaveItem(event: ItemTossEvent) {
-        val player = event.player
+        val player = event.player ?: return
         if (player.level().isClientSide) return
         val item = event.entity.item
         if (item.isItemEnchanted(LastSweetDreamEnchantment) && item.isDamageableItem) {
@@ -114,7 +115,7 @@ object LastWishEnchantmentEventHandler {
                         val oldItem = it.getItemStack()
                         it.clear()
                         it.saveItemStack(item)
-                        Containers.dropItemStack(player.level(), player.x.toDouble(), player.y.toDouble(), player.z.toDouble(), oldItem)
+                        Containers.dropItemStack(player.level(), player.x, player.y, player.z, oldItem)
                     }
                     event.isCanceled = true
                 }
@@ -131,7 +132,7 @@ object LastWishEnchantmentEventHandler {
                 val savedItem = cap.getItemStack()
                 savedItem.damageValue = 0
                 Containers.dropItemStack(
-                    event.entity.level(), event.entity.x.toDouble(), event.entity.y.toDouble(), event.entity.z.toDouble(), savedItem
+                    event.entity.level(), event.entity.x, event.entity.y, event.entity.z, savedItem
                 )
                 cap.clear()
             }
