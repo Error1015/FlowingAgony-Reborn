@@ -222,6 +222,7 @@ object DiceOfFraudEnchantmentHandler {
             val dice = player.random.nextInt(100)
             val modifier = 1 + (enchantmentLevel - 1) * 0.1f
             val duration = (600 * modifier).toInt()
+            val source = DamageSourceBuilder.causeExtremeHatred(player.level().registryAccess())
             when {
                 dice < 33 -> event.isCanceled = true
                 dice < 66 -> event.amount *= 2 * modifier
@@ -230,7 +231,7 @@ object DiceOfFraudEnchantmentHandler {
                 dice < 93 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, duration))
                 dice < 94 -> player.addEffect(MobEffectInstance(MobEffects.INVISIBILITY, duration))
                 dice < 95 -> {
-                    player.hurt(DamageSourceBuilder.EXOTIC_HEALER, event.amount * modifier)
+                    player.hurt(source, event.amount * modifier)
                     event.isCanceled = true
                 }
             }

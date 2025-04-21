@@ -7,7 +7,9 @@ import net.minecraft.world.entity.LivingEntity
 
 object LightburnFungalInfectionEffect : MobEffect(MobEffectCategory.HARMFUL, 16777196) {
     override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
-        pLivingEntity.hurt(DamageSourceBuilder.LIGHTBURN_FUNGAL_INFECTION, 3f)
+        if (pLivingEntity.level().isClientSide) return
+        val source = DamageSourceBuilder.causeLightburnFungalInfection(pLivingEntity.level().registryAccess())
+        pLivingEntity.hurt(source, 3f)
     }
 
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
