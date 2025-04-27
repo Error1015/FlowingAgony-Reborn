@@ -28,8 +28,6 @@ object FlowingAgonyReborn {
         GroupRegistries.register(MOD_BUS)
 
         // 游戏初始化的时候初始化Networking
-        MOD_BUS.addListener { _: FMLCommonSetupEvent ->
-            Networking.registerMessage()
-        }
+        MOD_BUS.addListener { _: FMLCommonSetupEvent -> Networking }
     }
 }

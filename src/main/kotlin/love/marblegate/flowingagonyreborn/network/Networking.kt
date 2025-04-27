@@ -14,7 +14,7 @@ object Networking {
     const val VERSION: String = "1.0"
     var ID: Int = 0
 
-    fun nextID() = ID++
+    fun nextID() = ++ID
 
     fun isInstanceInitialized() = ::INSTANCE.isInitialized
 

@@ -9,5 +9,6 @@ object CovertKnifeEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.covertKnife.get()
+
     override fun getMaxLevel() = 3
 }

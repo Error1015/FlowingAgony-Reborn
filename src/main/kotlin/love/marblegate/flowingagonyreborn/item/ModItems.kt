@@ -10,5 +10,5 @@ import thedarkcolour.kotlinforforge.forge.registerObject
 object ModItems {
     val ItemRegistries: DeferredRegister<Item> = DeferredRegister.create(Registries.ITEM, MODID)
 
-    val Logo by ItemRegistries.registerObject("logo") { Item(Properties().stacksTo(1))}
+    val Logo by ItemRegistries.registerObject("logo") { Item(Properties().stacksTo(1)) }
 }

@@ -67,7 +67,7 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(EyesoreEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel != 0) {
+            if (enchantmentLevel >= 0) {
                 event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.EYESORE_ENCHANTMENT_ACTIVE, 61, enchantmentLevel - 1))
             }
         }
@@ -82,7 +82,7 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ThornInFleshEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel != 0) {
+            if (enchantmentLevel >= 0) {
                 if (event.entity is Player) {
                     event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.THORN_IN_FLESH_ACTIVE_FOR_PLAYER, 60 + 40 * enchantmentLevel, enchantmentLevel - 1))
                 } else {
@@ -100,7 +100,7 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.isCanceled) return
         if (event.rayTraceResult is EntityHitResult) {
-            val entity = (event.rayTraceResult as EntityHitResult).entity
+            val entity = (event.rayTraceResult as EntityHitResult).entity ?: return
             if (entity is EnderMan) {
                 val owner = event.projectile.owner ?: return
                 if (owner is Player) {
@@ -121,9 +121,14 @@ object FlameOfEnvyEnchantmentEventHandler {
                         is SpectralArrow -> entity.addEffect(MobEffectInstance(MobEffects.GLOWING, 200))
 
                         is Arrow -> {
-                            val potion: Potion = ObfuscationReflectionHelper.getPrivateValue(
-                                Arrow::class.java, (event.projectile as Arrow), "potion"
-                            ) ?: return
+                            val potion: Potion = try {
+                                ObfuscationReflectionHelper.getPrivateValue(
+                                    Arrow::class.java, (event.projectile as Arrow), "potion"
+                                ) ?: return
+                            } catch (exception: Exception) {
+                                exception.printStackTrace()
+                                null
+                            } ?: return
                             if (potion != Potions.EMPTY) {
                                 potion.effects.forEach {
                                     if (it != null) {
@@ -156,7 +161,11 @@ object FlameOfEnvyEnchantmentEventHandler {
                 }
                 if (availableEnvySpreadTargets.isNotEmpty()) {
                     availableEnvySpreadTargets.forEach {
-                        if (Math.random() < 0.08 + 0.02 * enchantmentLevel) event.source.entity?.let { spreadTarget -> it.setLastHurtMob(spreadTarget) }
+                        if (Math.random() < 0.08 + 0.02 * enchantmentLevel) {
+                            event.source.entity?.let { spreadTarget ->
+                                it.setLastHurtMob(spreadTarget)
+                            }
+                        }
                     }
                 }
             } else {

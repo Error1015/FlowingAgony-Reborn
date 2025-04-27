@@ -4,7 +4,6 @@ package love.marblegate.flowingagonyreborn.enchantment
 
 import net.minecraft.world.item.enchantment.Enchantment
 
-
 /**
  * 计算附魔的附魔花费
  */
