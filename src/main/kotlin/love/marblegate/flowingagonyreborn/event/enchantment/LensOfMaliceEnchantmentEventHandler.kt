@@ -128,7 +128,7 @@ object LensOfMaliceEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(BackAndFillEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             if (event.entity.killCredit == event.source.entity) {
-                event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.BACK_AND_FILL_ENCHANTMENT_ACTIVE, 100, enchantmentLevel - 1))
+                event.entity.addEffect(MobEffectInstance(ModEffects.BACK_AND_FILL_ENCHANTMENT_ACTIVE, 100, enchantmentLevel - 1).setImplicit)
             } else {
                 event.amount += enchantmentLevel + 1
             }

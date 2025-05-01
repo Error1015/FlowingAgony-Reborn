@@ -58,7 +58,7 @@ object MadeOfMadnessEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(InsanePoetEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             event.entity.addEffect(MobEffectInstance(ModEffects.LISTEN_TO_ME_SINGING, 40 * enchantmentLevel, enchantmentLevel - 1))
-            player.addEffect(EffectUtil.genImplicitEffect(ModEffects.INSANE_POET_ENCHANTMENT_ACTIVE, enchantmentLevel * 40))
+            player.addEffect(MobEffectInstance(ModEffects.INSANE_POET_ENCHANTMENT_ACTIVE, enchantmentLevel * 40).setImplicit)
             event.amount *= Config.generalSettings.insanePoetDamageReduction.get().toFloat()
         }
     }
@@ -71,9 +71,9 @@ object MadeOfMadnessEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(PaperBrainEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             event.entity.addEffect(
-                EffectUtil.genImplicitEffect(
+                MobEffectInstance(
                     ModEffects.PAPER_BRAIN_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
-                )
+                ).setImplicit
             )
             event.amount *= (1.0 - Config.generalSettings.paperBrainDamageReduction.get()).toFloat()
         }
@@ -87,9 +87,9 @@ object MadeOfMadnessEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ShockTherapyEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             event.entity.addEffect(
-                EffectUtil.genImplicitEffect(
+                MobEffectInstance(
                     ModEffects.SHOCK_THERAPY_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
-                )
+                ).setImplicit
             )
             event.amount *= (1.0 - Config.generalSettings.shockTherapyDamageReduction.get()).toFloat()
         }

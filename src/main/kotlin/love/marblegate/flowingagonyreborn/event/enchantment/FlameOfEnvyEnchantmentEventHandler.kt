@@ -7,10 +7,10 @@ import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EnviousKindEnc
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EyesoreEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.SourceOfEnvyEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.ThornInFleshEnchantment
-import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
 import love.marblegate.flowingagonyreborn.util.getTargetsOfSameType
+import love.marblegate.flowingagonyreborn.util.setImplicit
 import love.marblegate.flowingagonyreborn.util.isHostile
 import net.minecraft.util.Mth
 import net.minecraft.world.effect.MobEffectInstance
@@ -67,8 +67,8 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(EyesoreEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel >= 0) {
-                event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.EYESORE_ENCHANTMENT_ACTIVE, 61, enchantmentLevel - 1))
+            if (enchantmentLevel > 0) {
+                event.entity.addEffect(MobEffectInstance(ModEffects.EYESORE_ENCHANTMENT_ACTIVE, 61, enchantmentLevel - 1).setImplicit)
             }
         }
     }
@@ -82,11 +82,19 @@ object FlameOfEnvyEnchantmentEventHandler {
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ThornInFleshEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel >= 0) {
+            if (enchantmentLevel > 0) {
                 if (event.entity is Player) {
-                    event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.THORN_IN_FLESH_ACTIVE_FOR_PLAYER, 60 + 40 * enchantmentLevel, enchantmentLevel - 1))
+                    event.entity.addEffect(
+                        MobEffectInstance(
+                            ModEffects.THORN_IN_FLESH_ACTIVE_FOR_PLAYER, 60 + 40 * enchantmentLevel, enchantmentLevel - 1
+                        ).setImplicit
+                    )
                 } else {
-                    event.entity.addEffect(EffectUtil.genImplicitEffect(ModEffects.THORN_IN_FLESH_ACTIVE, 60 + 40 * enchantmentLevel, enchantmentLevel - 1))
+                    event.entity.addEffect(
+                        MobEffectInstance(
+                            ModEffects.THORN_IN_FLESH_ACTIVE, 60 + 40 * enchantmentLevel, enchantmentLevel - 1
+                        ).setImplicit
+                    )
                 }
             }
         }

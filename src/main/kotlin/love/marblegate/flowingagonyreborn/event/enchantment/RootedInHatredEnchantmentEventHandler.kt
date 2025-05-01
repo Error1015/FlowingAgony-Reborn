@@ -7,10 +7,10 @@ import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.rootedinhatred.*
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
-import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
+import love.marblegate.flowingagonyreborn.util.setImplicit
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffectCategory
@@ -26,7 +26,6 @@ import net.minecraftforge.network.PacketDistributor
 
 @Mod.EventBusSubscriber
 object RootedInHatredEnchantmentEventHandler {
-    // 怨恨之灵 TODO: 服务器中拥有此附魔的玩家杀不死
     @SubscribeEvent
     fun doResentfulSoulEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
@@ -125,11 +124,9 @@ object RootedInHatredEnchantmentEventHandler {
             val activeLevel = it.getActiveLevel()
             if (activeLevel != 0) {
                 event.entity.addEffect(
-                    EffectUtil.genImplicitEffect(
-                        ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE,
-                        800 * activeLevel,
-                        activeLevel - 1
-                    )
+                    MobEffectInstance(
+                        ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE, 800 * activeLevel, activeLevel - 1
+                    ).setImplicit
                 )
                 it.setActiveLevel(0)
             }
@@ -144,7 +141,7 @@ object RootedInHatredEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(FreshRevengeEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             if (event.entity.lastHurtMobTimestamp <= 20 + enchantmentLevel * 4) {
-                player.addEffect(EffectUtil.genImplicitEffect(ModEffects.FRESH_REVENGE_ENCHANTMENT_ACTIVE, 200, enchantmentLevel - 1))
+                player.addEffect(MobEffectInstance(ModEffects.FRESH_REVENGE_ENCHANTMENT_ACTIVE, 200, enchantmentLevel - 1).setImplicit)
             }
         }
     }

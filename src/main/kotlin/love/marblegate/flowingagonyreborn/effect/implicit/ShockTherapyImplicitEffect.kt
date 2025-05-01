@@ -10,7 +10,7 @@ object ShockTherapyImplicitEffect : HarmfulBlankImplicitEffect() {
         lightningBolt.setPos(pLivingEntity.x, pLivingEntity.y, pLivingEntity.z)
         lightningBolt.setVisualOnly(true)
         pLivingEntity.level().addFreshEntity(lightningBolt)
-        pLivingEntity.hurt(pLivingEntity.level().damageSources().lightningBolt()/* 穿透护甲的伤害 */, (pLivingEntity.random.nextInt(3) + 2).toFloat())
+        pLivingEntity.hurt(pLivingEntity.level().damageSources().lightningBolt(), (pLivingEntity.random.nextInt(3) + 2).toFloat())
     }
 
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {

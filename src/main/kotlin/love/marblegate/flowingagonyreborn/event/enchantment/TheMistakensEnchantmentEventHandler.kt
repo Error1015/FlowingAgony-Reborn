@@ -75,12 +75,12 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantLevel = player.getEnchantmentLevel(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)
             if (enchantLevel == 0) return
-            if (event.effectInstance.isExplicit()) {
+            if (event.effectInstance.isExplicit) {
                 if (player.hasEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)) {
-                    val newEffectAmplifier = min(player.getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)?.let { it.amplifier + enchantLevel } ?: return, 29).toInt()
-                    player.addEffect(EffectUtil.genImplicitEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, newEffectAmplifier))
+                    val newEffectAmplifier = min(player.getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)?.let { it.amplifier + enchantLevel } ?: return, 29)
+                    player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, newEffectAmplifier).setImplicit)
                 } else {
-                    player.addEffect(EffectUtil.genImplicitEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, enchantLevel - 1))
+                    player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, enchantLevel - 1).setImplicit)
                 }
             }
         }
@@ -91,12 +91,12 @@ object TheMistakensEnchantmentEventHandler {
         if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
-            if (player.isItemEnchanted(PrototypeChaoticTypeBetaEnchantment, EquipmentSlot.CHEST) && event.effectInstance.isExplicit()) {
+            if (player.isItemEnchanted(PrototypeChaoticTypeBetaEnchantment, EquipmentSlot.CHEST) && event.effectInstance.isExplicit) {
                 if (event.effectInstance.effect.category == MobEffectCategory.BENEFICIAL && !event.effectInstance.effect.isInstantenous) {
                     if (player.isItemEnchanted(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)) {
                         event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, event.effectInstance.duration * 3))
                         val negativeEffects = player.activeEffects.stream()
-                                .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit() }.collect(Collectors.toList())
+                                .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit }.collect(Collectors.toList())
                         if (negativeEffects.isNotEmpty()) {
                             negativeEffects.forEach { effect ->
                                 player.removeEffect(effect.effect)
@@ -207,7 +207,7 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ScholarOfOriginalSinEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            if (event.effectInstance.effect.category == MobEffectCategory.HARMFUL && event.effectInstance.isExplicit()) {
+            if (event.effectInstance.effect.category == MobEffectCategory.HARMFUL && event.effectInstance.isExplicit) {
                 event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, (event.effectInstance.duration * (2.1 - 0.1 * enchantmentLevel)).toInt()))
             }
         }

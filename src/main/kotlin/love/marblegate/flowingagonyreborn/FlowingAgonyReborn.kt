@@ -12,12 +12,16 @@ import net.minecraftforge.fml.config.ModConfig
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.registerConfig
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 const val MODID = "flowingagony_reborn"
 
 @Mod(MODID)
 @Mod.EventBusSubscriber
 object FlowingAgonyReborn {
+    val logger: Logger = LoggerFactory.getLogger(MODID)
+
     init {
         Enchantments.register(MOD_BUS)
         ModEffects.register(MOD_BUS)

@@ -9,6 +9,7 @@ import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
 import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentMaxLevel
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
 import love.marblegate.flowingagonyreborn.util.isItemEnchanted
+import love.marblegate.flowingagonyreborn.util.safeClassCastAndHandle
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffectInstance
@@ -33,7 +34,6 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doTricksterEnchantmentEvent(event: AttackEntityEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
         val target = event.target ?: return
         val player = event.entity ?: return
         if (target is LivingEntity) {
@@ -72,7 +72,6 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doAnEnchantedGoldenAppleADayEnchantmentEvent(event: PlayerEvent.PlayerChangeGameModeEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
         val player = event.entity ?: return
         val enchantmentLevel = player.getArmorEnchantmentTotalLevel(AnEnchantedGoldenAppleADayEnchantment)
         if (enchantmentLevel == 0) return
@@ -125,9 +124,8 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     fun doDeathpunkEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
-        if (event.entity is Player) {
-            val player = event.entity as Player
+
+        event.entity.safeClassCastAndHandle { player: Player ->
             // 如果伤害来源是虚空伤害，则不触发死亡朋克附魔
             if (event.amount < player.health && event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD)) return
             // 检查玩家是否装备了死亡朋克的胸甲
@@ -190,9 +188,8 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
-        if (event.source.entity is Player) {
-            val player = event.source.entity as Player
+
+        event.source.entity.safeClassCastAndHandle { player: Player ->
             val enchantmentLevel = player.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             val weaponNbt = player.mainHandItem.tag
@@ -215,8 +212,7 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doExoticHealerEnchantmentEvent(event: LivingHealEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.entity is Player) {
-            val player = event.entity as Player
+        event.entity.safeClassCastAndHandle { player: Player ->
             val enchantmentLevel = player.getArmorEnchantmentMaxLevel(ExoticHealerEnchantment)
             if (enchantmentLevel == 0) return
             val dice = player.random.nextInt(100)

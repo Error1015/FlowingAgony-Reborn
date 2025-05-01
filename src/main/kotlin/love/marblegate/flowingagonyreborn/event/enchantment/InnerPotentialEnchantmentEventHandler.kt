@@ -9,12 +9,13 @@ import love.marblegate.flowingagonyreborn.enchantment.innerpotential.StubbornSte
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
 import love.marblegate.flowingagonyreborn.network.packet.RemoveEffectSyncToClientPacket
-import love.marblegate.flowingagonyreborn.util.EffectUtil
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
+import love.marblegate.flowingagonyreborn.util.setImplicit
 import love.marblegate.flowingagonyreborn.util.isItemEnchanted
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
+import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -65,8 +66,8 @@ object InnerPotentialEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(StubbornStepEnchantment, EquipmentSlot.LEGS)
             if (enchantmentLevel == 0) return
             when (enchantmentLevel) {
-                1 -> player.addEffect(EffectUtil.genImplicitEffect(ModEffects.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE, 200))
-                else -> player.addEffect(EffectUtil.genImplicitEffect(ModEffects.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE, 200, 1))
+                1 -> player.addEffect(MobEffectInstance(ModEffects.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE, 200).setImplicit)
+                else -> player.addEffect(MobEffectInstance(ModEffects.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE, 200, 1).setImplicit)
             }
             if (player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
                 player.removeEffectNoUpdate(MobEffects.MOVEMENT_SLOWDOWN)
@@ -87,10 +88,13 @@ object InnerPotentialEnchantmentEventHandler {
         if (event.player.health <= enchantmentLevel + 3) {
             if (!(event.player.isSprinting || event.player.isSwimming || event.player.isFallFlying)) {
                 if (event.player.hasEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)) {
-                    val amplifier = event.player.getEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)?.let { it.amplifier + 1 } ?: return
+                    val amplifier = event.player.getEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)?.let { it.amplifier + 1 }
+                            ?: return
                     val nextAmplifier = minOf(amplifier, 150)
-                    event.player.addEffect(EffectUtil.genImplicitEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE, 20, nextAmplifier))
-                } else event.player.addEffect(EffectUtil.genImplicitEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE, 20))
+                    event.player.addEffect(MobEffectInstance(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE, 20, nextAmplifier).setImplicit)
+                } else {
+                    event.player.addEffect(MobEffectInstance(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE, 20))
+                }
             } else {
                 if (event.player.hasEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)) {
                     event.player.removeEffectNoUpdate(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)
@@ -115,8 +119,8 @@ object InnerPotentialEnchantmentEventHandler {
                             player as ServerPlayer
                         }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true)
                     )
-                    player.addEffect(EffectUtil.genImplicitEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE, 40))
-                    player.addEffect(EffectUtil.genImplicitEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE, 200))
+                    player.addEffect(MobEffectInstance(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE, 40).setImplicit)
+                    player.addEffect(MobEffectInstance(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE, 200).setImplicit)
                 }
             }
         }
@@ -128,7 +132,9 @@ object InnerPotentialEnchantmentEventHandler {
         if (event.entity is Player) {
             val player = event.entity as Player
             if (event.source.`is`(DamageTypes.FALL) || event.source.`is`(DamageTypes.CRAMMING) || event.source.`is`(DamageTypes.IN_WALL)) {
-                if (player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE)) event.isCanceled = true
+                if (player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE)) {
+                    event.isCanceled = true
+                }
             }
         }
     }

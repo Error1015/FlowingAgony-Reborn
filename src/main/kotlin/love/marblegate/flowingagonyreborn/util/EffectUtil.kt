@@ -4,12 +4,15 @@ import love.marblegate.flowingagonyreborn.effect.implicit.ImplicitBaseEffect
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
 
-object EffectUtil {
-    fun genImplicitEffect(effect: MobEffect, duration: Int) = genImplicitEffect(effect, duration, 0)
+val MobEffectInstance.setImplicit: MobEffectInstance
+    @JvmName("implicit") get() = MobEffectInstance(
+        effect,
+        duration,
+        amplifier,
+        false,
+        false
+    )
 
-    fun genImplicitEffect(effect: MobEffect, duration: Int, amplifier: Int) = MobEffectInstance(effect, duration, amplifier, false, false)
-}
+val MobEffectInstance.isImplicit @JvmName("isImplicit") get() = effect is ImplicitBaseEffect || !isVisible || !showIcon()
 
-fun MobEffectInstance.isImplicit() = this.effect is ImplicitBaseEffect || !this.isVisible || !this.showIcon()
-
-fun MobEffectInstance.isExplicit() = !isImplicit()
+val MobEffectInstance.isExplicit @JvmName("isExplicit") get() = !isImplicit
