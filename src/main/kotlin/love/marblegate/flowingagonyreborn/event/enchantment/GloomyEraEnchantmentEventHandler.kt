@@ -64,8 +64,8 @@ object GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
     fun doComeBackAtDuskEnchantmentEvent(event: TickEvent.PlayerTickEvent) {
         if (event.player.level().isClientSide || event.phase != TickEvent.Phase.START) return
-        if (event.player.armorHasEnchantment(ModEnchantments.DirtyMoney)) {
-            if (event.player.level().dayTime % 24000 >= 10999 && event.player.level().dayTime % 24000 < 13501 && event.player.armorHasEnchantment(
+        if (event.player.anyArmorHasEnchantment(ModEnchantments.DirtyMoney)) {
+            if (event.player.level().dayTime % 24000 >= 10999 && event.player.level().dayTime % 24000 < 13501 && event.player.anyArmorHasEnchantment(
                         ModEnchantments.ComeBackAtDusk
                     )) {
                 if (!event.player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) {
@@ -86,7 +86,7 @@ object GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
     fun doDirtyMoneyEnchantmentEventPreventHOTVEffect(event: MobEffectEvent.Applicable) {
         if (event.entity.level().isClientSide) return
-        if (event.entity is Player && event.effectInstance.effect == MobEffects.HERO_OF_THE_VILLAGE && event.entity.armorHasEnchantment(
+        if (event.entity is Player && event.effectInstance.effect == MobEffects.HERO_OF_THE_VILLAGE && event.entity.anyArmorHasEnchantment(
                     ModEnchantments.DirtyMoney
                 )) {
             event.result = Event.Result.DENY

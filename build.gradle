@@ -1,9 +1,9 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.jetbrains.kotlin.jvm' version '2.1.10'
+    id 'net.minecraftforge.gradle'
+    id 'org.parchmentmc.librarian.forgegradle'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 version = mod_version
@@ -12,7 +12,6 @@ group = mod_group_id
 base {
     archivesName = "$mod_name-$minecraft_version"
 }
-
 
 java {
     toolchain {
@@ -30,6 +29,7 @@ minecraft {
         configureEach {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            property 'forge.logging.console.level', 'debug'
 
             mods {
                 "$mod_id" {
@@ -41,28 +41,24 @@ minecraft {
         client {
             workingDirectory('run')
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         server {
             workingDirectory('run/server')
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         gameTestServer {
             workingDirectory('run/server')
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         data {
             workingDirectory('run')
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
         }
     }

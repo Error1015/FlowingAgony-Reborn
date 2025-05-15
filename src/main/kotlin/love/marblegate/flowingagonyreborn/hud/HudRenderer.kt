@@ -12,7 +12,7 @@ object HudRenderer {
 
     @SubscribeEvent
     fun onOverlayRender(event: RegisterGuiOverlaysEvent) {
-        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "abnormal_joy_hud") { gui, guiGraphics, partialTick, width, height ->
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "abnormal_joy_hud") { _, guiGraphics, _, _, _ ->
             ABNORMAL_JOY_HUD.render(guiGraphics)
         }
     }

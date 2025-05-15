@@ -1,6 +1,5 @@
 package love.marblegate.flowingagonyreborn.util
 
-import love.marblegate.flowingagonyreborn.FlowingAgonyReborn.logger
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.event.entity.EntityEvent
 
@@ -12,8 +11,6 @@ inline fun <reified T> Any?.safeClassCastAndHandle(block: (T) -> Unit) {
     if (this != null) {
         if (this is T) {
             block(this)
-        } else {
-            logger.warn("转换失败! ${this::class.java.simpleName} 无法转换为 ${T::class.java.name}!")
         }
     }
 }

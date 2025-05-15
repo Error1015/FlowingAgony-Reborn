@@ -18,8 +18,7 @@ object ModItemGroup {
         get() = ModEnchantments.Enchantments.entries.map { obj ->
             EnchantedBookItem.createForEnchantment(
                 EnchantmentInstance(
-                    obj.get(),
-                    obj.get().maxLevel
+                    obj.get(), obj.get().maxLevel
                 )
             )
         }
@@ -28,7 +27,7 @@ object ModItemGroup {
         ItemGroup
             .builder()
             .title(Component.translatable("itemGroup.flowingagony_reborn.group"))
-            .icon { ModItems.Logo.defaultInstance }
+            .icon { ModItems.LOGO.defaultInstance }
             .displayItems { _, output -> output.acceptAll(EnchantedBookItems) }
             .build()
     }

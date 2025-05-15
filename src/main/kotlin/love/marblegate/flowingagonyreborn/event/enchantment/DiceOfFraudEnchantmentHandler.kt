@@ -125,7 +125,7 @@ object DiceOfFraudEnchantmentHandler {
     fun doDeathpunkEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
 
-        event.entity.safeClassCastAndHandle { player: Player ->
+        event.entity.safeClassCastAndHandle<Player> { player ->
             // 如果伤害来源是虚空伤害，则不触发死亡朋克附魔
             if (event.amount < player.health && event.source.`is`(DamageTypes.FELL_OUT_OF_WORLD)) return
             // 检查玩家是否装备了死亡朋克的胸甲
@@ -189,7 +189,7 @@ object DiceOfFraudEnchantmentHandler {
     fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
 
-        event.source.entity.safeClassCastAndHandle { player: Player ->
+        event.entity.safeClassCastAndHandle<Player> { player ->
             val enchantmentLevel = player.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel == 0) return
             val weaponNbt = player.mainHandItem.tag
@@ -212,7 +212,7 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doExoticHealerEnchantmentEvent(event: LivingHealEvent) {
         if (event.entity.level().isClientSide) return
-        event.entity.safeClassCastAndHandle { player: Player ->
+        event.entity.safeClassCastAndHandle<Player> { player ->
             val enchantmentLevel = player.getArmorEnchantmentMaxLevel(ExoticHealerEnchantment)
             if (enchantmentLevel == 0) return
             val dice = player.random.nextInt(100)

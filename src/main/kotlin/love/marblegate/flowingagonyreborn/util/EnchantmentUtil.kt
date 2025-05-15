@@ -22,24 +22,23 @@ fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.armorSl
 /**
  * 获取实体EquipmentSlot中的附魔
  */
-fun LivingEntity.getEnchantmentLevel(enchantment: Enchantment, slot: EquipmentSlot): Int {
-    return when (slot) {
-        HEAD -> this.helmet.allEnchantments[enchantment] ?: 0
-        CHEST -> this.chestplate.allEnchantments[enchantment] ?: 0
-        LEGS -> this.leggings.allEnchantments[enchantment] ?: 0
-        FEET -> this.boots.allEnchantments[enchantment] ?: 0
-        MAINHAND -> this.mainHandItem.allEnchantments[enchantment] ?: 0
-        OFFHAND -> offhandItem.allEnchantments[enchantment] ?: 0
-    }
+fun LivingEntity.getEnchantmentLevel(
+    enchantment: Enchantment,
+    slot: EquipmentSlot
+): Int = when (slot) {
+    HEAD -> this.helmet.allEnchantments[enchantment] ?: 0
+    CHEST -> this.chestplate.allEnchantments[enchantment] ?: 0
+    LEGS -> this.leggings.allEnchantments[enchantment] ?: 0
+    FEET -> this.boots.allEnchantments[enchantment] ?: 0
+    MAINHAND -> this.mainHandItem.allEnchantments[enchantment] ?: 0
+    OFFHAND -> offhandItem.allEnchantments[enchantment] ?: 0
+
 }
 
 /**
  * 实体有一个护甲拥有某附魔
  */
-fun LivingEntity.armorHasEnchantment(enchantment: Enchantment): Boolean {
-    armorSlots.forEach { if (it.isItemEnchanted(enchantment)) return true }
-    return false
-}
+fun LivingEntity.anyArmorHasEnchantment(enchantment: Enchantment): Boolean = armorSlots.any { it.isItemEnchanted(enchantment) }
 
 /**
  * 实体所有护甲的某附魔数量
@@ -71,7 +70,10 @@ fun LivingEntity.getArmorEnchantmentMaxLevel(enchantment: Enchantment): Int {
 /**
  * 实体某个槽位是否存在某附魔
  */
-fun LivingEntity.isItemEnchanted(enchantment: Enchantment, slot: EquipmentSlot): Boolean {
+fun LivingEntity.isItemEnchanted(
+    enchantment: Enchantment,
+    slot: EquipmentSlot
+): Boolean {
     val enchantments = EnchantmentHelper.getEnchantments(this.getItemBySlot(slot))
     return enchantments.containsKey(enchantment)
 }

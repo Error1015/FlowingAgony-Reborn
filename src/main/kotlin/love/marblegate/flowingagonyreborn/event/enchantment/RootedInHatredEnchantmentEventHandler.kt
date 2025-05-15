@@ -54,35 +54,37 @@ object RootedInHatredEnchantmentEventHandler {
                 if (!player.hasEffect(ModEffects.EXTREME_HATRED)) {
                     player.heal(1f + enchantmentLevel * 3)
                     player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200))
-                    event.isCanceled = true
 
-                    val serverPlayer = player as? ServerPlayer ?: return
+                    val serverPlayer = (player as? ServerPlayer) ?: return
                     Networking.safeSend(
                         PacketDistributor.PLAYER.with {
                             serverPlayer
                         }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true)
                     )
+                    event.isCanceled = true
                 } else {
-                    val effectLevel = player.getEffect(ModEffects.EXTREME_HATRED)?.let { it.amplifier + 1 } ?: 0
+                    val effectLevel = player
+                        .getEffect(ModEffects.EXTREME_HATRED)
+                        ?.let { it.amplifier + 1 } ?: 0
                     when (effectLevel) {
                         1 -> {
                             player.heal(1f + enchantmentLevel * 2)
                             player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200, 1))
-                            event.isCanceled = true
                             val serverPlayer = player as? ServerPlayer ?: return
                             Networking.safeSend(PacketDistributor.PLAYER.with {
                                 serverPlayer
                             }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true))
+                            event.isCanceled = true
                         }
 
                         2 -> {
                             player.heal(1f + enchantmentLevel)
                             player.addEffect(MobEffectInstance(ModEffects.EXTREME_HATRED, 7200, 2))
-                            event.isCanceled = true
                             val serverPlayer = player as? ServerPlayer ?: return
                             Networking.safeSend(PacketDistributor.PLAYER.with {
                                 serverPlayer
                             }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true))
+                            event.isCanceled = true
                         }
                     }
                 }
@@ -99,7 +101,11 @@ object RootedInHatredEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             var negativeEffectCount = 0
             if (player.isOnFire) negativeEffectCount++
-            negativeEffectCount += player.activeEffects.stream().filter { it.effect.category == MobEffectCategory.HARMFUL }.count().toInt()
+            negativeEffectCount += player.activeEffects
+                .stream()
+                .filter { it.effect.category == MobEffectCategory.HARMFUL }
+                .count()
+                .toInt()
             event.amount += negativeEffectCount * enchantmentLevel * Config.numericalSettings.outrageousSpirit.get()
         }
     }

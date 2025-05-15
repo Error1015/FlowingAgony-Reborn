@@ -1,14 +1,15 @@
 package love.marblegate.flowingagonyreborn.item
 
 import love.marblegate.flowingagonyreborn.MODID
-import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.Item.Properties
 import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModItems {
-    val ItemRegistries: DeferredRegister<Item> = DeferredRegister.create(Registries.ITEM, MODID)
+    val MOD_ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
 
-    val Logo by ItemRegistries.registerObject("logo") { Item(Properties().stacksTo(1)) }
+    val LOGO by MOD_ITEMS.registerObject("logo") {
+        Item(Item.Properties())
+    }
 }
