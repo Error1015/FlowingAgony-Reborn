@@ -24,8 +24,6 @@ object FlowingAgonyReborn {
         Sounds.register(MOD_BUS)
         registerConfig(ModConfig.Type.COMMON, Config.spec)
         GroupRegistries.register(MOD_BUS)
-
-        // 初始化Networking
-        Networking
+        Networking // 初始化Networking
     }
 }

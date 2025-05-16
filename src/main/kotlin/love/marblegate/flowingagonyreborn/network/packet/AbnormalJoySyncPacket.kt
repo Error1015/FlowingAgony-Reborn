@@ -29,14 +29,16 @@ class AbnormalJoySyncPacket {
     fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx.get().let {
-                    it.enqueueWork {
-                        val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
-                        pointCap?.ifPresent(
-                            NonNullConsumer { cap: AbnormalJoyCapability? -> cap?.setPoint(value) })
-                        ctx.get().packetHandled = true
+                ctx
+                    .get()
+                    .let {
+                        it.enqueueWork {
+                            val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
+                            pointCap?.ifPresent(
+                                NonNullConsumer { cap: AbnormalJoyCapability? -> cap?.setPoint(value) })
+                            ctx.get().packetHandled = true
+                        }
                     }
-                }
             }
         }
     }

@@ -21,7 +21,13 @@ class ParticleEffectPacket {
         var proxy: IProxy = object : IProxy {}
     }
 
-    constructor(type: MobEffectCategory, x: Double, y: Double, z: Double, vararg args: Double) {
+    constructor(
+        type: MobEffectCategory,
+        x: Double,
+        y: Double,
+        z: Double,
+        vararg args: Double
+    ) {
         this.type = type
         this.x = x
         this.y = y
@@ -56,17 +62,19 @@ class ParticleEffectPacket {
     fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx.get().let {
-                    it.enqueueWork {
-                        proxy = ClientProxy()
-                        if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
-                            for (i in 0 .. args[1].toInt()) {
-                                proxy.addParticleForceNear(CursedAntipathyParticleOption(args[0].toFloat()), x, y, z, 0.0, 0.0, 0.0)
+                ctx
+                    .get()
+                    .let {
+                        it.enqueueWork {
+                            proxy = ClientProxy()
+                            if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
+                                for (i in 0 .. args[1].toInt()) {
+                                    proxy.addParticleForceNear(CursedAntipathyParticleOption(args[0].toFloat()), x, y, z, 0.0, 0.0, 0.0)
+                                }
                             }
                         }
+                        ctx.get().packetHandled = true
                     }
-                    ctx.get().packetHandled = true
-                }
             }
         }
     }

@@ -26,15 +26,31 @@ open class ImplicitBaseEffect : MobEffect {
             override fun isVisibleInInventory(instance: MobEffectInstance?) = false
 
             override fun renderInventoryIcon(
-                instance: MobEffectInstance?, screen: EffectRenderingInventoryScreen<*>?, guiGraphics: GuiGraphics?, x: Int, y: Int, blitOffset: Int
+                instance: MobEffectInstance?,
+                screen: EffectRenderingInventoryScreen<*>?,
+                guiGraphics: GuiGraphics?,
+                x: Int,
+                y: Int,
+                blitOffset: Int
             ) = false
 
             override fun renderInventoryText(
-                instance: MobEffectInstance?, screen: EffectRenderingInventoryScreen<*>?, guiGraphics: GuiGraphics?, x: Int, y: Int, blitOffset: Int
+                instance: MobEffectInstance?,
+                screen: EffectRenderingInventoryScreen<*>?,
+                guiGraphics: GuiGraphics?,
+                x: Int,
+                y: Int,
+                blitOffset: Int
             ) = false
 
             override fun renderGuiIcon(
-                instance: MobEffectInstance?, gui: Gui?, guiGraphics: GuiGraphics?, x: Int, y: Int, z: Float, alpha: Float
+                instance: MobEffectInstance?,
+                gui: Gui?,
+                guiGraphics: GuiGraphics?,
+                x: Int,
+                y: Int,
+                z: Float,
+                alpha: Float
             ) = false
         })
     }

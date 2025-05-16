@@ -5,7 +5,7 @@ import love.marblegate.flowingagonyreborn.enchantment.CustomEnchantmentCategory
 import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
-object CarefullyIdentifiedEnchantment: ModBaseEnchantment(
+object CarefullyIdentifiedEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.pickaxe, EquipmentSlotTypeSet.MAIN_HAND
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.carefullyIdentified.get()

@@ -3,13 +3,19 @@ package love.marblegate.flowingagonyreborn.effect.implicit
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 
-// 需要注册两次故为class
 class ThornInFleshImplicitEffect : HarmfulBlankImplicitEffect() {
-    override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
+    override fun applyEffectTick(
+        pLivingEntity: LivingEntity,
+        pAmplifier: Int
+    ) {
         val duration: Int = pLivingEntity.getEffect(this)?.duration ?: 0
         if (duration % 60 < 10) {
             if (pLivingEntity is Player) {
-                pLivingEntity.hurt(pLivingEntity.damageSources().thorns(pLivingEntity), 1f)
+                pLivingEntity.hurt(
+                    pLivingEntity
+                        .damageSources()
+                        .thorns(pLivingEntity), 1f
+                )
             } else {
                 pLivingEntity.setDeltaMovement(0.0, pLivingEntity.deltaMovement.y, 0.0)
                 pLivingEntity.hurtMarked = true
@@ -17,5 +23,8 @@ class ThornInFleshImplicitEffect : HarmfulBlankImplicitEffect() {
         }
     }
 
-    override fun isDurationEffectTick(duration: Int, amplifier: Int) = true
+    override fun isDurationEffectTick(
+        duration: Int,
+        amplifier: Int
+    ) = true
 }

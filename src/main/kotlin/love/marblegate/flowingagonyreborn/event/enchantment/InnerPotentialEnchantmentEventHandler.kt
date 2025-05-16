@@ -10,9 +10,9 @@ import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
 import love.marblegate.flowingagonyreborn.network.packet.RemoveEffectSyncToClientPacket
 import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
-import love.marblegate.flowingagonyreborn.util.setImplicit
 import love.marblegate.flowingagonyreborn.util.isItemEnchanted
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
+import love.marblegate.flowingagonyreborn.util.setImplicit
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffectInstance
@@ -88,8 +88,9 @@ object InnerPotentialEnchantmentEventHandler {
         if (event.player.health <= enchantmentLevel + 3) {
             if (!(event.player.isSprinting || event.player.isSwimming || event.player.isFallFlying)) {
                 if (event.player.hasEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)) {
-                    val amplifier = event.player.getEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)?.let { it.amplifier + 1 }
-                            ?: return
+                    val amplifier = event.player
+                        .getEffect(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE)
+                        ?.let { it.amplifier + 1 } ?: return
                     val nextAmplifier = minOf(amplifier, 150)
                     event.player.addEffect(MobEffectInstance(ModEffects.POTENTIAL_BURST_ENCHANTMENT_ACTIVE, 20, nextAmplifier).setImplicit)
                 } else {

@@ -5,15 +5,28 @@ import net.minecraft.world.entity.LivingEntity
 
 
 object ShockTherapyImplicitEffect : HarmfulBlankImplicitEffect() {
-    override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
+    override fun applyEffectTick(
+        pLivingEntity: LivingEntity,
+        pAmplifier: Int
+    ) {
         val lightningBolt = EntityType.LIGHTNING_BOLT.create(pLivingEntity.level()) ?: return
         lightningBolt.setPos(pLivingEntity.x, pLivingEntity.y, pLivingEntity.z)
         lightningBolt.setVisualOnly(true)
-        pLivingEntity.level().addFreshEntity(lightningBolt)
-        pLivingEntity.hurt(pLivingEntity.level().damageSources().lightningBolt(), (pLivingEntity.random.nextInt(3) + 2).toFloat())
+        pLivingEntity
+            .level()
+            .addFreshEntity(lightningBolt)
+        pLivingEntity.hurt(
+            pLivingEntity
+                .level()
+                .damageSources()
+                .lightningBolt(), (pLivingEntity.random.nextInt(3) + 2).toFloat()
+        )
     }
 
-    override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
+    override fun isDurationEffectTick(
+        duration: Int,
+        amplifier: Int
+    ): Boolean {
         val k = 10
         return if (duration > 0) {
             duration % k == 0

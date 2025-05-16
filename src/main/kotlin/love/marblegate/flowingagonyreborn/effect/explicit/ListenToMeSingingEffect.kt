@@ -6,10 +6,17 @@ import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
 
 object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
-    override fun applyEffectTick(entity: LivingEntity, pAmplifier: Int) {
+    override fun applyEffectTick(
+        entity: LivingEntity,
+        pAmplifier: Int
+    ) {
         if (entity.level().isClientSide) return
         val duration: Int = entity.getEffect(this)?.duration ?: 0
-        val source = DamageSourceBuilder.causeRythmOfUniverse(entity.level().registryAccess())
+        val source = DamageSourceBuilder.causeRythmOfUniverse(
+            entity
+                .level()
+                .registryAccess()
+        )
         when {
             duration % 40 > 25 -> {
                 entity.setDeltaMovement(0.0, 0.41, 0.0)
@@ -37,7 +44,10 @@ object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
         }
     }
 
-    override fun isDurationEffectTick(pDuration: Int, pAmplifier: Int) = true
+    override fun isDurationEffectTick(
+        pDuration: Int,
+        pAmplifier: Int
+    ) = true
 
     fun getMaxDamage(amplifier: Int) = if (amplifier == 0) 9f else (12 + amplifier * 2).toFloat()
 

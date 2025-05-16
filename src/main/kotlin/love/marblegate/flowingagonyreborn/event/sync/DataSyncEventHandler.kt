@@ -29,7 +29,7 @@ object DataSyncEventHandler {
     }
 
     fun syncAbnormalJoyCapability(player: Player) {
-        if (player.level().isClientSide || !Networking.isInstanceInitialized()) return
+        if (player.level().isClientSide) return
 
         val capability = player.getCapability(ModCapManager.AbnormalJoy_Capability)
         capability.ifPresent { cap ->

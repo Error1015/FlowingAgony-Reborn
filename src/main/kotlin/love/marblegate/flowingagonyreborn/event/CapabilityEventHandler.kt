@@ -1,6 +1,5 @@
 package love.marblegate.flowingagonyreborn.event
 
-import love.marblegate.flowingagonyreborn.capibility.AbnormalJoyCapability
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.AbnormalJoySyncPacket
@@ -23,7 +22,11 @@ object CapabilityEventHandler {
             val pointCap = causeEntity.getCapability(ModCapManager.AbnormalJoy_Capability)
             pointCap.ifPresent { cap ->
                 if (cap.getPoint() >= 5) {
-                    event.entity.hurt(event.entity.damageSources().generic()/*穿透盔甲伤害?*/, 15f)
+                    event.entity.hurt(
+                        event.entity
+                            .damageSources()
+                            .generic()/*穿透盔甲伤害?*/, 15f
+                    )
                     cap.decrease(5f)
                 } else if (cap.getPoint() <= 1) {
                     cap.decrease(cap.getPoint())

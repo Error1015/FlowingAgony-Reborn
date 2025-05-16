@@ -5,7 +5,11 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
-abstract class ModBaseEnchantment(pRarity: Rarity, pCategory: EnchantmentCategory, pApplicableSlots: Array<out EquipmentSlot>) : Enchantment(pRarity, pCategory, pApplicableSlots) {
+abstract class ModBaseEnchantment(
+    pRarity: Rarity,
+    pCategory: EnchantmentCategory,
+    pApplicableSlots: Array<out EquipmentSlot>
+) : Enchantment(pRarity, pCategory, pApplicableSlots) {
     override fun getMinCost(pLevel: Int) = getEnchantability(pLevel, true)
 
     override fun getMaxCost(pLevel: Int) = getEnchantability(pLevel, false)

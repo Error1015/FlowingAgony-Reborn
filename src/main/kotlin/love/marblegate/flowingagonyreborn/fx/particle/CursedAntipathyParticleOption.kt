@@ -5,7 +5,7 @@ import love.marblegate.flowingagonyreborn.fx.ModParticle
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.network.FriendlyByteBuf
-import java.util.Locale
+import java.util.*
 
 open class CursedAntipathyParticleOption : ParticleOptions {
     private val diameter: Float
@@ -13,13 +13,17 @@ open class CursedAntipathyParticleOption : ParticleOptions {
     companion object {
         val DESERIALIZER: ParticleOptions.Deserializer<CursedAntipathyParticleOption> = object : ParticleOptions.Deserializer<CursedAntipathyParticleOption> {
             override fun fromCommand(
-                pParticleType: ParticleType<CursedAntipathyParticleOption?>, pReader: StringReader
+                pParticleType: ParticleType<CursedAntipathyParticleOption?>,
+                pReader: StringReader
             ): CursedAntipathyParticleOption {
                 pReader.expect(' ')
                 return CursedAntipathyParticleOption(pReader.readFloat())
             }
 
-            override fun fromNetwork(particleType: ParticleType<CursedAntipathyParticleOption>, pBuffer: FriendlyByteBuf): CursedAntipathyParticleOption {
+            override fun fromNetwork(
+                particleType: ParticleType<CursedAntipathyParticleOption>,
+                pBuffer: FriendlyByteBuf
+            ): CursedAntipathyParticleOption {
                 return CursedAntipathyParticleOption(pBuffer.readFloat())
             }
         }

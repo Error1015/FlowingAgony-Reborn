@@ -6,7 +6,7 @@ import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance
 import net.minecraft.sounds.SoundSource
 import net.minecraft.util.RandomSource
 
-class ExtremeHatredMediumStageSound: AbstractTickableSoundInstance {
+class ExtremeHatredMediumStageSound : AbstractTickableSoundInstance {
     private val player: LocalPlayer
 
     constructor(player: LocalPlayer) : super(ModSounds.EXTREME_HATRED_MEDIUM_STAGE_SOUND, SoundSource.PLAYERS, RandomSource.create()) {

@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
-object SurvivalShortcutEnchantment: ModBaseEnchantment(
+object SurvivalShortcutEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.survivalShortcut.get()

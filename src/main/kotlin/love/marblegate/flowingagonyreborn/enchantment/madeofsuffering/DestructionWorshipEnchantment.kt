@@ -11,6 +11,5 @@ object DestructionWorshipEnchantment : ModBaseEnchantment(
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.destructionWorship.get()
     override fun getMaxLevel() = 1
-    override fun checkCompatibility(pOther: Enchantment): Boolean =
-        super.checkCompatibility(pOther) && pOther != ConstrainedHeartEnchantment && pOther != PiercingFeverEnchantment
+    override fun checkCompatibility(pOther: Enchantment): Boolean = super.checkCompatibility(pOther) && pOther != ConstrainedHeartEnchantment && pOther != PiercingFeverEnchantment
 }

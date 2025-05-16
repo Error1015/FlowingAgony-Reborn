@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PrayerOfPainEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun getConfig(): Boolean= Config.acquirableSettings.prayerOfPain.get()
+    override fun getConfig(): Boolean = Config.acquirableSettings.prayerOfPain.get()
     override fun getMaxLevel() = 3
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != BurningPhobiaEnchantment && pOther != DrowningPhobiaEnchantment
 }

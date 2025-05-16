@@ -13,5 +13,6 @@ object MorirsDeathwishEnchantment : ModBaseEnchantment(
     override fun getConfig(): Boolean = Config.acquirableSettings.morirsDeathwish.get()
     override fun getMaxLevel() = 1
     override fun isTreasureOnly() = true
-    override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != GuidensRegretEnchantment && pOther != Enchantments.MENDING && pOther != MorirsLifeboundEnchantment
+    override fun checkCompatibility(pOther: Enchantment) =
+        super.checkCompatibility(pOther) && pOther != GuidensRegretEnchantment && pOther != Enchantments.MENDING && pOther != MorirsLifeboundEnchantment
 }

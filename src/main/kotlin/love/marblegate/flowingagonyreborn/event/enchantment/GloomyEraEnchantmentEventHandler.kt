@@ -17,7 +17,8 @@ import net.minecraft.world.entity.monster.Witch
 import net.minecraft.world.entity.monster.ZombieVillager
 import net.minecraft.world.entity.npc.Villager
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.*
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.item.trading.MerchantOffer
 import net.minecraft.world.level.Level
@@ -126,7 +127,9 @@ object GloomyEraEnchantmentEventHandler {
                         val offers = (it as Villager).offers
                         val outcome = rollDiceForPilferage(player.boots, it, offers, event.entity.random, event.distance.toDouble())
                         outcome.forEach { stack ->
-                            it.level().addFreshEntity(ItemEntity(it.level(), it.x, it.y, it.z, stack))
+                            it
+                                .level()
+                                .addFreshEntity(ItemEntity(it.level(), it.x, it.y, it.z, stack))
                         }
                     }
                 }
@@ -251,7 +254,11 @@ object GloomyEraEnchantmentEventHandler {
     }
 
     fun rollDiceForPilferage(
-        armorFeet: ItemStack, villager: Villager, offers: List<MerchantOffer>, random: RandomSource, fallingHeight: Double
+        armorFeet: ItemStack,
+        villager: Villager,
+        offers: List<MerchantOffer>,
+        random: RandomSource,
+        fallingHeight: Double
     ): List<ItemStack> {
         var extraLuck = Mth.floor(fallingHeight)
         extraLuck = minOf(extraLuck, 15)
@@ -277,7 +284,11 @@ object GloomyEraEnchantmentEventHandler {
         }
 
         if (random.nextInt(100) < 30 + 5 * extraLuck) {
-            if (!Config.generalSettings.villagerSafeMode.get()) villager.hurt(villager.damageSources().generic(), 1 + extraLuck * 0.5f)
+            if (!Config.generalSettings.villagerSafeMode.get()) villager.hurt(
+                villager
+                    .damageSources()
+                    .generic(), 1 + extraLuck * 0.5f
+            )
         }
 
         if (success) if (armorFeet != ItemStack.EMPTY) armorFeet.hurtAndBreak(30, villager) { }

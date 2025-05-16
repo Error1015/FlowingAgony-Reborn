@@ -9,5 +9,5 @@ object BackAndFillEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.bowAndCrossbow, EquipmentSlotTypeSet.MAIN_HAND
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.backAndFill.get()
-    override fun getMaxLevel() =  3
+    override fun getMaxLevel() = 3
 }

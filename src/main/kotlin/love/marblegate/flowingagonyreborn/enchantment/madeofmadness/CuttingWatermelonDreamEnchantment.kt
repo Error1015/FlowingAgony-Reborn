@@ -5,7 +5,7 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
-object CuttingWatermelonDreamEnchantment: ModBaseEnchantment(
+object CuttingWatermelonDreamEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.DIGGER, EquipmentSlotTypeSet.MAIN_HAND
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.cuttingWatermelonDream.get()

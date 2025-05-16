@@ -2,9 +2,11 @@ package love.marblegate.flowingagonyreborn.effect.implicit
 
 import net.minecraft.world.entity.LivingEntity
 
-object
-MiraculousEscapeForceEscapeEffect : HarmfulBlankImplicitEffect() {
-    override fun applyEffectTick(pLivingEntity: LivingEntity, pAmplifier: Int) {
+object MiraculousEscapeForceEscapeEffect : HarmfulBlankImplicitEffect() {
+    override fun applyEffectTick(
+        pLivingEntity: LivingEntity,
+        pAmplifier: Int
+    ) {
         val duration: Int = pLivingEntity.getEffect(this)?.duration ?: 0
         if (duration % 40 > 25) {
             pLivingEntity.setDeltaMovement(0.0, 2.0, 0.0)
@@ -14,5 +16,8 @@ MiraculousEscapeForceEscapeEffect : HarmfulBlankImplicitEffect() {
         pLivingEntity.hurtMarked = true
     }
 
-    override fun isDurationEffectTick(pDuration: Int, pAmplifier: Int) = true
+    override fun isDurationEffectTick(
+        pDuration: Int,
+        pAmplifier: Int
+    ) = true
 }

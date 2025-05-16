@@ -5,7 +5,7 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
-object HatredBloodlineEnchantment: ModBaseEnchantment(
+object HatredBloodlineEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
     override fun getConfig(): Boolean = Config.acquirableSettings.hatredBloodline.get()

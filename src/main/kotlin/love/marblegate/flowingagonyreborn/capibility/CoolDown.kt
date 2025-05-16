@@ -17,7 +17,10 @@ class CoolDown(
 
     fun isReady(cooldownType: CoolDownType) = (coolDownMap[cooldownType] ?: 0) < 1
 
-    fun set(cooldownType: CoolDownType, cooldownTick: Int) {
+    fun set(
+        cooldownType: CoolDownType,
+        cooldownTick: Int
+    ) {
         coolDownMap + (cooldownType to max(0, cooldownTick))
     }
 

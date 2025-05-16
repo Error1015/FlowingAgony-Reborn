@@ -25,7 +25,7 @@ object FXSyncHandler {
     }
 
     fun reapplyFX(player: Player) {
-        if (player.level().isClientSide || !Networking.isInstanceInitialized()) return
+        if (player.level().isClientSide) return
         val serverPlayer = player as? ServerPlayer ?: return
         when {
             player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) -> {

@@ -5,11 +5,7 @@ import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
-import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentTotalLevel
-import love.marblegate.flowingagonyreborn.util.getArmorEnchantmentMaxLevel
-import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
-import love.marblegate.flowingagonyreborn.util.isItemEnchanted
-import love.marblegate.flowingagonyreborn.util.safeClassCastAndHandle
+import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffectInstance
@@ -56,7 +52,10 @@ object DiceOfFraudEnchantmentHandler {
     /**
      * 给对应随机点数添加上对应的效果
      */
-    private fun appendixEffectForTrickster(entity: LivingEntity, diceNum: Int) {
+    private fun appendixEffectForTrickster(
+        entity: LivingEntity,
+        diceNum: Int
+    ) {
         when (diceNum) {
             1 -> entity.addEffect(MobEffectInstance(MobEffects.POISON, 100))
             2 -> entity.addEffect(MobEffectInstance(MobEffects.WITHER, 100))
@@ -109,7 +108,10 @@ object DiceOfFraudEnchantmentHandler {
         }
     }
 
-    private fun caseToAddEffect(tempNum: Int, player: Player) {
+    private fun caseToAddEffect(
+        tempNum: Int,
+        player: Player
+    ) {
         when (tempNum) {
             0 -> player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
             1 -> player.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))
@@ -218,7 +220,11 @@ object DiceOfFraudEnchantmentHandler {
             val dice = player.random.nextInt(100)
             val modifier = 1 + (enchantmentLevel - 1) * 0.1f
             val duration = (600 * modifier).toInt()
-            val source = DamageSourceBuilder.causeExtremeHatred(player.level().registryAccess())
+            val source = DamageSourceBuilder.causeExtremeHatred(
+                player
+                    .level()
+                    .registryAccess()
+            )
             when {
                 dice < 33 -> event.isCanceled = true
                 dice < 66 -> event.amount *= 2 * modifier

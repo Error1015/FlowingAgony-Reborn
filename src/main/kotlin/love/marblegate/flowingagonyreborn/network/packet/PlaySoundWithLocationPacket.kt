@@ -21,7 +21,13 @@ class PlaySoundWithLocationPacket {
         var proxy: IProxy = object : IProxy {}
     }
 
-    constructor(type: ModSoundType, onOrOff: Boolean, x: Double, y: Double, z: Double) {
+    constructor(
+        type: ModSoundType,
+        onOrOff: Boolean,
+        x: Double,
+        y: Double,
+        z: Double
+    ) {
         this.type = type
         this.onOrOff = onOrOff
         this.x = x
@@ -49,14 +55,16 @@ class PlaySoundWithLocationPacket {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             proxy = ClientProxy()
             Runnable {
-                ctx.get().let {
-                    it.enqueueWork {
-                        if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                            proxy.playSoundWithLocation(ModSounds.MALICE_OUTBREAK_KNOCKBACK_SOUND, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
+                ctx
+                    .get()
+                    .let {
+                        it.enqueueWork {
+                            if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
+                                proxy.playSoundWithLocation(ModSounds.MALICE_OUTBREAK_KNOCKBACK_SOUND, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
+                            }
                         }
+                        ctx.get().packetHandled = true
                     }
-                    ctx.get().packetHandled = true
-                }
             }
         }
     }

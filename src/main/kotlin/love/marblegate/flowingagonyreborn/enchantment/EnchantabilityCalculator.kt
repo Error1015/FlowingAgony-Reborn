@@ -7,7 +7,10 @@ import net.minecraft.world.item.enchantment.Enchantment
 /**
  * 计算附魔的附魔花费
  */
-fun Enchantment.getEnchantability(currentLevel: Int, isMin: Boolean): Int {
+fun Enchantment.getEnchantability(
+    currentLevel: Int,
+    isMin: Boolean
+): Int {
     val diff = maxLevel - currentLevel
     return when (rarity.weight) {
         1 -> if (isMin) 30 - 4 * diff else 80 - 10 * diff // VERY RARE

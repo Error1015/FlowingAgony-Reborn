@@ -59,17 +59,19 @@ object MadeOfMadnessEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             event.entity.addEffect(MobEffectInstance(ModEffects.LISTEN_TO_ME_SINGING, 40 * enchantmentLevel, enchantmentLevel - 1))
             player.addEffect(MobEffectInstance(ModEffects.INSANE_POET_ENCHANTMENT_ACTIVE, enchantmentLevel * 40).setImplicit)
-            event.amount *= Config.generalSettings.insanePoetDamageReduction.get().toFloat()
+            event.amount *= Config.generalSettings.insanePoetDamageReduction
+                .get()
+                .toFloat()
         }
     }
 
     @SubscribeEvent
     fun onPaperBrainEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.source.entity is Player) {
-            val player = event.source.entity as Player
+        val player = event.source.entity ?: return
+        if (player is Player) {
             val enchantmentLevel = player.getEnchantmentLevel(PaperBrainEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel == 0) return
+            if (enchantmentLevel <= 0) return
             event.entity.addEffect(
                 MobEffectInstance(
                     ModEffects.PAPER_BRAIN_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
@@ -118,7 +120,9 @@ object MadeOfMadnessEnchantmentEventHandler {
                 }
                 if (unBreakingLevel == 0) return
                 val damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4
-                event.player.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(damageAppliedToItem, event.player) { }
+                event.player
+                    .getItemBySlot(EquipmentSlot.MAINHAND)
+                    .hurtAndBreak(damageAppliedToItem, event.player) { }
             }
         }
     }
@@ -158,12 +162,21 @@ object MadeOfMadnessEnchantmentEventHandler {
                         }
                     }
                 }
-                if (fortuneLevel > 0) dropLoot(event.entity, player, player.damageSources().playerAttack(player), fortuneLevel)
+                if (fortuneLevel > 0) dropLoot(
+                    event.entity, player, player
+                        .damageSources()
+                        .playerAttack(player), fortuneLevel
+                )
             }
         }
     }
 
-    private fun dropLoot(entity: LivingEntity, player: Player, source: DamageSource, lootLevel: Int) {
+    private fun dropLoot(
+        entity: LivingEntity,
+        player: Player,
+        source: DamageSource,
+        lootLevel: Int
+    ) {
         val resourceLocation: ResourceLocation = entity.lootTable
         val lootTable = entity.level().server?.lootData?.getLootTable(resourceLocation) ?: return
         val context = getLootContextBuilder(entity, player, source).create(resourceLocation)
@@ -172,7 +185,11 @@ object MadeOfMadnessEnchantmentEventHandler {
         }
     }
 
-    private fun getLootContextBuilder(entity: LivingEntity, player: Player, source: DamageSource): LootContext.Builder {
+    private fun getLootContextBuilder(
+        entity: LivingEntity,
+        player: Player,
+        source: DamageSource
+    ): LootContext.Builder {
         val serverLevel = entity.level() as ServerLevel
         val paramsBuilder = LootParams
             .Builder(serverLevel)
@@ -188,8 +205,14 @@ object MadeOfMadnessEnchantmentEventHandler {
         return LootContext.Builder(paramsBuilder)
     }
 
-    fun recalculateLootByLootingLevel(stack: ItemStack, context: LootContext, lootLevel: Int): ItemStack {
-        val f = lootLevel.toFloat() * UniformGenerator.between(0f, 1f).getFloat(context)
+    fun recalculateLootByLootingLevel(
+        stack: ItemStack,
+        context: LootContext,
+        lootLevel: Int
+    ): ItemStack {
+        val f = lootLevel.toFloat() * UniformGenerator
+            .between(0f, 1f)
+            .getFloat(context)
         stack.grow(f.roundToInt())
         return stack
     }

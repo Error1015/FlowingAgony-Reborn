@@ -2,16 +2,8 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.effect.ModEffects
-import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.CovertKnifeEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EnviousKindEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.EyesoreEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.SourceOfEnvyEnchantment
-import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.ThornInFleshEnchantment
-import love.marblegate.flowingagonyreborn.util.getEnchantmentLevel
-import love.marblegate.flowingagonyreborn.util.getTargetsExceptOneself
-import love.marblegate.flowingagonyreborn.util.getTargetsOfSameType
-import love.marblegate.flowingagonyreborn.util.setImplicit
-import love.marblegate.flowingagonyreborn.util.isHostile
+import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.*
+import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.util.Mth
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -122,7 +114,11 @@ object FlameOfEnvyEnchantmentEventHandler {
                         else -> 0.0
                     }
                     if (Random.nextDouble() >= successProbability) return
-                    entity.hurt(owner.damageSources().playerAttack(owner), 9f)
+                    entity.hurt(
+                        owner
+                            .damageSources()
+                            .playerAttack(owner), 9f
+                    )
                     if (owner.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND) == 1) entity.setSecondsOnFire(5)
 
                     when (event.projectile) {

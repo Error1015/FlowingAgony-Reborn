@@ -16,7 +16,15 @@ import net.minecraft.world.level.Level
 
 
 class ClientProxy : IProxy {
-    override fun addParticleForceNear(particleData: ParticleOptions, x: Double, y: Double, z: Double, xSpeed: Double, ySpeed: Double, zSpeed: Double) {
+    override fun addParticleForceNear(
+        particleData: ParticleOptions,
+        x: Double,
+        y: Double,
+        z: Double,
+        xSpeed: Double,
+        ySpeed: Double,
+        zSpeed: Double
+    ) {
         val world: Level = Minecraft.getInstance().level ?: return
         val info = Minecraft.getInstance().gameRenderer.mainCamera
         if (info.isInitialized && info.position.distanceToSqr(x, y, z) <= 512.0) {
@@ -24,7 +32,10 @@ class ClientProxy : IProxy {
         }
     }
 
-    override fun handleISound(type: PlaySoundPacket.ModSoundType, onOrOff: Boolean) {
+    override fun handleISound(
+        type: PlaySoundPacket.ModSoundType,
+        onOrOff: Boolean
+    ) {
         when (type) {
             PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT -> {
                 if (onOrOff) {
@@ -63,7 +74,16 @@ class ClientProxy : IProxy {
         }
     }
 
-    override fun playSoundWithLocation(soundEvent: SoundEvent, category: SoundSource, volume: Float, pitch: Float, x: Double, y: Double, z: Double, distanceDelay: Boolean) {
+    override fun playSoundWithLocation(
+        soundEvent: SoundEvent,
+        category: SoundSource,
+        volume: Float,
+        pitch: Float,
+        x: Double,
+        y: Double,
+        z: Double,
+        distanceDelay: Boolean
+    ) {
         val level = Minecraft.getInstance().level ?: return
         level.playLocalSound(x, y, z, soundEvent, category, volume, pitch, distanceDelay)
     }
