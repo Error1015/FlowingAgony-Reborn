@@ -14,7 +14,7 @@ object PaperBrainImplicitEffect : HarmfulBlankImplicitEffect() {
                 .damageSources()
                 .magic(), (pLivingEntity
                 .getRandom()
-                .nextInt(4) + 5).toFloat() * Config.numericalSettings.paperCuttingHurtDamage.get()
+                .nextInt(4) + 5).toFloat() * Config.numericalSettings.paperBrainHurtDamage.get()
         )
     }
 

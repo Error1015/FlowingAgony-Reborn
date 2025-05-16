@@ -151,6 +151,6 @@ class Config {
         val outrageousSpirit: ForgeConfigSpec.ConfigValue<Float> = builder.define("OutrageousSpiritEnchantment", 1f)
         val scholarOfOriginalSinAddWeakness: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinAddWeakness", 1f)
         val scholarOfOriginalSinDecreaseAttack: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinDecreaseAttack", 1f)
-        val paperCuttingHurtDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("PaperCuttingHurtDamage", 1f)
+        val paperBrainHurtDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("paperBrainHurtDamage", 1f)
     }
 }
