@@ -7,7 +7,7 @@ class CommonConfig {
         var spec: ForgeConfigSpec
         private val builder = ForgeConfigSpec.Builder()
         var generalSettings: GeneralSettings
-        var bugFix: BugFix
+        var optionalBugFix: OptionalBugFix
         var numericalSettings: NumericalSettings
 
         init {
@@ -22,8 +22,8 @@ class CommonConfig {
                     "Enchantment Acquirable Setting", "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
                     "Enchantment which is acquirable is still functional."
                 )
-                .push("bug fix")
-            bugFix = BugFix(builder)
+                .push("Optional Bug Fix")
+            optionalBugFix = OptionalBugFix(builder)
             builder.pop()
             builder
                 .comment("Numerical Value Settings")
@@ -61,7 +61,7 @@ class CommonConfig {
             .defineInRange("paperBrainDamageReduction", 0.9, 0.0, 1.0)
     }
 
-    class BugFix(builder: ForgeConfigSpec.Builder) {
+    class OptionalBugFix(builder: ForgeConfigSpec.Builder) {
         val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder
             .comment(
                 "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect", "If you are modpack author, You Should Set to True"
