@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.effect
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
@@ -26,7 +26,7 @@ object ImplicitEffectEventHandler {
                         .getEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)
                         ?.let { it.amplifier + 1 } ?: 0
                     if (effectLevel <= 0) return
-                    event.amount = event.amount * (1f + effectLevel * 0.25f) * Config.numericalSettings.hatredBloodlineEffect.get()
+                    event.amount = event.amount * (1f + effectLevel * 0.25f) * CommonConfig.numericalSettings.hatredBloodlineEffect.get()
                 }
             }
         }

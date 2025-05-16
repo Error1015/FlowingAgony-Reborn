@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
@@ -59,7 +59,7 @@ object MadeOfMadnessEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             event.entity.addEffect(MobEffectInstance(ModEffects.LISTEN_TO_ME_SINGING, 40 * enchantmentLevel, enchantmentLevel - 1))
             player.addEffect(MobEffectInstance(ModEffects.INSANE_POET_ENCHANTMENT_ACTIVE, enchantmentLevel * 40).setImplicit)
-            event.amount *= Config.generalSettings.insanePoetDamageReduction
+            event.amount *= CommonConfig.generalSettings.insanePoetDamageReduction
                 .get()
                 .toFloat()
         }
@@ -77,7 +77,7 @@ object MadeOfMadnessEnchantmentEventHandler {
                     ModEffects.PAPER_BRAIN_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
                 ).setImplicit
             )
-            event.amount *= (1.0 - Config.generalSettings.paperBrainDamageReduction.get()).toFloat()
+            event.amount *= (1.0 - CommonConfig.generalSettings.paperBrainDamageReduction.get()).toFloat()
         }
     }
 
@@ -93,7 +93,7 @@ object MadeOfMadnessEnchantmentEventHandler {
                     ModEffects.SHOCK_THERAPY_ENCHANTMENT_ACTIVE, enchantmentLevel * 40 + 20, enchantmentLevel - 1
                 ).setImplicit
             )
-            event.amount *= (1.0 - Config.generalSettings.shockTherapyDamageReduction.get()).toFloat()
+            event.amount *= (1.0 - CommonConfig.generalSettings.shockTherapyDamageReduction.get()).toFloat()
         }
     }
 
@@ -116,7 +116,7 @@ object MadeOfMadnessEnchantmentEventHandler {
                     .nextDouble()
                     .toFloat()
                 targets.forEach { target ->
-                    target.hurt(cuttingWaterMelonDreamDamageSource, damage * Config.numericalSettings.cuttingWatermelonDream.get())
+                    target.hurt(cuttingWaterMelonDreamDamageSource, damage * CommonConfig.numericalSettings.cuttingWatermelonDream.get())
                 }
                 if (unBreakingLevel == 0) return
                 val damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4

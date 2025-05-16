@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.innerpotential.ArmorUpEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.innerpotential.MiraculousEscapeEnchantment
@@ -149,7 +149,7 @@ object InnerPotentialEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             if (player.health < 5 + enchantmentLevel) {
                 if (player.absorptionAmount + 1 < enchantmentLevel + 5) {
-                    player.absorptionAmount += Config.numericalSettings.armorUpEnchantment.get()
+                    player.absorptionAmount += CommonConfig.numericalSettings.armorUpEnchantment.get()
                 }
             }
         }

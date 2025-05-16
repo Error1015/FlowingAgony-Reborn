@@ -1,8 +1,8 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
 import love.marblegate.flowingagonyreborn.util.*
@@ -103,7 +103,7 @@ object DiceOfFraudEnchantmentHandler {
                         player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
                     }
                 }
-                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, Config.numericalSettings.anAppleADayCoolDowns.get())
+                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, CommonConfig.numericalSettings.anAppleADayCoolDowns.get())
             }
         }
     }
@@ -201,7 +201,7 @@ object DiceOfFraudEnchantmentHandler {
             } else {
                 val recordedTarget = weaponNbt.getString("savor_the_tasted_target") ?: return
                 if (recordedTarget == encodeId) {
-                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * Config.numericalSettings.savorTheTastedEnchantment.get()
+                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.get()
                 } else weaponNbt.putString("savor_the_tasted_target", encodeId)
             }
             player.mainHandItem.tag = weaponNbt

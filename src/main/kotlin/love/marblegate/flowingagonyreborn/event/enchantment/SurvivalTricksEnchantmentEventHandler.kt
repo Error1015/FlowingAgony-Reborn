@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.enchantment.survivaltricks.NecessaryEvilEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.survivaltricks.SurvivalRuseEnchantment
@@ -32,7 +32,7 @@ object SurvivalTricksEnchantmentEventHandler {
                 if (enchantmentLevel == 0) return
                 if (event.source.entity is Player) event.amount *= 0.95f - 0.05f * enchantmentLevel
                 else if (event.amount >= 9 - enchantmentLevel) {
-                    var entities: List<LivingEntity> = if (Config.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) {
+                    var entities: List<LivingEntity> = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) {
                         !it.isHostile(false) && it !is Villager
                     } else player.getTargetsExceptOneself(16f, 2f) {
                         !it.isHostile(false)
@@ -70,7 +70,7 @@ object SurvivalTricksEnchantmentEventHandler {
                 if (enchantmentLevel == 0) return
                 if (event.source.entity is Player) event.amount *= 0.85F - 0.05F * enchantmentLevel
                 else if (event.amount >= 13 - enchantmentLevel) {
-                    val entities = if (Config.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) { it !is Player && it !is Villager }
+                    val entities = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) { it !is Player && it !is Villager }
                     else player.getTargetsExceptOneself(
                         16f, 2f
                     ) { it !is Player }

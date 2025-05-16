@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.effect.implicit
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import net.minecraft.world.entity.LivingEntity
 
 object PaperBrainImplicitEffect : HarmfulBlankImplicitEffect() {
@@ -14,7 +14,7 @@ object PaperBrainImplicitEffect : HarmfulBlankImplicitEffect() {
                 .damageSources()
                 .magic(), (pLivingEntity
                 .getRandom()
-                .nextInt(4) + 5).toFloat() * Config.numericalSettings.paperBrainHurtDamage.get()
+                .nextInt(4) + 5).toFloat() * CommonConfig.numericalSettings.paperBrainHurtDamage.get()
         )
     }
 

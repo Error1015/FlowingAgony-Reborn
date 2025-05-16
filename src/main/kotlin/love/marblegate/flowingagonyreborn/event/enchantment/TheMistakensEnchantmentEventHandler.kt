@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.*
@@ -152,7 +152,7 @@ object TheMistakensEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(LightburnFungalParasiticEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             if (event.source.entity is LivingEntity) {
-                val targets = if (Config.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(8f, 2f) { it !is Villager } else player.getTargetsExceptOneself(8f, 2f) { true }
+                val targets = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(8f, 2f) { it !is Villager } else player.getTargetsExceptOneself(8f, 2f) { true }
                 if (targets.isNotEmpty()) {
                     val random = player.random
                     targets.forEach { if (random.nextDouble() < 0.125 * (enchantmentLevel + 1)) it.addEffect(MobEffectInstance(ModEffects.LIGHTBURN_FUNGAL_INFECTION, 120)) }
@@ -207,7 +207,7 @@ object TheMistakensEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ScholarOfOriginalSinEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             val extraDamage = min(event.amount * (1.1f - 0.1f * enchantmentLevel), 10f)
-            event.amount += extraDamage * Config.numericalSettings.scholarOfOriginalSinAddWeakness.get()
+            event.amount += extraDamage * CommonConfig.numericalSettings.scholarOfOriginalSinAddWeakness.get()
         }
     }
 
@@ -243,7 +243,7 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.source.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(OriginalSinErosionEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            event.amount = max(event.amount - 5f + enchantmentLevel, 0f) * Config.numericalSettings.scholarOfOriginalSinDecreaseAttack.get()
+            event.amount = max(event.amount - 5f + enchantmentLevel, 0f) * CommonConfig.numericalSettings.scholarOfOriginalSinDecreaseAttack.get()
         }
     }
 

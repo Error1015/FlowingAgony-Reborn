@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.*
@@ -68,7 +68,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
             if (attacker !in targets && event.entity != attacker) {
-                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level * Config.numericalSettings.phobiaEffectDamage.get())
+                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level * CommonConfig.numericalSettings.phobiaEffectDamage.get())
             }
         }
     }
@@ -88,9 +88,9 @@ object MadeOfSufferingEnchantmentEventHandler {
                                 .getEffect(ModEffects.LET_ME_SAVOR_IT)
                                 ?.let { it.amplifier < 9 } == true) player.addEffect(
                         MobEffectInstance(
-                        ModEffects.LET_ME_SAVOR_IT, 72000, player
-                            .getEffect(ModEffects.LET_ME_SAVOR_IT)
-                            ?.let { it.amplifier + 1 } ?: 0))
+                            ModEffects.LET_ME_SAVOR_IT, 72000, player
+                                .getEffect(ModEffects.LET_ME_SAVOR_IT)
+                                ?.let { it.amplifier + 1 } ?: 0))
                 } else player.addEffect(MobEffectInstance(ModEffects.LET_ME_SAVOR_IT, 72000))
             }
         }
@@ -98,7 +98,7 @@ object MadeOfSufferingEnchantmentEventHandler {
             val player = event.source.entity as Player
             if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                 val effectLevel = player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.amplifier ?: 0
-                event.amount *= 1f - 0.09f * (effectLevel + 1f) * Config.numericalSettings.prayerOfPainEnchantment.get()
+                event.amount *= 1f - 0.09f * (effectLevel + 1f) * CommonConfig.numericalSettings.prayerOfPainEnchantment.get()
             }
         }
     }

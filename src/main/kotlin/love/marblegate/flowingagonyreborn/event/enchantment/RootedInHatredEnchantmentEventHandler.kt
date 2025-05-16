@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.rootedinhatred.*
@@ -106,7 +106,7 @@ object RootedInHatredEnchantmentEventHandler {
                 .filter { it.effect.category == MobEffectCategory.HARMFUL }
                 .count()
                 .toInt()
-            event.amount += negativeEffectCount * enchantmentLevel * Config.numericalSettings.outrageousSpirit.get()
+            event.amount += negativeEffectCount * enchantmentLevel * CommonConfig.numericalSettings.outrageousSpirit.get()
         }
     }
 

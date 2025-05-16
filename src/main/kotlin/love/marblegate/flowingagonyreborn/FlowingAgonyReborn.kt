@@ -1,6 +1,8 @@
 package love.marblegate.flowingagonyreborn
 
 import love.marblegate.flowingagonyreborn.ModItemGroup.GroupRegistries
+import love.marblegate.flowingagonyreborn.config.CommonConfig
+import love.marblegate.flowingagonyreborn.config.EnchantmentConfig
 import love.marblegate.flowingagonyreborn.effect.ModEffects.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments.Enchantments
 import love.marblegate.flowingagonyreborn.fx.ModParticle.ParticleTypes
@@ -22,7 +24,8 @@ object FlowingAgonyReborn {
         MOD_ITEMS.register(MOD_BUS)
         ParticleTypes.register(MOD_BUS)
         Sounds.register(MOD_BUS)
-        registerConfig(ModConfig.Type.COMMON, Config.spec)
+        registerConfig(ModConfig.Type.COMMON, CommonConfig.spec, "$MODID/$MODID-common.toml")
+        registerConfig(ModConfig.Type.COMMON, EnchantmentConfig.spec, "$MODID/$MODID-enchantments_settings.toml")
         GroupRegistries.register(MOD_BUS)
         Networking // 初始化Networking
     }

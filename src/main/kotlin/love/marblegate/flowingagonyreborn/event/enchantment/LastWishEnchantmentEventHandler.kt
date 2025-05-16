@@ -1,8 +1,8 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.GuidensRegretEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.LastSweetDreamEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.MorirsDeathwishEnchantment
@@ -38,7 +38,7 @@ object LastWishEnchantmentEventHandler {
                     val temp = maxOf(floor(event.amount), 100f).toInt()
                     (0 until temp).forEach { _ -> repairPoint += 1 + player.random.nextInt(3) }
                 }
-                stack.damageValue -= (repairPoint * Config.numericalSettings.morirsDeathwishEnchantmentOnHurt.get()).toInt()
+                stack.damageValue -= (repairPoint * CommonConfig.numericalSettings.morirsDeathwishEnchantmentOnHurt.get()).toInt()
             }
         }
     }
@@ -53,7 +53,7 @@ object LastWishEnchantmentEventHandler {
             val coolDownCapability = player.getCapability(ModCapManager.CoolDown_Capability)
             coolDownCapability.ifPresent { cap ->
                 if (cap.isReady(CoolDown.CoolDownType.MORIRS_DEATHWISH_DEATHMENDING)) {
-                    stacks.forEach { it.damageValue -= Config.numericalSettings.morirsDeathwishEnchantmentOnDeathValue.get() }
+                    stacks.forEach { it.damageValue -= CommonConfig.numericalSettings.morirsDeathwishEnchantmentOnDeathValue.get() }
                     cap.set(CoolDown.CoolDownType.MORIRS_DEATHWISH_DEATHMENDING, 12000)
                 }
             }
@@ -74,7 +74,7 @@ object LastWishEnchantmentEventHandler {
                     val temp = maxOf(floor(event.amount), 100f).toInt()
                     (0 until temp).forEach { _ -> repairPoint += 1 + player.random.nextInt(3) }
                 }
-                it.damageValue -= (repairPoint * Config.numericalSettings.morirsLifeboundOnHeal.get()).toInt()
+                it.damageValue -= (repairPoint * CommonConfig.numericalSettings.morirsLifeboundOnHeal.get()).toInt()
             }
         }
     }
@@ -97,7 +97,7 @@ object LastWishEnchantmentEventHandler {
             val stacks = player.getStackWithEnchantment(GuidensRegretEnchantment)
             stacks.forEach {
                 val repairPoint = 1 + player.random.nextInt(3)
-                it.damageValue -= (repairPoint * Config.numericalSettings.guidensRegret.get()).toInt()
+                it.damageValue -= (repairPoint * CommonConfig.numericalSettings.guidensRegret.get()).toInt()
             }
         }
     }

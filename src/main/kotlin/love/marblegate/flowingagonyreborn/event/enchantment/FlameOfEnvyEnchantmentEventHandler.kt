@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.flameofenvy.*
 import love.marblegate.flowingagonyreborn.util.*
@@ -42,7 +42,7 @@ object FlameOfEnvyEnchantmentEventHandler {
             if (diff <= 0) return
             val temp = floor(diff / 10.0).toInt()
             // 根据配置文件决定是否修复善妒之人给予超过10级的ENVIOUS_BEING效果的Bug
-            val amplifier = if (Config.acquirableSettings.isFixEnviousKind.get()) {
+            val amplifier = if (CommonConfig.bugFix.isFixEnviousKind.get()) {
                 if (temp > 10) 10 else temp
             } else temp
             player.addEffect(MobEffectInstance(ModEffects.ENVIOUS_BEING, 200, amplifier))
@@ -98,15 +98,14 @@ object FlameOfEnvyEnchantmentEventHandler {
     @SubscribeEvent
     fun doCovertKnifeEnchantmentEvent(event: ProjectileImpactEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.isCanceled) return
         if (event.rayTraceResult is EntityHitResult) {
             val entity = (event.rayTraceResult as EntityHitResult).entity ?: return
             if (entity is EnderMan) {
-                val owner = event.projectile.owner ?: return
-                if (owner is Player) {
-                    val enchantmentLevel = owner.getEnchantmentLevel(CovertKnifeEnchantment, EquipmentSlot.MAINHAND)
+                val attacker = event.projectile.owner ?: return
+                if (attacker is Player) {
+                    val enchantmentLevel = attacker.getEnchantmentLevel(CovertKnifeEnchantment, EquipmentSlot.MAINHAND)
                     if (enchantmentLevel == 0) return
-
+                    // 根据附魔等级取对应的概率
                     val successProbability = when (enchantmentLevel) {
                         3 -> 1.0
                         2 -> 0.75
@@ -115,12 +114,13 @@ object FlameOfEnvyEnchantmentEventHandler {
                     }
                     if (Random.nextDouble() >= successProbability) return
                     entity.hurt(
-                        owner
+                        attacker
                             .damageSources()
-                            .playerAttack(owner), 9f
+                            .playerAttack(attacker), 9f
                     )
-                    if (owner.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND) == 1) entity.setSecondsOnFire(5)
+                    if (attacker.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND) == 1) entity.setSecondsOnFire(5)
 
+                    // 根据箭矢的不同情况作出不同的事件
                     when (event.projectile) {
                         is SpectralArrow -> entity.addEffect(MobEffectInstance(MobEffects.GLOWING, 200))
 
@@ -131,8 +131,8 @@ object FlameOfEnvyEnchantmentEventHandler {
                                 ) ?: return
                             } catch (exception: Exception) {
                                 exception.printStackTrace()
-                                null
-                            } ?: return
+                                return
+                            }
                             if (potion != Potions.EMPTY) {
                                 potion.effects.forEach {
                                     if (it != null) {

@@ -46,7 +46,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-println("""
+println(
+    """
         Java: ${System.getProperty("java.version")},
         JVM: ${System.getProperty("java.vm.version")},
         ${System.getProperty("java.vendor")},

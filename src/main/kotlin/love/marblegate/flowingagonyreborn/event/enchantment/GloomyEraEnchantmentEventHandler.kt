@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments
 import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.util.Mth
@@ -284,7 +284,7 @@ object GloomyEraEnchantmentEventHandler {
         }
 
         if (random.nextInt(100) < 30 + 5 * extraLuck) {
-            if (!Config.generalSettings.villagerSafeMode.get()) villager.hurt(
+            if (!CommonConfig.generalSettings.villagerSafeMode.get()) villager.hurt(
                 villager
                     .damageSources()
                     .generic(), 1 + extraLuck * 0.5f

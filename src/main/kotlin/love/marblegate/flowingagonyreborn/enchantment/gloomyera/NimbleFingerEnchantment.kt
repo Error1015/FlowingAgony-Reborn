@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.enchantment.gloomyera
 
-import love.marblegate.flowingagonyreborn.Config
+import love.marblegate.flowingagonyreborn.config.EnchantmentConfig
 import love.marblegate.flowingagonyreborn.enchantment.CustomEnchantmentCategory
 import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
@@ -8,6 +8,11 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object NimbleFingerEnchantment : ModBaseEnchantment(
     Rarity.RARE, CustomEnchantmentCategory.swordArmorAndTool, EquipmentSlotTypeSet.ALL
 ) {
-    override fun getConfig(): Boolean = Config.acquirableSettings.nimbleFinger.get()
+    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.nimbleFinger.get()
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.nimbleFinger.get()
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.nimbleFinger.get()
+
     override fun getMaxLevel() = 3
 }
