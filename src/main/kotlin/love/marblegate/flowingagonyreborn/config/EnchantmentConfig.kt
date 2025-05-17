@@ -9,6 +9,7 @@ class EnchantmentConfig {
         var tradeableConfig: TradeableConfig
         var discoverableConfig: DiscoverableConfig
         var applyOnEnchantingTableConfig: ApplyOnEnchantingTableConfig
+        var isTreasureConfig: IsTreasureConfig
 
         init {
             builder.push("tradeable")
@@ -22,6 +23,11 @@ class EnchantmentConfig {
             builder.push("applyOnEnchantingTable")
             applyOnEnchantingTableConfig = ApplyOnEnchantingTableConfig(builder)
             builder.pop()
+
+            builder.push("isTreasure")
+            isTreasureConfig = IsTreasureConfig(builder)
+            builder.pop()
+
             spec = builder.build()
         }
     }
@@ -216,5 +222,69 @@ class EnchantmentConfig {
         val scholarOfOriginalSin: ForgeConfigSpec.BooleanValue = builder.define("scholarOfOriginalSin", true)
         val originalSinErosion: ForgeConfigSpec.BooleanValue = builder.define("originalSinErosion", true)
         val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", true)
+    }
+
+    class IsTreasureConfig(
+        builder: ForgeConfigSpec.Builder
+    ) {
+        val anEnchantedGoldenAppleADay: ForgeConfigSpec.BooleanValue = builder.define("anEnchantedGoldenAppleADay", false)
+        val deathPunk: ForgeConfigSpec.BooleanValue = builder.define("deathPunk", false)
+        val exoticHealer: ForgeConfigSpec.BooleanValue = builder.define("exoticHealer", false)
+        val savorTheTasted: ForgeConfigSpec.BooleanValue = builder.define("savorTheTasted", false)
+        val trickster: ForgeConfigSpec.BooleanValue = builder.define("trickster", false)
+        val covertKnife: ForgeConfigSpec.BooleanValue = builder.define("covertKnife", false)
+        val enviousKind: ForgeConfigSpec.BooleanValue = builder.define("enviousKind", false)
+        val eyesore: ForgeConfigSpec.BooleanValue = builder.define("eyesore", true)
+        val sourceOfEnvy: ForgeConfigSpec.BooleanValue = builder.define("sourceOfEnvy", false)
+        val thornInFlesh: ForgeConfigSpec.BooleanValue = builder.define("thornInFlesh", false)
+        val cleansingBeforeUsing: ForgeConfigSpec.BooleanValue = builder.define("cleansingBeforeUsing", true)
+        val comeBackAtDusk: ForgeConfigSpec.BooleanValue = builder.define("comeBackAtDusk", true)
+        val dirtyMoney: ForgeConfigSpec.BooleanValue = builder.define("dirtyMoney", true)
+        val pilferageCreed: ForgeConfigSpec.BooleanValue = builder.define("pilferageCreed", true)
+        val carefullyIdentified: ForgeConfigSpec.BooleanValue = builder.define("carefullyIdentified", false)
+        val nimbleFinger: ForgeConfigSpec.BooleanValue = builder.define("nimbleFinger", false)
+        val regularCustomerProgram: ForgeConfigSpec.BooleanValue = builder.define("regularCustomerProgram", true)
+        val armorUp: ForgeConfigSpec.BooleanValue = builder.define("armorUp", false)
+        val frivolousStep: ForgeConfigSpec.BooleanValue = builder.define("frivolousStep", false)
+        val miraculousEscape: ForgeConfigSpec.BooleanValue = builder.define("miraculousEscape", false)
+        val potentialBurst: ForgeConfigSpec.BooleanValue = builder.define("potentialBurst", false)
+        val stubbornStep: ForgeConfigSpec.BooleanValue = builder.define("stubbornStep", false)
+        val infectiousMalice: ForgeConfigSpec.BooleanValue = builder.define("infectiousMalice", false)
+        val iSeeYouNow: ForgeConfigSpec.BooleanValue = builder.define("iSeeYouNow", false)
+        val maliceOutbreak: ForgeConfigSpec.BooleanValue = builder.define("maliceOutbreak", false)
+        val perceivedMalice: ForgeConfigSpec.BooleanValue = builder.define("perceivedMalice", false)
+        val vengeance: ForgeConfigSpec.BooleanValue = builder.define("vengeance", false)
+        val backAndFill: ForgeConfigSpec.BooleanValue = builder.define("backAndFill", false)
+        val agonyScreamer: ForgeConfigSpec.BooleanValue = builder.define("agonyScreamer", false)
+        val cuttingWatermelonDream: ForgeConfigSpec.BooleanValue = builder.define("cuttingWatermelonDream", true)
+        val insanePoet: ForgeConfigSpec.BooleanValue = builder.define("insanePoet", false)
+        val paperBrain: ForgeConfigSpec.BooleanValue = builder.define("paperBrain", false)
+        val shockTherapy: ForgeConfigSpec.BooleanValue = builder.define("shockTherapy", false)
+        val burningPhobia: ForgeConfigSpec.BooleanValue = builder.define("burningPhobia", false)
+        val constrainedHeart: ForgeConfigSpec.BooleanValue = builder.define("constrainedHeart", false)
+        val drowningPhobia: ForgeConfigSpec.BooleanValue = builder.define("drowningPhobia", false)
+        val piercingFever: ForgeConfigSpec.BooleanValue = builder.define("piercingFever", false)
+        val destructionWorship: ForgeConfigSpec.BooleanValue = builder.define("destructionWorship", false)
+        val prayerOfPain: ForgeConfigSpec.BooleanValue = builder.define("prayerOfPain", false)
+        val freshRevenge: ForgeConfigSpec.BooleanValue = builder.define("freshRevenge", false)
+        val hatredBloodline: ForgeConfigSpec.BooleanValue = builder.define("hatredBloodline", false)
+        val outrageousSpirit: ForgeConfigSpec.BooleanValue = builder.define("outrageousSpirit", false)
+        val resentfulSoul: ForgeConfigSpec.BooleanValue = builder.define("resentfulSoul", true)
+        val tooResentfulToDie: ForgeConfigSpec.BooleanValue = builder.define("tooResentfulToDie", true)
+        val morirsDeathwish: ForgeConfigSpec.BooleanValue = builder.define("morirsDeathwish", true)
+        val morirsLifebound: ForgeConfigSpec.BooleanValue = builder.define("morirsLifebound", true)
+        val guidensRegret: ForgeConfigSpec.BooleanValue = builder.define("guidensRegret", true)
+        val lastSweetDream: ForgeConfigSpec.BooleanValue = builder.define("lastSweetDream", true)
+        val necessaryEvil: ForgeConfigSpec.BooleanValue = builder.define("necessaryEvil", false)
+        val survivalRuse: ForgeConfigSpec.BooleanValue = builder.define("survivalRuse", false)
+        val survivalShortcut: ForgeConfigSpec.BooleanValue = builder.define("survivalShortcut", false)
+        val corruptedKindred: ForgeConfigSpec.BooleanValue = builder.define("corruptedKindred", false)
+        val lightburnFungalParasitic: ForgeConfigSpec.BooleanValue = builder.define("lightburnFungalParasitic", true)
+        val prototypeChaotic: ForgeConfigSpec.BooleanValue = builder.define("prototypeChaotic", false)
+        val prototypeChaoticTypeBeta: ForgeConfigSpec.BooleanValue = builder.define("prototypeChaoticTypeBeta", false)
+        val shadowborn: ForgeConfigSpec.BooleanValue = builder.define("shadowborn", false)
+        val scholarOfOriginalSin: ForgeConfigSpec.BooleanValue = builder.define("scholarOfOriginalSin", true)
+        val originalSinErosion: ForgeConfigSpec.BooleanValue = builder.define("originalSinErosion", true)
+        val burialObject: ForgeConfigSpec.BooleanValue = builder.define("burialObject", false)
     }
 }

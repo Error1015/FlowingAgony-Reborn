@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object SurvivalShortcutEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.survivalShortcut.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.survivalShortcut.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.survivalShortcut.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.survivalShortcut.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.survivalShortcut.get()
 
     override fun getMaxLevel() = 3
 

@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ResentfulSoulEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.resentfulSoul.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.resentfulSoul.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.resentfulSoul.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.resentfulSoul.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.resentfulSoul.get()
 
     override fun getMaxLevel() = 3
 

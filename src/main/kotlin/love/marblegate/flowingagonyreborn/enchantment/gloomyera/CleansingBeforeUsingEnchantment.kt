@@ -8,11 +8,13 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object CleansingBeforeUsingEnchantment : ModBaseEnchantment(
     Rarity.RARE, CustomEnchantmentCategory.everyThing, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.cleansingBeforeUsing.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.cleansingBeforeUsing.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cleansingBeforeUsing.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.cleansingBeforeUsing.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.cleansingBeforeUsing.get()
 
     override fun getMaxLevel() = 1
 

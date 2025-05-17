@@ -8,11 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object DeathPunkEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.deathPunk.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.deathPunk.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.deathPunk.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.deathPunk.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.deathPunk.get()
 
     override fun getMaxLevel() = 1
 }

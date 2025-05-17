@@ -10,11 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments
 object PaperBrainEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.paperBrain.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.paperBrain.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.paperBrain.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.paperBrain.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.paperBrain.get()
 
     override fun getMaxLevel() = 3
 

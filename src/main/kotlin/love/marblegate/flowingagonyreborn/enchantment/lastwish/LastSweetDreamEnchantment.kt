@@ -8,11 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object LastSweetDreamEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.lastSweetDream.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.lastSweetDream.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.lastSweetDream.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.lastSweetDream.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.lastSweetDream.get()
 
     override fun getMaxLevel() = 1
 

@@ -8,11 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object InfectiousMaliceEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.infectiousMalice.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.infectiousMalice.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.infectiousMalice.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.infectiousMalice.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.infectiousMalice.get()
 
     override fun getMaxLevel() = 1
 }

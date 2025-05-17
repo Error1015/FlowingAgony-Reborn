@@ -8,11 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object LightburnFungalParasiticEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.lightburnFungalParasitic.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.lightburnFungalParasitic.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.lightburnFungalParasitic.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.lightburnFungalParasitic.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.lightburnFungalParasitic.get()
 
     override fun getMaxLevel() = 3
 

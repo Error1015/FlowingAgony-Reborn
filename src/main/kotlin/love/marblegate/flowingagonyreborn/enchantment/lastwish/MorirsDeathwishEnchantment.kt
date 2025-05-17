@@ -10,11 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments
 object MorirsDeathwishEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsDeathwish.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsDeathwish.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsDeathwish.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.morirsDeathwish.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.morirsDeathwish.get()
 
     override fun getMaxLevel() = 1
 

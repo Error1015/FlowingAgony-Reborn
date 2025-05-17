@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object DrowningPhobiaEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.drowningPhobia.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.drowningPhobia.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.drowningPhobia.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.drowningPhobia.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.drowningPhobia.get()
 
     override fun getMaxLevel() = 3
 

@@ -8,11 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object EnviousKindEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.enviousKind.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.enviousKind.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.enviousKind.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.enviousKind.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.enviousKind.get()
 
     override fun getMaxLevel() = 1
 }

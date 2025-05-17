@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object OriginalSinErosionEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.originalSinErosion.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.originalSinErosion.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.originalSinErosion.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.originalSinErosion.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.originalSinErosion.get()
 
     override fun getMaxLevel() = 3
 

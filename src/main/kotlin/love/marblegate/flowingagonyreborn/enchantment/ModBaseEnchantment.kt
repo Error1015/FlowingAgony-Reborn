@@ -9,22 +9,19 @@ abstract class ModBaseEnchantment(
     pRarity: Rarity,
     pCategory: EnchantmentCategory,
     pApplicableSlots: Array<EquipmentSlot>
-) : Enchantment(pRarity, pCategory, pApplicableSlots) {
+) : Enchantment(pRarity, pCategory, pApplicableSlots), IModEnchantmentConfig {
+
     override fun getMinCost(pLevel: Int) = getEnchantability(pLevel, true)
 
     override fun getMaxCost(pLevel: Int) = getEnchantability(pLevel, false)
 
-    abstract fun isTradeableConfig(): Boolean
-
-    abstract fun isDiscoverableConfig(): Boolean
-
-    abstract fun canApplyAtEnchantingTableConfig(): Boolean
-
-    override fun isTradeable() = isTradeableConfig()
+    override fun isTradeable() = isTradableConfig()
 
     override fun isDiscoverable() = isDiscoverableConfig()
 
-    override fun isAllowedOnBooks() = canApplyAtEnchantingTableConfig()
+    override fun isAllowedOnBooks() = true
 
     override fun canApplyAtEnchantingTable(stack: ItemStack) = canApplyAtEnchantingTableConfig() && super.canApplyAtEnchantingTable(stack)
+
+    override fun isTreasureOnly(): Boolean = isTreasureOnlyConfig()
 }

@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object DirtyMoneyEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.dirtyMoney.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.dirtyMoney.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.dirtyMoney.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.dirtyMoney.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.dirtyMoney.get()
 
     override fun getMaxLevel() = 2
 

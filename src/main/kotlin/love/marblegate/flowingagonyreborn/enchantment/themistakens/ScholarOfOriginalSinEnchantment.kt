@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ScholarOfOriginalSinEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.scholarOfOriginalSin.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.scholarOfOriginalSin.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.scholarOfOriginalSin.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.scholarOfOriginalSin.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.scholarOfOriginalSin.get()
 
     override fun getMaxLevel() = 3
 

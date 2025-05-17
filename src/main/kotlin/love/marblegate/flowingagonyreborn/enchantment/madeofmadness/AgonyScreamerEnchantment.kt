@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object AgonyScreamerEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.agonyScreamer.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.agonyScreamer.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.agonyScreamer.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.agonyScreamer.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.agonyScreamer.get()
 
     override fun getMaxLevel() = 3
 

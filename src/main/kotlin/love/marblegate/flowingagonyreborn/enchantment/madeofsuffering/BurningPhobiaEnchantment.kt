@@ -9,11 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object BurningPhobiaEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradeableConfig(): Boolean = EnchantmentConfig.tradeableConfig.burningPhobia.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.burningPhobia.get()
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.burningPhobia.get()
 
     override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.burningPhobia.get()
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.burningPhobia.get()
 
     override fun getMaxLevel() = 3
 
