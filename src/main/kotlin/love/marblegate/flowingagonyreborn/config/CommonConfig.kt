@@ -73,30 +73,30 @@ class CommonConfig {
      * 此处是相关数值配置
      */
     class NumericalSettings(builder: ForgeConfigSpec.Builder) {
-        val hatredBloodlineEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("HatredBloodlineEffect", 1f)
-        val cursedHatredEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("HatredBloodlineEffect", 1f)
-        val curseOfUndeadEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("CurseOfUndeadEffect", 1f)
-        val beenResonatedEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("BeenResonatedEffect", 1f)
-        val extremeHatredEffect: ForgeConfigSpec.ConfigValue<Float> = builder.define("ExtremeHatredEffect", 1f)
-        val letMeSavorItEffectReduceDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("LetMeSavorItEffectReduceDamage", 1f)
-        val letMeSavorItEffectReflectDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("LetMeSavorItEffectReflectDamage", 1f)
-        val phobiaEffectDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("PhobiaEffectDamage", 1f)
-        val savorTheTastedEnchantment: ForgeConfigSpec.ConfigValue<Float> = builder.define("SavorTheTastedEnchantment", 1f)
-        val armorUpEnchantment: ForgeConfigSpec.ConfigValue<Int> = builder
+        val hatredBloodlineEffect: ForgeConfigSpec.DoubleValue = builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
+        val cursedHatredEffect: ForgeConfigSpec.DoubleValue = builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
+        val curseOfUndeadEffect: ForgeConfigSpec.DoubleValue = builder.defineInRange("CurseOfUndeadEffect", 1.0, 0.0, Double.MAX_VALUE)
+        val beenResonatedEffect: ForgeConfigSpec.DoubleValue = builder.defineInRange("BeenResonatedEffect", 1.0, 0.0, Double.MAX_VALUE)
+        val extremeHatredEffect: ForgeConfigSpec.DoubleValue = builder.defineInRange("ExtremeHatredEffect", 1.0, 0.0, Double.MAX_VALUE)
+        val letMeSavorItEffectReduceDamage: ForgeConfigSpec.DoubleValue = builder.defineInRange("LetMeSavorItEffectReduceDamage", 1.0, 0.0, Double.MAX_VALUE)
+        val letMeSavorItEffectReflectDamage: ForgeConfigSpec.DoubleValue = builder.defineInRange("LetMeSavorItEffectReflectDamage", 1.0, 0.0, Double.MAX_VALUE)
+        val phobiaEffectDamage: ForgeConfigSpec.DoubleValue = builder.defineInRange("PhobiaEffectDamage", 1.0, 0.0, Double.MAX_VALUE)
+        val savorTheTastedEnchantment: ForgeConfigSpec.DoubleValue = builder.defineInRange("SavorTheTastedEnchantment", 1.0, 0.0, Double.MAX_VALUE)
+        val armorUpEnchantment: ForgeConfigSpec.IntValue = builder
             .comment("the absorption amount to add")
-            .define("ArmorUpEnchantment", 1)
-        val anAppleADayCoolDowns: ForgeConfigSpec.ConfigValue<Int> = builder
+            .defineInRange("ArmorUpEnchantment", 1, 0, Int.MAX_VALUE)
+        val anAppleADayCoolDowns: ForgeConfigSpec.IntValue = builder
             .comment("default 18000, about 5 minutes")
-            .define("anAppleADayCoolDowns", 18000)
-        val morirsDeathwishEnchantmentOnHurt: ForgeConfigSpec.ConfigValue<Float> = builder.define("morirsDeathwishEnchantmentOnHurtFix", 1f)
-        val morirsDeathwishEnchantmentOnDeathValue: ForgeConfigSpec.ConfigValue<Int> = builder.define("morirsDeathwishEnchantmentOnDeathFix", 64)
-        val morirsLifeboundOnHeal: ForgeConfigSpec.ConfigValue<Float> = builder.define("morirsLifeboundOnHeal", 1f)
-        val guidensRegret: ForgeConfigSpec.ConfigValue<Float> = builder.define("GuidensRegret", 1f)
-        val cuttingWatermelonDream: ForgeConfigSpec.ConfigValue<Float> = builder.define("CuttingWatermelonDream", 1f)
-        val prayerOfPainEnchantment: ForgeConfigSpec.ConfigValue<Float> = builder.define("PrayerOfPainEnchantment", 1f)
-        val outrageousSpirit: ForgeConfigSpec.ConfigValue<Float> = builder.define("OutrageousSpiritEnchantment", 1f)
-        val scholarOfOriginalSinAddWeakness: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinAddWeakness", 1f)
-        val scholarOfOriginalSinDecreaseAttack: ForgeConfigSpec.ConfigValue<Float> = builder.define("ScholarOfOriginalSinDecreaseAttack", 1f)
-        val paperBrainHurtDamage: ForgeConfigSpec.ConfigValue<Float> = builder.define("paperBrainHurtDamage", 1f)
+            .defineInRange("anAppleADayCoolDowns", 180000, 0, Int.MAX_VALUE)
+        val morirsDeathwishEnchantmentOnHurt: ForgeConfigSpec.DoubleValue = builder.defineInRange("morirsDeathwishEnchantmentOnHurtFix", 1.0, 0.0, Double.MAX_VALUE)
+        val morirsDeathwishEnchantmentOnDeathValue: ForgeConfigSpec.IntValue = builder.defineInRange("morirsDeathwishEnchantmentOnDeathFix", 64, 0, Int.MAX_VALUE)
+        val morirsLifeboundOnHeal: ForgeConfigSpec.DoubleValue = builder.defineInRange("morirsLifeboundOnHeal", 1.0, 0.0, Double.MAX_VALUE)
+        val guidensRegret: ForgeConfigSpec.DoubleValue = builder.defineInRange("GuidensRegret", 1.0, 0.0, Double.MAX_VALUE)
+        val cuttingWatermelonDream: ForgeConfigSpec.DoubleValue = builder.defineInRange("CuttingWatermelonDream", 1.0, 0.0, Double.MAX_VALUE)
+        val prayerOfPainEnchantment: ForgeConfigSpec.DoubleValue = builder.defineInRange("PrayerOfPainEnchantment", 1.0, 0.0, Double.MAX_VALUE)
+        val outrageousSpirit: ForgeConfigSpec.DoubleValue = builder.defineInRange("OutrageousSpiritEnchantment", 1.0, 0.0, Double.MAX_VALUE)
+        val scholarOfOriginalSinAddWeakness: ForgeConfigSpec.DoubleValue = builder.defineInRange("ScholarOfOriginalSinAddWeakness", 1.0, 0.0, Double.MAX_VALUE)
+        val scholarOfOriginalSinDecreaseAttack: ForgeConfigSpec.DoubleValue = builder.defineInRange("ScholarOfOriginalSinDecreaseAttack", 1.0, 0.0, Double.MAX_VALUE)
+        val paperBrainHurtDamage: ForgeConfigSpec.DoubleValue = builder.defineInRange("paperBrainHurtDamage", 1.0, 0.0, Double.MAX_VALUE)
     }
 }
