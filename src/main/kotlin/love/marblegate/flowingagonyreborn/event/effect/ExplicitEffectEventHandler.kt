@@ -39,7 +39,7 @@ object ExplicitEffectEventHandler {
                     ?.let { it.amplifier + 1 } ?: return
                 event.entity.removeEffect(ModEffects.CURSED_HATRED)
                 val damage = potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat()
-                event.entity.hurt(causeCursedHatredDamage, damage * CommonConfig.numericalSettings.cursedHatredEffect.get())
+                event.entity.hurt(causeCursedHatredDamage, damage * CommonConfig.numericalSettings.cursedHatredEffect.get().toFloat())
             }
         }
     }
@@ -67,7 +67,7 @@ object ExplicitEffectEventHandler {
                     Networking.safeSend(PacketDistributor.PLAYER.with {
                         serverPlayer
                     }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, false))
-                    event.amount *= (1 + potionLevel) * CommonConfig.numericalSettings.extremeHatredEffect.get()
+                    event.amount *= (1 + potionLevel) * CommonConfig.numericalSettings.extremeHatredEffect.get().toFloat()
                 }
             }
         }
@@ -119,7 +119,7 @@ object ExplicitEffectEventHandler {
         event.handleServer {
             event.entity.safeClassCastAndHandle<Player> { player ->
                 if (player.hasEffect(ModEffects.CURSE_OF_UNDEAD) && event.source.`is`(DamageTypes.ON_FIRE)) {
-                    event.amount *= 2 * CommonConfig.numericalSettings.curseOfUndeadEffect.get()
+                    event.amount *= 2 * CommonConfig.numericalSettings.curseOfUndeadEffect.get().toFloat()
                     if (player.hasHelmet()) {
                         player.helmet.hurtAndBreak(1, player) { }
                     }
@@ -170,7 +170,7 @@ object ExplicitEffectEventHandler {
                     .getEffect(ModEffects.BEEN_RESONATED)
                     ?.let { it.amplifier + 1 } ?: 0
                 entities.forEach { entity ->
-                    entity.hurt(source, event.amount * (0.35F + damageIndex * 0.15F) * CommonConfig.numericalSettings.beenResonatedEffect.get())
+                    entity.hurt(source, event.amount * (0.35F + damageIndex * 0.15F) * CommonConfig.numericalSettings.beenResonatedEffect.get().toFloat())
                 }
             }
         }
@@ -184,7 +184,7 @@ object ExplicitEffectEventHandler {
                     val effectLevel = player
                         .getEffect(ModEffects.LET_ME_SAVOR_IT)
                         ?.let { it.amplifier + 1 } ?: 0
-                    event.amount = event.amount * (1 - 0.09F * effectLevel) * CommonConfig.numericalSettings.letMeSavorItEffectReduceDamage.get()
+                    event.amount = event.amount * (1 - 0.09F * effectLevel) * CommonConfig.numericalSettings.letMeSavorItEffectReduceDamage.get().toFloat()
                 }
             }
         }
@@ -201,7 +201,7 @@ object ExplicitEffectEventHandler {
                         ?.let { it.amplifier + 1 } ?: 0
                     event.source.entity.safeClassCastAndHandle<LivingEntity> { livingEntity ->
                         if (!livingEntity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
-                            livingEntity.hurt(letMeSavorIt, effectLevel * event.amount * CommonConfig.numericalSettings.letMeSavorItEffectReflectDamage.get())
+                            livingEntity.hurt(letMeSavorIt, effectLevel * event.amount * CommonConfig.numericalSettings.letMeSavorItEffectReflectDamage.get().toFloat())
                         }
                     }
                 }

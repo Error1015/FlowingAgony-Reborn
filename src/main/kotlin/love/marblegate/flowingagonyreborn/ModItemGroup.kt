@@ -27,7 +27,7 @@ object ModItemGroup {
         ItemGroup
             .builder()
             .title(Component.translatable("itemGroup.flowingagony_reborn.group"))
-            .icon { ModItems.LOGO.defaultInstance }
+            .icon { ModItems.FLOWING_AGONY_ENCHANTED_BOOK.defaultInstance }
             .displayItems { _, output -> output.acceptAll(EnchantedBookItems) }
             .build()
     }

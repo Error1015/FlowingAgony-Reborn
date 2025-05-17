@@ -106,7 +106,7 @@ object RootedInHatredEnchantmentEventHandler {
                 .filter { it.effect.category == MobEffectCategory.HARMFUL }
                 .count()
                 .toInt()
-            event.amount += negativeEffectCount * enchantmentLevel * CommonConfig.numericalSettings.outrageousSpirit.get()
+            event.amount += negativeEffectCount * enchantmentLevel * CommonConfig.numericalSettings.outrageousSpirit.get().toFloat()
         }
     }
 

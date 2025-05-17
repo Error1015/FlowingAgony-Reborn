@@ -116,7 +116,7 @@ object MadeOfMadnessEnchantmentEventHandler {
                     .nextDouble()
                     .toFloat()
                 targets.forEach { target ->
-                    target.hurt(cuttingWaterMelonDreamDamageSource, damage * CommonConfig.numericalSettings.cuttingWatermelonDream.get())
+                    target.hurt(cuttingWaterMelonDreamDamageSource, damage * CommonConfig.numericalSettings.cuttingWatermelonDream.get().toFloat())
                 }
                 if (unBreakingLevel == 0) return
                 val damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4

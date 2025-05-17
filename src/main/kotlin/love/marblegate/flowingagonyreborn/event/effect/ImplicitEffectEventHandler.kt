@@ -26,7 +26,7 @@ object ImplicitEffectEventHandler {
                         .getEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)
                         ?.let { it.amplifier + 1 } ?: 0
                     if (effectLevel <= 0) return
-                    event.amount = event.amount * (1f + effectLevel * 0.25f) * CommonConfig.numericalSettings.hatredBloodlineEffect.get()
+                    event.amount = event.amount * (1f + effectLevel * 0.25f) * CommonConfig.numericalSettings.hatredBloodlineEffect.get().toFloat()
                 }
             }
         }

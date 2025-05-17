@@ -40,7 +40,7 @@ object DiceOfFraudEnchantmentHandler {
             when (enchantmentLevel) {
                 1 -> appendixEffectForTrickster(target, diceNum)
                 2 -> {
-                    // 当两个随机数相等的时候，重新生成一个随机数, 直到不想等为止
+                    // 当两个随机数相等的时候，重新生成一个随机数, 直到不相等为止
                     while (diceNum == anotherDiceNum) anotherDiceNum = target.random.nextInt(5) + 1
                     appendixEffectForTrickster(target, diceNum)
                     appendixEffectForTrickster(target, anotherDiceNum)
@@ -201,7 +201,7 @@ object DiceOfFraudEnchantmentHandler {
             } else {
                 val recordedTarget = weaponNbt.getString("savor_the_tasted_target") ?: return
                 if (recordedTarget == encodeId) {
-                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.get()
+                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.get().toFloat()
                 } else weaponNbt.putString("savor_the_tasted_target", encodeId)
             }
             player.mainHandItem.tag = weaponNbt
