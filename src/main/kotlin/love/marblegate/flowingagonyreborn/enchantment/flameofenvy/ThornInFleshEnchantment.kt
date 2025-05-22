@@ -20,5 +20,4 @@ object ThornInFleshEnchantment : ModBaseEnchantment(
     override fun getMaxLevel() = 3
 
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != EyesoreEnchantment
-
 }
