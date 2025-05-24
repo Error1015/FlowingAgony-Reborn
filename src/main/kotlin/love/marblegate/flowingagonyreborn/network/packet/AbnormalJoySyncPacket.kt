@@ -11,16 +11,10 @@ import net.minecraftforge.network.NetworkEvent
 import java.util.function.Supplier
 
 
-class AbnormalJoySyncPacket {
-    private val value: Float
-
-    constructor(value: Float) {
-        this.value = value
-    }
-
-    constructor(buffer: FriendlyByteBuf) {
-        value = buffer.readFloat()
-    }
+class AbnormalJoySyncPacket(
+    val value: Float
+) {
+    constructor(buffer: FriendlyByteBuf) : this(buffer.readFloat())
 
     fun toBytes(buffer: FriendlyByteBuf) {
         buffer.writeFloat(value)
@@ -35,7 +29,7 @@ class AbnormalJoySyncPacket {
                         it.enqueueWork {
                             val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
                             pointCap?.ifPresent(
-                                NonNullConsumer { cap: AbnormalJoyCapability? -> cap?.setPoint(value) })
+                                NonNullConsumer { cap: AbnormalJoyCapability -> cap.setPoint(value) })
                             ctx.get().packetHandled = true
                         }
                     }

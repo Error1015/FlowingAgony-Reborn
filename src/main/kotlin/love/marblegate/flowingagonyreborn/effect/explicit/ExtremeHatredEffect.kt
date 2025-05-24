@@ -11,7 +11,7 @@ object ExtremeHatredEffect : MobEffect(MobEffectCategory.HARMFUL, 16711680) {
         pAmplifier: Int
     ) {
         if (pLivingEntity is Player) {
-            crazilyComsumeFoodLevel(pLivingEntity)
+            crazilyConsumeFoodLevel(pLivingEntity)
         }
     }
 
@@ -23,7 +23,7 @@ object ExtremeHatredEffect : MobEffect(MobEffectCategory.HARMFUL, 16711680) {
         return duration % k == 0
     }
 
-    fun crazilyComsumeFoodLevel(player: Player) {
+    fun crazilyConsumeFoodLevel(player: Player) {
         player
             .getFoodData()
             .addExhaustion(4f)

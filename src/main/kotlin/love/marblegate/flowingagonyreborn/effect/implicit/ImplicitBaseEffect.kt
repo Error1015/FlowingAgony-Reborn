@@ -10,16 +10,11 @@ import net.minecraft.world.item.ItemStack
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions
 import java.util.function.Consumer
 
-open class ImplicitBaseEffect : MobEffect {
-    constructor() : super(MobEffectCategory.NEUTRAL, 0)
+open class ImplicitBaseEffect(typeIn: MobEffectCategory = MobEffectCategory.NEUTRAL) : MobEffect(typeIn, 0) {
 
-    constructor(typeIn: MobEffectCategory) : super(typeIn, 0)
+    override fun getCurativeItems(): List<ItemStack> = arrayListOf()
 
-    override fun getCurativeItems(): List<ItemStack?>? {
-        return ArrayList<ItemStack?>()
-    }
-
-    override fun initializeClient(consumer: Consumer<IClientMobEffectExtensions?>) {
+    override fun initializeClient(consumer: Consumer<IClientMobEffectExtensions>) {
         consumer.accept(object : IClientMobEffectExtensions {
             override fun isVisibleInGui(instance: MobEffectInstance?) = false
 
