@@ -32,29 +32,26 @@ object DamageSourceBuilder {
         return createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.phobia, entity)
     }
 
-    internal fun createFlowingAgonySimpleDeathMessageDamageSource(
+    fun createFlowingAgonySimpleDeathMessageDamageSource(
         key: ResourceKey<DamageType>,
         registryAccess: RegistryAccess
-    ): DamageSource {
-        return FlowingAgonySimpleDeathMessageDamageSource(
-            registryAccess
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(key)
-        )
-    }
+    ): DamageSource = FlowingAgonySimpleDeathMessageDamageSource(
+        registryAccess
+            .registryOrThrow(Registries.DAMAGE_TYPE)
+            .getHolderOrThrow(key)
+    )
 
-    internal fun createFlowingAgonyMobtoMobDamageSource(
+    fun createFlowingAgonyMobtoMobDamageSource(
         key: ResourceKey<DamageType>,
         entity: Entity
-    ): DamageSource {
-        return FlowingAgonyMobtoMobDamageSource(
-            entity
-                .level()
-                .registryAccess()
-                .registryOrThrow(Registries.DAMAGE_TYPE)
-                .getHolderOrThrow(key), entity
-        )
-    }
+    ): DamageSource = FlowingAgonyMobtoMobDamageSource(
+        entity
+            .level()
+            .registryAccess()
+            .registryOrThrow(Registries.DAMAGE_TYPE)
+            .getHolderOrThrow(key), entity
+    )
+
 
     internal fun createBasicDamageSource(
         key: ResourceKey<DamageType>,

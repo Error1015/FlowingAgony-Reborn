@@ -7,7 +7,8 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     idea
-    // `maven-publish`
+    `maven-publish`
+    id("me.modmuss50.mod-publish-plugin")
 }
 
 val minecraft_version: String by project
@@ -22,10 +23,8 @@ val mod_authors: String by project
 val mod_license: String by project
 val mod_description: String by project
 val mod_group_id: String by project
-
 val mapping_channel: String by project
 val mapping_version: String by project
-
 val kff_version: String by project
 
 group = mod_group_id
@@ -46,12 +45,46 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+publishMods {
+    val kffSlug = "kotlin-for-forge"
+
+    file.set(tasks.jar.get().archiveFile)
+    type.set(STABLE)
+    modLoaders.add("forge")
+    changelog = """
+       ## No More.
+    """.trimIndent()
+    version.set(mod_version)
+    displayName = base.archivesName
+
+    curseforge {
+        projectId = "1218577"
+        projectSlug = "marblegates-exotic-enchantment-reborn"
+        accessToken = System.getenv("CF_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        requires(kffSlug)
+    }
+
+    modrinth {
+        projectId = "nTa4l6xw"
+        accessToken = System.getenv("MODRINTH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        requires(kffSlug)
+    }
+
+    github {
+        repository.set("Error1015/FlowingAgony-Reborn")
+        accessToken = System.getenv("GITHUB_TOKEN")
+        commitish = "1.20.1"
+    }
+}
+
 println(
     """
-        Java: ${System.getProperty("java.version")},
-        JVM: ${System.getProperty("java.vm.version")},
-        ${System.getProperty("java.vendor")},
-        Arch: ${System.getProperty("os.arch")}
+    Java: ${System.getProperty("java.version")},
+    JVM: ${System.getProperty("java.vm.version")},
+    ${System.getProperty("java.vendor")},
+    Arch: ${System.getProperty("os.arch")}
     """.trimIndent()
 )
 
@@ -156,6 +189,14 @@ tasks
         options.encoding = "UTF-8"
         options.release.set(17)
     }
+
+publishing {
+    publications {}
+
+    repositories {
+        mavenLocal()
+    }
+}
 
 
 tasks.named<Jar>("jar") {

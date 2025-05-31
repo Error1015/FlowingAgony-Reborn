@@ -18,6 +18,7 @@ pluginManagement {
         kotlin("plugin.serialization") version "2.1.10"
         id("net.minecraftforge.gradle") version "[6.0.16,6.2)"
         id("org.parchmentmc.librarian.forgegradle") version "1.+"
+        id("me.modmuss50.mod-publish-plugin") version "0.8.4"
     }
 }
 
