@@ -1,0 +1,21 @@
+package love.marblegate.flowingagonyreborn.damagesource
+
+import love.marblegate.flowingagonyreborn.util.asPath
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
+import net.minecraft.world.damagesource.DamageType
+
+object ModDamageTypes {
+    val cursed_hatred = createResourceKey("cursed_hatred")
+    val cursed_antipathy_effect = createResourceKey("cursed_antipathy_effect")
+    val lightburn_fungal_infection = createResourceKey("lightburn_fungal_infection")
+    val agony_resonance = createResourceKey("agony_resonance")
+    val rhythm_of_universe = createResourceKey("rhythm_of_universe")
+    val exotic_healer = createResourceKey("exotic_healer")
+    val cutting_watermelon_dream = createResourceKey("cutting_watermelon_dream")
+    val let_me_savor_it = createResourceKey("let_me_savor_it")
+    val burial_object_curse = createResourceKey("burial_object_curse")
+    val phobia = createResourceKey("phobia")
+
+    fun createResourceKey(path: String): ResourceKey<DamageType> = ResourceKey.create(Registries.DAMAGE_TYPE, path.asPath)
+}
