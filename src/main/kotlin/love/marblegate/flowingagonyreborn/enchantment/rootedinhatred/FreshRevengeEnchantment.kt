@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object FreshRevengeEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.freshRevenge
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.freshRevenge
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.freshRevenge
 

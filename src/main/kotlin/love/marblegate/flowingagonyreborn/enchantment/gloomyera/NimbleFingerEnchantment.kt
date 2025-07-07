@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object NimbleFingerEnchantment : ModBaseEnchantment(
     Rarity.RARE, CustomEnchantmentCategory.swordArmorAndTool, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.nimbleFinger
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.nimbleFinger
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.nimbleFinger
 

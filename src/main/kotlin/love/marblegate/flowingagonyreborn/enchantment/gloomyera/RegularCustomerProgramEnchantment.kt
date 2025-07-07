@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object RegularCustomerProgramEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.regularCustomerProgram
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.regularCustomerProgram
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.regularCustomerProgram
 

@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object TooResentfulToDieEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.tooResentfulToDie
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.tooResentfulToDie
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.tooResentfulToDie
 

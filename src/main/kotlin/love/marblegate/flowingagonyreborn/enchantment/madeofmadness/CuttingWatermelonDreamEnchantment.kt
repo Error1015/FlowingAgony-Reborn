@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object CuttingWatermelonDreamEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.DIGGER, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.cuttingWatermelonDream
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.cuttingWatermelonDream
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cuttingWatermelonDream
 

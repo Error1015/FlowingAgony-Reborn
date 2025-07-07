@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ArmorUpEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.armorUp
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.armorUp
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.armorUp
 

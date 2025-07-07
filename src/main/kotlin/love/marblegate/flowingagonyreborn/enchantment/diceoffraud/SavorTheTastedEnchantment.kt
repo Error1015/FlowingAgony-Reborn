@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object SavorTheTastedEnchantment : ModBaseEnchantment(
     Rarity.RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.savorTheTasted
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.savorTheTasted
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.savorTheTasted
 

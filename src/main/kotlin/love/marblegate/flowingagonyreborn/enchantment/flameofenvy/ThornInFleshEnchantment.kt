@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ThornInFleshEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.thornInFlesh
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.thornInFlesh
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.thornInFlesh
 

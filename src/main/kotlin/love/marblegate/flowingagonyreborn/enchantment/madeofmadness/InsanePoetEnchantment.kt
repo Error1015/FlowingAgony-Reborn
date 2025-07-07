@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 object InsanePoetEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.insanePoet
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.insanePoet
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.insanePoet
 

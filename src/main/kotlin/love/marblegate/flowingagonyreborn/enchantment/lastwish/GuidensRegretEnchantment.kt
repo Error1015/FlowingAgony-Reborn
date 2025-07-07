@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 object GuidensRegretEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.guidensRegret
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.guidensRegret
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.guidensRegret
 

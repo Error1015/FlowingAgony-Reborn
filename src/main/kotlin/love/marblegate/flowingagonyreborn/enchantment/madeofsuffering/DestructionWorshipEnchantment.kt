@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object DestructionWorshipEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.destructionWorship
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.destructionWorship
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.destructionWorship
 

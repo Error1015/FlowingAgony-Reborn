@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object LightburnFungalParasiticEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.lightburnFungalParasitic
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.lightburnFungalParasitic
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.lightburnFungalParasitic
 

@@ -42,7 +42,7 @@ object FlameOfEnvyEnchantmentEventHandler {
             if (diff <= 0) return
             val temp = floor(diff / 10.0).toInt()
             // 根据配置文件决定是否修复善妒之人给予超过10级的ENVIOUS_BEING效果的Bug
-            val amplifier = if (CommonConfig.optionalBugFix.isFixEnviousKind.get()) {
+            val amplifier = if (CommonConfig.optionalBugFix.isFixEnviousKind) {
                 if (temp > 10) 10 else temp
             } else temp
             player.addEffect(MobEffectInstance(ModEffects.ENVIOUS_BEING, 200, amplifier))

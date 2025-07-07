@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object OutrageoutSpiritEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.outrageousSpirit
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.outrageousSpirit
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.outrageousSpirit
 

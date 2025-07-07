@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object BackAndFillEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.bowAndCrossbow, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.backAndFill
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.backAndFill
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.backAndFill
 

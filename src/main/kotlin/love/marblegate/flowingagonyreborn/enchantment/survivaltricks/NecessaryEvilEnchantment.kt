@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object NecessaryEvilEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.necessaryEvil
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.necessaryEvil
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.necessaryEvil
 

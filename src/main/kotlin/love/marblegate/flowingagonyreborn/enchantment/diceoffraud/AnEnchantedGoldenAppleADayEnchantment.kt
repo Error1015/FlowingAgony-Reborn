@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object AnEnchantedGoldenAppleADayEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.anEnchantedGoldenAppleADay
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.anEnchantedGoldenAppleADay
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.anEnchantedGoldenAppleADay
 

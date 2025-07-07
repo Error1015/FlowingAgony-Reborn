@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object MiraculousEscapeEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.miraculousEscape
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.miraculousEscape
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.miraculousEscape
 

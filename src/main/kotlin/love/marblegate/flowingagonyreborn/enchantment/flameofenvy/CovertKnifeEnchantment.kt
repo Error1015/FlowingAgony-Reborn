@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object CovertKnifeEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.covertKnife
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.covertKnife
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.covertKnife
 

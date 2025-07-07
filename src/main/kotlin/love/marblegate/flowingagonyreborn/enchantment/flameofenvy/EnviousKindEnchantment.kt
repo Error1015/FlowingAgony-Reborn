@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object EnviousKindEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.enviousKind
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.enviousKind
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.enviousKind
 

@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object HatredBloodlineEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.hatredBloodline
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.hatredBloodline
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.hatredBloodline
 

@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object OriginalSinErosionEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.originalSinErosion
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.originalSinErosion
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.originalSinErosion
 

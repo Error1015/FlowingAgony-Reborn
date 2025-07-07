@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object AgonyScreamerEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.agonyScreamer
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.agonyScreamer
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.agonyScreamer
 

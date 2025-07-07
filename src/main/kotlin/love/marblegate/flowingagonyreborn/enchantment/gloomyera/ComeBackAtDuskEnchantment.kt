@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ComeBackAtDuskEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.comeBackAtDusk
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.comeBackAtDusk
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.comeBackAtDusk
 

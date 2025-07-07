@@ -7,14 +7,14 @@ class EnchantmentConfig {
     companion object {
         var spec: ForgeConfigSpec
         private val builder = ForgeConfigSpec.Builder()
-        var tradeableConfig: TradeableConfig
+        var tradableConfig: TradableConfig
         var discoverableConfig: DiscoverableConfig
         var applyOnEnchantingTableConfig: ApplyOnEnchantingTableConfig
         var isTreasureConfig: IsTreasureConfig
 
         init {
             builder.push("tradeable")
-            tradeableConfig = TradeableConfig(builder)
+            tradableConfig = TradableConfig
             builder.pop()
 
             builder.push("discoverable")
@@ -33,9 +33,7 @@ class EnchantmentConfig {
         }
     }
 
-    class TradeableConfig(
-        builder: ForgeConfigSpec.Builder
-    ) {
+    object TradableConfig {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)

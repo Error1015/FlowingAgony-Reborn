@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PerceivedMaliceEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.perceivedMalice
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.perceivedMalice
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.perceivedMalice
 

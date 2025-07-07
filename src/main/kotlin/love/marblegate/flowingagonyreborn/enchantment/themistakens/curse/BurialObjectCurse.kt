@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object BurialObjectCurse : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.burialObject
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.burialObject
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.burialObject
 

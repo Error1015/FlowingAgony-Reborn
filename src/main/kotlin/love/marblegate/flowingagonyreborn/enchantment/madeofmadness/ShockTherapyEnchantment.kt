@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 object ShockTherapyEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.shockTherapy
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.shockTherapy
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.shockTherapy
 

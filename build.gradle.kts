@@ -52,9 +52,7 @@ publishMods {
     file.set(tasks.jar.get().archiveFile)
     type.set(STABLE)
     modLoaders.add("forge")
-    changelog = """
-       ## No More.
-    """.trimIndent()
+    changelog.set(rootProject.file("changelog.md").readText())
     version.set(mod_version)
     displayName = base.archivesName
 
@@ -73,11 +71,11 @@ publishMods {
         requires(kffSlug)
     }
 
-    github {
-        repository.set("Error1015/FlowingAgony-Reborn")
-        accessToken = System.getenv("GITHUB_TOKEN")
-        commitish = "1.20.1"
-    }
+    // github {
+    //     repository.set("Error1015/FlowingAgony-Reborn")
+    //     accessToken = System.getenv("GITHUB_TOKEN")
+    //     commitish = "1.20.1"
+    // }
 }
 
 println(Platform)

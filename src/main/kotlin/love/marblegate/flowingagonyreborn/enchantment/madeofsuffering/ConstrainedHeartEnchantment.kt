@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ConstrainedHeartEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.constrainedHeart
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.constrainedHeart
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.constrainedHeart
 

@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object CarefullyIdentifiedEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.pickaxe, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.carefullyIdentified
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.carefullyIdentified
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.carefullyIdentified
 

@@ -8,7 +8,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 object TricksterEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.trickster
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.trickster
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.trickster
 

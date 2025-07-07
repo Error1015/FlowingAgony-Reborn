@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object SurvivalRuseEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.survivalRuse
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.survivalRuse
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.survivalRuse
 

@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ResentfulSoulEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.resentfulSoul
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.resentfulSoul
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.resentfulSoul
 

@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PotentialBurstEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.potentialBurst
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.potentialBurst
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.potentialBurst
 

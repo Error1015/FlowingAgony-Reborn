@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ExoticHealerEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.exoticHealer
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.exoticHealer
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.exoticHealer
 

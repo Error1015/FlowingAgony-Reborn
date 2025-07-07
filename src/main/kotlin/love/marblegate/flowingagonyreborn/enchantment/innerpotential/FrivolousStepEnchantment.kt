@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object FrivolousStepEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.frivolousStep
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.frivolousStep
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.frivolousStep
 

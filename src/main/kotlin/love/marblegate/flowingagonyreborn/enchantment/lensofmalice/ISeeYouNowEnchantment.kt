@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ISeeYouNowEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.iSeeYouNow
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.iSeeYouNow
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.iSeeYouNow
 

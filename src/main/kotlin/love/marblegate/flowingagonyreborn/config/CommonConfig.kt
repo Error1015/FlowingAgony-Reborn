@@ -13,23 +13,23 @@ class CommonConfig {
 
         init {
             builder.comment("General Settings").push("general")
-            generalSettings = GeneralSettings(builder)
+            generalSettings = GeneralSettings
             builder.pop()
 
             builder.comment(
                 "Enchantment Acquirable Setting", "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
                 "Enchantment which is acquirable is still functional."
             ).push("Optional Bug Fix")
-            optionalBugFix = OptionalBugFix(builder)
+            optionalBugFix = OptionalBugFix
             builder.pop()
             builder.comment("Numerical Value Settings").push("Numerical")
-            numericalSettings = NumericalSettings(builder)
+            numericalSettings = NumericalSettings
             builder.pop()
             spec = builder.build()
         }
     }
 
-    class GeneralSettings(builder: ForgeConfigSpec.Builder) {
+    object GeneralSettings {
         val villagerSafeMode: ForgeConfigSpec.BooleanValue = builder.comment(
             "If it's set to \"true\", \"Lightburn Fungal Parasitic\" cannot spread negative effect to villager,",
             "and \"Survival Shortcut\", \"Necessary Evil\", \"Pilferage Creed\" cannot damage villager."
@@ -48,8 +48,8 @@ class CommonConfig {
         ).defineInRange("paperBrainDamageReduction", 0.9, 0.0, 1.0)
     }
 
-    class OptionalBugFix(builder: ForgeConfigSpec.Builder) {
-        val isFixEnviousKind: ForgeConfigSpec.BooleanValue = builder.comment(
+    object OptionalBugFix {
+        val isFixEnviousKind by builder.comment(
             "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect", "If you are modpack author, You Should Set to True"
         ).define("isFixEnviousKind", true)
     }
@@ -57,7 +57,7 @@ class CommonConfig {
     /**
      * 此处是相关数值配置
      */
-    class NumericalSettings(builder: ForgeConfigSpec.Builder) {
+    object NumericalSettings {
         val hatredBloodlineEffect by builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
         val cursedHatredEffect by builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
         val curseOfUndeadEffect by builder.defineInRange("CurseOfUndeadEffect", 1.0, 0.0, Double.MAX_VALUE)

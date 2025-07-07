@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PrayerOfPainEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prayerOfPain
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.prayerOfPain
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prayerOfPain
 

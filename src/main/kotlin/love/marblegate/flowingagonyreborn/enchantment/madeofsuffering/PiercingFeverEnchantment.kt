@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PiercingFeverEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.piercingFever
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.piercingFever
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.piercingFever
 

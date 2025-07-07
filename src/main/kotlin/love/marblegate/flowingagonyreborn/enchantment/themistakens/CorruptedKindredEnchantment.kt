@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object CorruptedKindredEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.corruptedKindred
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.corruptedKindred
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.corruptedKindred
 

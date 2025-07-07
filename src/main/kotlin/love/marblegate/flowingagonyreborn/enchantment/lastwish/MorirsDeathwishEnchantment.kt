@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 object MorirsDeathwishEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsDeathwish
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.morirsDeathwish
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsDeathwish
 

@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PrototypeChaoticTypeBetaEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prototypeChaoticTypeBeta
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.prototypeChaoticTypeBeta
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prototypeChaoticTypeBeta
 

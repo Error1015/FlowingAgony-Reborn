@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 object MorirsLifeboundEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsLifebound
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.morirsLifebound
 
     override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsLifebound
 
