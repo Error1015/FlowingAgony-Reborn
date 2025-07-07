@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.reflect.KProperty
 
 plugins {
     id("net.minecraftforge.gradle")
@@ -79,14 +80,21 @@ publishMods {
     }
 }
 
-println(
-    """
-    Java: ${System.getProperty("java.version")},
-    JVM: ${System.getProperty("java.vm.version")},
-    ${System.getProperty("java.vendor")},
-    Arch: ${System.getProperty("os.arch")}
+println(Platform)
+
+object Platform {
+    val java: String = System.getProperty("java.version")
+    val jvm: String = System.getProperty("java.vm.version")
+    val vendor: String = System.getProperty("java.vendor")
+    val arch: String = System.getProperty("os.arch")
+
+    override fun toString() = """
+        Java : $java,
+        Jvm  : $jvm ,
+        Vendor: $vendor,
+        Arch : $arch
     """.trimIndent()
-)
+}
 
 minecraft {
     mappings(mapping_channel, mapping_version)
@@ -98,7 +106,7 @@ minecraft {
             source(sourceSets.main.get())
 
             property("mixin.env.remapRefMap", "true")
-            property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
+            property("mixin.env.refMapRemappingFile", "$projectDir/build/createSrgToMcp/output.srg")
             property("forge.logging.console.level", "debug")
         }
 
@@ -143,14 +151,14 @@ sourceSets.main.get().resources.srcDir("src/generated/resources")
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://thedarkcolour.github.io/KotlinForForge/") {
+    maven(url = "https://thedarkcolour.github.io/KotlinForForge/") {
         name = "Kotlin For Forge Maven"
         content {
             includeGroup("thedarkcolour")
         }
     }
 
-    maven("https://www.cursemaven.com") {
+    maven(url = "https://www.cursemaven.com") {
         content {
             includeGroup("curse.maven")
         }
@@ -167,28 +175,24 @@ dependencies {
     runtimeOnly(fg.deobf("curse.maven:jei-238222:6075247"))
 }
 
-tasks
-    .withType<ProcessResources>()
-    .configureEach {
-        val replaceProperties = mapOf(
-            "minecraft_version" to minecraft_version, "minecraft_version_range" to minecraft_version_range, "forge_version" to forge_version, "forge_version_range" to forge_version_range,
-            "loader_version_range" to loader_version_range, "mod_id" to mod_id, "mod_name" to mod_name, "mod_license" to mod_license, "mod_version" to mod_version, "mod_authors" to mod_authors,
-            "mod_description" to mod_description
-        )
-        inputs.properties(replaceProperties)
+tasks.withType<ProcessResources>().configureEach {
+    val replaceProperties = mapOf(
+        "minecraft_version" to minecraft_version, "minecraft_version_range" to minecraft_version_range, "forge_version" to forge_version, "forge_version_range" to forge_version_range,
+        "loader_version_range" to loader_version_range, "mod_id" to mod_id, "mod_name" to mod_name, "mod_license" to mod_license, "mod_version" to mod_version, "mod_authors" to mod_authors,
+        "mod_description" to mod_description
+    )
+    inputs.properties(replaceProperties)
 
-        filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) {
-            expand(replaceProperties)
-        }
+    filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) {
+        expand(replaceProperties)
     }
+}
 
 
-tasks
-    .withType<JavaCompile>()
-    .configureEach {
-        options.encoding = "UTF-8"
-        options.release.set(17)
-    }
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+    options.release.set(17)
+}
 
 publishing {
     publications {}

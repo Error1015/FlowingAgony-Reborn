@@ -149,7 +149,7 @@ object InnerPotentialEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             if (player.health < 5 + enchantmentLevel) {
                 if (player.absorptionAmount + 1 < enchantmentLevel + 5) {
-                    player.absorptionAmount += CommonConfig.numericalSettings.armorUpEnchantment.get()
+                    player.absorptionAmount += CommonConfig.numericalSettings.armorUpEnchantment
                 }
             }
         }

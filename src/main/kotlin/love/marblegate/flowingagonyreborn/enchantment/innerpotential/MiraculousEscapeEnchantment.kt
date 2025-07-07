@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object MiraculousEscapeEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.miraculousEscape.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.miraculousEscape
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.miraculousEscape.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.miraculousEscape
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.miraculousEscape.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.miraculousEscape
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.miraculousEscape.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.miraculousEscape
 
     override fun getMaxLevel() = 1
 }

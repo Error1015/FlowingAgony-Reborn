@@ -10,13 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments
 object MorirsLifeboundEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsLifebound.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.morirsLifebound
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsLifebound.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsLifebound
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.morirsLifebound.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.morirsLifebound
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.morirsLifebound.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.morirsLifebound
 
     override fun getMaxLevel() = 1
 

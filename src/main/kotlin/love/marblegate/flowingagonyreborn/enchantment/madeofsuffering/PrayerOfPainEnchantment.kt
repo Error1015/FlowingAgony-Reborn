@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PrayerOfPainEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prayerOfPain.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prayerOfPain
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prayerOfPain.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prayerOfPain
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.prayerOfPain.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.prayerOfPain
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.prayerOfPain.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.prayerOfPain
 
     override fun getMaxLevel() = 3
 

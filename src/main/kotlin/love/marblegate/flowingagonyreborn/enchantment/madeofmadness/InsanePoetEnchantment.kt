@@ -10,13 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments
 object InsanePoetEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.insanePoet.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.insanePoet
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.insanePoet.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.insanePoet
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.insanePoet.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.insanePoet
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.insanePoet.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.insanePoet
 
     override fun getMaxLevel() = 5
 

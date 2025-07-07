@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object BurialObjectCurse : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.burialObject.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.burialObject
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.burialObject.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.burialObject
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.burialObject.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.burialObject
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.burialObject.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.burialObject
 
     override fun getMaxLevel() = 1
 

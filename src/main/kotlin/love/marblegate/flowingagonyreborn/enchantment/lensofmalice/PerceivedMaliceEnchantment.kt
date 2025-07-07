@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PerceivedMaliceEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.perceivedMalice.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.perceivedMalice
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.perceivedMalice.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.perceivedMalice
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.perceivedMalice.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.perceivedMalice
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.perceivedMalice.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.perceivedMalice
 
     override fun getMaxLevel() = 5
 

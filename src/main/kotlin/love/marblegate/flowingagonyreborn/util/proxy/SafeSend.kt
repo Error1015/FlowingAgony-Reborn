@@ -11,6 +11,6 @@ fun <MSG> Networking.safeSend(
     message: MSG
 ) {
     if (this.isInstanceInitialized()) {
-        INSTANCE.send<MSG>(target, message)
+        instance.send<MSG>(target, message)
     }
 }

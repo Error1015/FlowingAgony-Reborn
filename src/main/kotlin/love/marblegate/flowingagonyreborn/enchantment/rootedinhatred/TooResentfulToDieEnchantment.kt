@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object TooResentfulToDieEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.tooResentfulToDie.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.tooResentfulToDie
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.tooResentfulToDie.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.tooResentfulToDie
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.tooResentfulToDie.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.tooResentfulToDie
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.tooResentfulToDie.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.tooResentfulToDie
 
     override fun getMaxLevel() = 3
 

@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ExoticHealerEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.exoticHealer.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.exoticHealer
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.exoticHealer.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.exoticHealer
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.exoticHealer.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.exoticHealer
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.exoticHealer.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.exoticHealer
 
     override fun getMaxLevel() = 2
 }

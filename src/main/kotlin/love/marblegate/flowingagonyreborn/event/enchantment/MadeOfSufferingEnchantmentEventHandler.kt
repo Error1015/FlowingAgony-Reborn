@@ -68,7 +68,7 @@ object MadeOfSufferingEnchantmentEventHandler {
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
             if (attacker !in targets && event.entity != attacker) {
-                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level * CommonConfig.numericalSettings.phobiaEffectDamage.get().toFloat())
+                attacker.hurt(damageSource, event.amount * 1.5f + 0.5f * level * CommonConfig.numericalSettings.phobiaEffectDamage.toFloat())
             }
         }
     }
@@ -98,7 +98,7 @@ object MadeOfSufferingEnchantmentEventHandler {
             val player = event.source.entity as Player
             if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                 val effectLevel = player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.amplifier ?: 0
-                event.amount *= 1f - 0.09f * (effectLevel + 1f) * CommonConfig.numericalSettings.prayerOfPainEnchantment.get().toFloat()
+                event.amount *= 1f - 0.09f * (effectLevel + 1f) * CommonConfig.numericalSettings.prayerOfPainEnchantment.toFloat()
             }
         }
     }

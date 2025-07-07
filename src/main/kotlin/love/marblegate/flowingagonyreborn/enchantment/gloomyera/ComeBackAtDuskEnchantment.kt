@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ComeBackAtDuskEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.comeBackAtDusk.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.comeBackAtDusk
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.comeBackAtDusk.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.comeBackAtDusk
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.comeBackAtDusk.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.comeBackAtDusk
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.comeBackAtDusk.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.comeBackAtDusk
 
     override fun getMaxLevel() = 1
 

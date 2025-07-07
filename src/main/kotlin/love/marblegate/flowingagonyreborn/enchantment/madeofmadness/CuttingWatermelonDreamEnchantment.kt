@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object CuttingWatermelonDreamEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.DIGGER, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.cuttingWatermelonDream.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.cuttingWatermelonDream
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cuttingWatermelonDream.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cuttingWatermelonDream
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.cuttingWatermelonDream.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.cuttingWatermelonDream
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.cuttingWatermelonDream.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.cuttingWatermelonDream
 
     override fun getMaxLevel() = 1
 

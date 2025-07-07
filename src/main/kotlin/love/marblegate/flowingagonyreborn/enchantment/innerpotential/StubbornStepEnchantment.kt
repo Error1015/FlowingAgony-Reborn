@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object StubbornStepEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.stubbornStep.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.stubbornStep
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.stubbornStep.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.stubbornStep
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.stubbornStep.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.stubbornStep
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.stubbornStep.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.stubbornStep
 
     override fun getMaxLevel() = 3
 

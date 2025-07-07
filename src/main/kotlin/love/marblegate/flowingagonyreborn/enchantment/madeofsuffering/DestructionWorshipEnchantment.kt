@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object DestructionWorshipEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.destructionWorship.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.destructionWorship
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.destructionWorship.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.destructionWorship
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.destructionWorship.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.destructionWorship
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.destructionWorship.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.destructionWorship
 
     override fun getMaxLevel() = 1
 

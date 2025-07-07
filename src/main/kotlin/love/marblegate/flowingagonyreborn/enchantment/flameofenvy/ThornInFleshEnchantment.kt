@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ThornInFleshEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.thornInFlesh.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.thornInFlesh
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.thornInFlesh.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.thornInFlesh
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.thornInFlesh.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.thornInFlesh
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.thornInFlesh.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.thornInFlesh
 
     override fun getMaxLevel() = 3
 

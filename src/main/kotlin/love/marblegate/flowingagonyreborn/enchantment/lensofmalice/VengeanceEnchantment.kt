@@ -9,13 +9,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object VengeanceEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.vengeance.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.vengeance
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.vengeance.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.vengeance
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.vengeance.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.vengeance
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.vengeance.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.vengeance
 
     override fun getMaxLevel() = 5
 

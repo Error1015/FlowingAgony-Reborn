@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object PrototypeChaoticTypeBetaEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prototypeChaoticTypeBeta.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.prototypeChaoticTypeBeta
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prototypeChaoticTypeBeta.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.prototypeChaoticTypeBeta
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.prototypeChaoticTypeBeta.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.prototypeChaoticTypeBeta
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.prototypeChaoticTypeBeta.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.prototypeChaoticTypeBeta
 
     override fun getMaxLevel() = 1
 }

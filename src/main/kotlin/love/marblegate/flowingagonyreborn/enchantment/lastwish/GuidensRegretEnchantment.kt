@@ -10,13 +10,13 @@ import net.minecraft.world.item.enchantment.Enchantments
 object GuidensRegretEnchantment : ModBaseEnchantment(
     Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.guidensRegret.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.guidensRegret
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.guidensRegret.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.guidensRegret
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.guidensRegret.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.guidensRegret
 
     override fun getMaxLevel() = 1
 

@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ArmorUpEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.armorUp.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.armorUp
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.armorUp.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.armorUp
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.armorUp.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.armorUp
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.armorUp.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.armorUp
 
     override fun getMaxLevel() = 3
 }

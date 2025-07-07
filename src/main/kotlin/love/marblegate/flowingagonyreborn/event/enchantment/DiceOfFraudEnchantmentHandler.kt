@@ -103,7 +103,7 @@ object DiceOfFraudEnchantmentHandler {
                         player.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000))
                     }
                 }
-                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, CommonConfig.numericalSettings.anAppleADayCoolDowns.get())
+                cap.set(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, CommonConfig.numericalSettings.anAppleADayCoolDowns)
             }
         }
     }
@@ -190,21 +190,25 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
+        val entity = event.entity ?: return
 
-        event.entity.safeClassCastAndHandle<Player> { player ->
-            val enchantmentLevel = player.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
-            if (enchantmentLevel == 0) return
-            val weaponNbt = player.mainHandItem.tag
+        if (entity is Player) {
+            val enchantmentLevel = entity.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
+            if (enchantmentLevel <= 0) return
+            val weaponNbt = entity.mainHandItem.tag ?: return
             val encodeId = event.entity.encodeId ?: return
-            if (weaponNbt?.contains("savor_the_tasted_target") != true) {
-                weaponNbt?.putString("savor_the_tasted_target", encodeId)
+            val stringNBT = "savor_the_tasted_target"
+            if (!weaponNbt.contains(stringNBT)) {
+                weaponNbt.putString(stringNBT, encodeId)
             } else {
-                val recordedTarget = weaponNbt.getString("savor_the_tasted_target") ?: return
+                val recordedTarget = weaponNbt.getString(stringNBT) ?: return
                 if (recordedTarget == encodeId) {
-                    event.amount += (player.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.get().toFloat()
-                } else weaponNbt.putString("savor_the_tasted_target", encodeId)
+                    event.amount += (entity.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.toFloat()
+                } else {
+                    weaponNbt.putString(stringNBT, encodeId)
+                }
             }
-            player.mainHandItem.tag = weaponNbt
+            entity.mainHandItem.tag = weaponNbt
         }
     }
 
@@ -221,9 +225,7 @@ object DiceOfFraudEnchantmentHandler {
             val modifier = 1 + (enchantmentLevel - 1) * 0.1f
             val duration = (600 * modifier).toInt()
             val source = DamageSourceBuilder.causeExtremeHatred(
-                player
-                    .level()
-                    .registryAccess()
+                player.level().registryAccess()
             )
             when {
                 dice < 33 -> event.isCanceled = true

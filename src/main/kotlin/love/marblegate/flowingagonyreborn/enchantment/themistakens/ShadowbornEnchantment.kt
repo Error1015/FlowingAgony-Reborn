@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object ShadowbornEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.shadowborn.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.shadowborn
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.shadowborn.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.shadowborn
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.shadowborn.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.shadowborn
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.shadowborn.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.shadowborn
 
     override fun getMaxLevel() = 1
 }

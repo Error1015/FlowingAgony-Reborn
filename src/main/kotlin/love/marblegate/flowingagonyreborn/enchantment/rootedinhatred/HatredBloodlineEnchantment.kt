@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object HatredBloodlineEnchantment : ModBaseEnchantment(
     Rarity.UNCOMMON, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.hatredBloodline.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.hatredBloodline
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.hatredBloodline.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.hatredBloodline
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.hatredBloodline.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.hatredBloodline
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.hatredBloodline.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.hatredBloodline
 
     override fun getMaxLevel() = 3
 

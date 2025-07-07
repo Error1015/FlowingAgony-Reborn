@@ -8,13 +8,13 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 object CovertKnifeEnchantment : ModBaseEnchantment(
     Rarity.RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.covertKnife.get()
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradeableConfig.covertKnife
 
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.covertKnife.get()
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.covertKnife
 
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.covertKnife.get()
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.covertKnife
 
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.covertKnife.get()
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.covertKnife
 
     override fun getMaxLevel() = 3
 }
