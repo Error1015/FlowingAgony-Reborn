@@ -190,25 +190,26 @@ object DiceOfFraudEnchantmentHandler {
     @SubscribeEvent
     fun doSavorTheTastedEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        val entity = event.entity ?: return
+        val target = event.entity ?: return
+        val attacker = event.source.entity ?: return
 
-        if (entity is Player) {
-            val enchantmentLevel = entity.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
+        if (attacker is Player) {
+            val enchantmentLevel = attacker.getEnchantmentLevel(SavorTheTastedEnchantment, EquipmentSlot.MAINHAND)
             if (enchantmentLevel <= 0) return
-            val weaponNbt = entity.mainHandItem.tag ?: return
-            val encodeId = event.entity.encodeId ?: return
+            val weaponNbt = attacker.mainHandItem.tag ?: return
+            val targetEncodeId = target.encodeId ?: return
             val stringNBT = "savor_the_tasted_target"
             if (!weaponNbt.contains(stringNBT)) {
-                weaponNbt.putString(stringNBT, encodeId)
+                weaponNbt.putString(stringNBT, targetEncodeId)
             } else {
                 val recordedTarget = weaponNbt.getString(stringNBT) ?: return
-                if (recordedTarget == encodeId) {
-                    event.amount += (entity.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.toFloat()
+                if (recordedTarget == targetEncodeId) {
+                    event.amount += (target.random.nextInt(5) + enchantmentLevel * 4 - 1) * CommonConfig.numericalSettings.savorTheTastedEnchantment.toFloat()
                 } else {
-                    weaponNbt.putString(stringNBT, encodeId)
+                    weaponNbt.putString(stringNBT, targetEncodeId)
                 }
             }
-            entity.mainHandItem.tag = weaponNbt
+            attacker.mainHandItem.tag = weaponNbt
         }
     }
 
