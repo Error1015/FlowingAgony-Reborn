@@ -52,9 +52,13 @@ object GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
     fun doCleansingBeforeUsingEnchantmentEvent(event: LivingDeathEvent) {
         if (event.entity.level().isClientSide) return
-        if (event.source.entity is Player && event.entity is Villager) {
-            val villager = event.entity as Villager
-            val mainHandItem = villager.getItemInHand(InteractionHand.MAIN_HAND) ?: return
+
+        val player = event.source.entity ?: return
+        val villager = event.entity ?: return
+
+        if (player is Player && villager is Villager) {
+            // val mainHandItem = villager.getItemInHand(InteractionHand.MAIN_HAND) ?: return
+            val mainHandItem = player.mainHandItem ?: return
             mainHandItem.setRepairCost(0)
             if (mainHandItem.isDamageableItem) {
                 mainHandItem.damageValue -= 10

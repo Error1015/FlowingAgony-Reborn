@@ -1,6 +1,5 @@
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.reflect.KProperty
 
 plugins {
     id("net.minecraftforge.gradle")
@@ -61,7 +60,10 @@ publishMods {
         projectSlug = "marblegates-exotic-enchantment-reborn"
         accessToken = System.getenv("CF_TOKEN")
         minecraftVersions.add(minecraft_version)
+        clientRequired = true
+        javaVersions = listOf(JavaVersion.VERSION_17)
         requires(kffSlug)
+        setInternalDefaults()
     }
 
     modrinth {
