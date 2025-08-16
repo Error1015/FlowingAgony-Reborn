@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.*
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.curse.BurialObjectCurse
@@ -43,17 +43,13 @@ object TheMistakensEnchantmentEventHandler {
     fun doShadowbornEnchantmentEventApplyAndRemoveEffect(event: TickEvent.PlayerTickEvent) {
         if (event.player.level().isClientSide) return
         if (event.phase == TickEvent.Phase.START) {
-            if (event.player.hasEffect(MobEffects.BLINDNESS) && event.player
-                        .level()
-                        .getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) >= 5 && event.player.isItemEnchanted(
+            if (event.player.hasEffect(MobEffects.BLINDNESS) && event.player.level().getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) >= 5 && event.player.isItemEnchanted(
                         ShadowbornEnchantment, EquipmentSlot.HEAD
                     )) {
                 event.player.removeEffectNoUpdate(MobEffects.BLINDNESS)
                 Networking.safeSend(PacketDistributor.PLAYER.with { event.player as ServerPlayer }, RemoveEffectSyncToClientPacket(MobEffects.BLINDNESS))
             }
-            if (event.player
-                        .level()
-                        .getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
+            if (event.player.level().getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
                 if (event.player.hasEffect(MobEffects.NIGHT_VISION)) event.player.addEffect(MobEffectInstance(MobEffects.NIGHT_VISION, 1200))
             }
         }
@@ -65,9 +61,7 @@ object TheMistakensEnchantmentEventHandler {
         if (event.entity is Player) {
             val player = event.entity as Player
             if (player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
-                if (player
-                            .level()
-                            .getMaxLocalRawBrightness(BlockPos(event.entity.blockPosition())) >= 5) {
+                if (player.level().getMaxLocalRawBrightness(BlockPos(event.entity.blockPosition())) >= 5) {
                     if (event.effectInstance.effect == MobEffects.BLINDNESS) event.result = Event.Result.DENY
                 }
             }
@@ -83,10 +77,7 @@ object TheMistakensEnchantmentEventHandler {
             if (enchantLevel == 0) return
             if (event.effectInstance.isExplicit) {
                 if (player.hasEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)) {
-                    val newEffectAmplifier = min(
-                        player
-                            .getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)
-                            ?.let { it.amplifier + enchantLevel } ?: return, 29)
+                    val newEffectAmplifier = min(player.getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)?.let { it.amplifier + enchantLevel } ?: return, 29)
                     player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, newEffectAmplifier).setImplicit)
                 } else {
                     player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, enchantLevel - 1).setImplicit)
@@ -104,10 +95,8 @@ object TheMistakensEnchantmentEventHandler {
                 if (event.effectInstance.effect.category == MobEffectCategory.BENEFICIAL && !event.effectInstance.effect.isInstantenous) {
                     if (player.isItemEnchanted(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)) {
                         event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, event.effectInstance.duration * 3))
-                        val negativeEffects = player.activeEffects
-                            .stream()
-                            .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit }
-                            .collect(Collectors.toList())
+                        val negativeEffects = player.activeEffects.stream()
+                            .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit }.collect(Collectors.toList())
                         if (negativeEffects.isNotEmpty()) {
                             negativeEffects.forEach { effect ->
                                 player.removeEffect(effect.effect)
@@ -261,7 +250,7 @@ object TheMistakensEnchantmentEventHandler {
     @SubscribeEvent
     fun doBurialObjectCurseEvent(event: LivingDeathEvent) {
         if (event.entity.level().isClientSide) return
-        val burialObjectCurseDamageSource = DamageSourceBuilder.causeBurialObjectDamage(event.entity)
+        val burialObjectCurseDamageSource = DamageSourceFactory.causeBurialObjectDamage(event.entity)
         if (event.entity is Player) {
             val player = event.entity as Player
             val originalDeathPos = player.blockPosition()
@@ -269,9 +258,7 @@ object TheMistakensEnchantmentEventHandler {
                 (originalDeathPos.x - 16).toDouble(), (originalDeathPos.y - 1).toDouble(), (originalDeathPos.z - 16).toDouble(), (originalDeathPos.x + 16).toDouble(),
                 (originalDeathPos.y + 1).toDouble(), (originalDeathPos.z + 16.toDouble())
             )
-            val players = player
-                .level()
-                .getEntitiesOfClass(Player::class.java, scanningArea)
+            val players = player.level().getEntitiesOfClass(Player::class.java, scanningArea)
             players.forEach { player -> if (player.allArmorHasEnchantment(BurialObjectCurse)) player.hurt(burialObjectCurseDamageSource, 120f) }
         }
     }

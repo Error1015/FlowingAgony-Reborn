@@ -22,11 +22,7 @@ class ParticleEffectPacket {
     }
 
     constructor(
-        type: MobEffectCategory,
-        x: Double,
-        y: Double,
-        z: Double,
-        vararg args: Double
+        type: MobEffectCategory, x: Double, y: Double, z: Double, vararg args: Double
     ) {
         this.type = type
         this.x = x
@@ -62,9 +58,7 @@ class ParticleEffectPacket {
     fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx
-                    .get()
-                    .let {
+                ctx.get().let {
                         it.enqueueWork {
                             proxy = ClientProxy()
                             if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {

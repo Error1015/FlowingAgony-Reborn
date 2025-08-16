@@ -114,9 +114,7 @@ object FlameOfEnvyEnchantmentEventHandler {
                     }
                     if (Random.nextDouble() >= successProbability) return
                     entity.hurt(
-                        attacker
-                            .damageSources()
-                            .playerAttack(attacker), 9f
+                        attacker.damageSources().playerAttack(attacker), 9f
                     )
                     if (attacker.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND) == 1) entity.setSecondsOnFire(5)
 

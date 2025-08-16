@@ -5,21 +5,14 @@ import net.minecraft.world.entity.LivingEntity
 
 object PaperBrainImplicitEffect : HarmfulBlankImplicitEffect() {
     override fun applyEffectTick(
-        pLivingEntity: LivingEntity,
-        pAmplifier: Int
+        pLivingEntity: LivingEntity, pAmplifier: Int
     ) {
         pLivingEntity.hurt(
-            pLivingEntity
-                .level()
-                .damageSources()
-                .magic(), (pLivingEntity
-                .getRandom()
-                .nextInt(4) + 5).toFloat() * CommonConfig.numericalSettings.paperBrainHurtDamage.toFloat()
+            pLivingEntity.level().damageSources().magic(), (pLivingEntity.getRandom().nextInt(4) + 5).toFloat() * CommonConfig.numericalSettings.paperBrainHurtDamage.toFloat()
         )
     }
 
     override fun isDurationEffectTick(
-        pDuration: Int,
-        pAmplifier: Int
+        pDuration: Int, pAmplifier: Int
     ): Boolean = pDuration > 0 && pDuration % 20 == 0
 }

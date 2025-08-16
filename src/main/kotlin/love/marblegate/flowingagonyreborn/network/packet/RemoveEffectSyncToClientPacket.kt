@@ -34,9 +34,7 @@ class RemoveEffectSyncToClientPacket {
     fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx
-                    .get()
-                    .let {
+                ctx.get().let {
                         it.enqueueWork {
                             proxy = ClientProxy()
                             proxy.removeEffect(effect)

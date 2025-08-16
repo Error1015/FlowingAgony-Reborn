@@ -25,8 +25,7 @@ class PlayerCapabilityProvider : ICapabilitySerializable<CompoundTag> {
     }
 
     override fun <T : Any?> getCapability(
-        cap: Capability<T?>,
-        side: Direction?
+        cap: Capability<T?>, side: Direction?
     ): LazyOptional<T?> = getCapability(cap)
 
     override fun <T : Any?> getCapability(cap: Capability<T?>): LazyOptional<T?> {
@@ -37,14 +36,12 @@ class PlayerCapabilityProvider : ICapabilitySerializable<CompoundTag> {
         return LazyOptional.empty()
     }
 
-    override fun serializeNBT(): CompoundTag? {
+    override fun serializeNBT(): CompoundTag {
         val nbt = CompoundTag()
         nbt.putFloat("abnormal_joy", abnormalJoyCapability.getPoint())
         CoolDown.CoolDownType.entries.forEach { coolDownType -> nbt.putInt(coolDownType.name, coolDown.get(coolDownType)) }
         nbt.put(
-            "last_sweet_dream_itemstack", lastSweetDreamCapability
-                .getItemStack()
-                .serializeNBT()
+            "last_sweet_dream_itemstack", lastSweetDreamCapability.getItemStack().serializeNBT()
         )
         nbt.putInt("hatred_bloodline_level", hatredBloodlineStatusCapability.getActiveLevel())
         return nbt

@@ -4,8 +4,7 @@ import net.minecraft.world.entity.LivingEntity
 
 object MiraculousEscapeForceEscapeEffect : HarmfulBlankImplicitEffect() {
     override fun applyEffectTick(
-        pLivingEntity: LivingEntity,
-        pAmplifier: Int
+        pLivingEntity: LivingEntity, pAmplifier: Int
     ) {
         val duration: Int = pLivingEntity.getEffect(this)?.duration ?: 0
         if (duration % 40 > 25) {
@@ -17,7 +16,6 @@ object MiraculousEscapeForceEscapeEffect : HarmfulBlankImplicitEffect() {
     }
 
     override fun isDurationEffectTick(
-        pDuration: Int,
-        pAmplifier: Int
+        pDuration: Int, pAmplifier: Int
     ) = true
 }

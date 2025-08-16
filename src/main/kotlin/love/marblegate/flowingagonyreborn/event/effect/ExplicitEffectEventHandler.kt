@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.effect
 
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.PlaySoundPacket
@@ -28,15 +28,11 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doCursedHatredEffectEvent(event: LivingDamageEvent) {
         event.handleServer {
-            val causeCursedHatredDamage = DamageSourceBuilder.causeCursedHatredDamage(
-                event.entity
-                    .level()
-                    .registryAccess()
+            val causeCursedHatredDamage = DamageSourceFactory.causeCursedHatredDamage(
+                event.entity.level().registryAccess()
             )
             if (event.entity.hasEffect(ModEffects.CURSED_HATRED) && event.source != causeCursedHatredDamage) {
-                val potionLevel = event.entity
-                    .getEffect(ModEffects.CURSED_HATRED)
-                    ?.let { it.amplifier + 1 } ?: return
+                val potionLevel = event.entity.getEffect(ModEffects.CURSED_HATRED)?.let { it.amplifier + 1 } ?: return
                 event.entity.removeEffect(ModEffects.CURSED_HATRED)
                 val damage = potionLevel * 2f * (if (event.entity is Player) 0.9f - 0.1f * Math.random() else 1f).toFloat()
                 event.entity.hurt(causeCursedHatredDamage, damage * CommonConfig.numericalSettings.cursedHatredEffect.toFloat())
@@ -49,9 +45,7 @@ object ExplicitEffectEventHandler {
         event.handleServer {
             event.source.entity.safeClassCastAndHandle<Player> { player ->
                 val player = event.source.entity as Player
-                val potionLevel = player
-                    .getEffect(ModEffects.EXTREME_HATRED)
-                    ?.let { it.amplifier + 1 } ?: return
+                val potionLevel = player.getEffect(ModEffects.EXTREME_HATRED)?.let { it.amplifier + 1 } ?: return
                 if (event.amount * (1 + potionLevel) >= event.entity.maxHealth) {
                     player.removeEffect(ModEffects.EXTREME_HATRED)
 
@@ -79,8 +73,7 @@ object ExplicitEffectEventHandler {
             if (event.phase == TickEvent.Phase.START) {
                 if (event.player.hasEffect(
                             ModEffects.CURSE_OF_UNDEAD
-                        ) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player
-                            .level()
+                        ) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player.level()
                             .canSeeSky(event.player.blockPosition()))) {
                     if (!event.player.hasHelmet()) {
                         event.player.setSecondsOnFire(5)
@@ -157,18 +150,14 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun doBeenResonatedEffectEvent(event: LivingDamageEvent) {
         event.handleServer {
-            val source = DamageSourceBuilder.causeAgonyResonance(
-                event.entity
-                    .level()
-                    .registryAccess()
+            val source = DamageSourceFactory.causeAgonyResonance(
+                event.entity.level().registryAccess()
             )
             if (event.entity.hasEffect(ModEffects.BEEN_RESONATED) && event.source != source) {
                 val entities = event.entity.getTargetsExceptOneself(8f, 2f) { entity ->
                     entity.hasEffect(ModEffects.AGONY_RESONANCE)
                 }
-                val damageIndex = event.entity
-                    .getEffect(ModEffects.BEEN_RESONATED)
-                    ?.let { it.amplifier + 1 } ?: 0
+                val damageIndex = event.entity.getEffect(ModEffects.BEEN_RESONATED)?.let { it.amplifier + 1 } ?: 0
                 entities.forEach { entity ->
                     entity.hurt(source, event.amount * (0.35F + damageIndex * 0.15F) * CommonConfig.numericalSettings.beenResonatedEffect.toFloat())
                 }
@@ -181,9 +170,7 @@ object ExplicitEffectEventHandler {
         event.handleServer {
             event.source.entity.safeClassCastAndHandle<Player> { player ->
                 if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
-                    val effectLevel = player
-                        .getEffect(ModEffects.LET_ME_SAVOR_IT)
-                        ?.let { it.amplifier + 1 } ?: 0
+                    val effectLevel = player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                     event.amount = event.amount * (1 - 0.09F * effectLevel) * CommonConfig.numericalSettings.letMeSavorItEffectReduceDamage.toFloat()
                 }
             }
@@ -193,12 +180,10 @@ object ExplicitEffectEventHandler {
     @SubscribeEvent
     fun onLetMeSavorItEffectEventReflectDamage(event: LivingDamageEvent) {
         event.handleServer {
-            val letMeSavorIt = DamageSourceBuilder.causeLetMeSavorItDamage(event.entity)
+            val letMeSavorIt = DamageSourceFactory.causeLetMeSavorItDamage(event.entity)
             event.entity.safeClassCastAndHandle<Player> { player ->
                 if (event.shouldReflectDamage() && player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
-                    val effectLevel = event.entity
-                        .getEffect(ModEffects.LET_ME_SAVOR_IT)
-                        ?.let { it.amplifier + 1 } ?: 0
+                    val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                     event.source.entity.safeClassCastAndHandle<LivingEntity> { livingEntity ->
                         if (!livingEntity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                             livingEntity.hurt(letMeSavorIt, effectLevel * event.amount * CommonConfig.numericalSettings.letMeSavorItEffectReflectDamage.toFloat())

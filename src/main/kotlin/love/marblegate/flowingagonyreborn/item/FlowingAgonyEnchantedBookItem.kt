@@ -16,7 +16,6 @@ open class FlowingAgonyEnchantedBookItem(properties: Properties) : EnchantedBook
             return stack
         }
 
-        // 封装成扩展函数
         fun ItemStack.addEnchantment(instance: EnchantmentInstance) = addEnchantment(this, instance)
     }
 

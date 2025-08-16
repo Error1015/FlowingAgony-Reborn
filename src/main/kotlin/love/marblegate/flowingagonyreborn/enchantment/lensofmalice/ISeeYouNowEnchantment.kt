@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ISeeYouNowEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.iSeeYouNow
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.iSeeYouNow
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.iSeeYouNow
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.iSeeYouNow
-
-    override fun getMaxLevel() = 1
-}
+    pRarity = Rarity.UNCOMMON, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.iSeeYouNow,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.iSeeYouNow, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.iSeeYouNow,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.iSeeYouNow, canEnchant = EnchantmentConfig.canEnchantConfig.iSeeYouNow, maxLevel = 1
+)

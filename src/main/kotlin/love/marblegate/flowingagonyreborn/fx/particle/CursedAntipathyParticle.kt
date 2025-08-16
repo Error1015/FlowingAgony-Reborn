@@ -8,11 +8,7 @@ import net.minecraftforge.api.distmarker.OnlyIn
 @OnlyIn(Dist.CLIENT)
 class CursedAntipathyParticle : TextureSheetParticle {
     constructor(
-        world: ClientLevel,
-        x: Double,
-        y: Double,
-        z: Double,
-        diameter: Float
+        world: ClientLevel, x: Double, y: Double, z: Double, diameter: Float
     ) : super(world, x, y, z) {
         lifetime = 100
         xd = (Math.random() * 2.0 - 1.0) * 0.1
@@ -28,14 +24,7 @@ class CursedAntipathyParticle : TextureSheetParticle {
     @OnlyIn(Dist.CLIENT)
     class Factory(private val spriteSet: SpriteSet) : ParticleProvider<CursedAntipathyParticleOption> {
         override fun createParticle(
-            typeIn: CursedAntipathyParticleOption,
-            worldIn: ClientLevel,
-            x: Double,
-            y: Double,
-            z: Double,
-            xSpeed: Double,
-            ySpeed: Double,
-            zSpeed: Double
+            typeIn: CursedAntipathyParticleOption, worldIn: ClientLevel, x: Double, y: Double, z: Double, xSpeed: Double, ySpeed: Double, zSpeed: Double
         ): Particle {
             val cursedHatredParticle = CursedAntipathyParticle(worldIn, x, y, z, typeIn.getDiameter())
             cursedHatredParticle.pickSprite(spriteSet)

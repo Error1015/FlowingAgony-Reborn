@@ -61,9 +61,7 @@ object LensOfMaliceEnchantmentEventHandler {
             Networking.safeSend(
                 PacketDistributor.NEAR.with {
                     PacketDistributor.TargetPoint(
-                        living.x, living.y, living.z, 192.0, living
-                            .level()
-                            .dimension()
+                        living.x, living.y, living.z, 192.0, living.level().dimension()
                     )
                 }, PlaySoundWithLocationPacket(
                     PlaySoundWithLocationPacket.ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND, true, living.x, living.y + living.eyeHeight, living.z
@@ -83,10 +81,7 @@ object LensOfMaliceEnchantmentEventHandler {
             if (living is Player) {
                 living.addEffect(MobEffectInstance(ModEffects.CURSED_HATRED, 200 * totalLevel))
             } else {
-                val effects = living.activeEffects
-                    .stream()
-                    .filter { it.effect.category == MobEffectCategory.HARMFUL }
-                    .collect(Collectors.toList())
+                val effects = living.activeEffects.stream().filter { it.effect.category == MobEffectCategory.HARMFUL }.collect(Collectors.toList())
                 if (effects.isEmpty()) return
                 val targets = player.getTargetsOfSameType(8f, 2f, living, true)
                 if (effects.size <= totalLevel) {

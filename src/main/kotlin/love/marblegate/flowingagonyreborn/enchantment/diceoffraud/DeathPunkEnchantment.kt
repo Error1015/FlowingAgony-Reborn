@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object DeathPunkEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.deathPunk
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.deathPunk
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.deathPunk
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.deathPunk
-
-    override fun getMaxLevel() = 1
-}
+    pRarity = Rarity.UNCOMMON, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.deathPunk,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.deathPunk, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.deathPunk,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.deathPunk, canEnchant = EnchantmentConfig.canEnchantConfig.deathPunk, maxLevel = 1
+)

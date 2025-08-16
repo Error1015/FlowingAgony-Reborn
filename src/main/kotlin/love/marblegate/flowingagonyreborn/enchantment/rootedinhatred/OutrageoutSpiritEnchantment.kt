@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object OutrageoutSpiritEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.outrageousSpirit
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.outrageousSpirit
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.outrageousSpirit
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.outrageousSpirit
-
-    override fun getMaxLevel() = 5
-}
+    Rarity.UNCOMMON, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.outrageousSpirit,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.outrageousSpirit, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.outrageousSpirit,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.outrageousSpirit, canEnchant = EnchantmentConfig.canEnchantConfig.outrageousSpirit, maxLevel = 5
+)

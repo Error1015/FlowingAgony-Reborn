@@ -7,19 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ResentfulSoulEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
+    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.resentfulSoul,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.resentfulSoul, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.resentfulSoul,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.resentfulSoul, canEnchant = EnchantmentConfig.canEnchantConfig.resentfulSoul, maxLevel = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.resentfulSoul
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.resentfulSoul
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.resentfulSoul
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.resentfulSoul
-
-    override fun getMaxLevel() = 3
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != TooResentfulToDieEnchantment
-
-    override fun isTreasureOnly() = true
 }

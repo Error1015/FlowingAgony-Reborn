@@ -8,20 +8,10 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object GuidensRegretEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BREAKABLE, pApplicableSlots = EquipmentSlotTypeSet.ALL, isTradable = EnchantmentConfig.tradableConfig.guidensRegret,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.guidensRegret, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.guidensRegret, canEnchant = EnchantmentConfig.canEnchantConfig.guidensRegret, maxLevel = 1
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.guidensRegret
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.guidensRegret
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.guidensRegret
-
-    override fun getMaxLevel() = 1
-
     override fun checkCompatibility(pOther: Enchantment) =
         super.checkCompatibility(pOther) && pOther != MorirsDeathwishEnchantment && pOther != MorirsLifeboundEnchantment && pOther != Enchantments.MENDING
-
-    override fun isTreasureOnly() = true
 }

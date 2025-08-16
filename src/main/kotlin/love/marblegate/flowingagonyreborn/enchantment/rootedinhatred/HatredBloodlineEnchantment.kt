@@ -6,17 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object HatredBloodlineEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.hatredBloodline
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.hatredBloodline
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.hatredBloodline
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.hatredBloodline
-
-    override fun getMaxLevel() = 3
-
-    override fun isTradeable(): Boolean = true
-}
+    Rarity.UNCOMMON, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.hatredBloodline,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.hatredBloodline, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.hatredBloodline,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.hatredBloodline, canEnchant = EnchantmentConfig.canEnchantConfig.hatredBloodline, maxLevel = 3
+)

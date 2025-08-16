@@ -7,17 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PiercingFeverEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
+    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.piercingFever,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.piercingFever, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.piercingFever,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.piercingFever, canEnchant = EnchantmentConfig.canEnchantConfig.piercingFever, maxLevel = 1
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.piercingFever
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.piercingFever
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.piercingFever
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.piercingFever
-
-    override fun getMaxLevel() = 1
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != ConstrainedHeartEnchantment && pOther != DestructionWorshipEnchantment
 }

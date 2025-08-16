@@ -23,9 +23,7 @@ class AbnormalJoySyncPacket(
     fun handle(ctx: Supplier<NetworkEvent.Context>) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
-                ctx
-                    .get()
-                    .let {
+                ctx.get().let {
                         it.enqueueWork {
                             val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
                             pointCap?.ifPresent(

@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.madeofmadness.*
@@ -98,7 +98,7 @@ object MadeOfMadnessEnchantmentEventHandler {
     @SubscribeEvent
     fun onCuttingWatermelonDreamEnchantmentEventDealDamage(event: BlockEvent.BreakEvent) {
         if (event.player.level().isClientSide) return
-        val cuttingWaterMelonDreamDamageSource = DamageSourceBuilder.causeCuttingWaterMelonDream(event.player)
+        val cuttingWaterMelonDreamDamageSource = DamageSourceFactory.causeCuttingWaterMelonDream(event.player)
         if (event.state.block == Blocks.MELON) {
             if (event.player.isItemEnchanted(CuttingWatermelonDreamEnchantment, EquipmentSlot.MAINHAND)) {
                 val targets = event.player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }
@@ -110,17 +110,13 @@ object MadeOfMadnessEnchantmentEventHandler {
                     damage += (event.player.getItemBySlot(EquipmentSlot.MAINHAND).item as DiggerItem).attackDamage
                 }
                 if (silkLevel == 1) damage *= 0.5f
-                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random
-                    .nextDouble()
-                    .toFloat()
+                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random.nextDouble().toFloat()
                 targets.forEach { target ->
                     target.hurt(cuttingWaterMelonDreamDamageSource, damage * CommonConfig.numericalSettings.cuttingWatermelonDream.toFloat())
                 }
                 if (unBreakingLevel == 0) return
                 val damageAppliedToItem = if (unBreakingLevel == 3) 3 else 4
-                event.player
-                    .getItemBySlot(EquipmentSlot.MAINHAND)
-                    .hurtAndBreak(damageAppliedToItem, event.player) { }
+                event.player.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(damageAppliedToItem, event.player) { }
             }
         }
     }
@@ -161,19 +157,14 @@ object MadeOfMadnessEnchantmentEventHandler {
                     }
                 }
                 if (fortuneLevel > 0) dropLoot(
-                    event.entity, player, player
-                        .damageSources()
-                        .playerAttack(player), fortuneLevel
+                    event.entity, player, player.damageSources().playerAttack(player), fortuneLevel
                 )
             }
         }
     }
 
     private fun dropLoot(
-        entity: LivingEntity,
-        player: Player,
-        source: DamageSource,
-        lootLevel: Int
+        entity: LivingEntity, player: Player, source: DamageSource, lootLevel: Int
     ) {
         val resourceLocation: ResourceLocation = entity.lootTable
         val lootTable = entity.level().server?.lootData?.getLootTable(resourceLocation) ?: return
@@ -184,33 +175,21 @@ object MadeOfMadnessEnchantmentEventHandler {
     }
 
     private fun getLootContextBuilder(
-        entity: LivingEntity,
-        player: Player,
-        source: DamageSource
+        entity: LivingEntity, player: Player, source: DamageSource
     ): LootContext.Builder {
         val serverLevel = entity.level() as ServerLevel
-        val paramsBuilder = LootParams
-            .Builder(serverLevel)
-            .withParameter(LootContextParams.THIS_ENTITY, entity)
-            .withParameter(LootContextParams.ORIGIN, entity.position())
-            .withParameter(LootContextParams.DAMAGE_SOURCE, source)
-            .withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
-            .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity)
-            .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
-            .withLuck(player.luck)
+        val paramsBuilder = LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position())
+            .withParameter(LootContextParams.DAMAGE_SOURCE, source).withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
+            .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity).withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player).withLuck(player.luck)
             .create(LootContextParamSets.ENTITY)
 
         return LootContext.Builder(paramsBuilder)
     }
 
     fun recalculateLootByLootingLevel(
-        stack: ItemStack,
-        context: LootContext,
-        lootLevel: Int
+        stack: ItemStack, context: LootContext, lootLevel: Int
     ): ItemStack {
-        val f = lootLevel.toFloat() * UniformGenerator
-            .between(0f, 1f)
-            .getFloat(context)
+        val f = lootLevel.toFloat() * UniformGenerator.between(0f, 1f).getFloat(context)
         stack.grow(f.roundToInt())
         return stack
     }

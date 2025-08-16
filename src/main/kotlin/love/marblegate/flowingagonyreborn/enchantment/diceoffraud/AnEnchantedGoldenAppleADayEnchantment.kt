@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object AnEnchantedGoldenAppleADayEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.anEnchantedGoldenAppleADay
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.anEnchantedGoldenAppleADay
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.anEnchantedGoldenAppleADay
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.anEnchantedGoldenAppleADay
-
-    override fun getMaxLevel() = 1
-}
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.anEnchantedGoldenAppleADay,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.anEnchantedGoldenAppleADay, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.anEnchantedGoldenAppleADay,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.anEnchantedGoldenAppleADay, canEnchant = EnchantmentConfig.canEnchantConfig.anEnchantedGoldenAppleADay, maxLevel = 1
+)

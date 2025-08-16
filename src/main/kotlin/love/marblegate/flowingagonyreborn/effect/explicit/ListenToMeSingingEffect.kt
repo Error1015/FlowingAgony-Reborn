@@ -1,21 +1,18 @@
 package love.marblegate.flowingagonyreborn.effect.explicit
 
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
 
 object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
     override fun applyEffectTick(
-        entity: LivingEntity,
-        pAmplifier: Int
+        entity: LivingEntity, pAmplifier: Int
     ) {
         if (entity.level().isClientSide) return
         val duration: Int = entity.getEffect(this)?.duration ?: 0
-        val source = DamageSourceBuilder.causeRythmOfUniverse(
-            entity
-                .level()
-                .registryAccess()
+        val source = DamageSourceFactory.causeRythmOfUniverse(
+            entity.level().registryAccess()
         )
         when {
             duration % 40 > 25 -> {
@@ -45,8 +42,7 @@ object ListenToMeSingingEffect : MobEffect(MobEffectCategory.HARMFUL, 6881280) {
     }
 
     override fun isDurationEffectTick(
-        pDuration: Int,
-        pAmplifier: Int
+        pDuration: Int, pAmplifier: Int
     ) = true
 
     fun getMaxDamage(amplifier: Int) = if (amplifier == 0) 9f else (12 + amplifier * 2).toFloat()

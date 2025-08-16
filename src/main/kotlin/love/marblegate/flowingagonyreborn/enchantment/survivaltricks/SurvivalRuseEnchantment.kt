@@ -7,17 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object SurvivalRuseEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
+    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.survivalRuse,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.survivalRuse, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.survivalRuse,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.survivalRuse, canEnchant = EnchantmentConfig.canEnchantConfig.survivalRuse, maxLevel = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.survivalRuse
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.survivalRuse
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.survivalRuse
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.survivalRuse
-
-    override fun getMaxLevel() = 3
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != NecessaryEvilEnchantment && pOther != SurvivalShortcutEnchantment
 }

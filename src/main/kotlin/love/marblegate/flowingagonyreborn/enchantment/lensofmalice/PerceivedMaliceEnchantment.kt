@@ -7,17 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PerceivedMaliceEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.perceivedMalice,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.perceivedMalice, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.perceivedMalice,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.perceivedMalice, canEnchant = EnchantmentConfig.canEnchantConfig.perceivedMalice, maxLevel = 5
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.perceivedMalice
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.perceivedMalice
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.perceivedMalice
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.perceivedMalice
-
-    override fun getMaxLevel() = 5
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != VengeanceEnchantment
 }

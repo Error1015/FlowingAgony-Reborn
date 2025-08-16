@@ -23,8 +23,7 @@ fun LivingEntity.allArmorHasEnchantment(enchantment: Enchantment) = this.armorSl
  * 获取实体EquipmentSlot中的附魔
  */
 fun LivingEntity.getEnchantmentLevel(
-    enchantment: Enchantment,
-    slot: EquipmentSlot
+    enchantment: Enchantment, slot: EquipmentSlot
 ): Int = when (slot) {
     HEAD -> this.helmet.allEnchantments[enchantment] ?: 0
     CHEST -> this.chestplate.allEnchantments[enchantment] ?: 0
@@ -71,8 +70,7 @@ fun LivingEntity.getArmorEnchantmentMaxLevel(enchantment: Enchantment): Int {
  * 实体某个槽位是否存在某附魔
  */
 fun LivingEntity.isItemEnchanted(
-    enchantment: Enchantment,
-    slot: EquipmentSlot
+    enchantment: Enchantment, slot: EquipmentSlot
 ): Boolean {
     val enchantments = EnchantmentHelper.getEnchantments(this.getItemBySlot(slot))
     return enchantments.containsKey(enchantment)
@@ -84,4 +82,20 @@ fun LivingEntity.getStackWithEnchantment(enchantment: Enchantment): List<ItemSta
         if (this.isItemEnchanted(enchantment, it)) list += getItemBySlot(it)
     }
     return list
+}
+
+/**
+ * 计算附魔的附魔花费
+ */
+fun Enchantment.getEnchantability(
+    currentLevel: Int, isMin: Boolean
+): Int {
+    val diff = maxLevel - currentLevel
+    return when (rarity.weight) {
+        1 -> if (isMin) 30 - 4 * diff else 80 - 10 * diff // VERY RARE
+        2 -> if (isMin) 20 - 3 * diff else 70 - 9 * diff // RARE
+        5 -> if (isMin) 10 - diff else 60 - 8 * diff // UNCOMMON
+        10 -> if (isMin) 1 + currentLevel else 51 - 6 * diff // COMMON
+        else -> 1
+    }
 }

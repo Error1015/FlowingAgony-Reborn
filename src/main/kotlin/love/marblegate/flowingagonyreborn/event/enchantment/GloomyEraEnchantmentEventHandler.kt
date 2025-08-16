@@ -6,7 +6,6 @@ import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.Containers
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EquipmentSlot
@@ -256,11 +255,7 @@ object GloomyEraEnchantmentEventHandler {
     }
 
     fun rollDiceForPilferage(
-        armorFeet: ItemStack,
-        villager: Villager,
-        offers: List<MerchantOffer>,
-        random: RandomSource,
-        fallingHeight: Double
+        armorFeet: ItemStack, villager: Villager, offers: List<MerchantOffer>, random: RandomSource, fallingHeight: Double
     ): List<ItemStack> {
         var extraLuck = Mth.floor(fallingHeight)
         extraLuck = minOf(extraLuck, 15)

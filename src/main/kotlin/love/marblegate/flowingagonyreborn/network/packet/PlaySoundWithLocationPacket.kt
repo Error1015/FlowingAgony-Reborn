@@ -22,11 +22,7 @@ class PlaySoundWithLocationPacket {
     }
 
     constructor(
-        type: ModSoundType,
-        onOrOff: Boolean,
-        x: Double,
-        y: Double,
-        z: Double
+        type: ModSoundType, onOrOff: Boolean, x: Double, y: Double, z: Double
     ) {
         this.type = type
         this.onOrOff = onOrOff
@@ -55,9 +51,7 @@ class PlaySoundWithLocationPacket {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             proxy = ClientProxy()
             Runnable {
-                ctx
-                    .get()
-                    .let {
+                ctx.get().let {
                         it.enqueueWork {
                             if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
                                 proxy.playSoundWithLocation(ModSounds.MALICE_OUTBREAK_KNOCKBACK_SOUND, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)

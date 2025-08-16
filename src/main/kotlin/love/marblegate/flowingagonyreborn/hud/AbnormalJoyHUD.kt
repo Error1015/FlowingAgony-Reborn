@@ -19,9 +19,7 @@ class AbnormalJoyHUD {
             val cap: LazyOptional<AbnormalJoyCapability> = player.getCapability(ModCapManager.AbnormalJoy_Capability)
 
             cap.ifPresent { capability ->
-                val abnormalJoyPoint = capability
-                    .getPoint()
-                    .toInt()
+                val abnormalJoyPoint = capability.getPoint().toInt()
                 if (abnormalJoyPoint != 0) {
                     RenderSystem.setShaderTexture(0, hud)
                     RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)

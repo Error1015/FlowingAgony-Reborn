@@ -7,17 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object DrowningPhobiaEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
+    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.drowningPhobia,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.drowningPhobia, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.drowningPhobia,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.drowningPhobia, canEnchant = EnchantmentConfig.canEnchantConfig.drowningPhobia, maxLevel = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.drowningPhobia
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.drowningPhobia
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.drowningPhobia
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.drowningPhobia
-
-    override fun getMaxLevel() = 3
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != BurningPhobiaEnchantment && pOther != PrayerOfPainEnchantment
 }

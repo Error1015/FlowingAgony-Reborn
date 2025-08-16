@@ -6,17 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object LightburnFungalParasiticEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.lightburnFungalParasitic
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.lightburnFungalParasitic
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.lightburnFungalParasitic
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.lightburnFungalParasitic
-
-    override fun getMaxLevel() = 3
-
-    override fun isTreasureOnly() = true
-}
+    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.lightburnFungalParasitic,
+    isDiscoverable = EnchantmentConfig.discoverableConfig.lightburnFungalParasitic, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.lightburnFungalParasitic,
+    isTreasureOnly = EnchantmentConfig.isTreasureConfig.lightburnFungalParasitic, canEnchant = EnchantmentConfig.canEnchantConfig.lightburnFungalParasitic, maxLevel = 3
+)

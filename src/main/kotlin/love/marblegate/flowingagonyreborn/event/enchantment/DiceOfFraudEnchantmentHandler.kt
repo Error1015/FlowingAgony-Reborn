@@ -3,7 +3,7 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 import love.marblegate.flowingagonyreborn.capibility.CoolDown
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*
 import love.marblegate.flowingagonyreborn.util.*
 import net.minecraft.util.Mth
@@ -53,8 +53,7 @@ object DiceOfFraudEnchantmentHandler {
      * 给对应随机点数添加上对应的效果
      */
     private fun appendixEffectForTrickster(
-        entity: LivingEntity,
-        diceNum: Int
+        entity: LivingEntity, diceNum: Int
     ) {
         when (diceNum) {
             1 -> entity.addEffect(MobEffectInstance(MobEffects.POISON, 100))
@@ -109,8 +108,7 @@ object DiceOfFraudEnchantmentHandler {
     }
 
     private fun caseToAddEffect(
-        tempNum: Int,
-        player: Player
+        tempNum: Int, player: Player
     ) {
         when (tempNum) {
             0 -> player.addEffect(MobEffectInstance(MobEffects.ABSORPTION, 2400, 3))
@@ -225,7 +223,7 @@ object DiceOfFraudEnchantmentHandler {
             val dice = player.random.nextInt(100)
             val modifier = 1 + (enchantmentLevel - 1) * 0.1f
             val duration = (600 * modifier).toInt()
-            val source = DamageSourceBuilder.causeExtremeHatred(
+            val source = DamageSourceFactory.causeExtremeHatred(
                 player.level().registryAccess()
             )
             when {
