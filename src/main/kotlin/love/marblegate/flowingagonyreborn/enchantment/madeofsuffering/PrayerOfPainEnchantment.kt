@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PrayerOfPainEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.prayerOfPain,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.prayerOfPain,
     isDiscoverable = EnchantmentConfig.discoverableConfig.prayerOfPain, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.prayerOfPain,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.prayerOfPain, canEnchant = EnchantmentConfig.canEnchantConfig.prayerOfPain, maxLevel = 3,
     incompatibleEnchantments = listOf(BurningPhobiaEnchantment, DrowningPhobiaEnchantment)

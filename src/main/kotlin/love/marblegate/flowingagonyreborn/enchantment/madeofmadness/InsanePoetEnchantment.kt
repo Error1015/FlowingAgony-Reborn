@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object InsanePoetEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.insanePoet,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BOW, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.insanePoet,
     isDiscoverable = EnchantmentConfig.discoverableConfig.insanePoet, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.insanePoet,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.insanePoet, canEnchant = EnchantmentConfig.canEnchantConfig.insanePoet, maxLevel = 5
 ) {

@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object TooResentfulToDieEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.tooResentfulToDie,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.tooResentfulToDie,
     isDiscoverable = EnchantmentConfig.discoverableConfig.tooResentfulToDie, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.tooResentfulToDie,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.tooResentfulToDie, canEnchant = EnchantmentConfig.canEnchantConfig.tooResentfulToDie, maxLevel = 3
 ) {

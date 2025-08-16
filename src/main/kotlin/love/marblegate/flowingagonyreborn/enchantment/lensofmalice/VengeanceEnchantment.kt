@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object VengeanceEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.vengeance,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.vengeance,
     isDiscoverable = EnchantmentConfig.discoverableConfig.vengeance, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.vengeance,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.vengeance, canEnchant = EnchantmentConfig.canEnchantConfig.vengeance, maxLevel = 5
 ) {

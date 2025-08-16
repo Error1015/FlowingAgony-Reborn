@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object ShockTherapyEnchantment : ModBaseEnchantment(
-    Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.shockTherapy,
+    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.WEAPON, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.shockTherapy,
     isDiscoverable = EnchantmentConfig.discoverableConfig.shockTherapy, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.shockTherapy,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.shockTherapy, canEnchant = EnchantmentConfig.canEnchantConfig.shockTherapy, maxLevel = 3
 ) {

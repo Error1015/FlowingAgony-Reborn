@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object BurialObjectCurse : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.burialObject,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.burialObject,
     isDiscoverable = EnchantmentConfig.discoverableConfig.burialObject, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.burialObject,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.burialObject, canEnchant = EnchantmentConfig.canEnchantConfig.burialObject, maxLevel = 1
 ) {

@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object AgonyScreamerEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.agonyScreamer,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BOW, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.agonyScreamer,
     isDiscoverable = EnchantmentConfig.discoverableConfig.agonyScreamer, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.agonyScreamer,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.agonyScreamer, canEnchant = EnchantmentConfig.canEnchantConfig.agonyScreamer, maxLevel = 3
 ) {

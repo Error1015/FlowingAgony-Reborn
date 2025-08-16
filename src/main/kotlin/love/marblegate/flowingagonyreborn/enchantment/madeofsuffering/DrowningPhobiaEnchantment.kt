@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object DrowningPhobiaEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.drowningPhobia,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_HEAD, pApplicableSlots = EquipmentSlotTypeSet.HEAD, isTradable = EnchantmentConfig.tradableConfig.drowningPhobia,
     isDiscoverable = EnchantmentConfig.discoverableConfig.drowningPhobia, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.drowningPhobia,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.drowningPhobia, canEnchant = EnchantmentConfig.canEnchantConfig.drowningPhobia, maxLevel = 3
 ) {

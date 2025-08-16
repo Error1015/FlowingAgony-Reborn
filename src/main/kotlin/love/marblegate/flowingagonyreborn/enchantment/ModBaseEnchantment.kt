@@ -18,7 +18,6 @@ abstract class ModBaseEnchantment(
     open val maxLevel: Int = 1,
     open val incompatibleEnchantments: List<Enchantment> = emptyList() // 冲突附魔列表
 ) : Enchantment(pRarity, pCategory, pApplicableSlots) {
-
     override fun getMinCost(pLevel: Int) = getEnchantability(pLevel, true)
 
     override fun getMaxCost(pLevel: Int) = getEnchantability(pLevel, false)

@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ConstrainedHeartEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.constrainedHeart,
+    pRarity = Rarity.UNCOMMON, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.constrainedHeart,
     isDiscoverable = EnchantmentConfig.discoverableConfig.constrainedHeart, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.constrainedHeart,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.constrainedHeart, canEnchant = EnchantmentConfig.canEnchantConfig.constrainedHeart, maxLevel = 1
 ) {

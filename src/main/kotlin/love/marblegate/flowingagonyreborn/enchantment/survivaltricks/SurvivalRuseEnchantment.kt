@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object SurvivalRuseEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.survivalRuse,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.survivalRuse,
     isDiscoverable = EnchantmentConfig.discoverableConfig.survivalRuse, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.survivalRuse,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.survivalRuse, canEnchant = EnchantmentConfig.canEnchantConfig.survivalRuse, maxLevel = 3
 ) {

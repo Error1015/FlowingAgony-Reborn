@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PiercingFeverEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.piercingFever,
+    pRarity = Rarity.UNCOMMON, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.piercingFever,
     isDiscoverable = EnchantmentConfig.discoverableConfig.piercingFever, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.piercingFever,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.piercingFever, canEnchant = EnchantmentConfig.canEnchantConfig.piercingFever, maxLevel = 1
 ) {

@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object NecessaryEvilEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.necessaryEvil,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.necessaryEvil,
     isDiscoverable = EnchantmentConfig.discoverableConfig.necessaryEvil, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.necessaryEvil,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.necessaryEvil, canEnchant = EnchantmentConfig.canEnchantConfig.necessaryEvil, maxLevel = 3
 ) {

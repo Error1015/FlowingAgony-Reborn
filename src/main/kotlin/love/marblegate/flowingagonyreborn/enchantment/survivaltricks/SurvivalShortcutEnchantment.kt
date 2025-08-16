@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object SurvivalShortcutEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.survivalShortcut,
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.survivalShortcut,
     isDiscoverable = EnchantmentConfig.discoverableConfig.survivalShortcut, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.survivalShortcut,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.survivalShortcut, canEnchant = EnchantmentConfig.canEnchantConfig.survivalShortcut, maxLevel = 3
 ) {

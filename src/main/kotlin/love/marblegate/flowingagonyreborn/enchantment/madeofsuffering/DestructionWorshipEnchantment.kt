@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object DestructionWorshipEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.destructionWorship,
+    pRarity = Rarity.UNCOMMON, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.destructionWorship,
     isDiscoverable = EnchantmentConfig.discoverableConfig.destructionWorship, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.destructionWorship,
     isTreasureOnly = EnchantmentConfig.isTreasureConfig.destructionWorship, canEnchant = EnchantmentConfig.canEnchantConfig.destructionWorship, maxLevel = 1
 ) {
