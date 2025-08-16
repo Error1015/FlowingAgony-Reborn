@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object InfectiousMaliceEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.infectiousMalice,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.infectiousMalice, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.infectiousMalice,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.infectiousMalice, canEnchant = EnchantmentConfig.canEnchantConfig.infectiousMalice, maxLevel = 1
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, tradableSetting = EnchantmentConfig.tradableConfig.infectiousMalice,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.infectiousMalice, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.infectiousMalice,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.infectiousMalice, canEnchantSetting = EnchantmentConfig.canEnchantConfig.infectiousMalice, maxLevelValue = 1
 )

@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PilferageCreedEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_FEET, pApplicableSlots = EquipmentSlotTypeSet.FEET, isTradable = EnchantmentConfig.tradableConfig.pilferageCreed,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.pilferageCreed, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.pilferageCreed,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.pilferageCreed, canEnchant = EnchantmentConfig.canEnchantConfig.pilferageCreed, maxLevel = 1
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_FEET, pApplicableSlots = EquipmentSlotTypeSet.FEET, tradableSetting = EnchantmentConfig.tradableConfig.pilferageCreed,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.pilferageCreed, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.pilferageCreed,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.pilferageCreed, canEnchantSetting = EnchantmentConfig.canEnchantConfig.pilferageCreed, maxLevelValue = 1
 )

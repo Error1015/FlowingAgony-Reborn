@@ -10,31 +10,31 @@ abstract class ModBaseEnchantment(
     pRarity: Rarity,
     pCategory: EnchantmentCategory,
     pApplicableSlots: Array<EquipmentSlot>,
-    open val isTradable: Boolean,
-    open val isDiscoverable: Boolean,
-    open val canEnchant: Boolean = true,
-    open val canApplyOnEnchantingTable: Boolean,
-    open val isTreasureOnly: Boolean,
-    open val maxLevel: Int = 1,
+    open val tradableSetting: Boolean,
+    open val discoverableSetting: Boolean,
+    open val canEnchantSetting: Boolean = true,
+    open val canApplyOnEnchantingTableSetting: Boolean,
+    open val isTreasureOnlySettings: Boolean,
+    open val maxLevelValue: Int = 1,
     open val incompatibleEnchantments: List<Enchantment> = emptyList() // 冲突附魔列表
 ) : Enchantment(pRarity, pCategory, pApplicableSlots) {
     override fun getMinCost(pLevel: Int) = getEnchantability(pLevel, true)
 
     override fun getMaxCost(pLevel: Int) = getEnchantability(pLevel, false)
 
-    override fun isTradeable() = isTradable
+    override fun isTradeable() = tradableSetting
 
-    override fun isDiscoverable() = isDiscoverable
+    override fun isDiscoverable() = discoverableSetting
 
     override fun isAllowedOnBooks() = true
 
-    override fun canEnchant(pStack: ItemStack): Boolean = canEnchant
+    override fun canEnchant(pStack: ItemStack): Boolean = canEnchantSetting
 
-    override fun canApplyAtEnchantingTable(stack: ItemStack) = canApplyOnEnchantingTable && super.canApplyAtEnchantingTable(stack)
+    override fun canApplyAtEnchantingTable(stack: ItemStack) = canApplyOnEnchantingTableSetting && super.canApplyAtEnchantingTable(stack)
 
-    override fun isTreasureOnly(): Boolean = isTreasureOnly
+    override fun isTreasureOnly(): Boolean = isTreasureOnlySettings
 
-    override fun getMaxLevel() = maxLevel
+    override fun getMaxLevel() = maxLevelValue
 
     /**
      * 当另一个附魔不存在冲突列表中则通过

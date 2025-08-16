@@ -8,9 +8,9 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object ShockTherapyEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.WEAPON, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, isTradable = EnchantmentConfig.tradableConfig.shockTherapy,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.shockTherapy, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.shockTherapy,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.shockTherapy, canEnchant = EnchantmentConfig.canEnchantConfig.shockTherapy, maxLevel = 3
+    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.WEAPON, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, tradableSetting = EnchantmentConfig.tradableConfig.shockTherapy,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.shockTherapy, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.shockTherapy,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.shockTherapy, canEnchantSetting = EnchantmentConfig.canEnchantConfig.shockTherapy, maxLevelValue = 3
 ) {
     override fun checkCompatibility(pOther: Enchantment) =
         super.checkCompatibility(pOther) && pOther != PaperBrainEnchantment && pOther != Enchantments.SHARPNESS && pOther != Enchantments.BANE_OF_ARTHROPODS && pOther != Enchantments.SMITE

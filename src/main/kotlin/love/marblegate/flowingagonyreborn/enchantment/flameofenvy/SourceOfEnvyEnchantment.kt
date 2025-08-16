@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object SourceOfEnvyEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.sourceOfEnvy,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.sourceOfEnvy, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.sourceOfEnvy,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.sourceOfEnvy, canEnchant = EnchantmentConfig.canEnchantConfig.sourceOfEnvy, maxLevel = 5
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, tradableSetting = EnchantmentConfig.tradableConfig.sourceOfEnvy,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.sourceOfEnvy, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.sourceOfEnvy,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.sourceOfEnvy, canEnchantSetting = EnchantmentConfig.canEnchantConfig.sourceOfEnvy, maxLevelValue = 5
 )

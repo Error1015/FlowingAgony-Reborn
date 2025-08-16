@@ -8,9 +8,9 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object GuidensRegretEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BREAKABLE, pApplicableSlots = EquipmentSlotTypeSet.ALL, isTradable = EnchantmentConfig.tradableConfig.guidensRegret,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.guidensRegret, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.guidensRegret, canEnchant = EnchantmentConfig.canEnchantConfig.guidensRegret, maxLevel = 1
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BREAKABLE, pApplicableSlots = EquipmentSlotTypeSet.ALL, tradableSetting = EnchantmentConfig.tradableConfig.guidensRegret,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.guidensRegret, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.guidensRegret,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.guidensRegret, canEnchantSetting = EnchantmentConfig.canEnchantConfig.guidensRegret, maxLevelValue = 1
 ) {
     override fun checkCompatibility(pOther: Enchantment) =
         super.checkCompatibility(pOther) && pOther != MorirsDeathwishEnchantment && pOther != MorirsLifeboundEnchantment && pOther != Enchantments.MENDING

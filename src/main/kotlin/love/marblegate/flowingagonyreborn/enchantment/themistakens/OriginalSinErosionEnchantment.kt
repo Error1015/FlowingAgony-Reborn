@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object OriginalSinErosionEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.originalSinErosion,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.originalSinErosion, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.originalSinErosion,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.originalSinErosion, canEnchant = EnchantmentConfig.canEnchantConfig.originalSinErosion, maxLevel = 3, incompatibleEnchantments = listOf(ScholarOfOriginalSinEnchantment)
+    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, tradableSetting = EnchantmentConfig.tradableConfig.originalSinErosion,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.originalSinErosion, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.originalSinErosion,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.originalSinErosion, canEnchantSetting = EnchantmentConfig.canEnchantConfig.originalSinErosion, maxLevelValue = 3, incompatibleEnchantments = listOf(ScholarOfOriginalSinEnchantment)
 )

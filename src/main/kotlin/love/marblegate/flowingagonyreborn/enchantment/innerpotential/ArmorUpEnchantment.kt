@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ArmorUpEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, isTradable = EnchantmentConfig.tradableConfig.armorUp,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.armorUp, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.armorUp,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.armorUp, canEnchant = EnchantmentConfig.canEnchantConfig.armorUp, maxLevel = 3
+    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, tradableSetting = EnchantmentConfig.tradableConfig.armorUp,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.armorUp, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.armorUp,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.armorUp, canEnchantSetting = EnchantmentConfig.canEnchantConfig.armorUp, maxLevelValue = 3
 )

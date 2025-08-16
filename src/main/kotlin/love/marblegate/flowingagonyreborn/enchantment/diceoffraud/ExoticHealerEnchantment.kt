@@ -6,7 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ExoticHealerEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, isTradable = EnchantmentConfig.tradableConfig.exoticHealer,
-    isDiscoverable = EnchantmentConfig.discoverableConfig.exoticHealer, canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.exoticHealer,
-    isTreasureOnly = EnchantmentConfig.isTreasureConfig.exoticHealer, canEnchant = EnchantmentConfig.canEnchantConfig.exoticHealer, maxLevel = 2
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, tradableSetting = EnchantmentConfig.tradableConfig.exoticHealer,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.exoticHealer, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.exoticHealer,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.exoticHealer, canEnchantSetting = EnchantmentConfig.canEnchantConfig.exoticHealer, maxLevelValue = 2
 )

@@ -7,7 +7,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object RegularCustomerProgramEnchantment : ModBaseEnchantment(
     pRarity = Rarity.VERY_RARE, pCategory = CustomEnchantmentCategory.axeAndSwordItem, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    isTradable = EnchantmentConfig.tradableConfig.regularCustomerProgram, isDiscoverable = EnchantmentConfig.discoverableConfig.regularCustomerProgram,
-    canApplyOnEnchantingTable = EnchantmentConfig.applyOnEnchantingTableConfig.regularCustomerProgram, isTreasureOnly = EnchantmentConfig.isTreasureConfig.regularCustomerProgram,
-    canEnchant = EnchantmentConfig.canEnchantConfig.regularCustomerProgram, maxLevel = 1
+    tradableSetting = EnchantmentConfig.tradableConfig.regularCustomerProgram, discoverableSetting = EnchantmentConfig.discoverableConfig.regularCustomerProgram,
+    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.regularCustomerProgram, isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.regularCustomerProgram,
+    canEnchantSetting = EnchantmentConfig.canEnchantConfig.regularCustomerProgram, maxLevelValue = 1
 )
