@@ -39,11 +39,7 @@ base {
     archivesName = "$mod_name-$minecraft_version"
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 publishMods {
     val kffSlug = "kotlin-for-forge"
@@ -138,12 +134,10 @@ minecraft {
 }
 
 kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
     compilerOptions {
         freeCompilerArgs.add("-Xwhen-guards")
     }
+    jvmToolchain(17)
 }
 
 sourceSets.main.get().resources.srcDir("src/generated/resources")
@@ -173,6 +167,7 @@ dependencies {
     runtimeOnly(fg.deobf("curse.maven:enchantment-descriptions-250419:5855251"))
     runtimeOnly(fg.deobf("curse.maven:jade-324717:6106101"))
     runtimeOnly(fg.deobf("curse.maven:jei-238222:6075247"))
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.withType<ProcessResources>().configureEach {

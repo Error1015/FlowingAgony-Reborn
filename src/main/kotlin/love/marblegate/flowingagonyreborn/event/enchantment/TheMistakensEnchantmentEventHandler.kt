@@ -54,7 +54,7 @@ object TheMistakensEnchantmentEventHandler {
             if (event.player
                         .level()
                         .getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
-                if (event.player.hasEffect(MobEffects.NIGHT_VISION)) event.player.addEffect(MobEffectInstance(MobEffects.NIGHT_VISION, 1200))
+                if (!event.player.hasEffect(MobEffects.NIGHT_VISION)) event.player.addEffect(MobEffectInstance(MobEffects.NIGHT_VISION, 1200))
             }
         }
     }
