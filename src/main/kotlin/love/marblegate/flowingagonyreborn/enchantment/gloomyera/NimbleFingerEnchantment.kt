@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object NimbleFingerEnchantment : ModBaseEnchantment(
-    Rarity.RARE, CustomEnchantmentCategory.swordArmorAndTool, EquipmentSlotTypeSet.ALL
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.nimbleFinger
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.nimbleFinger
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.nimbleFinger
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.nimbleFinger
-
-    override fun getMaxLevel() = 3
-}
+    pRarity = Rarity.RARE, pCategory = CustomEnchantmentCategory.swordArmorAndTool, pApplicableSlots = EquipmentSlotTypeSet.ALL, tradableSetting = EnchantmentConfig.tradableConfig.nimbleFinger,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.nimbleFinger, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.nimbleFinger,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.nimbleFinger, canEnchantSetting = EnchantmentConfig.canEnchantConfig.nimbleFinger, maxLevelValue = 3
+)

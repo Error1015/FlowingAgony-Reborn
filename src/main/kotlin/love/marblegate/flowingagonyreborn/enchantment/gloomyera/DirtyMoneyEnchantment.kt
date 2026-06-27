@@ -7,19 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object DirtyMoneyEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR, pApplicableSlots = EquipmentSlotTypeSet.ARMORS, tradableSetting = EnchantmentConfig.tradableConfig.dirtyMoney,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.dirtyMoney, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.dirtyMoney,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.dirtyMoney, canEnchantSetting = EnchantmentConfig.canEnchantConfig.dirtyMoney, maxLevelValue = 2
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.dirtyMoney
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.dirtyMoney
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.dirtyMoney
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.dirtyMoney
-
-    override fun getMaxLevel() = 2
-
-    override fun isTreasureOnly() = true
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != ComeBackAtDuskEnchantment
 }

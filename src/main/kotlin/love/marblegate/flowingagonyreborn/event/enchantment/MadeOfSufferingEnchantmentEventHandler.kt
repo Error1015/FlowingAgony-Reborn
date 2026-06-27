@@ -2,7 +2,7 @@ package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.capibility.ModCapManager
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.madeofsuffering.*
 import love.marblegate.flowingagonyreborn.network.Networking
@@ -30,9 +30,7 @@ import net.minecraftforge.network.PacketDistributor
 object MadeOfSufferingEnchantmentEventHandler {
     @SubscribeEvent
     fun onDrowningPhobiaEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player && event.shouldReflectDamage() && event.entity.isSwimming) {
             val enchantmentLevel = event.entity.getEnchantmentLevel(DrowningPhobiaEnchantment, EquipmentSlot.HEAD)
             if (enchantmentLevel == 0) return
@@ -42,9 +40,7 @@ object MadeOfSufferingEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onBurningPhobiaEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player && event.shouldReflectDamage()) {
             if (event.entity.isInLava || event.entity.remainingFireTicks > 0 && event.source.`is`(DamageTypes.ON_FIRE)) {
                 val enchantmentLevel = event.entity.getEnchantmentLevel(BurningPhobiaEnchantment, EquipmentSlot.HEAD)
@@ -55,15 +51,13 @@ object MadeOfSufferingEnchantmentEventHandler {
     }
 
     private fun dealPhobiaEffectDamage(
-        event: LivingDamageEvent,
-        effect: MobEffect,
-        level: Int
+        event: LivingDamageEvent, effect: MobEffect, level: Int
     ) {
         event.entity.addEffect(MobEffectInstance(effect, 500 - level * 100))
         event.entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 500 - level * 100))
         val player = event.entity as? Player ?: return
         val targets = player.getTargetsExceptOneself(12f, 2f) { entity -> entity.isHostile(false) }
-        val damageSource = DamageSourceBuilder.causePhobiaDamage(event.entity)
+        val damageSource = DamageSourceFactory.causePhobiaDamage(event.entity)
         targets.forEach { target -> target.hurt(damageSource, event.amount * 1.5f + 0.5f * level) }
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
@@ -75,22 +69,15 @@ object MadeOfSufferingEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onPrayerOfPainEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(PrayerOfPainEnchantment, EquipmentSlot.HEAD)
             if (enchantmentLevel == 0) return
             if (player.health < 4 + enchantmentLevel * 2) {
                 if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
-                    if (player
-                                .getEffect(ModEffects.LET_ME_SAVOR_IT)
-                                ?.let { it.amplifier < 9 } == true) player.addEffect(
-                        MobEffectInstance(
-                            ModEffects.LET_ME_SAVOR_IT, 72000, player
-                                .getEffect(ModEffects.LET_ME_SAVOR_IT)
-                                ?.let { it.amplifier + 1 } ?: 0))
+                    if (player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier < 9 } == true) player.addEffect(
+                        MobEffectInstance(ModEffects.LET_ME_SAVOR_IT, 72000, player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0))
                 } else player.addEffect(MobEffectInstance(ModEffects.LET_ME_SAVOR_IT, 72000))
             }
         }
@@ -105,9 +92,7 @@ object MadeOfSufferingEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onConstrainedHeartEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ConstrainedHeartEnchantment, EquipmentSlot.CHEST)
@@ -122,9 +107,7 @@ object MadeOfSufferingEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onPiercingFeverEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(PiercingFeverEnchantment, EquipmentSlot.CHEST)
@@ -135,9 +118,7 @@ object MadeOfSufferingEnchantmentEventHandler {
 
     @SubscribeEvent
     fun onDestructionWorshipEnchantmentEvent(event: LivingDamageEvent) {
-        if (event.entity
-                    .level()
-                    .isClientSide()) return
+        if (event.entity.level().isClientSide()) return
         if (event.entity is Player) {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(DestructionWorshipEnchantment, EquipmentSlot.CHEST)
@@ -149,8 +130,7 @@ object MadeOfSufferingEnchantmentEventHandler {
     }
 
     private fun grandAbnormalJoyPoint(
-        event: LivingDamageEvent,
-        level: Int
+        event: LivingDamageEvent, level: Int
     ) {
         val pointCap = event.entity.getCapability(ModCapManager.AbnormalJoy_Capability)
         pointCap.ifPresent { cap ->

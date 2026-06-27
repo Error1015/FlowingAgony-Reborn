@@ -6,7 +6,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier
 
 object EnviousBeingEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0) {
     override fun getAttributeModifierValue(
-        amplifier: Int,
-        modifier: AttributeModifier
+        amplifier: Int, modifier: AttributeModifier
     ) = modifier.amount + amplifier
 }

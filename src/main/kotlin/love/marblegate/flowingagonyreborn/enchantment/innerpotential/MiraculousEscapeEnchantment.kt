@@ -6,15 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object MiraculousEscapeEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.miraculousEscape
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.miraculousEscape
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.miraculousEscape
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.miraculousEscape
-
-    override fun getMaxLevel() = 1
-}
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_FEET, pApplicableSlots = EquipmentSlotTypeSet.FEET, tradableSetting = EnchantmentConfig.tradableConfig.miraculousEscape,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.miraculousEscape, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.miraculousEscape,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.miraculousEscape, canEnchantSetting = EnchantmentConfig.canEnchantConfig.miraculousEscape, maxLevelValue = 1
+)

@@ -8,18 +8,10 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object PaperBrainEnchantment : ModBaseEnchantment(
-    Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlotTypeSet.MAIN_HAND
+    pRarity = Rarity.RARE, pCategory = EnchantmentCategory.WEAPON, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, tradableSetting = EnchantmentConfig.tradableConfig.paperBrain,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.paperBrain, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.paperBrain,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.paperBrain, canEnchantSetting = EnchantmentConfig.canEnchantConfig.paperBrain, maxLevelValue = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.paperBrain
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.paperBrain
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.paperBrain
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.paperBrain
-
-    override fun getMaxLevel() = 3
-
     override fun checkCompatibility(other: Enchantment): Boolean =
         super.checkCompatibility(other) && other != ShockTherapyEnchantment && other != Enchantments.SHARPNESS && other != Enchantments.BANE_OF_ARTHROPODS && other != Enchantments.SMITE
 

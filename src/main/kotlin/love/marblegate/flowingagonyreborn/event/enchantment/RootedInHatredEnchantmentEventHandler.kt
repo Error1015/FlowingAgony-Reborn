@@ -63,9 +63,7 @@ object RootedInHatredEnchantmentEventHandler {
                     )
                     event.isCanceled = true
                 } else {
-                    val effectLevel = player
-                        .getEffect(ModEffects.EXTREME_HATRED)
-                        ?.let { it.amplifier + 1 } ?: 0
+                    val effectLevel = player.getEffect(ModEffects.EXTREME_HATRED)?.let { it.amplifier + 1 } ?: 0
                     when (effectLevel) {
                         1 -> {
                             player.heal(1f + enchantmentLevel * 2)
@@ -101,11 +99,7 @@ object RootedInHatredEnchantmentEventHandler {
             if (enchantmentLevel == 0) return
             var negativeEffectCount = 0
             if (player.isOnFire) negativeEffectCount++
-            negativeEffectCount += player.activeEffects
-                .stream()
-                .filter { it.effect.category == MobEffectCategory.HARMFUL }
-                .count()
-                .toInt()
+            negativeEffectCount += player.activeEffects.stream().filter { it.effect.category == MobEffectCategory.HARMFUL }.count().toInt()
             event.amount += negativeEffectCount * enchantmentLevel * CommonConfig.numericalSettings.outrageousSpirit.toFloat()
         }
     }

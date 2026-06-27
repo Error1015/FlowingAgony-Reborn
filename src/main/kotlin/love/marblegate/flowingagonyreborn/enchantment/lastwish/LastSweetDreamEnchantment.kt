@@ -6,17 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object LastSweetDreamEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.lastSweetDream
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.lastSweetDream
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.lastSweetDream
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.lastSweetDream
-
-    override fun getMaxLevel() = 1
-
-    override fun isTreasureOnly() = true
-}
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.BREAKABLE, pApplicableSlots = EquipmentSlotTypeSet.ALL, tradableSetting = EnchantmentConfig.tradableConfig.lastSweetDream,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.lastSweetDream, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.lastSweetDream,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.lastSweetDream, canEnchantSetting = EnchantmentConfig.canEnchantConfig.lastSweetDream, maxLevelValue = 1
+)

@@ -39,8 +39,7 @@ object ModEffects {
         FrivolousStepImplicitEffect.addAttributeModifier(Attributes.MOVEMENT_SPEED, "412C831F-22EA-43B8-B74B-D172019AD3D2", 0.15, AttributeModifier.Operation.MULTIPLY_BASE)
     }
     val HATRED_BLOODLINE_ENCHANTMENT_ACTIVE: MobEffect by ModEffects.registerObject("hatred_bloodline_enchantment_active") {
-        HatredBloodlineImplicitEffect
-            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "C164A28C-4A60-4957-B414-1DF28bb56C74", 0.0083, AttributeModifier.Operation.ADDITION)
+        HatredBloodlineImplicitEffect.addAttributeModifier(Attributes.MOVEMENT_SPEED, "C164A28C-4A60-4957-B414-1DF28bb56C74", 0.0083, AttributeModifier.Operation.ADDITION)
             .addAttributeModifier(Attributes.ATTACK_SPEED, "F07D977E-F516-4D16-9088-11B70D847FFA", 0.33, AttributeModifier.Operation.ADDITION)
     }
     val FRESH_REVENGE_ENCHANTMENT_ACTIVE: MobEffect by ModEffects.registerObject("fresh_revenge_enchantment_active") {
@@ -55,13 +54,11 @@ object ModEffects {
     val MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE by ModEffects.registerObject("miraculous_escape_enchantment_active") { BeneficialBlankImplicitEffect() }
     val MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE by ModEffects.registerObject("miraculous_escape_enchantment_force_escape") { MiraculousEscapeForceEscapeEffect }
     val PAPER_BRAIN_ENCHANTMENT_ACTIVE: MobEffect by ModEffects.registerObject("paper_brain_enchantment_active") {
-        PaperBrainImplicitEffect
-            .addAttributeModifier(Attributes.FOLLOW_RANGE, "831CF4BC-ED83-4072-A2A2-C115DD72317F", -0.96, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        PaperBrainImplicitEffect.addAttributeModifier(Attributes.FOLLOW_RANGE, "831CF4BC-ED83-4072-A2A2-C115DD72317F", -0.96, AttributeModifier.Operation.MULTIPLY_TOTAL)
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, "6E21DF28-A639-43E5-A189-D9ECFAE3AA39", -0.67, AttributeModifier.Operation.MULTIPLY_TOTAL)
     }
     val SHOCK_THERAPY_ENCHANTMENT_ACTIVE: MobEffect by ModEffects.registerObject("shock_therapy_enchantment_active") {
-        ShockTherapyImplicitEffect
-            .addAttributeModifier(Attributes.FOLLOW_RANGE, "BA46BF78-B706-4FB0-9EA0-98978BB648B1", -0.96, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        ShockTherapyImplicitEffect.addAttributeModifier(Attributes.FOLLOW_RANGE, "BA46BF78-B706-4FB0-9EA0-98978BB648B1", -0.96, AttributeModifier.Operation.MULTIPLY_TOTAL)
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, "058D9210-1B26-4578-85C9-2CF67698F1E1", -0.67, AttributeModifier.Operation.MULTIPLY_TOTAL)
     }
     val THORN_IN_FLESH_ACTIVE: MobEffect by ModEffects.registerObject("thorn_in_flesh_active") {

@@ -81,27 +81,20 @@ object SurvivalTricksEnchantmentEventHandler {
     }
 
     private fun damageTransfer(
-        entities: List<LivingEntity>,
-        event: LivingDamageEvent,
-        level: Int,
-        shareMode: Boolean
+        entities: List<LivingEntity>, event: LivingDamageEvent, level: Int, shareMode: Boolean
     ) {
         if (!entities.isEmpty()) {
             if (shareMode) {
                 val damageSharedPerEntity = event.amount / entities.size
                 entities.forEach {
                     it.hurt(
-                        it
-                            .damageSources()
-                            .generic(), damageSharedPerEntity
+                        it.damageSources().generic(), damageSharedPerEntity
                     )
                 }
             } else {
                 var target: LivingEntity = if (entities.size == 1) entities[0] else getLuckyOne(entities, event.entity.random)
                 target.hurt(
-                    target
-                        .damageSources()
-                        .generic(), event.amount
+                    target.damageSources().generic(), event.amount
                 )
             }
             event.isCanceled = true
@@ -118,7 +111,6 @@ object SurvivalTricksEnchantmentEventHandler {
      * 在一个LivingEntity的集合中随机抽取一个幸运儿
      */
     private fun getLuckyOne(
-        entities: List<LivingEntity>,
-        source: RandomSource
+        entities: List<LivingEntity>, source: RandomSource
     ) = entities[source.nextInt(entities.size)]
 }

@@ -23,9 +23,7 @@ object CapabilityEventHandler {
             pointCap.ifPresent { cap ->
                 if (cap.getPoint() >= 5) {
                     event.entity.hurt(
-                        event.entity
-                            .damageSources()
-                            .generic(), 15f
+                        event.entity.damageSources().generic(), 15f
                     )
                     cap.decrease(5f)
                 } else if (cap.getPoint() <= 1) {

@@ -22,9 +22,7 @@ object ImplicitEffectEventHandler {
         event.handleServer {
             event.source.entity.safeClassCastAndHandle<Player> { player ->
                 if (player.hasEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)) {
-                    val effectLevel = player
-                        .getEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)
-                        ?.let { it.amplifier + 1 } ?: 0
+                    val effectLevel = player.getEffect(ModEffects.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE)?.let { it.amplifier + 1 } ?: 0
                     if (effectLevel <= 0) return
                     event.amount = event.amount * (1f + effectLevel * 0.25f) * CommonConfig.numericalSettings.hatredBloodlineEffect.toFloat()
                 }

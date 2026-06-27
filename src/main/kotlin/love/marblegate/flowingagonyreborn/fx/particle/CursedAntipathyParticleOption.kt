@@ -13,16 +13,14 @@ open class CursedAntipathyParticleOption : ParticleOptions {
     companion object {
         val DESERIALIZER: ParticleOptions.Deserializer<CursedAntipathyParticleOption> = object : ParticleOptions.Deserializer<CursedAntipathyParticleOption> {
             override fun fromCommand(
-                pParticleType: ParticleType<CursedAntipathyParticleOption?>,
-                pReader: StringReader
+                pParticleType: ParticleType<CursedAntipathyParticleOption?>, pReader: StringReader
             ): CursedAntipathyParticleOption {
                 pReader.expect(' ')
                 return CursedAntipathyParticleOption(pReader.readFloat())
             }
 
             override fun fromNetwork(
-                particleType: ParticleType<CursedAntipathyParticleOption>,
-                pBuffer: FriendlyByteBuf
+                particleType: ParticleType<CursedAntipathyParticleOption>, pBuffer: FriendlyByteBuf
             ): CursedAntipathyParticleOption {
                 return CursedAntipathyParticleOption(pBuffer.readFloat())
             }

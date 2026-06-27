@@ -7,17 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object FrivolousStepEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_FEET, pApplicableSlots = EquipmentSlotTypeSet.FEET, tradableSetting = EnchantmentConfig.tradableConfig.frivolousStep,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.frivolousStep, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.frivolousStep,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.frivolousStep, canEnchantSetting = EnchantmentConfig.canEnchantConfig.frivolousStep, maxLevelValue = 2
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.frivolousStep
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.frivolousStep
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.frivolousStep
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.frivolousStep
-
-    override fun getMaxLevel() = 2
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != StubbornStepEnchantment
 }

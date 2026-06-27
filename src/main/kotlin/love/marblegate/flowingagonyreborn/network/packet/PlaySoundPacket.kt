@@ -22,8 +22,7 @@ class PlaySoundPacket {
     }
 
     constructor(
-        type: ModSoundType,
-        onOrOff: Boolean
+        type: ModSoundType, onOrOff: Boolean
     ) {
         this.type = type
         this.onOrOff = onOrOff
@@ -38,9 +37,7 @@ class PlaySoundPacket {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, Supplier {
             Runnable {
                 proxy = ClientProxy()
-                ctx
-                    .get()
-                    .enqueueWork({ proxy.handleISound(type, onOrOff) })
+                ctx.get().enqueueWork({ proxy.handleISound(type, onOrOff) })
                 ctx.get().packetHandled = true
             }
         })

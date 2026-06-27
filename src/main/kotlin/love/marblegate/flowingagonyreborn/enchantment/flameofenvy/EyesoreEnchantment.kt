@@ -7,19 +7,9 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object EyesoreEnchantment : ModBaseEnchantment(
-    Rarity.VERY_RARE, EnchantmentCategory.CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND
+    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.CROSSBOW, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, tradableSetting = EnchantmentConfig.tradableConfig.eyesore,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.eyesore, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.eyesore,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.eyesore, canEnchantSetting = EnchantmentConfig.canEnchantConfig.eyesore, maxLevelValue = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.eyesore
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.eyesore
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.eyesore
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.eyesore
-
-    override fun getMaxLevel() = 3
-
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != ThornInFleshEnchantment
-
-    override fun isTreasureOnly() = true
 }

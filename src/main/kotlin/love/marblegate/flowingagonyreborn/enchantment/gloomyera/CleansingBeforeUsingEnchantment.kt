@@ -6,17 +6,7 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object CleansingBeforeUsingEnchantment : ModBaseEnchantment(
-    Rarity.RARE, CustomEnchantmentCategory.everyThing, EquipmentSlotTypeSet.ALL
-) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.cleansingBeforeUsing
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cleansingBeforeUsing
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.cleansingBeforeUsing
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.cleansingBeforeUsing
-
-    override fun getMaxLevel() = 1
-
-    override fun isTreasureOnly() = true
-}
+    pRarity = Rarity.RARE, pCategory = CustomEnchantmentCategory.everyThing, pApplicableSlots = EquipmentSlotTypeSet.ALL, tradableSetting = EnchantmentConfig.tradableConfig.cleansingBeforeUsing,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.cleansingBeforeUsing, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.cleansingBeforeUsing,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.cleansingBeforeUsing, canEnchantSetting = EnchantmentConfig.canEnchantConfig.cleansingBeforeUsing, maxLevelValue = 1
+)

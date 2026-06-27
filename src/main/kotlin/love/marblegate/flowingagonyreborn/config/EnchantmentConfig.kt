@@ -11,6 +11,7 @@ class EnchantmentConfig {
         var discoverableConfig: DiscoverableConfig
         var applyOnEnchantingTableConfig: ApplyOnEnchantingTableConfig
         var isTreasureConfig: IsTreasureConfig
+        var canEnchantConfig: CanEnchantConfig
 
         init {
             builder.push("tradeable")
@@ -18,16 +19,21 @@ class EnchantmentConfig {
             builder.pop()
 
             builder.push("discoverable")
-            discoverableConfig = DiscoverableConfig(builder)
+            discoverableConfig = DiscoverableConfig
             builder.pop()
 
             builder.push("applyOnEnchantingTable")
-            applyOnEnchantingTableConfig = ApplyOnEnchantingTableConfig(builder)
+            applyOnEnchantingTableConfig = ApplyOnEnchantingTableConfig
             builder.pop()
 
             builder.push("isTreasure")
-            isTreasureConfig = IsTreasureConfig(builder)
+            isTreasureConfig = IsTreasureConfig
             builder.pop()
+
+            builder.push("canEnchant")
+            canEnchantConfig = CanEnchantConfig
+            builder.pop()
+
 
             spec = builder.build()
         }
@@ -95,9 +101,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    class DiscoverableConfig(
-        builder: ForgeConfigSpec.Builder
-    ) {
+    object DiscoverableConfig {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)
@@ -159,9 +163,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    class ApplyOnEnchantingTableConfig(
-        builder: ForgeConfigSpec.Builder
-    ) {
+    object ApplyOnEnchantingTableConfig {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)
@@ -223,9 +225,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    class IsTreasureConfig(
-        builder: ForgeConfigSpec.Builder
-    ) {
+    object IsTreasureConfig {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", false)
         val deathPunk by builder.define("deathPunk", false)
         val exoticHealer by builder.define("exoticHealer", false)
@@ -286,4 +286,67 @@ class EnchantmentConfig {
         val originalSinErosion by builder.define("originalSinErosion", true)
         val burialObject by builder.define("burialObject", false)
     }
+
+    object CanEnchantConfig {
+        val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
+        val deathPunk by builder.define("deathPunk", true)
+        val exoticHealer by builder.define("exoticHealer", true)
+        val savorTheTasted by builder.define("savorTheTasted", true)
+        val trickster by builder.define("trickster", true)
+        val covertKnife by builder.define("covertKnife", true)
+        val enviousKind by builder.define("enviousKind", true)
+        val eyesore by builder.define("eyesore", true)
+        val sourceOfEnvy by builder.define("sourceOfEnvy", true)
+        val thornInFlesh by builder.define("thornInFlesh", true)
+        val cleansingBeforeUsing by builder.define("cleansingBeforeUsing", true)
+        val comeBackAtDusk by builder.define("comeBackAtDusk", true)
+        val dirtyMoney by builder.define("dirtyMoney", true)
+        val pilferageCreed by builder.define("pilferageCreed", true)
+        val carefullyIdentified by builder.define("carefullyIdentified", true)
+        val nimbleFinger by builder.define("nimbleFinger", true)
+        val regularCustomerProgram by builder.define("regularCustomerProgram", true)
+        val armorUp by builder.define("armorUp", true)
+        val frivolousStep by builder.define("frivolousStep", true)
+        val miraculousEscape by builder.define("miraculousEscape", true)
+        val potentialBurst by builder.define("potentialBurst", true)
+        val stubbornStep by builder.define("stubbornStep", true)
+        val infectiousMalice by builder.define("infectiousMalice", true)
+        val iSeeYouNow by builder.define("iSeeYouNow", true)
+        val maliceOutbreak by builder.define("maliceOutbreak", true)
+        val perceivedMalice by builder.define("perceivedMalice", true)
+        val vengeance by builder.define("vengeance", true)
+        val backAndFill by builder.define("backAndFill", true)
+        val agonyScreamer by builder.define("agonyScreamer", true)
+        val cuttingWatermelonDream by builder.define("cuttingWatermelonDream", true)
+        val insanePoet by builder.define("insanePoet", true)
+        val paperBrain by builder.define("paperBrain", true)
+        val shockTherapy by builder.define("shockTherapy", true)
+        val burningPhobia by builder.define("burningPhobia", true)
+        val constrainedHeart by builder.define("constrainedHeart", true)
+        val drowningPhobia by builder.define("drowningPhobia", true)
+        val piercingFever by builder.define("piercingFever", true)
+        val destructionWorship by builder.define("destructionWorship", true)
+        val prayerOfPain by builder.define("prayerOfPain", true)
+        val freshRevenge by builder.define("freshRevenge", true)
+        val hatredBloodline by builder.define("hatredBloodline", true)
+        val outrageousSpirit by builder.define("outrageousSpirit", true)
+        val resentfulSoul by builder.define("resentfulSoul", true)
+        val tooResentfulToDie by builder.define("tooResentfulToDie", true)
+        val morirsDeathwish by builder.define("morirsDeathwish", true)
+        val morirsLifebound by builder.define("morirsLifebound", true)
+        val guidensRegret by builder.define("guidensRegret", true)
+        val lastSweetDream by builder.define("lastSweetDream", true)
+        val necessaryEvil by builder.define("necessaryEvil", true)
+        val survivalRuse by builder.define("survivalRuse", true)
+        val survivalShortcut by builder.define("survivalShortcut", true)
+        val corruptedKindred by builder.define("corruptedKindred", true)
+        val lightburnFungalParasitic by builder.define("lightburnFungalParasitic", true)
+        val prototypeChaotic by builder.define("prototypeChaotic", true)
+        val prototypeChaoticTypeBeta by builder.define("prototypeChaoticTypeBeta", true)
+        val shadowborn by builder.define("shadowborn", true)
+        val scholarOfOriginalSin by builder.define("scholarOfOriginalSin", true)
+        val originalSinErosion by builder.define("originalSinErosion", true)
+        val burialObject by builder.define("burialObject", true)
+    }
+
 }

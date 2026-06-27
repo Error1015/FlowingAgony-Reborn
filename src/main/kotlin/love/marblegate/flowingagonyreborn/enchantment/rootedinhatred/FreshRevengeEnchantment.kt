@@ -6,15 +6,9 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object FreshRevengeEnchantment : ModBaseEnchantment(
-    Rarity.UNCOMMON, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
+    pRarity = Rarity.UNCOMMON, pCategory = CustomEnchantmentCategory.axeAndSwordItem, pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND, tradableSetting = EnchantmentConfig.tradableConfig.freshRevenge,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.freshRevenge, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.freshRevenge,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.freshRevenge, canEnchantSetting = EnchantmentConfig.canEnchantConfig.freshRevenge, maxLevelValue = 3
 ) {
-    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.freshRevenge
-
-    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.freshRevenge
-
-    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.freshRevenge
-
-    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.freshRevenge
-
-    override fun getMaxLevel() = 3
+    fun getMaxLevelValue() = 3
 }
