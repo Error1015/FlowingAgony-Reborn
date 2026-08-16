@@ -1,0 +1,21 @@
+{
+  "description": {
+    "translate": "enchantment.flowingagony_reborn.an_enchanted_golden_apple_a_day"
+  },
+  "supported_items": "#minecraft:enchantable/armor",
+  "primary_items": "#minecraft:enchantable/armor",
+  "weight": 300,
+  "max_level": 1,
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 6
+  },
+  "min_cost": {
+    "base": 2,
+    "per_level_above_first": 4
+  },
+  "anvil_cost": 2,
+  "slots": [
+    "armor"
+  ]
+}

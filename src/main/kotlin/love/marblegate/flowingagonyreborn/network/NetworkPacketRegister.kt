@@ -11,11 +11,9 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 object NetworkPacketRegister {
     @SubscribeEvent
     fun registerPacket(event: RegisterPayloadHandlersEvent) {
-        event
-            .registrar("1.0")
-            .apply {
-                playToClient(AbnormalJoySyncPacket.type, AbnormalJoySyncPacket.codec, AbnormalJoySyncPacket::handle)
-                playToClient(RemoveEffectSyncToClientPacket.type, RemoveEffectSyncToClientPacket.codec, RemoveEffectSyncToClientPacket::handle)
-            }
+        event.registrar("1.0").apply {
+            playToClient(AbnormalJoySyncPacket.type, AbnormalJoySyncPacket.codec, AbnormalJoySyncPacket::handle)
+            playToClient(RemoveEffectSyncToClientPacket.type, RemoveEffectSyncToClientPacket.codec, RemoveEffectSyncToClientPacket::handle)
+        }
     }
 }
