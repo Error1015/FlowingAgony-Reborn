@@ -1,29 +1,35 @@
 # Make sure this is set to "kotlinforforge"
-modLoader="kotlinforforge"
+modLoader = "kotlinforforge"
 # Make sure this is set to the appropriate version range
-loaderVersion="${loader_version_range}"
-license='${mod_license}'
+loaderVersion = "${loader_version_range}"
+license = '${mod_license}'
 
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
-authors="${mod_authors}"
-description='''${mod_description}'''
-logoFile= "flowingagony_reborn.png"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
+logoFile = "flowingagony_reborn.png"
 
-[[dependencies.${mod_id}]]
-    modId="neoforge"
-    type="required"
-    versionRange="${neo_version_range}"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.${mod_id}]]
-    modId="minecraft"
-    type="required"
-    versionRange="${minecraft_version_range}"
-    ordering="NONE"
-    side="BOTH"
+[[dependencies.${ mod_id }]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neo_version_range}"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = "[5.8.0,)"
+ordering = "NONE"
+side = "BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
 # that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
