@@ -1,6 +1,6 @@
-package love.marblegate.flowingagonyreborn
+package love.marblegate.flowingagonyreborn.item
 
-import love.marblegate.flowingagonyreborn.item.ModItems
+import love.marblegate.flowingagonyreborn.ID
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab

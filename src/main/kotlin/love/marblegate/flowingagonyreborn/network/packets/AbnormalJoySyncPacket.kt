@@ -6,7 +6,7 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class AbnormalJoySyncPacket(
+data class AbnormalJoySyncPacket(
     val value: Float
 ) : CustomPacketPayload {
     companion object {

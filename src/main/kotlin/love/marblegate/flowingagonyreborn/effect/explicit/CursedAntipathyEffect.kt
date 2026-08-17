@@ -1,42 +1,39 @@
 package love.marblegate.flowingagonyreborn.effect.explicit
 
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.network.packets.ParticleSyncPacket
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.neoforged.neoforge.network.PacketDistributor
 
 object CursedAntipathyEffect : MobEffect(
     MobEffectCategory.HARMFUL, 18432
 ) {
     override fun applyEffectTick(
-        livingEntity: LivingEntity,
-        amplifier: Int
+        livingEntity: LivingEntity, amplifier: Int
     ): Boolean {
         if (livingEntity.level().isClientSide) return false
-        val cursedAntipathy = DamageSourceBuilder.causeCursedAntipathyDamage(
-            livingEntity
-                .level()
-                .registryAccess()
+        val effectLevel = amplifier + 1
+        val cursedAntipathyDamageSource = DamageSourceBuilder.causeCursedAntipathyDamage(
+            livingEntity.level().registryAccess()
         )
-        livingEntity.hurt(cursedAntipathy, amplifier.toFloat() / 2)
-        // Networking.safeSend(
-        //     PacketDistributor.NEAR.with {
-        //         PacketDistributor.TargetPoint(
-        //             pLivingEntity.x, pLivingEntity.y, pLivingEntity.z, 192.0, pLivingEntity
-        //                 .level()
-        //                 .dimension()
-        //         )
-        //     }, ParticleEffectPacket(
-        //         ParticleEffectPacket.MobEffectCategory.CURSED_ANTIPATHY_EFFECT, pLivingEntity.x, pLivingEntity.y + 1, pLivingEntity.z, (pAmplifier + 1) * 0.5, ((pAmplifier + 1) * 2).toDouble()
-        //     )
-        // )
+        livingEntity.hurt(cursedAntipathyDamageSource, amplifier.toFloat() / 2)
+        if (livingEntity is Player) {
+            PacketDistributor.sendToPlayersNear(
+                livingEntity.level() as ServerLevel, null, livingEntity.x, livingEntity.y, livingEntity.z, 192.0, ParticleSyncPacket(
+                    ParticleSyncPacket.MobEffectCategory.CURSED_ANTIPATHY_EFFECT, livingEntity.blockPosition(), effectLevel * 0.5f, effectLevel * 2
+                )
+            )
+        }
         return true
     }
 
 
     override fun shouldApplyEffectTickThisTick(
-        duration: Int,
-        amplifier: Int
+        duration: Int, amplifier: Int
     ): Boolean {
         val k = when (amplifier) {
             0 -> 100

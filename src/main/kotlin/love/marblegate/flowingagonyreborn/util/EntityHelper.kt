@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.*
 import net.minecraft.world.entity.monster.hoglin.Hoglin
 import net.minecraft.world.entity.monster.piglin.Piglin
 import net.minecraft.world.phys.AABB
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import java.util.function.Predicate
 
 fun LivingEntity.getTargetsExceptOneself(
@@ -81,3 +82,9 @@ fun LivingEntity.supportHeadDrop() =
     (this is Zombie && this !is ZombieVillager && this !is ZombifiedPiglin && this !is Husk) || (this is Skeleton || this is Creeper || this is EnderDragon || this is WitherSkeleton)
 
 // fun LivingEntity.isPassiveUndead() = this is ZombieHorse || this is SkeletonHorse
+
+
+/**
+ * 如果伤害大于0.1，且伤害来源是实体, 则返回true
+ */
+fun LivingDamageEvent.Post.shouldReflectDamage() = originalDamage > 0.1 && source.entity is LivingEntity

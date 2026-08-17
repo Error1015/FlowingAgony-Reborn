@@ -8,23 +8,23 @@ import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.entity.Entity
 
 object DamageSourceBuilder {
-    fun causeCursedHatredDamage(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_hatred, registryAccess)
+    fun causeCursedHatredDamage(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursedHatred, registryAccess)
 
-    fun causeCursedAntipathyDamage(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursed_antipathy_effect, registryAccess)
+    fun causeCursedAntipathyDamage(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.cursedAntipathyEffect, registryAccess)
 
-    fun causeLightburnFungalInfection(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.lightburn_fungal_infection, registryAccess)
+    fun causeLightburnFungalInfection(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.lightBurnFungalInfection, registryAccess)
 
-    fun causeAgonyResonance(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.agony_resonance, registryAccess)
+    fun causeAgonyResonance(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.agonyResonance, registryAccess)
 
-    fun causeRythmOfUniverse(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.rhythm_of_universe, registryAccess)
+    fun causeRythmOfUniverse(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.rhythmOfUniverse, registryAccess)
 
-    fun causeExtremeHatred(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.exotic_healer, registryAccess)
+    fun causeExtremeHatred(registryAccess: RegistryAccess) = createFlowingAgonySimpleDeathMessageDamageSource(ModDamageTypes.exoticHealer, registryAccess)
 
-    fun causeCuttingWaterMelonDream(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.cutting_watermelon_dream, entity)
+    fun causeCuttingWaterMelonDream(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.cuttingWatermelonDream, entity)
 
-    fun causeLetMeSavorItDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.let_me_savor_it, entity)
+    fun causeLetMeSavorItDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.letMeSavorIt, entity)
 
-    fun causeBurialObjectDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.burial_object_curse, entity)
+    fun causeBurialObjectDamage(entity: Entity) = createFlowingAgonyMobtoMobDamageSource(ModDamageTypes.burialObjectCurse, entity)
 
     fun causePhobiaDamage(entity: Entity): DamageSource {
         // see https://github.com/MarbleGateKeeper/FlowingAgony/issues/9
