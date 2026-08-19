@@ -12,10 +12,10 @@ import thedarkcolour.kotlinforforge.forge.registerObject
 import net.minecraft.world.item.CreativeModeTab as ItemGroup
 
 object ModItemGroup {
-    val GroupRegistries: DeferredRegister<ItemGroup> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
+    val deferredRegister: DeferredRegister<ItemGroup> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
 
-    val EnchantedBookItems: List<ItemStack>
-        get() = ModEnchantments.Enchantments.entries.map { obj ->
+    val enchantedBookItem: List<ItemStack>
+        get() = ModEnchantments.deferredRegister.entries.map { obj ->
             EnchantedBookItem.createForEnchantment(
                 EnchantmentInstance(
                     obj.get(), obj.get().maxLevel
@@ -23,8 +23,8 @@ object ModItemGroup {
             )
         }
 
-    val EnchantmentsGroup: ItemGroup by GroupRegistries.registerObject("flowingagony_reborn.group") {
+    val EnchantmentsGroup: ItemGroup by deferredRegister.registerObject("flowingagony_reborn.group") {
         ItemGroup.builder().title(Component.translatable("itemGroup.flowingagony_reborn.group")).icon { ModItems.FLOWING_AGONY_ENCHANTED_BOOK.defaultInstance }
-            .displayItems { _, output -> output.acceptAll(EnchantedBookItems) }.build()
+            .displayItems { _, output -> output.acceptAll(enchantedBookItem) }.build()
     }
 }

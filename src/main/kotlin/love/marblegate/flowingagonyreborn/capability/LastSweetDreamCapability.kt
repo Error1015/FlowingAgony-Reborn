@@ -1,4 +1,4 @@
-package love.marblegate.flowingagonyreborn.capibility
+package love.marblegate.flowingagonyreborn.capability
 
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items

@@ -54,10 +54,10 @@ class PlaySoundWithLocationPacket {
                 ctx.get().let {
                         it.enqueueWork {
                             if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                                proxy.playSoundWithLocation(ModSounds.MALICE_OUTBREAK_KNOCKBACK_SOUND, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
+                                proxy.playSoundWithLocation(ModSounds.maliceOutbreakKnockbackSound, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
                             }
                         }
-                        ctx.get().packetHandled = true
+                        it.packetHandled = true
                     }
             }
         }

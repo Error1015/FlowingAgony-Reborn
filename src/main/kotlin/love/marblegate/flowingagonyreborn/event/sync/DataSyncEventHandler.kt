@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.sync
 
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.AbnormalJoySyncPacket
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
@@ -34,7 +34,7 @@ object DataSyncEventHandler {
         val capability = player.getCapability(ModCapManager.AbnormalJoy_Capability)
         capability.ifPresent { cap ->
             Networking.safeSend(
-                PacketDistributor.PLAYER.with { player as ServerPlayer }, AbnormalJoySyncPacket(cap.getPoint())
+                PacketDistributor.PLAYER.with { player as ServerPlayer }, AbnormalJoySyncPacket(cap.abnormalJoyPoint)
             )
         }
     }

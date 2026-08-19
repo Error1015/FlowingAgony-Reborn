@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.capibility.CoolDown
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.CoolDown
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.GuidensRegretEnchantment
 import love.marblegate.flowingagonyreborn.enchantment.lastwish.LastSweetDreamEnchantment

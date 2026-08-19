@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
 import love.marblegate.flowingagonyreborn.config.CommonConfig
-import love.marblegate.flowingagonyreborn.damagesource.DamageSourceBuilder
+import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.*
 import love.marblegate.flowingagonyreborn.enchantment.themistakens.curse.BurialObjectCurse
@@ -261,7 +261,7 @@ object TheMistakensEnchantmentEventHandler {
     @SubscribeEvent
     fun doBurialObjectCurseEvent(event: LivingDeathEvent) {
         if (event.entity.level().isClientSide) return
-        val burialObjectCurseDamageSource = DamageSourceBuilder.causeBurialObjectDamage(event.entity)
+        val burialObjectCurseDamageSource = DamageSourceFactory.causeBurialObjectDamage(event.entity)
         if (event.entity is Player) {
             val player = event.entity as Player
             val originalDeathPos = player.blockPosition()

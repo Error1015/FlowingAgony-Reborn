@@ -1,4 +1,4 @@
-package love.marblegate.flowingagonyreborn.capibility
+package love.marblegate.flowingagonyreborn.capability
 
 import love.marblegate.flowingagonyreborn.MODID
 import net.minecraft.resources.ResourceLocation
@@ -43,13 +43,13 @@ object ModCapManager {
         val oldAbnormalJoyPoint = event.original.getCapability(AbnormalJoy_Capability)
         val newAbnormalJoyPoint = player.getCapability(AbnormalJoy_Capability)
         if (oldAbnormalJoyPoint.isPresent && newAbnormalJoyPoint.isPresent) {
-            newAbnormalJoyPoint.ifPresent { newCap -> oldAbnormalJoyPoint.ifPresent { oldCap -> newCap.setPoint(oldCap.getPoint()) } }
+            newAbnormalJoyPoint.ifPresent { newCap -> oldAbnormalJoyPoint.ifPresent { oldCap -> newCap.abnormalJoyPoint = oldCap.abnormalJoyPoint } }
         }
 
         val oldCoolDown = event.original.getCapability(CoolDown_Capability)
         val newCoolDown = player.getCapability(CoolDown_Capability)
         if (oldCoolDown.isPresent && newCoolDown.isPresent) {
-            newCoolDown.ifPresent { newCap -> oldCoolDown.ifPresent { oldCap -> newCap.setMap(oldCap.getMap()) } }
+            newCoolDown.ifPresent { newCap -> oldCoolDown.ifPresent { oldCap -> newCap.coolDownMap = oldCap.coolDownMap } }
         }
 
         val oldLastSweetDream = event.original.getCapability(LastSweetDream_Capability)

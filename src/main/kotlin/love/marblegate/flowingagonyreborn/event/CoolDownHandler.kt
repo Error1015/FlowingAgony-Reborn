@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event
 
-import love.marblegate.flowingagonyreborn.capibility.CoolDown
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.CoolDown
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod

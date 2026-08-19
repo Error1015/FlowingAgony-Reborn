@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.capibility.CoolDown
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.CoolDown
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.DamageSourceFactory
 import love.marblegate.flowingagonyreborn.enchantment.diceoffraud.*

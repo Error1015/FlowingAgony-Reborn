@@ -1,4 +1,4 @@
-package love.marblegate.flowingagonyreborn.capibility
+package love.marblegate.flowingagonyreborn.capability
 
 class HatredBloodlineStatusCapability(
     private var hatredBloodlineLevel: Int = 0

@@ -1,4 +1,4 @@
-package love.marblegate.flowingagonyreborn.capibility
+package love.marblegate.flowingagonyreborn.capability
 
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -24,11 +24,11 @@ class PlayerCapabilityProvider : ICapabilitySerializable<CompoundTag> {
         lastSweetDreamCapabilityOptional.invalidate()
     }
 
-    override fun <T : Any?> getCapability(
-        cap: Capability<T?>, side: Direction?
-    ): LazyOptional<T?> = getCapability(cap)
+    override fun <T> getCapability(
+        cap: Capability<T>, side: Direction?
+    ): LazyOptional<T> = getCapability(cap)
 
-    override fun <T : Any?> getCapability(cap: Capability<T?>): LazyOptional<T?> {
+    override fun <T> getCapability(cap: Capability<T>): LazyOptional<T> {
         if (cap == ModCapManager.AbnormalJoy_Capability) return abnormalJoyCapabilityOptional.cast()
         if (cap == ModCapManager.CoolDown_Capability) return coolDownOptional.cast()
         if (cap == ModCapManager.LastSweetDream_Capability) return lastSweetDreamCapabilityOptional.cast()
@@ -38,7 +38,7 @@ class PlayerCapabilityProvider : ICapabilitySerializable<CompoundTag> {
 
     override fun serializeNBT(): CompoundTag {
         val nbt = CompoundTag()
-        nbt.putFloat("abnormal_joy", abnormalJoyCapability.getPoint())
+        nbt.putFloat("abnormal_joy", abnormalJoyCapability.abnormalJoyPoint)
         CoolDown.CoolDownType.entries.forEach { coolDownType -> nbt.putInt(coolDownType.name, coolDown.get(coolDownType)) }
         nbt.put(
             "last_sweet_dream_itemstack", lastSweetDreamCapability.getItemStack().serializeNBT()
@@ -49,7 +49,7 @@ class PlayerCapabilityProvider : ICapabilitySerializable<CompoundTag> {
 
     override fun deserializeNBT(nbt: CompoundTag?) {
         if (nbt == null) return
-        abnormalJoyCapability.setPoint(nbt.getFloat("abnormal_joy"))
+        abnormalJoyCapability.abnormalJoyPoint = nbt.getFloat("abnormal_joy")
         CoolDown.CoolDownType.entries.forEach { coolDownType -> coolDown.set(coolDownType, nbt.getInt(coolDownType.name)) }
         val nbtItem = nbt.get("last_sweet_dream_itemstack") ?: lastSweetDreamCapability.clear()
         lastSweetDreamCapability.saveItemStack(ItemStack.of(nbtItem as CompoundTag))

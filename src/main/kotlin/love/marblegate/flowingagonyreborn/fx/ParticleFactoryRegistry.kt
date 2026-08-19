@@ -11,6 +11,6 @@ import net.minecraftforge.fml.common.Mod
 object ParticleFactoryRegistry {
     @SubscribeEvent
     fun onParticleFactoryRegistration(event: RegisterParticleProvidersEvent) {
-        event.registerSpriteSet(ModParticle.CURSED_ANTIPATHY_PARTICLE) { CursedAntipathyParticle.Factory(it) }
+        event.registerSpriteSet(ModParticle.cursedAntipathyParticle) { CursedAntipathyParticle.Factory(it) }
     }
 }

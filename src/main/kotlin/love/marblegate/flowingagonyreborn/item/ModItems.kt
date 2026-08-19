@@ -8,9 +8,9 @@ import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModItems {
-    val MOD_ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
+    val deferredRegister: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
 
-    val FLOWING_AGONY_ENCHANTED_BOOK: Item by MOD_ITEMS.registerObject("flowing_agony_enchanted_book") {
+    val FLOWING_AGONY_ENCHANTED_BOOK: Item by deferredRegister.registerObject("flowing_agony_enchanted_book") {
         FlowingAgonyEnchantedBookItem(
             Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)
         )

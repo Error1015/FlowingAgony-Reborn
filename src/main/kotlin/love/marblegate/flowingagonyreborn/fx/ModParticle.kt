@@ -8,6 +8,6 @@ import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModParticle {
-    val ParticleTypes: DeferredRegister<ParticleType<*>> = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MODID)
-    val CURSED_ANTIPATHY_PARTICLE by ParticleTypes.registerObject("cursed_antipathy_particle") { CursedAntipathyParticleType }
+    val deferredRegister: DeferredRegister<ParticleType<*>> = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MODID)
+    val cursedAntipathyParticle by deferredRegister.registerObject("cursed_antipathy_particle") { CursedAntipathyParticleType }
 }

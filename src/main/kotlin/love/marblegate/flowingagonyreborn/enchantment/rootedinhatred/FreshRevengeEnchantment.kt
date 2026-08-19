@@ -10,5 +10,5 @@ object FreshRevengeEnchantment : ModBaseEnchantment(
     discoverableSetting = EnchantmentConfig.discoverableConfig.freshRevenge, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.freshRevenge,
     isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.freshRevenge, canEnchantSetting = EnchantmentConfig.canEnchantConfig.freshRevenge, maxLevelValue = 3
 ) {
-    fun getMaxLevelValue() = 3
+    // fun getMaxLevelValue() = 3
 }

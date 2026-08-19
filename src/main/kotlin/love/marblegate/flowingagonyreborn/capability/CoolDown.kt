@@ -1,10 +1,10 @@
-package love.marblegate.flowingagonyreborn.capibility
+package love.marblegate.flowingagonyreborn.capability
 
 import java.util.*
 import kotlin.math.max
 
 class CoolDown(
-    private var coolDownMap: Map<CoolDownType, Int> = mutableMapOf()
+    var coolDownMap: Map<CoolDownType, Int> = EnumMap(CoolDownType::class.java)
 ) {
     init {
         coolDownMap = EnumMap(CoolDownType::class.java)
@@ -25,12 +25,6 @@ class CoolDown(
 
     fun decrease(cooldownType: CoolDownType) {
         if (!isReady(cooldownType)) coolDownMap + (cooldownType to (coolDownMap[cooldownType]?.minus(1) ?: 0))
-    }
-
-    fun getMap() = coolDownMap
-
-    fun setMap(map: Map<CoolDownType, Int>) {
-        coolDownMap = map
     }
 
     enum class CoolDownType {

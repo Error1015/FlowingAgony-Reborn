@@ -1,7 +1,7 @@
 package love.marblegate.flowingagonyreborn.network.packet
 
-import love.marblegate.flowingagonyreborn.capibility.AbnormalJoyCapability
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.AbnormalJoyCapability
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import net.minecraft.client.Minecraft
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraftforge.api.distmarker.Dist
@@ -24,13 +24,13 @@ class AbnormalJoySyncPacket(
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
                 ctx.get().let {
-                        it.enqueueWork {
-                            val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
-                            pointCap?.ifPresent(
-                                NonNullConsumer { cap: AbnormalJoyCapability -> cap.setPoint(value) })
-                            ctx.get().packetHandled = true
-                        }
+                    it.enqueueWork {
+                        val pointCap = Minecraft.getInstance().player?.getCapability(ModCapManager.AbnormalJoy_Capability)
+                        pointCap?.ifPresent(
+                            NonNullConsumer { cap: AbnormalJoyCapability -> cap.abnormalJoyPoint = value })
+                        it.packetHandled = true
                     }
+                }
             }
         }
     }

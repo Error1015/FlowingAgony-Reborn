@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event.enchantment
 
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import love.marblegate.flowingagonyreborn.config.CommonConfig
 import love.marblegate.flowingagonyreborn.damagesource.ModDamageTypes
 import love.marblegate.flowingagonyreborn.effect.ModEffects

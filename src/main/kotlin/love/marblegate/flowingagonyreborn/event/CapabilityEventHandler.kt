@@ -1,6 +1,6 @@
 package love.marblegate.flowingagonyreborn.event
 
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import love.marblegate.flowingagonyreborn.network.Networking
 import love.marblegate.flowingagonyreborn.network.packet.AbnormalJoySyncPacket
 import love.marblegate.flowingagonyreborn.util.proxy.safeSend
@@ -21,20 +21,20 @@ object CapabilityEventHandler {
         if (causeEntity is Player) {
             val pointCap = causeEntity.getCapability(ModCapManager.AbnormalJoy_Capability)
             pointCap.ifPresent { cap ->
-                if (cap.getPoint() >= 5) {
+                if (cap.abnormalJoyPoint >= 5) {
                     event.entity.hurt(
                         event.entity.damageSources().generic(), 15f
                     )
                     cap.decrease(5f)
-                } else if (cap.getPoint() <= 1) {
-                    cap.decrease(cap.getPoint())
+                } else if (cap.abnormalJoyPoint <= 1) {
+                    cap.decrease(cap.abnormalJoyPoint)
                 }
 
                 // 同步到客户端
                 val serverPlayer = event.source.entity as? ServerPlayer ?: return@ifPresent
                 Networking.safeSend(PacketDistributor.PLAYER.with {
                     serverPlayer
-                }, AbnormalJoySyncPacket(cap.getPoint()))
+                }, AbnormalJoySyncPacket(cap.abnormalJoyPoint))
             }
         }
     }

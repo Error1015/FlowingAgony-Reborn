@@ -24,86 +24,86 @@ import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModEnchantments {
-    val Enchantments: DeferredRegister<Enchantment> = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID)
+    val deferredRegister: DeferredRegister<Enchantment> = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID)
 
     // Diceoffraud
-    val anEnchantedGoldenAppleADay by Enchantments.registerObject("an_enchanted_golden_apple_a_day") { AnEnchantedGoldenAppleADayEnchantment }
-    val deathPunk by Enchantments.registerObject("deathpunk") { DeathPunkEnchantment }
-    val ExoticHealer by Enchantments.registerObject("exotic_healer") { ExoticHealerEnchantment }
-    val SavorTheTasted by Enchantments.registerObject("savor_the_tasted") { SavorTheTastedEnchantment }
-    val Trickster by Enchantments.registerObject("trickster") { TricksterEnchantment }
+    val anEnchantedGoldenAppleADay by deferredRegister.registerObject("an_enchanted_golden_apple_a_day") { AnEnchantedGoldenAppleADayEnchantment }
+    val deathPunk by deferredRegister.registerObject("deathpunk") { DeathPunkEnchantment }
+    val ExoticHealer by deferredRegister.registerObject("exotic_healer") { ExoticHealerEnchantment }
+    val SavorTheTasted by deferredRegister.registerObject("savor_the_tasted") { SavorTheTastedEnchantment }
+    val Trickster by deferredRegister.registerObject("trickster") { TricksterEnchantment }
 
     // flameofenvy
-    val CovertKnife by Enchantments.registerObject("covert_knife") { CovertKnifeEnchantment }
-    val EnviousKind by Enchantments.registerObject("envious_kind") { EnviousKindEnchantment }
-    val Eyesore by Enchantments.registerObject("eyesore") { EyesoreEnchantment }
-    val SourceOfEnvy by Enchantments.registerObject("source_of_envy") { SourceOfEnvyEnchantment }
-    val ThornInFlesh by Enchantments.registerObject("thorn_in_flesh") { ThornInFleshEnchantment }
+    val CovertKnife by deferredRegister.registerObject("covert_knife") { CovertKnifeEnchantment }
+    val EnviousKind by deferredRegister.registerObject("envious_kind") { EnviousKindEnchantment }
+    val Eyesore by deferredRegister.registerObject("eyesore") { EyesoreEnchantment }
+    val SourceOfEnvy by deferredRegister.registerObject("source_of_envy") { SourceOfEnvyEnchantment }
+    val ThornInFlesh by deferredRegister.registerObject("thorn_in_flesh") { ThornInFleshEnchantment }
 
     // gloomyera
-    val CarefullyIdentified by Enchantments.registerObject("carefully_identified") { CarefullyIdentifiedEnchantment }
-    val CleansingBeforeUsing by Enchantments.registerObject("cleansing_before_using") { CleansingBeforeUsingEnchantment }
-    val ComeBackAtDusk by Enchantments.registerObject("come_back_at_dusk") { ComeBackAtDuskEnchantment }
-    val DirtyMoney by Enchantments.registerObject("dirty_money") { DirtyMoneyEnchantment }
-    val NimbleFinger by Enchantments.registerObject("nimble_finger") { NimbleFingerEnchantment }
-    val PilferageCreed by Enchantments.registerObject("pilferage_creed") { PilferageCreedEnchantment }
-    val RegularCustomerProgram by Enchantments.registerObject("regular_customer_program") { RegularCustomerProgramEnchantment }
+    val CarefullyIdentified by deferredRegister.registerObject("carefully_identified") { CarefullyIdentifiedEnchantment }
+    val CleansingBeforeUsing by deferredRegister.registerObject("cleansing_before_using") { CleansingBeforeUsingEnchantment }
+    val ComeBackAtDusk by deferredRegister.registerObject("come_back_at_dusk") { ComeBackAtDuskEnchantment }
+    val DirtyMoney by deferredRegister.registerObject("dirty_money") { DirtyMoneyEnchantment }
+    val NimbleFinger by deferredRegister.registerObject("nimble_finger") { NimbleFingerEnchantment }
+    val PilferageCreed by deferredRegister.registerObject("pilferage_creed") { PilferageCreedEnchantment }
+    val RegularCustomerProgram by deferredRegister.registerObject("regular_customer_program") { RegularCustomerProgramEnchantment }
 
     // innerpotential
-    val ArmorUp by Enchantments.registerObject("armor_up") { ArmorUpEnchantment }
-    val FrivolousStep by Enchantments.registerObject("frivolous_step") { FrivolousStepEnchantment }
-    val MiraculousEscape by Enchantments.registerObject("miraculous_escape") { MiraculousEscapeEnchantment }
-    val PotentialBurst by Enchantments.registerObject("potential_burst") { PotentialBurstEnchantment }
-    val StubbornStep by Enchantments.registerObject("stubborn_step") { StubbornStepEnchantment }
+    val ArmorUp by deferredRegister.registerObject("armor_up") { ArmorUpEnchantment }
+    val FrivolousStep by deferredRegister.registerObject("frivolous_step") { FrivolousStepEnchantment }
+    val MiraculousEscape by deferredRegister.registerObject("miraculous_escape") { MiraculousEscapeEnchantment }
+    val PotentialBurst by deferredRegister.registerObject("potential_burst") { PotentialBurstEnchantment }
+    val StubbornStep by deferredRegister.registerObject("stubborn_step") { StubbornStepEnchantment }
 
     // lastwish
-    val GuidensRegret by Enchantments.registerObject("guidens_regret") { GuidensRegretEnchantment }
-    val LastSweetDream by Enchantments.registerObject("last_sweet_dream") { LastSweetDreamEnchantment }
-    val MorirsDeathwish by Enchantments.registerObject("morirs_deathwish") { MorirsDeathwishEnchantment }
-    val MorirsLifebound by Enchantments.registerObject("morirs_lifebound") { MorirsLifeboundEnchantment }
+    val GuidensRegret by deferredRegister.registerObject("guidens_regret") { GuidensRegretEnchantment }
+    val LastSweetDream by deferredRegister.registerObject("last_sweet_dream") { LastSweetDreamEnchantment }
+    val MorirsDeathwish by deferredRegister.registerObject("morirs_deathwish") { MorirsDeathwishEnchantment }
+    val MorirsLifebound by deferredRegister.registerObject("morirs_lifebound") { MorirsLifeboundEnchantment }
 
     // lensofmalice
-    val BackAndFill by Enchantments.registerObject("back_and_fill") { BackAndFillEnchantment }
-    val InfectiousMalice by Enchantments.registerObject("infectious_malice") { InfectiousMaliceEnchantment }
-    val ISeeYouNow by Enchantments.registerObject("i_see_you_now") { ISeeYouNowEnchantment }
-    val MaliceOutbreak by Enchantments.registerObject("malice_outbreak") { MaliceOutbreakEnchantment }
-    val PerceivedMalice by Enchantments.registerObject("perceived_malice") { PerceivedMaliceEnchantment }
-    val Vengeance by Enchantments.registerObject("vengeance") { VengeanceEnchantment }
+    val BackAndFill by deferredRegister.registerObject("back_and_fill") { BackAndFillEnchantment }
+    val InfectiousMalice by deferredRegister.registerObject("infectious_malice") { InfectiousMaliceEnchantment }
+    val ISeeYouNow by deferredRegister.registerObject("i_see_you_now") { ISeeYouNowEnchantment }
+    val MaliceOutbreak by deferredRegister.registerObject("malice_outbreak") { MaliceOutbreakEnchantment }
+    val PerceivedMalice by deferredRegister.registerObject("perceived_malice") { PerceivedMaliceEnchantment }
+    val Vengeance by deferredRegister.registerObject("vengeance") { VengeanceEnchantment }
 
     // madeofmadness
-    val AgonyScreamer by Enchantments.registerObject("agony_screamer") { AgonyScreamerEnchantment }
-    val CuttingWatermelonDream by Enchantments.registerObject("cutting_watermelon_dream") { CuttingWatermelonDreamEnchantment }
-    val InsanePoet by Enchantments.registerObject("insane_poet") { InsanePoetEnchantment }
-    val PaperBrain by Enchantments.registerObject("paper_brain") { PaperBrainEnchantment }
-    val ShockTherapy by Enchantments.registerObject("shock_therapy") { ShockTherapyEnchantment }
+    val AgonyScreamer by deferredRegister.registerObject("agony_screamer") { AgonyScreamerEnchantment }
+    val CuttingWatermelonDream by deferredRegister.registerObject("cutting_watermelon_dream") { CuttingWatermelonDreamEnchantment }
+    val InsanePoet by deferredRegister.registerObject("insane_poet") { InsanePoetEnchantment }
+    val PaperBrain by deferredRegister.registerObject("paper_brain") { PaperBrainEnchantment }
+    val ShockTherapy by deferredRegister.registerObject("shock_therapy") { ShockTherapyEnchantment }
 
     // madeofsuffering
-    val BurningPhobia by Enchantments.registerObject("burning_phobia") { BurningPhobiaEnchantment }
-    val ConstrainedHeart by Enchantments.registerObject("constrained_heart") { ConstrainedHeartEnchantment }
-    val DestructionWorship by Enchantments.registerObject("destruction_worship") { DestructionWorshipEnchantment }
-    val DrowningPhobia by Enchantments.registerObject("drowning_phobia") { DrowningPhobiaEnchantment }
-    val PiercingFever by Enchantments.registerObject("piercing_fever") { PiercingFeverEnchantment }
-    val PrayerOfPain by Enchantments.registerObject("prayer_of_pain") { PrayerOfPainEnchantment }
+    val BurningPhobia by deferredRegister.registerObject("burning_phobia") { BurningPhobiaEnchantment }
+    val ConstrainedHeart by deferredRegister.registerObject("constrained_heart") { ConstrainedHeartEnchantment }
+    val DestructionWorship by deferredRegister.registerObject("destruction_worship") { DestructionWorshipEnchantment }
+    val DrowningPhobia by deferredRegister.registerObject("drowning_phobia") { DrowningPhobiaEnchantment }
+    val PiercingFever by deferredRegister.registerObject("piercing_fever") { PiercingFeverEnchantment }
+    val PrayerOfPain by deferredRegister.registerObject("prayer_of_pain") { PrayerOfPainEnchantment }
 
     // rootedinhatred
-    val FreshRevenge by Enchantments.registerObject("fresh_revenge") { FreshRevengeEnchantment }
-    val HatredBloodline by Enchantments.registerObject("hatred_bloodline") { HatredBloodlineEnchantment }
-    val OutrageoutSpirit by Enchantments.registerObject("outrageous_spirit") { OutrageoutSpiritEnchantment }
-    val ResentfulSou by Enchantments.registerObject("resentful_soul") { ResentfulSoulEnchantment }
-    val TooResentfulToDie by Enchantments.registerObject("too_resentful_to_die") { TooResentfulToDieEnchantment }
+    val FreshRevenge by deferredRegister.registerObject("fresh_revenge") { FreshRevengeEnchantment }
+    val HatredBloodline by deferredRegister.registerObject("hatred_bloodline") { HatredBloodlineEnchantment }
+    val OutrageoutSpirit by deferredRegister.registerObject("outrageous_spirit") { OutrageoutSpiritEnchantment }
+    val ResentfulSou by deferredRegister.registerObject("resentful_soul") { ResentfulSoulEnchantment }
+    val TooResentfulToDie by deferredRegister.registerObject("too_resentful_to_die") { TooResentfulToDieEnchantment }
 
     // survivaltricks
-    val NecessaryEvil by Enchantments.registerObject("necessary_evil") { NecessaryEvilEnchantment }
-    val SurvivalShortcut by Enchantments.registerObject("survival_shortcut") { SurvivalShortcutEnchantment }
-    val SurvivalRuse by Enchantments.registerObject("survival_ruse") { SurvivalRuseEnchantment }
+    val NecessaryEvil by deferredRegister.registerObject("necessary_evil") { NecessaryEvilEnchantment }
+    val SurvivalShortcut by deferredRegister.registerObject("survival_shortcut") { SurvivalShortcutEnchantment }
+    val SurvivalRuse by deferredRegister.registerObject("survival_ruse") { SurvivalRuseEnchantment }
 
     // themistakens
-    val BurialObject by Enchantments.registerObject("burial_object") { BurialObjectCurse }
-    val CorruptedKindred by Enchantments.registerObject("corrupted_kindred") { CorruptedKindredEnchantment }
-    val LightburnFungalParasitic by Enchantments.registerObject("lightburn_fungal_parasitic") { LightburnFungalParasiticEnchantment }
-    val OriginalSinErosion by Enchantments.registerObject("original_sin_erosion") { OriginalSinErosionEnchantment }
-    val PrototypeChaotic by Enchantments.registerObject("prototype_chaotic") { PrototypeChaoticEnchantment }
-    val PrototypeChaoticTypeBeta by Enchantments.registerObject("prototype_chaotic_type_beta") { PrototypeChaoticTypeBetaEnchantment }
-    val ScholarOfOriginalSin by Enchantments.registerObject("scholar_of_original_sin") { ScholarOfOriginalSinEnchantment }
-    val Shadowborn by Enchantments.registerObject("shadowborn") { ShadowbornEnchantment }
+    val BurialObject by deferredRegister.registerObject("burial_object") { BurialObjectCurse }
+    val CorruptedKindred by deferredRegister.registerObject("corrupted_kindred") { CorruptedKindredEnchantment }
+    val LightburnFungalParasitic by deferredRegister.registerObject("lightburn_fungal_parasitic") { LightburnFungalParasiticEnchantment }
+    val OriginalSinErosion by deferredRegister.registerObject("original_sin_erosion") { OriginalSinErosionEnchantment }
+    val PrototypeChaotic by deferredRegister.registerObject("prototype_chaotic") { PrototypeChaoticEnchantment }
+    val PrototypeChaoticTypeBeta by deferredRegister.registerObject("prototype_chaotic_type_beta") { PrototypeChaoticTypeBetaEnchantment }
+    val ScholarOfOriginalSin by deferredRegister.registerObject("scholar_of_original_sin") { ScholarOfOriginalSinEnchantment }
+    val Shadowborn by deferredRegister.registerObject("shadowborn") { ShadowbornEnchantment }
 }

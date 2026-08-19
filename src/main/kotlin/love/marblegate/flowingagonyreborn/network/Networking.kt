@@ -18,20 +18,50 @@ object Networking {
     fun isInstanceInitialized() = ::instance.isInitialized
 
     fun registerMessage() {
-        instance = NetworkRegistry.newSimpleChannel(ResourceLocation(MODID, "mod_networking"), { VERSION }, { true }, { true })
-        instance.registerMessage(nextID(), PlaySoundPacket::class.java, PlaySoundPacket::toBytes, ::PlaySoundPacket, PlaySoundPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT))
+        instance = NetworkRegistry.newSimpleChannel(ResourceLocation(MODID, "mod_networking"), { VERSION }, { it == VERSION }, { it == VERSION })
+
         instance.registerMessage(
-            nextID(), ParticleEffectPacket::class.java, ParticleEffectPacket::toBytes, ::ParticleEffectPacket, ParticleEffectPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
-        )
-        instance.registerMessage(
-            nextID(), PlaySoundWithLocationPacket::class.java, PlaySoundWithLocationPacket::toBytes, ::PlaySoundWithLocationPacket, PlaySoundWithLocationPacket::handle,
+            nextID(),
+            PlaySoundPacket::class.java,
+            PlaySoundPacket::toBytes,
+            ::PlaySoundPacket,
+            PlaySoundPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         )
+
         instance.registerMessage(
-            nextID(), AbnormalJoySyncPacket::class.java, AbnormalJoySyncPacket::toBytes, ::AbnormalJoySyncPacket, AbnormalJoySyncPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+            nextID(),
+            ParticleEffectPacket::class.java,
+            ParticleEffectPacket::toBytes,
+            ::ParticleEffectPacket,
+            ParticleEffectPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         )
+
         instance.registerMessage(
-            nextID(), RemoveEffectSyncToClientPacket::class.java, RemoveEffectSyncToClientPacket::toBytes, ::RemoveEffectSyncToClientPacket, RemoveEffectSyncToClientPacket::handle,
+            nextID(),
+            PlaySoundWithLocationPacket::class.java,
+            PlaySoundWithLocationPacket::toBytes,
+            ::PlaySoundWithLocationPacket,
+            PlaySoundWithLocationPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        )
+
+        instance.registerMessage(
+            nextID(),
+            AbnormalJoySyncPacket::class.java,
+            AbnormalJoySyncPacket::toBytes,
+            ::AbnormalJoySyncPacket,
+            AbnormalJoySyncPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        )
+
+        instance.registerMessage(
+            nextID(),
+            RemoveEffectSyncToClientPacket::class.java,
+            RemoveEffectSyncToClientPacket::toBytes,
+            ::RemoveEffectSyncToClientPacket,
+            RemoveEffectSyncToClientPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         )
     }

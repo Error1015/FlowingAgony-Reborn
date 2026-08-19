@@ -2,8 +2,8 @@ package love.marblegate.flowingagonyreborn.hud
 
 import com.mojang.blaze3d.systems.RenderSystem
 import love.marblegate.flowingagonyreborn.MODID
-import love.marblegate.flowingagonyreborn.capibility.AbnormalJoyCapability
-import love.marblegate.flowingagonyreborn.capibility.ModCapManager
+import love.marblegate.flowingagonyreborn.capability.AbnormalJoyCapability
+import love.marblegate.flowingagonyreborn.capability.ModCapManager
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.resources.ResourceLocation

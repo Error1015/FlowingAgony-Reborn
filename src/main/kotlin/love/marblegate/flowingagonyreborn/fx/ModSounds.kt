@@ -8,26 +8,25 @@ import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModSounds {
-    val Sounds: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID)
+    val deferredRegister: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID)
 
-    val MIRACULOUS_ESCAPE_HEARTBEAT: SoundEvent by Sounds.registerObject("miraculous_escape_heartbeat") {
+    val miraculousEscapeHeartbeat: SoundEvent by deferredRegister.registerObject("miraculous_escape_heartbeat") {
         SoundEvent.createVariableRangeEvent(ResourceLocation(MODID, "miraculous_escape_heartbeat"))
     }
 
-    val MALICE_OUTBREAK_KNOCKBACK_SOUND: SoundEvent by Sounds.registerObject("malice_outbreak_knockback_sound") {
+    val maliceOutbreakKnockbackSound: SoundEvent by deferredRegister.registerObject("malice_outbreak_knockback_sound") {
         SoundEvent.createVariableRangeEvent(ResourceLocation(MODID, "malice_outbreak_knockback_sound"))
     }
 
-    val EXTREME_HATRED_FIRST_STAGE_SOUND: SoundEvent by Sounds.registerObject("extreme_hatred_first_stage_sound") {
+    val extremeHatredFirstStageSound: SoundEvent by deferredRegister.registerObject("extreme_hatred_first_stage_sound") {
         SoundEvent.createVariableRangeEvent(ResourceLocation(MODID, "extreme_hatred_first_stage_sound"))
     }
 
-    val EXTREME_HATRED_MEDIUM_STAGE_SOUND: SoundEvent by Sounds.registerObject("extreme_hatred_medium_stage_sound") {
+    val extremeHatredMediumStageSound: SoundEvent by deferredRegister.registerObject("extreme_hatred_medium_stage_sound") {
         SoundEvent.createVariableRangeEvent(ResourceLocation(MODID, "extreme_hatred_medium_stage_sound"))
     }
 
-    val EXTREME_HATRED_FINAL_STAGE_SOUND: SoundEvent by Sounds.registerObject("extreme_hatred_final_stage_sound") {
+    val extremeHatredFinalStageSound: SoundEvent by deferredRegister.registerObject("extreme_hatred_final_stage_sound") {
         SoundEvent.createVariableRangeEvent(ResourceLocation(MODID, "extreme_hatred_final_stage_sound"))
     }
-
 }
