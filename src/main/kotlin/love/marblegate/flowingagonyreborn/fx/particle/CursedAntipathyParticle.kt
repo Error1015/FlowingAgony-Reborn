@@ -10,7 +10,7 @@ import net.minecraft.core.particles.ParticleType
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import java.util.Locale
+import java.util.*
 
 @OnlyIn(Dist.CLIENT)
 class CursedAntipathyParticle(
@@ -31,7 +31,14 @@ class CursedAntipathyParticle(
     @OnlyIn(Dist.CLIENT)
     class Factory(private val spriteSet: SpriteSet) : ParticleProvider<CursedAntipathyParticleOption> {
         override fun createParticle(
-            typeIn: CursedAntipathyParticleOption, worldIn: ClientLevel, x: Double, y: Double, z: Double, xSpeed: Double, ySpeed: Double, zSpeed: Double
+            typeIn: CursedAntipathyParticleOption,
+            worldIn: ClientLevel,
+            x: Double,
+            y: Double,
+            z: Double,
+            xSpeed: Double,
+            ySpeed: Double,
+            zSpeed: Double
         ): Particle {
             val cursedHatredParticle = CursedAntipathyParticle(worldIn, x, y, z, typeIn.getDiameter())
             cursedHatredParticle.pickSprite(spriteSet)
@@ -43,7 +50,7 @@ class CursedAntipathyParticle(
 
 open class CursedAntipathyParticleOption(
     val diameter: Float
-): ParticleOptions {
+) : ParticleOptions {
     companion object {
         val DESERIALIZER: ParticleOptions.Deserializer<CursedAntipathyParticleOption> = object : ParticleOptions.Deserializer<CursedAntipathyParticleOption> {
             override fun fromCommand(

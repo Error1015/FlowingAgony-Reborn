@@ -30,7 +30,9 @@ object FXSyncHandler {
         when {
             player.hasEffect(ModEffects.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE) -> {
                 Networking.safeSend(
-                    PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true))
+                    PacketDistributor.PLAYER.with { serverPlayer },
+                                    PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true)
+                )
             }
 
             player.hasEffect(ModEffects.EXTREME_HATRED) -> {
@@ -42,7 +44,8 @@ object FXSyncHandler {
 
 
                     1 -> Networking.safeSend(
-                        PacketDistributor.PLAYER.with { serverPlayer }, PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true)
+                        PacketDistributor.PLAYER.with { serverPlayer },
+                        PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true)
                     )
 
 

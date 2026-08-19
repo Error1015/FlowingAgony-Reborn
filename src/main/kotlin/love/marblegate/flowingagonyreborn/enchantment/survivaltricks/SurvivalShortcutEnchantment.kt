@@ -7,9 +7,16 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object SurvivalShortcutEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE, pCategory = EnchantmentCategory.ARMOR_CHEST, pApplicableSlots = EquipmentSlotTypeSet.CHEST, tradableSetting = EnchantmentConfig.tradableConfig.survivalShortcut,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.survivalShortcut, canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.survivalShortcut,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.survivalShortcut, canEnchantSetting = EnchantmentConfig.canEnchantConfig.survivalShortcut, maxLevelValue = 3
+    pRarity = Rarity.VERY_RARE,
+    pCategory = EnchantmentCategory.ARMOR_CHEST,
+    pApplicableSlots = EquipmentSlotTypeSet.CHEST,
+    tradableSetting = EnchantmentConfig.tradableConfig.survivalShortcut,
+    discoverableSetting = EnchantmentConfig.discoverableConfig.survivalShortcut,
+    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.survivalShortcut,
+    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.survivalShortcut,
+    canEnchantSetting = EnchantmentConfig.canEnchantConfig.survivalShortcut,
+    maxLevelValue = 3
 ) {
-    override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != NecessaryEvilEnchantment && pOther != SurvivalRuseEnchantment
+    override fun checkCompatibility(pOther: Enchantment) =
+        super.checkCompatibility(pOther) && pOther != NecessaryEvilEnchantment && pOther != SurvivalRuseEnchantment
 }

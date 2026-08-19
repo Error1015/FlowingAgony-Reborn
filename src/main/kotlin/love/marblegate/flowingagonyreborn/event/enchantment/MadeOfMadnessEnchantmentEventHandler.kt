@@ -110,7 +110,8 @@ object MadeOfMadnessEnchantmentEventHandler {
                     damage += (event.player.getItemBySlot(EquipmentSlot.MAINHAND).item as DiggerItem).attackDamage
                 }
                 if (silkLevel == 1) damage *= 0.5f
-                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random.nextDouble().toFloat()
+                damage *= if (event.player.level().dayTime * 24000 > 13000) (4 + event.player.random.nextDouble() * 2).toFloat() else 2 + event.player.random
+                    .nextDouble().toFloat()
                 targets.forEach { target ->
                     target.hurt(cuttingWaterMelonDreamDamageSource, damage * CommonConfig.numericalSettings.cuttingWatermelonDream.toFloat())
                 }
@@ -178,10 +179,11 @@ object MadeOfMadnessEnchantmentEventHandler {
         entity: LivingEntity, player: Player, source: DamageSource
     ): LootContext.Builder {
         val serverLevel = entity.level() as ServerLevel
-        val paramsBuilder = LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position())
-            .withParameter(LootContextParams.DAMAGE_SOURCE, source).withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
-            .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity).withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player).withLuck(player.luck)
-            .create(LootContextParamSets.ENTITY)
+        val paramsBuilder = LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity)
+            .withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.DAMAGE_SOURCE, source)
+            .withOptionalParameter(LootContextParams.KILLER_ENTITY, source.entity)
+            .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, source.directEntity)
+            .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player).withLuck(player.luck).create(LootContextParamSets.ENTITY)
 
         return LootContext.Builder(paramsBuilder)
     }

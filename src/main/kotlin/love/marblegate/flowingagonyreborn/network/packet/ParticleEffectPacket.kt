@@ -59,16 +59,16 @@ class ParticleEffectPacket {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT) {
             Runnable {
                 ctx.get().let {
-                        it.enqueueWork {
-                            proxy = ClientProxy()
-                            if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
-                                for (i in 0 .. args[1].toInt()) {
-                                    proxy.addParticleForceNear(CursedAntipathyParticleOption(args[0].toFloat()), x, y, z, 0.0, 0.0, 0.0)
-                                }
+                    it.enqueueWork {
+                        proxy = ClientProxy()
+                        if (type == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
+                            for (i in 0 .. args[1].toInt()) {
+                                proxy.addParticleForceNear(CursedAntipathyParticleOption(args[0].toFloat()), x, y, z, 0.0, 0.0, 0.0)
                             }
                         }
-                        ctx.get().packetHandled = true
                     }
+                    ctx.get().packetHandled = true
+                }
             }
         }
     }

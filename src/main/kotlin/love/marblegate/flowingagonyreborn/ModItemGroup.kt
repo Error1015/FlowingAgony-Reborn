@@ -24,7 +24,7 @@ object ModItemGroup {
         }
 
     val EnchantmentsGroup: ItemGroup by deferredRegister.registerObject("flowingagony_reborn.group") {
-        ItemGroup.builder().title(Component.translatable("itemGroup.flowingagony_reborn.group")).icon { ModItems.FLOWING_AGONY_ENCHANTED_BOOK.defaultInstance }
-            .displayItems { _, output -> output.acceptAll(enchantedBookItem) }.build()
+        ItemGroup.builder().title(Component.translatable("itemGroup.flowingagony_reborn.group"))
+            .icon { ModItems.FLOWING_AGONY_ENCHANTED_BOOK.defaultInstance }.displayItems { _, output -> output.acceptAll(enchantedBookItem) }.build()
     }
 }

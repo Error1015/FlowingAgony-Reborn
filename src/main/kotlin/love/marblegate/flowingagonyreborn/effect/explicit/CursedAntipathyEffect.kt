@@ -26,7 +26,12 @@ object CursedAntipathyEffect : MobEffect(
                     pLivingEntity.x, pLivingEntity.y, pLivingEntity.z, 192.0, pLivingEntity.level().dimension()
                 )
             }, ParticleEffectPacket(
-                ParticleEffectPacket.MobEffectCategory.CURSED_ANTIPATHY_EFFECT, pLivingEntity.x, pLivingEntity.y + 1, pLivingEntity.z, (pAmplifier + 1) * 0.5, ((pAmplifier + 1) * 2).toDouble()
+                ParticleEffectPacket.MobEffectCategory.CURSED_ANTIPATHY_EFFECT,
+                pLivingEntity.x,
+                pLivingEntity.y + 1,
+                pLivingEntity.z,
+                (pAmplifier + 1) * 0.5,
+                ((pAmplifier + 1) * 2).toDouble()
             )
         )
     }

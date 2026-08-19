@@ -43,17 +43,20 @@ object TheMistakensEnchantmentEventHandler {
     fun doShadowbornEnchantmentEventApplyAndRemoveEffect(event: TickEvent.PlayerTickEvent) {
         if (event.player.level().isClientSide) return
         if (event.phase == TickEvent.Phase.START) {
-            if (event.player.hasEffect(MobEffects.BLINDNESS) && event.player
-                        .level()
+            if (event.player.hasEffect(MobEffects.BLINDNESS) && event.player.level()
                         .getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) >= 5 && event.player.isItemEnchanted(
                         ShadowbornEnchantment, EquipmentSlot.HEAD
                     )) {
                 event.player.removeEffectNoUpdate(MobEffects.BLINDNESS)
-                Networking.safeSend(PacketDistributor.PLAYER.with { event.player as ServerPlayer }, RemoveEffectSyncToClientPacket(MobEffects.BLINDNESS))
+                Networking.safeSend(
+                    PacketDistributor.PLAYER.with { event.player as ServerPlayer },
+                    RemoveEffectSyncToClientPacket(MobEffects.BLINDNESS)
+                )
             }
-            if (event.player
-                        .level()
-                        .getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
+            if (event.player.level().getMaxLocalRawBrightness(BlockPos(event.player.blockPosition())) <= 5 && event.player.isItemEnchanted(
+                        ShadowbornEnchantment,
+                        EquipmentSlot.HEAD
+                    )) {
                 if (!event.player.hasEffect(MobEffects.NIGHT_VISION)) event.player.addEffect(MobEffectInstance(MobEffects.NIGHT_VISION, 1200))
             }
         }
@@ -65,9 +68,7 @@ object TheMistakensEnchantmentEventHandler {
         if (event.entity is Player) {
             val player = event.entity as Player
             if (player.isItemEnchanted(ShadowbornEnchantment, EquipmentSlot.HEAD)) {
-                if (player
-                            .level()
-                            .getMaxLocalRawBrightness(BlockPos(event.entity.blockPosition())) >= 5) {
+                if (player.level().getMaxLocalRawBrightness(BlockPos(event.entity.blockPosition())) >= 5) {
                     if (event.effectInstance.effect == MobEffects.BLINDNESS) event.result = Event.Result.DENY
                 }
             }
@@ -84,9 +85,8 @@ object TheMistakensEnchantmentEventHandler {
             if (event.effectInstance.isExplicit) {
                 if (player.hasEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)) {
                     val newEffectAmplifier = min(
-                        player
-                            .getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)
-                            ?.let { it.amplifier + enchantLevel } ?: return, 29)
+                        player.getEffect(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE)
+                                                     ?.let { it.amplifier + enchantLevel } ?: return, 29)
                     player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, newEffectAmplifier).setImplicit)
                 } else {
                     player.addEffect(MobEffectInstance(ModEffects.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE, 1200, enchantLevel - 1).setImplicit)
@@ -104,8 +104,7 @@ object TheMistakensEnchantmentEventHandler {
                 if (event.effectInstance.effect.category == MobEffectCategory.BENEFICIAL && !event.effectInstance.effect.isInstantenous) {
                     if (player.isItemEnchanted(PrototypeChaoticEnchantment, EquipmentSlot.CHEST)) {
                         event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, event.effectInstance.duration * 3))
-                        val negativeEffects = player.activeEffects
-                            .stream()
+                        val negativeEffects = player.activeEffects.stream()
                             .filter { it.effect.category == MobEffectCategory.HARMFUL && it.isCurativeItem(Items.MILK_BUCKET.defaultInstance) && it.isExplicit }
                             .collect(Collectors.toList())
                         if (negativeEffects.isNotEmpty()) {
@@ -152,10 +151,20 @@ object TheMistakensEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(LightburnFungalParasiticEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             if (event.source.entity is LivingEntity) {
-                val targets = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(8f, 2f) { it !is Villager } else player.getTargetsExceptOneself(8f, 2f) { true }
+                val targets = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(
+                    8f,
+                    2f
+                ) { it !is Villager } else player.getTargetsExceptOneself(8f, 2f) { true }
                 if (targets.isNotEmpty()) {
                     val random = player.random
-                    targets.forEach { if (random.nextDouble() < 0.125 * (enchantmentLevel + 1)) it.addEffect(MobEffectInstance(ModEffects.LIGHTBURN_FUNGAL_INFECTION, 120)) }
+                    targets.forEach {
+                        if (random.nextDouble() < 0.125 * (enchantmentLevel + 1)) it.addEffect(
+                            MobEffectInstance(
+                                ModEffects.LIGHTBURN_FUNGAL_INFECTION,
+                                120
+                            )
+                        )
+                    }
                 }
             }
             if (!event.isCanceled) {
@@ -219,7 +228,12 @@ object TheMistakensEnchantmentEventHandler {
             val enchantmentLevel = player.getEnchantmentLevel(ScholarOfOriginalSinEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
             if (event.effectInstance.effect.category == MobEffectCategory.HARMFUL && event.effectInstance.isExplicit) {
-                event.effectInstance.update(MobEffectInstance(event.effectInstance.effect, (event.effectInstance.duration * (2.1 - 0.1 * enchantmentLevel)).toInt()))
+                event.effectInstance.update(
+                    MobEffectInstance(
+                        event.effectInstance.effect,
+                        (event.effectInstance.duration * (2.1 - 0.1 * enchantmentLevel)).toInt()
+                    )
+                )
             }
         }
     }
@@ -266,12 +280,14 @@ object TheMistakensEnchantmentEventHandler {
             val player = event.entity as Player
             val originalDeathPos = player.blockPosition()
             val scanningArea = AABB(
-                (originalDeathPos.x - 16).toDouble(), (originalDeathPos.y - 1).toDouble(), (originalDeathPos.z - 16).toDouble(), (originalDeathPos.x + 16).toDouble(),
-                (originalDeathPos.y + 1).toDouble(), (originalDeathPos.z + 16.toDouble())
+                (originalDeathPos.x - 16).toDouble(),
+                (originalDeathPos.y - 1).toDouble(),
+                (originalDeathPos.z - 16).toDouble(),
+                (originalDeathPos.x + 16).toDouble(),
+                (originalDeathPos.y + 1).toDouble(),
+                (originalDeathPos.z + 16.toDouble())
             )
-            val players = player
-                .level()
-                .getEntitiesOfClass(Player::class.java, scanningArea)
+            val players = player.level().getEntitiesOfClass(Player::class.java, scanningArea)
             players.forEach { player -> if (player.allArmorHasEnchantment(BurialObjectCurse)) player.hurt(burialObjectCurseDamageSource, 120f) }
         }
     }

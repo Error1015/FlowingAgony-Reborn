@@ -73,8 +73,8 @@ object ExplicitEffectEventHandler {
             if (event.phase == TickEvent.Phase.START) {
                 if (event.player.hasEffect(
                             ModEffects.CURSE_OF_UNDEAD
-                        ) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player.level()
-                            .canSeeSky(event.player.blockPosition()))) {
+                        ) && (event.player.level().dayTime % 24000 == 12000.toLong()) && (!event.player.level().isThundering && !event.player.level().isRaining) && (event.player
+                            .level().canSeeSky(event.player.blockPosition()))) {
                     if (!event.player.hasHelmet()) {
                         event.player.setSecondsOnFire(5)
                     }
@@ -186,7 +186,10 @@ object ExplicitEffectEventHandler {
                     val effectLevel = event.entity.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0
                     event.source.entity.safeClassCastAndHandle<LivingEntity> { livingEntity ->
                         if (!livingEntity.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
-                            livingEntity.hurt(letMeSavorIt, effectLevel * event.amount * CommonConfig.numericalSettings.letMeSavorItEffectReflectDamage.toFloat())
+                            livingEntity.hurt(
+                                letMeSavorIt,
+                                effectLevel * event.amount * CommonConfig.numericalSettings.letMeSavorItEffectReflectDamage.toFloat()
+                            )
                         }
                     }
                 }

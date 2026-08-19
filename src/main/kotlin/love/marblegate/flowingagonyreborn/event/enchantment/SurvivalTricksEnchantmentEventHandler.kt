@@ -32,7 +32,10 @@ object SurvivalTricksEnchantmentEventHandler {
                 if (enchantmentLevel == 0) return
                 if (event.source.entity is Player) event.amount *= 0.95f - 0.05f * enchantmentLevel
                 else if (event.amount >= 9 - enchantmentLevel) {
-                    var entities: List<LivingEntity> = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) {
+                    var entities: List<LivingEntity> = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(
+                        16f,
+                        2f
+                    ) {
                         !it.isHostile(false) && it !is Villager
                     } else player.getTargetsExceptOneself(16f, 2f) {
                         !it.isHostile(false)
@@ -70,7 +73,10 @@ object SurvivalTricksEnchantmentEventHandler {
                 if (enchantmentLevel == 0) return
                 if (event.source.entity is Player) event.amount *= 0.85F - 0.05F * enchantmentLevel
                 else if (event.amount >= 13 - enchantmentLevel) {
-                    val entities = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(16f, 2f) { it !is Player && it !is Villager }
+                    val entities = if (CommonConfig.generalSettings.villagerSafeMode.get()) player.getTargetsExceptOneself(
+                        16f,
+                        2f
+                    ) { it !is Player && it !is Villager }
                     else player.getTargetsExceptOneself(
                         16f, 2f
                     ) { it !is Player }

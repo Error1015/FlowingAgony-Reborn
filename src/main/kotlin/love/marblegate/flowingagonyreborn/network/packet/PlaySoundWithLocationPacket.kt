@@ -52,13 +52,13 @@ class PlaySoundWithLocationPacket {
             proxy = ClientProxy()
             Runnable {
                 ctx.get().let {
-                        it.enqueueWork {
-                            if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                                proxy.playSoundWithLocation(ModSounds.maliceOutbreakKnockbackSound, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
-                            }
+                    it.enqueueWork {
+                        if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
+                            proxy.playSoundWithLocation(ModSounds.maliceOutbreakKnockbackSound, SoundSource.PLAYERS, 5f, 0.5f, x, y, z, true)
                         }
-                        it.packetHandled = true
                     }
+                    it.packetHandled = true
+                }
             }
         }
     }

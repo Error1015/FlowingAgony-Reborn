@@ -21,8 +21,6 @@ object ShockTherapyImplicitEffect : HarmfulBlankImplicitEffect() {
         duration: Int, amplifier: Int
     ): Boolean {
         val k = 10
-        return if (duration > 0) {
-            duration % k == 0
-        } else false
+        return duration > 0 && duration % k == 0
     }
 }

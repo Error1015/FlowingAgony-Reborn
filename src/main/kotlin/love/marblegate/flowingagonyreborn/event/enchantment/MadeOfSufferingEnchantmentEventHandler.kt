@@ -77,7 +77,10 @@ object MadeOfSufferingEnchantmentEventHandler {
             if (player.health < 4 + enchantmentLevel * 2) {
                 if (player.hasEffect(ModEffects.LET_ME_SAVOR_IT)) {
                     if (player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier < 9 } == true) player.addEffect(
-                        MobEffectInstance(ModEffects.LET_ME_SAVOR_IT, 72000, player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0))
+                        MobEffectInstance(
+                        ModEffects.LET_ME_SAVOR_IT,
+                        72000,
+                        player.getEffect(ModEffects.LET_ME_SAVOR_IT)?.let { it.amplifier + 1 } ?: 0))
                 } else player.addEffect(MobEffectInstance(ModEffects.LET_ME_SAVOR_IT, 72000))
             }
         }
@@ -97,7 +100,9 @@ object MadeOfSufferingEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(ConstrainedHeartEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            if (event.source.`is`(DamageTypes.ON_FIRE) || event.source.`is`(DamageTypes.IN_WALL) || event.source.`is`(DamageTypes.CRAMMING) || event.source.`is`(DamageTypes.FALL) || event.source.`is`(
+            if (event.source.`is`(DamageTypes.ON_FIRE) || event.source.`is`(DamageTypes.IN_WALL) || event.source.`is`(DamageTypes.CRAMMING) || event.source.`is`(
+                        DamageTypes.FALL
+                    ) || event.source.`is`(
                         DamageTypes.FLY_INTO_WALL
                     ) || event.source.`is`(DamageTypes.WITHER) || event.source.`is`(DamageTypes.MAGIC) || player.hasEffect(MobEffects.POISON)) {
                 grandAbnormalJoyPoint(event, enchantmentLevel)
@@ -112,7 +117,10 @@ object MadeOfSufferingEnchantmentEventHandler {
             val player = event.entity as Player
             val enchantmentLevel = player.getEnchantmentLevel(PiercingFeverEnchantment, EquipmentSlot.CHEST)
             if (enchantmentLevel == 0) return
-            if (event.source.isIndirect || event.source.`is`(DamageTypes.CACTUS) || event.source.`is`(DamageTypes.SWEET_BERRY_BUSH)) grandAbnormalJoyPoint(event, enchantmentLevel)
+            if (event.source.isIndirect || event.source.`is`(DamageTypes.CACTUS) || event.source.`is`(DamageTypes.SWEET_BERRY_BUSH)) grandAbnormalJoyPoint(
+                event,
+                enchantmentLevel
+            )
         }
     }
 

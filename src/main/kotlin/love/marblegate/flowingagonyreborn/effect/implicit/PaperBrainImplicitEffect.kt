@@ -8,7 +8,8 @@ object PaperBrainImplicitEffect : HarmfulBlankImplicitEffect() {
         pLivingEntity: LivingEntity, pAmplifier: Int
     ) {
         pLivingEntity.hurt(
-            pLivingEntity.level().damageSources().magic(), (pLivingEntity.getRandom().nextInt(4) + 5).toFloat() * CommonConfig.numericalSettings.paperBrainHurtDamage.toFloat()
+            pLivingEntity.level().damageSources().magic(),
+            (pLivingEntity.getRandom().nextInt(4) + 5).toFloat() * CommonConfig.numericalSettings.paperBrainHurtDamage.toFloat()
         )
     }
 

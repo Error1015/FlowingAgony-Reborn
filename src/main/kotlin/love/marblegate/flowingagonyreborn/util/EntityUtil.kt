@@ -18,8 +18,12 @@ fun LivingEntity.getTargetsExceptOneself(
     radius: Float, height: Float, predicate: Predicate<LivingEntity>
 ): List<LivingEntity> {
     val aabb = AABB(
-        (this.blockPosition().x - radius).toDouble(), (this.blockPosition().y - height).toDouble(), (this.blockPosition().z - radius).toDouble(), (this.blockPosition().x + radius).toDouble(),
-        (this.blockPosition().y + height).toDouble(), (this.blockPosition().z + radius).toDouble()
+        (this.blockPosition().x - radius).toDouble(),
+        (this.blockPosition().y - height).toDouble(),
+        (this.blockPosition().z - radius).toDouble(),
+        (this.blockPosition().x + radius).toDouble(),
+        (this.blockPosition().y + height).toDouble(),
+        (this.blockPosition().z + radius).toDouble()
     )
 
     val entities = this.level().getEntitiesOfClass(LivingEntity::class.java, aabb, predicate)
@@ -31,12 +35,16 @@ fun LivingEntity.getTargetsOfSameType(
     radius: Float, height: Float, sourceEntity: LivingEntity, excludeOneself: Boolean
 ): List<LivingEntity> {
     val aabb = AABB(
-        (this.blockPosition().x - radius).toDouble(), (this.blockPosition().y - height).toDouble(), (this.blockPosition().z - radius).toDouble(), (this.blockPosition().x + radius).toDouble(),
-        (this.blockPosition().y + height).toDouble(), (this.blockPosition().z + radius).toDouble()
+        (this.blockPosition().x - radius).toDouble(),
+        (this.blockPosition().y - height).toDouble(),
+        (this.blockPosition().z - radius).toDouble(),
+        (this.blockPosition().x + radius).toDouble(),
+        (this.blockPosition().y + height).toDouble(),
+        (this.blockPosition().z + radius).toDouble()
     )
     val entities = this.level().getEntitiesOfClass(
-            LivingEntity::class.java, aabb
-        ) { livingEntity -> livingEntity.javaClass == sourceEntity.javaClass }
+        LivingEntity::class.java, aabb
+    ) { livingEntity -> livingEntity.javaClass == sourceEntity.javaClass }
     if (excludeOneself) entities.remove(this)
     return entities
 }

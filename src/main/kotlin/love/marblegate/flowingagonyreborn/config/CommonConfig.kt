@@ -17,7 +17,8 @@ class CommonConfig {
             builder.pop()
 
             builder.comment(
-                "Enchantment Acquirable Setting", "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
+                "Enchantment Acquirable Setting",
+                "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
                 "Enchantment which is acquirable is still functional."
             ).push("Optional Bug Fix")
             optionalBugFix = OptionalBugFix
@@ -50,7 +51,8 @@ class CommonConfig {
 
     object OptionalBugFix {
         val isFixEnviousKind by builder.comment(
-            "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect", "If you are modpack author, You Should Set to True"
+            "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect",
+            "If you are modpack author, You Should Set to True"
         ).define("isFixEnviousKind", true)
     }
 
