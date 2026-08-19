@@ -4,6 +4,9 @@ Bring [FlowingAgony](https://github.com/DragonsPlusMinecraft/FlowingAgony) to ne
 ### dependencies
 [ Kotlin For Forge ](https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge)
 
-## URL
+### URL
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/marblegates-exotic-enchantment-reborn)
 [Modrinth](https://modrinth.com/mod/marblegates-exotic-enchantment-flowing-agony-reborn)
+
+### Want to Know what the effect of these enchantments?
+Click [ Here ](https://www.mcmod.cn/item/list/3872-5.html)
