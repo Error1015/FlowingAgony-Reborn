@@ -7,16 +7,18 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ConstrainedHeartEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.UNCOMMON,
-    pCategory = EnchantmentCategory.ARMOR_CHEST,
-    pApplicableSlots = EquipmentSlotTypeSet.CHEST,
-    tradableSetting = EnchantmentConfig.tradableConfig.constrainedHeart,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.constrainedHeart,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.constrainedHeart,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.constrainedHeart,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.constrainedHeart,
-    maxLevelValue = 1
+    Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST
 ) {
-    override fun checkCompatibility(pOther: Enchantment): Boolean =
-        super.checkCompatibility(pOther) && pOther != PiercingFeverEnchantment && pOther != DestructionWorshipEnchantment
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.constrainedHeart
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.constrainedHeart
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.constrainedHeart
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.constrainedHeart
+
+    override fun getMaxLevel() = 1
+
+    override fun checkCompatibility(pOther: Enchantment): Boolean = super.checkCompatibility(pOther) && pOther != PiercingFeverEnchantment && pOther != DestructionWorshipEnchantment
+
 }

@@ -6,13 +6,15 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object SavorTheTastedEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE,
-    pCategory = CustomEnchantmentCategory.axeAndSwordItem,
-    pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    tradableSetting = EnchantmentConfig.tradableConfig.savorTheTasted,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.savorTheTasted,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.savorTheTasted,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.savorTheTasted,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.savorTheTasted,
-    maxLevelValue = 3
-)
+    Rarity.RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.savorTheTasted
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.savorTheTasted
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.savorTheTasted
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.savorTheTasted
+
+    override fun getMaxLevel() = 3
+}

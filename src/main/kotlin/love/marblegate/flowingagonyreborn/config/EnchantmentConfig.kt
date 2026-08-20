@@ -15,23 +15,23 @@ class EnchantmentConfig {
 
         init {
             builder.push("tradeable")
-            tradableConfig = TradableConfig
+            tradableConfig = TradableConfig(builder)
             builder.pop()
 
             builder.push("discoverable")
-            discoverableConfig = DiscoverableConfig
+            discoverableConfig = DiscoverableConfig(builder)
             builder.pop()
 
             builder.push("applyOnEnchantingTable")
-            applyOnEnchantingTableConfig = ApplyOnEnchantingTableConfig
+            applyOnEnchantingTableConfig = ApplyOnEnchantingTableConfig(builder)
             builder.pop()
 
             builder.push("isTreasure")
-            isTreasureConfig = IsTreasureConfig
+            isTreasureConfig = IsTreasureConfig(builder)
             builder.pop()
 
             builder.push("canEnchant")
-            canEnchantConfig = CanEnchantConfig
+            canEnchantConfig = CanEnchantConfig(builder)
             builder.pop()
 
 
@@ -39,7 +39,7 @@ class EnchantmentConfig {
         }
     }
 
-    object TradableConfig {
+    class TradableConfig(builder: ForgeConfigSpec.Builder) {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)
@@ -101,7 +101,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    object DiscoverableConfig {
+    class DiscoverableConfig(builder: ForgeConfigSpec.Builder) {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)
@@ -163,7 +163,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    object ApplyOnEnchantingTableConfig {
+    class ApplyOnEnchantingTableConfig(builder: ForgeConfigSpec.Builder) {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)
@@ -225,7 +225,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", true)
     }
 
-    object IsTreasureConfig {
+    class IsTreasureConfig(builder: ForgeConfigSpec.Builder) {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", false)
         val deathPunk by builder.define("deathPunk", false)
         val exoticHealer by builder.define("exoticHealer", false)
@@ -287,7 +287,7 @@ class EnchantmentConfig {
         val burialObject by builder.define("burialObject", false)
     }
 
-    object CanEnchantConfig {
+    class CanEnchantConfig(builder: ForgeConfigSpec.Builder) {
         val anEnchantedGoldenAppleADay by builder.define("anEnchantedGoldenAppleADay", true)
         val deathPunk by builder.define("deathPunk", true)
         val exoticHealer by builder.define("exoticHealer", true)

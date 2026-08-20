@@ -13,7 +13,7 @@ class CommonConfig {
 
         init {
             builder.comment("General Settings").push("general")
-            generalSettings = GeneralSettings
+            generalSettings = GeneralSettings(builder)
             builder.pop()
 
             builder.comment(
@@ -21,16 +21,16 @@ class CommonConfig {
                 "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
                 "Enchantment which is acquirable is still functional."
             ).push("Optional Bug Fix")
-            optionalBugFix = OptionalBugFix
+            optionalBugFix = OptionalBugFix(builder)
             builder.pop()
             builder.comment("Numerical Value Settings").push("Numerical")
-            numericalSettings = NumericalSettings
+            numericalSettings = NumericalSettings(builder)
             builder.pop()
             spec = builder.build()
         }
     }
 
-    object GeneralSettings {
+    class GeneralSettings(builder: ForgeConfigSpec.Builder) {
         val villagerSafeMode: ForgeConfigSpec.BooleanValue = builder.comment(
             "If it's set to \"true\", \"Lightburn Fungal Parasitic\" cannot spread negative effect to villager,",
             "and \"Survival Shortcut\", \"Necessary Evil\", \"Pilferage Creed\" cannot damage villager."
@@ -49,7 +49,7 @@ class CommonConfig {
         ).defineInRange("paperBrainDamageReduction", 0.9, 0.0, 1.0)
     }
 
-    object OptionalBugFix {
+    class OptionalBugFix(builder: ForgeConfigSpec.Builder) {
         val isFixEnviousKind by builder.comment(
             "This entry is for a bug, The EnviousKind Enchantment will Add bigger than 10 level Envious Being Effect",
             "If you are modpack author, You Should Set to True"
@@ -59,7 +59,7 @@ class CommonConfig {
     /**
      * 此处是相关数值配置
      */
-    object NumericalSettings {
+    class NumericalSettings(builder: ForgeConfigSpec.Builder) {
         val hatredBloodlineEffect by builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
         val cursedHatredEffect by builder.defineInRange("HatredBloodlineEffect", 1.0, 0.0, Double.MAX_VALUE)
         val curseOfUndeadEffect by builder.defineInRange("CurseOfUndeadEffect", 1.0, 0.0, Double.MAX_VALUE)

@@ -2,13 +2,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 plugins {
-    id("net.minecraftforge.gradle")
+    id("net.minecraftforge.gradle") version "[6.0,6.2)"
     id("org.parchmentmc.librarian.forgegradle")
     kotlin("jvm")
     kotlin("plugin.serialization")
     idea
     `maven-publish`
-    // id("me.modmuss50.mod-publish-plugin")
+    id("me.modmuss50.mod-publish-plugin")
 }
 
 val minecraft_version: String by project
@@ -41,40 +41,40 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-// publishMods {
-//     val kffSlug = "kotlin-for-forge"
-//
-//     file.set(tasks.jar.get().archiveFile)
-//     type.set(STABLE)
-//     modLoaders.add("forge")
-//     changelog.set(rootProject.file("changelog.md").readText())
-//     version.set(mod_version)
-//     displayName = base.archivesName
-//
-//     curseforge {
-//         projectId = "1218577"
-//         projectSlug = "marblegates-exotic-enchantment-reborn"
-//         accessToken = System.getenv("CF_TOKEN")
-//         minecraftVersions.add(minecraft_version)
-//         clientRequired = true
-//         javaVersions = listOf(JavaVersion.VERSION_17)
-//         requires(kffSlug)
-//         setInternalDefaults()
-//     }
-//
-//     modrinth {
-//         projectId = "nTa4l6xw"
-//         accessToken = System.getenv("MODRINTH_TOKEN")
-//         minecraftVersions.add(minecraft_version)
-//         requires(kffSlug)
-//     }
-//
-//     // github {
-//     //     repository.set("Error1015/FlowingAgony-Reborn")
-//     //     accessToken = System.getenv("GITHUB_TOKEN")
-//     //     commitish = "1.20.1"
-//     // }
-// }
+publishMods {
+    val kffSlug = "kotlin-for-forge"
+
+    file.set(tasks.jar.get().archiveFile)
+    type.set(STABLE)
+    modLoaders.add("forge")
+    changelog.set(rootProject.file("changelog.md").readText())
+    version.set(mod_version)
+    displayName = base.archivesName
+
+    curseforge {
+        projectId = "1218577"
+        projectSlug = "marblegates-exotic-enchantment-reborn"
+        accessToken = System.getenv("CF_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        clientRequired = true
+        javaVersions = listOf(JavaVersion.VERSION_17)
+        requires(kffSlug)
+        setInternalDefaults()
+    }
+
+    modrinth {
+        projectId = "nTa4l6xw"
+        accessToken = System.getenv("MODRINTH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        requires(kffSlug)
+    }
+
+    // github {
+    //     repository.set("Error1015/FlowingAgony-Reborn")
+    //     accessToken = System.getenv("GITHUB_TOKEN")
+    //     commitish = "1.20.1"
+    // }
+}
 
 println(Platform)
 
@@ -167,7 +167,6 @@ dependencies {
     runtimeOnly(fg.deobf("curse.maven:enchantment-descriptions-250419:5855251"))
     runtimeOnly(fg.deobf("curse.maven:jade-324717:6106101"))
     runtimeOnly(fg.deobf("curse.maven:jei-238222:6075247"))
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.withType<ProcessResources>().configureEach {

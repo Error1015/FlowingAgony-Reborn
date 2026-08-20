@@ -6,13 +6,15 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object ShadowbornEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE,
-    pCategory = EnchantmentCategory.ARMOR_HEAD,
-    pApplicableSlots = EquipmentSlotTypeSet.HEAD,
-    tradableSetting = EnchantmentConfig.tradableConfig.shadowborn,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.shadowborn,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.shadowborn,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.shadowborn,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.shadowborn,
-    maxLevelValue = 1
-)
+    Rarity.RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.shadowborn
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.shadowborn
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.shadowborn
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.shadowborn
+
+    override fun getMaxLevel() = 1
+}

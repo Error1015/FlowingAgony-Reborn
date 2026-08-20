@@ -6,13 +6,15 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object PotentialBurstEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = EnchantmentCategory.ARMOR_FEET,
-    pApplicableSlots = EquipmentSlotTypeSet.FEET,
-    tradableSetting = EnchantmentConfig.tradableConfig.potentialBurst,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.potentialBurst,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.potentialBurst,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.potentialBurst,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.potentialBurst,
-    maxLevelValue = 3
-)
+    Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, EquipmentSlotTypeSet.FEET
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.potentialBurst
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.potentialBurst
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.potentialBurst
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.potentialBurst
+
+    override fun getMaxLevel() = 3
+}

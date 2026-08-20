@@ -6,13 +6,15 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object MaliceOutbreakEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.RARE,
-    pCategory = EnchantmentCategory.ARMOR_HEAD,
-    pApplicableSlots = EquipmentSlotTypeSet.HEAD,
-    tradableSetting = EnchantmentConfig.tradableConfig.maliceOutbreak,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.maliceOutbreak,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.maliceOutbreak,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.maliceOutbreak,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.maliceOutbreak,
-    maxLevelValue = 5
-)
+    Rarity.RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.maliceOutbreak
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.maliceOutbreak
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.maliceOutbreak
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.maliceOutbreak
+
+    override fun getMaxLevel() = 5
+}

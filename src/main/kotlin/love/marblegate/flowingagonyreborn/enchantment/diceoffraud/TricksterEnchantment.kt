@@ -6,13 +6,15 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object TricksterEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = CustomEnchantmentCategory.axeAndSwordItem,
-    pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    tradableSetting = EnchantmentConfig.tradableConfig.trickster,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.trickster,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.trickster,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.trickster,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.trickster,
-    maxLevelValue = 2
-)
+    Rarity.VERY_RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.trickster
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.trickster
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.trickster
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.trickster
+
+    override fun getMaxLevel() = 2
+}

@@ -7,15 +7,17 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object AgonyScreamerEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = EnchantmentCategory.BOW,
-    pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    tradableSetting = EnchantmentConfig.tradableConfig.agonyScreamer,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.agonyScreamer,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.agonyScreamer,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.agonyScreamer,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.agonyScreamer,
-    maxLevelValue = 3
+    Rarity.VERY_RARE, EnchantmentCategory.BOW, EquipmentSlotTypeSet.MAIN_HAND
 ) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.agonyScreamer
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.agonyScreamer
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.agonyScreamer
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.agonyScreamer
+
+    override fun getMaxLevel() = 3
+
     override fun checkCompatibility(pOther: Enchantment) = super.checkCompatibility(pOther) && pOther != InsanePoetEnchantment
 }

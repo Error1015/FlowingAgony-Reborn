@@ -11,8 +11,6 @@ object CustomEnchantmentCategory {
     val bowAndCrossbow: EnchantmentCategory = EnchantmentCategory.create("$MODID:bow_and_crossbow") { it is ProjectileWeaponItem }
     val pickaxe: EnchantmentCategory = EnchantmentCategory.create("$MODID:pickaxe") { it is PickaxeItem }
     val everyThing: EnchantmentCategory = EnchantmentCategory.create("$MODID:everything") {
-        it is Vanishable || Block.byItem(it) is Vanishable || EnchantmentCategory.BREAKABLE.canEnchant(it) || EnchantmentCategory.WEARABLE.canEnchant(
-            it
-        )
+        it is Vanishable || Block.byItem(it) is Vanishable || EnchantmentCategory.BREAKABLE.canEnchant(it) || EnchantmentCategory.WEARABLE.canEnchant(it)
     }
 }

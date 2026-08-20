@@ -8,16 +8,20 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory
 import net.minecraft.world.item.enchantment.Enchantments
 
 object MorirsLifeboundEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = EnchantmentCategory.BREAKABLE,
-    pApplicableSlots = EquipmentSlotTypeSet.ALL,
-    tradableSetting = EnchantmentConfig.tradableConfig.morirsLifebound,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.morirsLifebound,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.morirsLifebound,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.morirsLifebound,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.morirsLifebound,
-    maxLevelValue = 1
+    Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL
 ) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.morirsLifebound
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.morirsLifebound
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.morirsLifebound
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.morirsLifebound
+
+    override fun getMaxLevel() = 1
+
+    override fun isTreasureOnly() = true
+
     override fun checkCompatibility(pOther: Enchantment) =
         super.checkCompatibility(pOther) && pOther != GuidensRegretEnchantment && pOther != Enchantments.MENDING && pOther != MorirsDeathwishEnchantment
 }

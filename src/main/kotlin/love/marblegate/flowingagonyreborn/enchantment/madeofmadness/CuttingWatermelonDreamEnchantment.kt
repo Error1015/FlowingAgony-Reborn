@@ -6,13 +6,17 @@ import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 
 object CuttingWatermelonDreamEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = EnchantmentCategory.DIGGER,
-    pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    tradableSetting = EnchantmentConfig.tradableConfig.cuttingWatermelonDream,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.cuttingWatermelonDream,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.cuttingWatermelonDream,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.cuttingWatermelonDream,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.cuttingWatermelonDream,
-    maxLevelValue = 1
-)
+    Rarity.VERY_RARE, EnchantmentCategory.DIGGER, EquipmentSlotTypeSet.MAIN_HAND
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.cuttingWatermelonDream
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.cuttingWatermelonDream
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.cuttingWatermelonDream
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.cuttingWatermelonDream
+
+    override fun getMaxLevel() = 1
+
+    override fun isTreasureOnly(): Boolean = true
+}

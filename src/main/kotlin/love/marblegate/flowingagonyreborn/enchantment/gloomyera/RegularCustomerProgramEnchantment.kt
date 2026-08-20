@@ -6,13 +6,17 @@ import love.marblegate.flowingagonyreborn.enchantment.EquipmentSlotTypeSet
 import love.marblegate.flowingagonyreborn.enchantment.ModBaseEnchantment
 
 object RegularCustomerProgramEnchantment : ModBaseEnchantment(
-    pRarity = Rarity.VERY_RARE,
-    pCategory = CustomEnchantmentCategory.axeAndSwordItem,
-    pApplicableSlots = EquipmentSlotTypeSet.MAIN_HAND,
-    tradableSetting = EnchantmentConfig.tradableConfig.regularCustomerProgram,
-    discoverableSetting = EnchantmentConfig.discoverableConfig.regularCustomerProgram,
-    canApplyOnEnchantingTableSetting = EnchantmentConfig.applyOnEnchantingTableConfig.regularCustomerProgram,
-    isTreasureOnlySettings = EnchantmentConfig.isTreasureConfig.regularCustomerProgram,
-    canEnchantSetting = EnchantmentConfig.canEnchantConfig.regularCustomerProgram,
-    maxLevelValue = 1
-)
+    Rarity.VERY_RARE, CustomEnchantmentCategory.axeAndSwordItem, EquipmentSlotTypeSet.MAIN_HAND
+) {
+    override fun isTradableConfig(): Boolean = EnchantmentConfig.tradableConfig.regularCustomerProgram
+
+    override fun isDiscoverableConfig(): Boolean = EnchantmentConfig.discoverableConfig.regularCustomerProgram
+
+    override fun canApplyAtEnchantingTableConfig(): Boolean = EnchantmentConfig.applyOnEnchantingTableConfig.regularCustomerProgram
+
+    override fun isTreasureOnlyConfig(): Boolean = EnchantmentConfig.isTreasureConfig.regularCustomerProgram
+
+    override fun getMaxLevel() = 1
+
+    override fun isTreasureOnly() = true
+}
