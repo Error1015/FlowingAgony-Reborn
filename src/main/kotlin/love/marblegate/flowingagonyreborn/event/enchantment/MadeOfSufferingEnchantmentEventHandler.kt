@@ -145,7 +145,7 @@ object MadeOfSufferingEnchantmentEventHandler {
             cap.addPoint(event.amount * 0.25f * (level + 1))
             val serverPlayer = event.entity as? ServerPlayer ?: return@ifPresent
             Networking.safeSend(
-                PacketDistributor.PLAYER.with { serverPlayer }, AbnormalJoySyncPacket(cap.getPoint())
+                PacketDistributor.PLAYER.with { serverPlayer }, AbnormalJoySyncPacket(cap.abnormalJoyPoint)
             )
         }
     }

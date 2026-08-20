@@ -6,6 +6,7 @@ import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.enchantment.ModEnchantments
 import love.marblegate.flowingagonyreborn.fx.ModParticle
 import love.marblegate.flowingagonyreborn.fx.ModSounds
+import love.marblegate.flowingagonyreborn.item.ModItemGroup
 import love.marblegate.flowingagonyreborn.item.ModItems
 import love.marblegate.flowingagonyreborn.network.Networking
 import net.minecraftforge.fml.common.Mod

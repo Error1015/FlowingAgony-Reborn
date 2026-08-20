@@ -40,7 +40,7 @@ class CursedAntipathyParticle(
             ySpeed: Double,
             zSpeed: Double
         ): Particle {
-            val cursedHatredParticle = CursedAntipathyParticle(worldIn, x, y, z, typeIn.getDiameter())
+            val cursedHatredParticle = CursedAntipathyParticle(worldIn, x, y, z, typeIn.diameter)
             cursedHatredParticle.pickSprite(spriteSet)
             return cursedHatredParticle
         }
@@ -75,8 +75,6 @@ open class CursedAntipathyParticleOption(
     }
 
     override fun writeToString(): String = String.format(Locale.ROOT, "%s %.2f", "cursed_antipathy_particle", diameter)
-
-    fun getDiameter() = diameter
 }
 
 object CursedAntipathyParticleType : ParticleType<CursedAntipathyParticleOption>(false, CursedAntipathyParticleOption.DESERIALIZER) {
