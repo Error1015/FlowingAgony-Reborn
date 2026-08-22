@@ -11,10 +11,7 @@ object ModItems {
 
     val flowingAgonyEnchantedBookItem: Item by registrar.register("flowing_agony_enchanted_book") { ->
         FlowingAgonyEnchantedBookItem(
-            Item
-                .Properties()
-                .stacksTo(1)
-                .rarity(Rarity.UNCOMMON)
+            Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)
         )
     }
 }

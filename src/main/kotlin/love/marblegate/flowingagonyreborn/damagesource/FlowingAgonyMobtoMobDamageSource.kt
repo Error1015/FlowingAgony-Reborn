@@ -8,8 +8,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 
 class FlowingAgonyMobtoMobDamageSource(
-    holder: Holder<DamageType>,
-    entity: Entity
+    holder: Holder<DamageType>, entity: Entity
 ) : DamageSource(holder, entity) {
     override fun getLocalizedDeathMessage(pLivingEntity: LivingEntity): Component {
         val s = "death.attack.$msgId"

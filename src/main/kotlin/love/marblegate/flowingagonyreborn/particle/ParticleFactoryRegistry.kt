@@ -9,7 +9,7 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 object ParticleFactoryRegistry {
     @SubscribeEvent
     fun onParticleFactoryRegistration(event: RegisterParticleProvidersEvent) {
-        event.registerSpriteSet(ModParticleRegistrar.cursedAntipathyParticle,{ sprites ->
+        event.registerSpriteSet(ModParticleRegistrar.cursedAntipathyParticle, { sprites ->
             CursedAntipathyParticle.Factory(sprites)
         })
     }

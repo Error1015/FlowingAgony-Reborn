@@ -8,8 +8,7 @@ val String.asPath: ResourceLocation
     get() = ResourceLocation.fromNamespaceAndPath(ID, this)
 
 fun translatableComponent(
-    string: String,
-    vararg args: Any
+    string: String, vararg args: Any
 ): Component = if (args.isNotEmpty()) {
     Component.translatable(string, args)
 } else {

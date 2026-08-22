@@ -55,7 +55,7 @@ object ModEnchantmentEffectHandler {
         } * 20 * 60
 
         // 给玩家添加附魔金苹果效果
-        val shouldAdd = enchantedArmors.any { armor -> player.cooldowns.isOnCooldown(armor.item)}.not() // 若是有一件护甲在cd中，则不生效
+        val shouldAdd = enchantedArmors.any { armor -> player.cooldowns.isOnCooldown(armor.item) }.not() // 若是有一件护甲在cd中，则不生效
         if (shouldAdd) {
             player.apply {
                 this.addEffect(MobEffectInstance(MobEffects.REGENERATION, 400, 1))

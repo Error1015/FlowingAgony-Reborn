@@ -13,18 +13,23 @@ data class RemoveEffectSyncToClientPacket(
 ) : CustomPacketPayload {
     companion object {
         val codec: StreamCodec<FriendlyByteBuf, RemoveEffectSyncToClientPacket> = StreamCodec.of(
-            { buf, packet -> buf.writeJsonWithCodec(MobEffect.CODEC, packet.effect) },
-            { buf -> RemoveEffectSyncToClientPacket(buf.readJsonWithCodec(MobEffect.CODEC)) }
-        )
+            { buf, packet ->
+                buf.writeJsonWithCodec(
+                    MobEffect.CODEC,
+                    packet.effect
+                )
+            },
+            { buf ->
+                RemoveEffectSyncToClientPacket(
+                    buf.readJsonWithCodec(MobEffect.CODEC)
+                )
+            })
 
         val type = CustomPacketPayload.Type<RemoveEffectSyncToClientPacket>("remove_effect_sync_to_client".asPath)
     }
 
     override fun type() = type
 
-    /**
-     * todo: 或许和原来的逻辑有所差异
-     */
     fun handle(ctx: IPayloadContext) {
         ctx.enqueueWork { ctx.player().removeEffectNoUpdate(effect) }
     }

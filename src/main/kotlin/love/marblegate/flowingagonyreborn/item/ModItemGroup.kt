@@ -11,13 +11,9 @@ object ModItemGroup {
     val registrar: DeferredRegister<CreativeModeTab> = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, ID)
 
     val modGroup: CreativeModeTab by registrar.register("flowingagony_reborn.group") { ->
-        CreativeModeTab
-            .builder()
-            .title(Component.translatable("itemGroup.flowingagony_reborn.group"))
-            .icon { ModItems.flowingAgonyEnchantedBookItem.defaultInstance }
-            .displayItems { _, output ->
+        CreativeModeTab.builder().title(Component.translatable("itemGroup.flowingagony_reborn.group"))
+            .icon { ModItems.flowingAgonyEnchantedBookItem.defaultInstance }.displayItems { _, output ->
                 output.accept(ModItems.flowingAgonyEnchantedBookItem)
-            }
-            .build()
+            }.build()
     }
 }

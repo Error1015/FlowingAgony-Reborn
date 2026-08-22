@@ -24,7 +24,10 @@ class ParticleSyncPacket(
                                                                                          buf.writeInt(packet.count)
                                                                                      }, { buf ->
                                                                                          ParticleSyncPacket(
-                                                                                             buf.readEnum(MobEffectCategory::class.java), buf.readBlockPos(), buf.readFloat(), buf.readInt()
+                                                                                             buf.readEnum(MobEffectCategory::class.java),
+                                                                                             buf.readBlockPos(),
+                                                                                             buf.readFloat(),
+                                                                                             buf.readInt()
                                                                                          )
                                                                                      })
 
@@ -36,17 +39,22 @@ class ParticleSyncPacket(
     }
 
     fun handle(ctx: IPayloadContext) {
-        ctx.enqueueWork {
             ctx.enqueueWork {
                 proxy = ClientProxy()
 
                 if (effectCategory == MobEffectCategory.CURSED_ANTIPATHY_EFFECT) {
                     for (i in 0 .. count) {
-                        proxy.addParticleForceNear(CursedAntipathyParticleOption(diameter), blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), 0.0, 0.0, 0.0)
+                        proxy.addParticleForceNear(
+                            CursedAntipathyParticleOption(diameter),
+                            blockPos.x.toDouble(), blockPos.y.toDouble(),
+                            blockPos.z.toDouble(),
+                            0.0,
+                            0.0,
+                            0.0
+                        )
                     }
                 }
             }
-        }
     }
 
     enum class MobEffectCategory {

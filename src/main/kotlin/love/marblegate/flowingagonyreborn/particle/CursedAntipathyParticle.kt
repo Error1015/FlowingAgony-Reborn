@@ -2,7 +2,10 @@ package love.marblegate.flowingagonyreborn.particle
 
 import com.mojang.serialization.MapCodec
 import net.minecraft.client.multiplayer.ClientLevel
-import net.minecraft.client.particle.*
+import net.minecraft.client.particle.ParticleProvider
+import net.minecraft.client.particle.ParticleRenderType
+import net.minecraft.client.particle.SpriteSet
+import net.minecraft.client.particle.TextureSheetParticle
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -29,7 +32,14 @@ class CursedAntipathyParticle(
     @OnlyIn(Dist.CLIENT)
     class Factory(val spriteSet: SpriteSet) : ParticleProvider<CursedAntipathyParticleOption> {
         override fun createParticle(
-            typeIn: CursedAntipathyParticleOption, worldIn: ClientLevel, x: Double, y: Double, z: Double, xSpeed: Double, ySpeed: Double, zSpeed: Double
+            typeIn: CursedAntipathyParticleOption,
+            worldIn: ClientLevel,
+            x: Double,
+            y: Double,
+            z: Double,
+            xSpeed: Double,
+            ySpeed: Double,
+            zSpeed: Double
         ): TextureSheetParticle {
             val cursedHatredParticle = CursedAntipathyParticle(worldIn, x, y, z, typeIn.diameter)
             cursedHatredParticle.pickSprite(spriteSet)

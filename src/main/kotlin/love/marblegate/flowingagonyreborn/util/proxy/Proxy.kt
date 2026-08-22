@@ -1,5 +1,6 @@
 package love.marblegate.flowingagonyreborn.util.proxy
 
+import love.marblegate.flowingagonyreborn.network.packets.PlaySoundPacket
 import net.minecraft.core.Holder
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.sounds.SoundEvent
@@ -12,10 +13,10 @@ interface IProxy {
     ) {
     }
 
-    // fun handleISound(
-    //     type: PlaySoundPacket.ModSoundType, onOrOff: Boolean
-    // ) {
-    // }
+    fun handleISound(
+        type: PlaySoundPacket.ModSoundType, onOrOff: Boolean
+    ) {
+    }
 
     fun playSoundWithLocation(
         soundEvent: SoundEvent, category: SoundSource, volume: Float, pitch: Float, x: Double, y: Double, z: Double, distanceDelay: Boolean

@@ -5,6 +5,7 @@ import love.marblegate.flowingagonyreborn.effect.ModEffects
 import love.marblegate.flowingagonyreborn.item.ModItemGroup
 import love.marblegate.flowingagonyreborn.item.ModItems
 import love.marblegate.flowingagonyreborn.particle.ModParticleRegistrar
+import love.marblegate.flowingagonyreborn.sound.ModSounds
 import net.neoforged.fml.ModList
 import net.neoforged.fml.common.Mod
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
@@ -26,6 +27,7 @@ object FlowingAgonyReborn {
         ModItemGroup.registrar.register(MOD_BUS)
         ModEffects.registrar.register(MOD_BUS)
         ModParticleRegistrar.registries.register(MOD_BUS)
+        ModSounds.deferredRegister.register(MOD_BUS)
     }
 
     fun loadCuriosApi() {
